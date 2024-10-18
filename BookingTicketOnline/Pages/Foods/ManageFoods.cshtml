@@ -1,0 +1,77 @@
+﻿@page
+@model BookingTicketOnline.Pages.Foods.ManageFoodsModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<!-- Nội dung trang quản lý người dùng -->
+<div class="container my-5">
+    <!-- Nút thêm người dùng -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+        <div class="flex-shrink-0 mb-3 mb-md-0">
+            <a class="btn btn-success" asp-page="/Foods/CreateFoods">
+                <i class="bi bi-person-plus-fill me-2"></i> Add New Foods
+            </a>
+        </div>
+        <!-- Tìm kiếm -->
+        <div class="input-group w-100 w-md-50">
+            <input type="text" class="form-control" placeholder="Search by name">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+    </div>
+
+    <!-- Bảng danh sách người dùng -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Size</th>
+                    <th>Image</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Popcorn</td>
+                    <td>Classic buttered popcorn, perfect for a movie snack.</td>
+                    <td>$5.00</td>
+                    <td>Large</td>
+                    <td><img src="/images/popcorn-large.jpg" alt="Popcorn" width="50" height="50"></td>
+                    <td class="text-center">
+                        <a asp-page="/Foods/EditFoods"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/Foods/DeleteFoods"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Coke</td>
+                    <td>Refreshing Coca-Cola, served chilled.</td>
+                    <td>$3.00</td>
+                    <td>Medium</td>
+                    <td><img src="/images/coke-medium.jpg" alt="Coke" width="50" height="50"></td>
+                    <td class="text-center">
+                        <a asp-page="/Foods//EditFoods"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/Foods/DeleteFoods"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Hot Dog</td>
+                    <td>Delicious hot dog with ketchup and mustard.</td>
+                    <td>$4.50</td>
+                    <td>Regular</td>
+                    <td><img src="/images/hotdog-regular.jpg" alt="Hot Dog" width="50" height="50"></td>
+                    <td class="text-center">
+                        <a asp-page="/Foods/EditFoods"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/Foods/DeleteFoods"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

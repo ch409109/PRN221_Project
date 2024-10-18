@@ -1,0 +1,77 @@
+﻿@page
+@model BookingTicketOnline.Pages.Cinema.ManageCinemasModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container my-5">
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+        <div class="flex-shrink-0 mb-3 mb-md-0">
+            <a class="btn btn-success" asp-page="/Cinema/CreateCinema">
+                <i class="bi bi-person-plus-fill me-2"></i> Add New Cinema
+            </a>
+        </div>
+        <div class="input-group w-100 w-md-50">
+            <input type="text" class="form-control" placeholder="Search by name">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>City</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Cinema 1</td>
+                    <td>Hà Đông</td>
+                    <td>Hà Nội</td>
+                    <td>0999555444</td>
+                    <td>cinema1@gmail.com</td>
+                    <td class="text-center">
+                        <a asp-page="/Cinema/EditCinema"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/Cinema/DeleteCinema"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Cinema 2</td>
+                    <td>Phú Xuyên</td>
+                    <td>Hà Nội</td>
+                    <td>0111222897</td>
+                    <td>cinema2@gmail.com</td>
+                    <td class="text-center">
+                        <a asp-page="/Cinema/EditCinema"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/Cinema/DeleteCinema"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Cinema 3</td>
+                    <td>Cẩm Phả</td>
+                    <td>Quảng Ninh</td>
+                    <td>0111782345</td>
+                    <td>cinema3@gmail.com</td>
+                    <td class="text-center">
+                        <a asp-page="/Cinema//EditCinema"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/Cinema/DeleteCinema"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

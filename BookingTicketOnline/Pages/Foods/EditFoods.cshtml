@@ -1,0 +1,41 @@
+﻿@page
+@model BookingTicketOnline.Pages.Foods.EditFoodsModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="container my-5" style="max-width: 600px">
+    <h2 class="text-center mb-4">Edit Foods</h2>
+    <form>
+        <input hidden type="text" class="form-control" placeholder="1">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter name" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            <input type="number" class="form-control" placeholder="Enter quantity">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Size</label>
+            <select class="form-control">
+                <option value="" disabled selected>Choose a size</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Larget</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="number" class="form-control" placeholder="Enter price" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Image</label>
+            <input type="file" class="form-control" accept="image/*">
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary" asp-page="/Foods/ManageFoods">Save</button>
+            <a type="button" class="btn btn-outline-secondary" asp-page="/Foods/ManageFoods">Cancel</a>
+        </div>
+    </form>
+</div>
+

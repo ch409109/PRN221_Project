@@ -1,0 +1,62 @@
+﻿@page
+@model BookingTicketOnline.Pages.CheckOutModel
+
+@{
+    ViewData["Title"] = "_Layout";
+}
+
+<div class="container py-5">
+    <h2 class="text-center bg-black text-white p-3">THANH TOÁN</h2>
+
+    <!-- Step 1: Giảm Giá -->
+    <div class="row my-4">
+        <div class="col-md-6">
+            <h5>Bước 1: GIẢM GIÁ</h5>
+            <div class="form-group mb-3">
+                <label for="voucher">Voucher</label>
+                <input type="text" id="voucher" class="form-control" placeholder="Nhập mã giảm giá">
+            </div>
+        </div>
+        <div class="col-md-6 text-end">
+            <h5>Tổng cộng</h5>
+            <p>5.000.000 đ</p>
+        </div>
+    </div>
+
+    <!-- Step 2: Hình thức thanh toán -->
+    <div class="row my-4">
+        <div class="col-md-6">
+            <h5>Bước 2: HÌNH THỨC THANH TOÁN</h5>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" id="vnpay" checked>
+                <label class="form-check-label" for="vnpay">
+                    <img src="/img/vn" alt="VNPay" width="50"> VNPay
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="agreeTerms">
+                <label class="form-check-label" for="agreeTerms">Tôi đồng ý với điều khoản sử dụng</label>
+            </div>
+        </div>
+        <div class="col-md-6 text-end">
+            <h5>Khuyến mãi</h5>
+            <p>0.00 đ</p>
+        </div>
+    </div>
+
+    <!-- Tổng số tiền thanh toán -->
+    <div class="row my-4">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 text-end">
+            <h5 class="text-danger">Tổng số tiền thanh toán</h5>
+            <p class="text-danger">5.000.000 đ</p>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-between">
+        <a asp-page="/Foods/BookFoods" class="btn btn-danger">Previous</a>
+        <button class="btn btn-danger">Check Out</button>
+    </div>
+</div>
+

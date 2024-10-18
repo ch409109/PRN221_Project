@@ -1,0 +1,102 @@
+﻿@page
+@model BookingTicketOnline.Pages.News.NewsDetailModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phim Chiếu Rạp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .poster-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .poster {
+            width: 100%;
+            height: 100&;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-info {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .movie-images {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .movie-image {
+            width: 45%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>25 phim hay chiếu rạp 2022 đáng kỳ vọng nhất năm</h1>
+        <div class="poster-container">
+            <img src="/img/anh1.jpg" class="poster">
+        </div>
+
+        <div class="movie-info">
+            <h2>Aquaman And The Lost Kingdom</h2>
+            <p>
+                Aquaman được đạo diễn nổi tiếng với dòng phim kinh dị như Saw, Insidious, The Conjuring, The Nun và Annabelle đó là James Wan,
+                nên có thể Aquaman sẽ không đi theo phong cách vui tươi hay bùng sức sống như phần trước. Tại sự kiện DC FanDome, đạo diễn James Wan
+                đã trả lời bài phỏng vấn với lời lẽ xác nhận một số tính tiết “kinh dị” sẽ có trong bộ phim.
+            </p>
+            <p>
+                <i>
+                    "Cũng giống như phần cảnh tận cùng của bọn Trench trong phần đầu tiên, phần 2 của Aquaman sẽ có một vài nét nhân kinh dị.
+                    Tôi nghĩ những chi tiết này là một phần của con người tôi, và nó điều tự nhiên xuất hiện khi tôi làm những bộ phim như thế này.
+                    Với phần mới Aquaman, bạn cũng biết rằng thế giới dưới nước có rất nhiều cư dân kỳ lạ. Vậy nên hiện yếu tố dòng phim kinh dị của
+                    tôi cũng khiến tôi xây dựng nên những cảnh phim với chất riêng dù mình thể hiện nó một cách rất tự nhiên."
+                </i>
+            </p>
+            <div class="movie-images">
+                <img src="/img/anh1.jpg" alt="Aquaman" class="movie-image">
+                <img src="/img/anh2.jpg" alt="Aquaman" class="movie-image">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

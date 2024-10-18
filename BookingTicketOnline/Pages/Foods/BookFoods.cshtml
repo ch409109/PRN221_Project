@@ -1,0 +1,103 @@
+﻿@page
+@model BookingTicketOnline.Pages.Foods.BookFoodsModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combo Bắp Nước</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .combo-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .combo-image {
+            width: 70px;
+            height: 70px;
+            margin-right: 15px;
+        }
+
+        .combo-details {
+            flex: 1;
+        }
+
+        .combo-price {
+            font-weight: bold;
+            color: #e91e63; /* Màu hồng */
+        }
+
+        .total {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .continue-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+            .continue-button:hover {
+                background-color: #45a049; /* Màu xanh lá đậm */
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Combo Bắp Nước</h1>
+        <div class="combo-item">
+            <img class="combo-image" src="/img/combonuowc.jpg" alt="My Combo">
+            <div class="combo-details">
+                <p>MY COMBO - 89.000₫</p>
+                <p>1 bắp ngọt lớn + 1 nước siêu lớn</p>
+                <p class="combo-price">Nhận hàng trong ngày xem phim</p>
+            </div>
+        </div>
+        <div class="combo-item">
+            <img class="combo-image" src="/img/gia-bap-nuoc-cgv-1.jpg" alt="CGV Combo">
+            <div class="combo-details">
+                <p>BIG COMBO - 139.000₫</p>
+                <p>Có thể mua thêm tiện lợi với bắp phô mai và nước ngọt.</p>
+                <p class="combo-price">Nhận hàng trong ngày xem phim </p>
+            </div>
+        </div>
+        <div class="total">Tổng cộng: 0₫</div>
+        <a asp-page="/CheckOut" class="continue-button">Tiếp tục</a>
+    </div>
+</body>
+</html>

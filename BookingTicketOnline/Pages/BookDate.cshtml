@@ -1,0 +1,368 @@
+﻿@page
+@model BookingTicketOnline.Pages.BookDateModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Chiếu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: black;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0 0 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .location-select {
+            position: relative;
+            display: inline-block;
+        }
+
+        .location-button {
+            background-color: #ff69b4; /* Màu hồng */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 120px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+
+            .dropdown div {
+                padding: 10px;
+                cursor: pointer;
+            }
+
+                .dropdown div:hover {
+                    background-color: #f1f1f1;
+                }
+
+        .date-selector {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+            .date-selector input {
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                width: 60%;
+            }
+
+            .date-selector button {
+                padding: 10px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+        .dates {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .date {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+            .date:hover {
+                background-color: #e0e0e0;
+            }
+
+            .date.selected {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            .date .day {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .date .weekday {
+                font-size: 14px;
+                color: #666;
+            }
+
+        .showtime {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+            .showtime p {
+                margin: 5px 0;
+            }
+
+            .showtime .address {
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+        .time-buttons {
+            display: flex;
+            margin: 10px 0;
+        }
+
+        .time-button {
+            padding: 10px 20px;
+            margin: 0 5px;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            background-color: white;
+            color: #4CAF50;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+            .time-button:hover {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+        .feedback-section {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+            .feedback-section h2 {
+                margin: 0 0 10px;
+                font-size: 20px;
+                text-align: center;
+            }
+
+        .feedback {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .feedback:last-child {
+                border-bottom: none;
+            }
+
+            .feedback .user {
+                font-weight: bold;
+            }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>
+                Lịch Chiếu Dr. Strange
+            </h1>
+            <div class="location-select">
+                <button class="location-button" onclick="toggleDropdown()">Hà Nội <span>▼</span></button>
+                <div class="dropdown" id="dropdown">
+                    <div onclick="selectLocation('Hà Nội')">Hà Nội</div>
+                    <div onclick="selectLocation('TP.HCM')">TP.HCM</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="dates">
+            <div class="date">
+                <div class="day">13</div>
+                <div class="weekday">Chủ nhật</div>
+            </div>
+            <div class="date">
+                <div class="day">14</div>
+                <div class="weekday">Thứ hai</div>
+            </div>
+            <div class="date">
+                <div class="day">15</div>
+                <div class="weekday">Thứ ba</div>
+            </div>
+            <div class="date">
+                <div class="day">16</div>
+                <div class="weekday">Thứ tư</div>
+            </div>
+            <div class="date selected">
+                <div class="day">17</div>
+                <div class="weekday">Thứ năm</div>
+            </div>
+            <div class="date">
+                <div class="day">18</div>
+                <div class="weekday">Thứ sáu</div>
+            </div>
+            <div class="date">
+                <div class="day">19</div>
+                <div class="weekday">Thứ bảy</div>
+            </div>
+            <div class="date">
+                <div class="day">20</div>
+                <div class="weekday">Chủ nhật</div>
+            </div>
+        </div>
+
+        <div class="showtime">
+            <p class="address">BHD Star Discovery</p>
+            <p>Tầng 8 Trung tâm thương mại Discovery, 36 đường Cầu Giấy, Đống Đa, Hà Nội</p>
+            <div class="time-buttons">
+                <a asp-page="/Seat/BookSeat" class="time-button">19:20</a>
+                <a asp-page="/Seat/BookSeat" class="time-button">22:55</a>
+            </div>
+        </div>
+        <div class="showtime">
+            <p class="address">BHD Star Phạm Ngọc Thạch</p>
+            <p>Tầng 8 Vincom Plaza Phạm Ngọc Thạch, 2 đường Phạm Ngọc Thạch, Đống Đa, Hà Nội</p>
+            <div class="time-buttons">
+                <a asp-page="/Seat/BookSeat" class="time-button">19:20</a>
+                <a asp-page="/Seat/BookSeat" class="time-button">22:55</a>
+            </div>
+        </div>
+        <div class="showtime">
+            <p class="address">BHD Star The Garden</p>
+            <p>Tầng 1 Garden Shopping Center, đường Mễ Trì, Nam Từ Liêm, Hà Nội</p>
+            <div class="time-buttons">
+                <a asp-page="/Seat/BookSeat" class="time-button">19:20</a>
+                <a asp-page="/Seat/BookSeat" class="time-button">21:00</a>
+            </div>
+        </div>
+
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        @* <div class="feedback-section">
+            <h2>Phản hồi của người dùng</h2>
+
+            <div class="feedback">
+                <div class="avatar"></div>
+                <div class="feedback-content">
+                    <div class="user">Hứa Tấn Trung</div>
+                    <div class="rating">
+                        <span>⭐</span><span>(10/10)</span>
+                    </div>
+                    <div>18/10 mới chiếu mà 8/10 đưa vào mục Phim Đang chiếu???</div>
+                </div>
+            </div>
+
+            <div class="feedback">
+                <div class="avatar"></div>
+                <div class="feedback-content">
+                    <div class="user">Trần Phùng Yến</div>
+                    <div class="rating">
+                        <span>⭐</span><span>(8/10)</span>
+                    </div>
+                    <div>Chưa xem nhưng vì có chị Thu Trang nên sẽ ủng hộ ❤️✨, phim khá hay cuốn hút, thêm dàn diễn viên mình thích nữa nên ủng hộ phim khi chiếu nhé.</div>
+                </div>
+            </div>
+
+            <div class="feedback">
+                <div class="avatar"></div>
+                <div class="feedback-content">
+                    <div class="user">Vy Hoài Anh</div>
+                    <div class="rating">
+                        <span>⭐</span><span>(6/10)</span>
+                    </div>
+                    <div>Đừng nghèo nội dung quá nha.</div>
+                </div>
+            </div>
+
+            <div class="feedback">
+                <div class="avatar"></div>
+                <div class="feedback-content">
+                    <div class="user">Lê Mỹ Kiều</div>
+                    <div class="rating">
+                        <span>⭐</span><span>(10/10)</span>
+                    </div>
+                    <div>Cực phẩm!</div>
+                </div>
+            </div>
+
+        </div> *@
+    </div>
+
+    <footer>
+        &copy; 2024 Lịch Chiếu Phim
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById("dropdown").style.display =
+                document.getElementById("dropdown").style.display === "block" ? "none" : "block";
+        }
+
+        function selectLocation(location) {
+            document.querySelector(".location-button").innerText = location + ' ▼';
+            document.getElementById("dropdown").style.display = "none";
+        }
+
+        // Đóng dropdown khi click ra ngoài
+        window.onclick = function (event) {
+            if (!event.target.matches('.location-button')) {
+                var dropdowns = document.getElementsByClassName("dropdown");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    dropdowns[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

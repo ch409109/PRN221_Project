@@ -1,0 +1,215 @@
+﻿@page
+@model BookingTicketOnline.Pages.Seat.BookSeatModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Ghế Ngồi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .screen {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .seating-chart {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .seat {
+            width: 50px;
+            height: 50px;
+            background-color: #ff69b4; /* Màu hồng */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+            .seat:hover {
+                background-color: #ff1493; /* Màu hồng đậm */
+            }
+
+        .available {
+            background-color: #ff69b4; /* Màu hồng */
+        }
+
+        .reserved {
+            background-color: #888; /* Màu xám */
+            cursor: not-allowed;
+        }
+
+        .selected {
+            background-color: #4caf50; /* Màu xanh lá cây */
+        }
+
+        .info {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .movie-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .showtime {
+            margin: 10px 0;
+        }
+
+        .purchase-button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+            .purchase-button:hover {
+                background-color: #45a049; /* Màu xanh lá đậm */
+            }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+            .legend div {
+                margin: 0 10px;
+                display: flex;
+                align-items: center;
+            }
+
+            .legend .color-box {
+                width: 30px; /* Kích thước ô vuông */
+                height: 30px; /* Kích thước ô vuông */
+                border: 1px solid #000; /* Viền cho ô vuông */
+                margin-right: 5px;
+            }
+
+            .legend .available .color-box {
+                background-color: #ff69b4; /* Màu hồng */
+            }
+
+            .legend .reserved .color-box {
+                background-color: #888; /* Màu xám */
+            }
+
+            .legend .selected .color-box {
+                background-color: #4caf50; /* Màu xanh lá cây */
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mua Vé Xem Phim</h1>
+        <div class="screen">MÀN HÌNH</div>
+        <div class="seating-chart">
+            <div class="seat available" data-seat="A1">A1</div>
+            <div class="seat available" data-seat="A2">A2</div>
+            <div class="seat available" data-seat="A3">A3</div>
+            <div class="seat available" data-seat="A4">A4</div>
+            <div class="seat available" data-seat="A5">A5</div>
+            <div class="seat available" data-seat="A6">A6</div>
+            <div class="seat available" data-seat="A7">A7</div>
+            <div class="seat available" data-seat="A8">A8</div>
+            <div class="seat available" data-seat="B1">B1</div>
+            <div class="seat available" data-seat="B2">B2</div>
+            <div class="seat reserved" data-seat="B3">B3</div>
+            <div class="seat available" data-seat="B4">B4</div>
+            <div class="seat available" data-seat="B5">B5</div>
+            <div class="seat available" data-seat="B6">B6</div>
+            <div class="seat available" data-seat="B7">B7</div>
+            <div class="seat available" data-seat="B8">B8</div>
+            <div class="seat available" data-seat="C1">C1</div>
+            <div class="seat available" data-seat="C2">C2</div>
+            <div class="seat available" data-seat="C3">C3</div>
+            <div class="seat available" data-seat="C4">C4</div>
+            <div class="seat available" data-seat="C5">C5</div>
+            <div class="seat available" data-seat="C6">C6</div>
+            <div class="seat available" data-seat="C7">C7</div>
+            <div class="seat available" data-seat="C8">C8</div>
+            <div class="seat available" data-seat="D1">D1</div>
+            <div class="seat available" data-seat="D2">D2</div>
+            <div class="seat available" data-seat="D3">D3</div>
+            <div class="seat selected" data-seat="D4">D4</div>
+            <div class="seat available" data-seat="D5">D5</div>
+            <div class="seat available" data-seat="D6">D6</div>
+            <div class="seat available" data-seat="D7">D7</div>
+            <div class="seat available" data-seat="D8">D8</div>
+        </div>
+        <div class="legend">
+            <div class="available">
+                <div class="color-box"></div>
+                Ghế bạn chọn
+            </div>
+            <div class="reserved">
+                <div class="color-box"></div>
+                Ghế đã được chọn
+            </div>
+            <div class="selected">
+                <div class="color-box"></div>
+                Ghế bạn đang chọn
+            </div>
+        </div>
+        <div class="info">
+            <p class="movie-title">Transformers Mọt</p>
+            <p class="showtime">23:10 - Hôm nay, 08/10 - Phòng chiếu PREMIUM - 2D Phụ đề</p>
+            <p class="selected-seats">Ghế bạn chọn: <span id="selected-seats">D4</span></p>
+            <a asp-page="/Foods/BookFoods" class="purchase-button">Mua vé</a>
+        </div>
+    </div>
+
+    <script>
+        const seats = document.querySelectorAll('.seat.available');
+        const selectedSeatsElem = document.getElementById('selected-seats');
+
+        seats.forEach(seat => {
+            seat.addEventListener('click', () => {
+                seat.classList.toggle('selected');
+                updateSelectedSeats();
+            });
+        });
+
+        function updateSelectedSeats() {
+            const selectedSeats = document.querySelectorAll('.seat.selected');
+            const seatNumbers = Array.from(selectedSeats).map(seat => seat.dataset.seat);
+            selectedSeatsElem.innerText = seatNumbers.join(', ') || 'Chưa chọn ghế';
+        }
+    </script>
+</body>
+</html>

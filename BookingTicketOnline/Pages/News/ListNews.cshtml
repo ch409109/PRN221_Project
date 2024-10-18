@@ -1,0 +1,226 @@
+﻿@page
+@model BookingTicketOnline.Pages.News.ListNewsModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Tin Tức</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .news-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .news-content {
+            padding: 15px;
+        }
+
+        .news-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .news-meta {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-meta svg {
+            margin-right: 5px;
+        }
+
+        .news-desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Icon */
+        .icon {
+            width: 16px;
+            height: 16px;
+            fill: #777;
+        }
+
+        /* NEW SECTION */
+        .latest-articles {
+            margin-top: 50px;
+        }
+
+        .latest-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Left column (Latest articles) */
+        .latest-article-item {
+            display: flex;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .latest-article-item img {
+            width: 150px;
+            height: auto;
+        }
+
+        .latest-article-content {
+            padding: 15px;
+            width: 100%;
+        }
+
+        .latest-article-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .latest-article-meta {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .latest-article-desc {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Phim chiếu rạp</h1>
+        <p class="subtitle">Phim chiếu rạp, bom tấn cực ấn tượng </p>
+
+        <div class="news-grid">
+            <!-- Tin tức 1 -->
+            <div class="news-item">
+                <img src="/img/anh1.jpg" alt="Tin tức 1">
+                <div class="news-content">
+                    <h2 class="news-title"><a asp-page="/News/NewsDetail">Top 22 phim chiếu rạp 2021 hay đáng mong chờ nhất</a></h2>
+                    <div class="news-meta">
+                    </div>
+                    <p class="news-desc">Top 22 phim chiếu rạp hay 2021 với mọi thể loại sẽ tấn công các phòng rạp chiếu phim trong năm nay</p>
+                </div>
+            </div>
+
+            <!-- Tin tức 2 -->
+            <div class="news-item">
+                <img src="/img/anh2.jpg" alt="Tin tức 2">
+                <div class="news-content">
+                    <h2 class="news-title">25 phim hay chiếu rạp 2022 đáng kỳ vọng nhất năm</h2>
+                    <div class="news-meta">
+                    </div>
+                    <p class="news-desc">Siêu ứng dụng MoMo xin phép liệt kê hàng loạt phim chiếu rạp hay 2022 đang kỳ vọng nhất với mọi thể loại.</p>
+                </div>
+            </div>
+
+            <!-- Tin tức 3 -->
+            <div class="news-item">
+                <img src="/img/anh3.jpg" alt="Tin tức 3">
+                <div class="news-content">
+                    <h2 class="news-title">Top 11 phim có doanh thu cao nhất mọi thời đại</h2>
+                    <div class="news-meta">
+                    </div>
+                    <p class="news-desc">Cùng khám phá xem 11 bộ phim nào có doanh thu cao nhất mọi thời đại nhé!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="latest-articles">
+            <h2 class="latest-title">Bài viết mới nhất</h2>
+
+            <div class="latest-article-item">
+                <img src="/img/anh1.jpg" alt="Top 22 phim chiếu rạp 2021">
+                <div class="latest-article-content">
+                    <h3 class="latest-article-title">Top 22 phim chiếu rạp 2021 hay đáng mong chờ nhất</h3>
+                    
+                    <p class="latest-article-desc">Top 22 phim chiếu rạp hay 2021 với mọi thể loại.</p>
+                </div>
+            </div>
+
+            <div class="latest-article-item">
+                <img src="/img/anh12.jpg" alt="Phim hay 2020 chiếu rạp">
+                <div class="latest-article-content">
+                    <h3 class="latest-article-title">Phim hay 2020 chiếu rạp gây ấn tượng</h3>
+                    
+                    <p class="latest-article-desc">Phim hay 2020 đáng chờ được đan xen nhiều thể loại.</p>
+                </div>
+            </div>
+
+            <div class="latest-article-item">
+                <img src="/img/anh13.jpg" alt="Phim hành động hài 2020">
+                <div class="latest-article-content">
+                    <h3 class="latest-article-title">Phim hành động hài 2020 được chú ý nhiều nhất</h3>
+                    
+                    <p class="latest-article-desc">Đã từ lâu thể loại hài hành động là dòng phim sinh ra nhiều huyền thoại.</p>
+                </div>
+            </div>
+
+            <div class="latest-article-item">
+                <img src="~/img/anh14.jpg" alt="Những bộ phim kinh dị 2021">
+                <div class="latest-article-content">
+                    <h3 class="latest-article-title">Những bộ phim kinh dị 2021 đáng sợ được mong chờ</h3>
+                    
+                    <p class="latest-article-desc">Tháng này có rất nhiều phim kinh dị ra rạp để chiều lòng các tín đồ của dòng phim.</p>
+                </div>
+            </div>
+    </div>
+</body>
+</html>

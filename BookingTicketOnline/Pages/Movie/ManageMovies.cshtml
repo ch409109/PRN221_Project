@@ -1,0 +1,96 @@
+﻿@page
+@model BookingTicketOnline.Pages.Movie.ManageMoviesModel
+
+@{
+    Layout = "_AdminLayout";
+}
+<!-- Nội dung trang quản lý người dùng -->
+<div class="container my-5">
+    <!-- Nút thêm người dùng -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+        <div class="flex-shrink-0 mb-3 mb-md-0">
+            <a class="btn btn-success" asp-page="/Movie/CreateMovie">
+                <i class="bi bi-person-plus-fill me-2"></i> Add New Movie
+            </a>
+        </div>
+        <!-- Tìm kiếm -->
+        <div class="input-group w-100 w-md-50">
+            <input type="text" class="form-control" placeholder="Search by name">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+    </div>
+
+    <!-- Bộ lọc -->
+    <div class="d-flex flex-column flex-md-row justify-content-end flex-wrap mb-4">
+        <select class="form-select me-2 mb-2 mb-md-0" style="max-width: 200px;">
+            <option selected>Select category</option>
+            <option value="1">Kinh dị</option>
+            <option value="2">Trinh thám</option>
+            <option value="3">Lãng mạn</option>
+        </select>
+    </div>
+
+    <!-- Bảng danh sách người dùng -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Duration</th>
+                    <th>Genre</th>
+                    <th>Director</th>
+                    <th>Image</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dòng 1 -->
+                <tr>
+                    <td>1</td>
+                    <td>Inception</td>
+                    <td>A mind-bending thriller where dreams become the battlefield.</td>
+                    <td>148 min</td>
+                    <td>Sci-Fi, Thriller</td>
+                    <td>Christopher Nolan</td>
+                    <td><img src="/images/inception.jpg" alt="Inception" width="50" height="50"></td>
+                    <td class="text-center">
+                        <a asp-page="/Movie/EditMovie"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/Movie/DeleteMovie"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+
+                <!-- Dòng 2 -->
+                <tr>
+                    <td>2</td>
+                    <td>The Lion King</td>
+                    <td>The story of a young lion prince, Simba, and his journey to adulthood.</td>
+                    <td>118 min</td>
+                    <td>Animation, Adventure</td>
+                    <td>Roger Allers, Rob Minkoff</td>
+                    <td><img src="/images/lion-king.jpg" alt="The Lion King" width="50" height="50"></td>
+                    <td class="text-center">
+                        <a asp-page="/Movie/EditMovie"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/Movie/DeleteMovie"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+
+                <!-- Dòng 3 -->
+                <tr>
+                    <td>3</td>
+                    <td>Avengers: Endgame</td>
+                    <td>After the devastating events of Infinity War, the Avengers assemble once more.</td>
+                    <td>181 min</td>
+                    <td>Action, Sci-Fi</td>
+                    <td>Anthony Russo, Joe Russo</td>
+                    <td><img src="/images/endgame.jpg" alt="Avengers: Endgame" width="50" height="50"></td>
+                    <td class="text-center">
+                        <a asp-page="/Movie/EditMovie"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/Movie/DeleteMovie"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿@page
+@model BookingTicketOnline.Pages.User.ManageUsersModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<!-- Nội dung trang quản lý người dùng -->
+<div class="container my-5">
+    <!-- Nút thêm người dùng -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+        <div class="flex-shrink-0 mb-3 mb-md-0">
+            <a class="btn btn-success" asp-page="/User/CreateUser">
+                <i class="bi bi-person-plus-fill me-2"></i> Add New User
+            </a>
+        </div>
+        <!-- Tìm kiếm -->
+        <div class="input-group w-100 w-md-50">
+            <input type="text" class="form-control" placeholder="Search by username or email">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+    </div>
+    <!-- Bộ lọc -->
+    <div class="d-flex flex-column flex-md-row justify-content-end flex-wrap mb-4">
+        <select class="form-select me-2 mb-2 mb-md-0" style="max-width: 200px;">
+            <option selected>Select status</option>
+            <option value="1">Active</option>
+            <option value="2">Banned</option>
+            <option value="3">Inactive</option>
+        </select>
+        <select class="form-select mb-2 mb-md-0" style="max-width: 200px;">
+            <option selected>Select role</option>
+            <option value="1">Admin</option>
+            <option value="2">Staff</option>
+            <option value="3">User</option>
+            <option value="4">Movie Theater Owner</option>
+        </select>
+    </div>
+
+    <!-- Bảng danh sách người dùng -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>UserID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Role</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dòng 1 -->
+                <tr>
+                    <td>HE176909</td>
+                    <td>NhatLVHE176909</td>
+                    <td>NhatLVHE176909@fpt.edu.vn</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>Admin</td>
+                    <td class="text-center">
+                        <a asp-page="/User/EditUser"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/User/DeleteUser"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+
+                <!-- Dòng 2 -->
+                <tr>
+                    <td>HE172673</td>
+                    <td>CongHTHE172673</td>
+                    <td>CongHTHE172673@fpt.edu.vn</td>
+                    <td><span class="badge bg-danger">Banned</span></td>
+                    <td>Staff</td>
+                    <td class="text-center">
+                        <a asp-page="/User/EditUser"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/User/DeleteUser"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+
+                <!-- Dòng 3 -->
+                <tr>
+                    <td>HE172555</td>
+                    <td>HaiLTHE172555</td>
+                    <td>HaiLTHE172555@fpt.edu.vn</td>
+                    <td><span class="badge bg-secondary">Inactive</span></td>
+                    <td>Admin</td>
+                    <td class="text-center">
+                        <a asp-page="/User/EditUser"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/User/DeleteUser"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+
+                <!-- Dòng 4 -->
+                <tr>
+                    <td>HE170677</td>
+                    <td>TungNVHE170677</td>
+                    <td>TungNVHE170677@fpt.edu.vn</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>User</td>
+                    <td class="text-center">
+                        <a asp-page="/User/EditUser"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/User/DeleteUser"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+
+                <!-- Dòng 5 -->
+                <tr>
+                    <td>HE163211</td>
+                    <td>TuanTNHE163211</td>
+                    <td>TuanTNHE163211@fpt.edu.vn</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>Movie Theater Owner</td>
+                    <td class="text-center">
+                        <a asp-page="/User/EditUser"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-page="/User/DeleteUser"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

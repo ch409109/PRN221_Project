@@ -1,0 +1,65 @@
+﻿@page
+@model BookingTicketOnline.Pages.Category.ManageCategoriesModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+    <div class="flex-shrink-0 mb-3 mb-md-0">
+        <a class="btn btn-success" asp-page="/Category/CreateCategory">
+            <i class="bi bi-person-plus-fill me-2"></i> Add New Category
+        </a>
+    </div>
+
+    <div class="input-group w-100 w-md-50">
+        <input type="text" class="form-control" placeholder="Search by name">
+        <button class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Category ID</th>
+                <th>Name</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Kinh dị</td>
+                <td class="text-center">
+                    <a asp-page="/Category/EditCategory"><i class="bi bi-pencil-square"></i></a>
+                    <a asp-page="/Category/DeleteCategory"><i class="bi bi-trash-fill"></i></a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>Trinh thám</td>
+                <td class="text-center">
+                    <a asp-page="/Category/EditCategory"><i class="bi bi-pencil-square"></i></a>
+                    <a asp-page="/Category/DeleteCategory"><i class="bi bi-trash-fill"></i></a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>Lãng mạn</td>
+                <td class="text-center">
+                    <a asp-page="/Category/EditCategory"><i class="bi bi-pencil-square"></i></a>
+                    <a asp-page="/Category/DeleteCategory"><i class="bi bi-trash-fill"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+

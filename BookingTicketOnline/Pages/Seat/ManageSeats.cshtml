@@ -1,0 +1,264 @@
+﻿@page
+@model BookingTicketOnline.Pages.Seat.ManageSeatsModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Management</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Seat.css">
+</head>
+
+<body>
+
+    <div class="container my-5 text-center">
+        <h2>CGV Aeon Hà Đông</h2>
+        <div class="d-flex justify-content-center mb-3">
+            <div class="btn-group" role="group">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addSeatModal" class="btn btn-outline-danger">Add Seat</button>
+                <button class="btn btn-outline-danger">Delete Seat</button>
+                <button class="btn btn-outline-danger">Edit Seat</button>
+            </div>
+        </div>
+
+        <div class="screen"></div>
+        <h5 class="mb-4">Screen</h5>
+
+        <!-- Seat rows -->
+        <div class="seat-container">
+            <div class="seat-row">
+                <span class="seat regular">A1</span>
+                <span class="seat regular">A2</span>
+                <span class="seat regular">A3</span>
+                <span class="seat regular">A4</span>
+                <span class="seat regular">A5</span>
+                <span class="seat regular">A6</span>
+                <span class="seat regular">A7</span>
+                <span class="seat regular">A8</span>
+                <span class="seat regular">A9</span>
+                <span class="seat regular">A10</span>
+                <span class="seat regular">A11</span>
+                <span class="seat regular">A12</span>
+                <span class="seat regular">A13</span>
+                <span class="seat regular">A14</span>
+            </div>
+
+            <div class="seat-row">
+                <span class="seat regular">B1</span>
+                <span class="seat regular">B2</span>
+                <span class="seat regular">B3</span>
+                <span class="seat regular">B4</span>
+                <span class="seat regular">B5</span>
+                <span class="seat regular">B6</span>
+                <span class="seat regular">B7</span>
+                <span class="seat regular">B8</span>
+                <span class="seat regular">B9</span>
+                <span class="seat regular">B10</span>
+                <span class="seat regular">B11</span>
+                <span class="seat regular">B12</span>
+                <span class="seat regular">B13</span>
+                <span class="seat regular">B14</span>
+                <span class="seat regular">B15</span>
+            </div>
+
+            <div class="seat-row">
+                <span class="seat regular">C1</span>
+                <span class="seat regular">C2</span>
+                <span class="seat regular">C3</span>
+                <span class="seat regular">C4</span>
+                <span class="seat regular">C5</span>
+                <span class="seat regular">C6</span>
+                <span class="seat regular">C7</span>
+                <span class="seat regular">C8</span>
+                <span class="seat regular">C9</span>
+                <span class="seat regular">C10</span>
+                <span class="seat regular">C11</span>
+                <span class="seat regular">C12</span>
+                <span class="seat regular">C13</span>
+                <span class="seat regular">C14</span>
+                <span class="seat regular">C15</span>
+            </div>
+
+            <div class="seat-row">
+                <span class="seat vip-seat">D1</span>
+                <span class="seat vip-seat">D2</span>
+                <span class="seat vip-seat">D3</span>
+                <span class="seat vip-seat">D4</span>
+                <span class="seat vip-seat">D5</span>
+                <span class="seat vip-seat">D6</span>
+                <span class="seat vip-seat">D7</span>
+                <span class="seat vip-seat">D8</span>
+                <span class="seat vip-seat">D9</span>
+                <span class="seat vip-seat">D10</span>
+                <span class="seat vip-seat">D11</span>
+                <span class="seat vip-seat">D12</span>
+                <span class="seat vip-seat">D13</span>
+                <span class="seat vip-seat">D14</span>
+                <span class="seat vip-seat">D15</span>
+            </div>
+
+            <div class="seat-row">
+                <span class="seat vip-seat">E1</span>
+                <span class="seat vip-seat">E2</span>
+                <span class="seat vip-seat">E3</span>
+                <span class="seat vip-seat">E4</span>
+                <span class="seat vip-seat">E5</span>
+                <span class="seat vip-seat">E6</span>
+                <span class="seat vip-seat">E7</span>
+                <span class="seat vip-seat">E8</span>
+                <span class="seat vip-seat">E9</span>
+                <span class="seat vip-seat">E10</span>
+                <span class="seat vip-seat">E11</span>
+                <span class="seat vip-seat">E12</span>
+                <span class="seat vip-seat">E13</span>
+                <span class="seat vip-seat">E14</span>
+                <span class="seat vip-seat">E15</span>
+            </div>
+
+            <div class="seat-row">
+                <span class="seat vip-seat">F1</span>
+                <span class="seat vip-seat">F2</span>
+                <span class="seat vip-seat">F3</span>
+                <span class="seat vip-seat">F4</span>
+                <span class="seat vip-seat">F5</span>
+                <span class="seat vip-seat">F6</span>
+                <span class="seat vip-seat">F7</span>
+                <span class="seat vip-seat">F8</span>
+                <span class="seat vip-seat">F9</span>
+                <span class="seat vip-seat">F10</span>
+                <span class="seat vip-seat">F11</span>
+                <span class="seat vip-seat">F12</span>
+                <span class="seat vip-seat">F13</span>
+                <span class="seat vip-seat">F14</span>
+                <span class="seat vip-seat">F15</span>
+            </div>
+            <div class="seat-row">
+                <span class="seat vip-seat">G1</span>
+                <span class="seat vip-seat">G2</span>
+                <span class="seat vip-seat">G3</span>
+                <span class="seat vip-seat">G4</span>
+                <span class="seat vip-seat">G5</span>
+                <span class="seat vip-seat">G6</span>
+                <span class="seat vip-seat">G7</span>
+                <span class="seat vip-seat">G8</span>
+                <span class="seat vip-seat">G9</span>
+                <span class="seat vip-seat">G10</span>
+                <span class="seat vip-seat">G11</span>
+                <span class="seat vip-seat">G12</span>
+                <span class="seat vip-seat">G13</span>
+                <span class="seat vip-seat">G14</span>
+                <span class="seat vip-seat">G15</span>
+            </div>
+            <div class="seat-row">
+                <span class="seat vip-seat">H3</span>
+                <span class="seat vip-seat">H4</span>
+                <span class="seat vip-seat">H5</span>
+                <span class="seat vip-seat">H6</span>
+                <span class="seat vip-seat">H7</span>
+                <span class="seat vip-seat">H8</span>
+                <span class="seat vip-seat">H9</span>
+                <span class="seat vip-seat">H10</span>
+                <span class="seat vip-seat">H11</span>
+                <span class="seat vip-seat">H12</span>
+                <span class="seat vip-seat">H13</span>
+                <span class="seat vip-seat">H14</span>
+                <span class="seat vip-seat">H15</span>
+                <span class="seat vip-seat">H16</span>
+                <span class="seat vip-seat">H17</span>
+            </div>
+            <div class="seat-row">
+                <span class="seat double-seat sweetbox-seat">J1 - J2</span>
+                <span class="seat double-seat sweetbox-seat">J3 - J4</span>
+                <span class="seat double-seat sweetbox-seat">J5 - J6</span>
+                <span class="seat double-seat sweetbox-seat">J7 - J8</span>
+                <span class="seat double-seat sweetbox-seat">J9 - J10</span>
+                <span class="seat double-seat sweetbox-seat">J11 - J12</span>
+                <span class="seat double-seat sweetbox-seat">J13 - J14</span>
+                <span class="seat double-seat sweetbox-seat">J15 - J16</span>
+                <span class="seat double-seat sweetbox-seat">J17 - J18</span>
+            </div>
+
+            <!-- Repeat rows similar to above as per need -->
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <span class="regular-seat"></span> Regular Seat
+            </div>
+            <div class="legend-item">
+                <span class="vip-seat"></span> VIP Seat
+            </div>
+            <div class="legend-item">
+                <span class="sweetbox-seat"></span> Sweetbox Seat
+            </div>
+            <div class="legend-item">
+                <span class="booked-seat"></span> Booked Seat
+            </div>
+            <div class="legend-item">
+                <span class="selected-seat"></span> Selected Seat
+            </div>
+            <div class="legend-item">
+                <span class="central-region"></span> Central Region
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addSeatModal" tabindex="-1" aria-labelledby="addSeatModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSeatModalLabel">Add New Seat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="seatNumber" class="form-label">Seat Number</label>
+                            <input type="text" class="form-control" id="seatNumber" name="seatNumber" placeholder="Enter seat number" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid seat number.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rowNumber" class="form-label">Row</label>
+                            <input type="text" class="form-control" id="rowNumber" name="rowNumber" placeholder="Enter row number" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid row number.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="seatStatus" class="form-label">Status</label>
+                            <select class="form-select" id="seatStatus" name="seatStatus" required>
+                                <option value="" disabled selected>Select status</option>
+                                <option value="available">Available</option>
+                                <option value="booked">Booked</option>
+                                <option value="vip">VIP</option>
+                                <option value="sweetbox">Sweetbox</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid status.
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add Seat</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

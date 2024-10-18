@@ -1,0 +1,52 @@
+﻿@page
+@model BookingTicketOnline.Pages.Movie.CreateMovieModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container my-5" style="max-width: 600px">
+    <h2 class="text-center mb-4">Create Movie</h2>
+    <form>
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" placeholder="Enter title">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-control">
+                <option value="" disabled selected>Choose a category</option>
+                <option value="kinh_di">Kinh dị</option>
+                <option value="phieu_luu">Phiêu lưu</option>
+                <option value="lang_man">Lãng mạn</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Release Date</label>
+            <input type="date" class="form-control" placeholder="Enter realease date">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Actors</label>
+            <input type="text" class="form-control" placeholder="Enter actors">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input type="text" class="form-control" placeholder="Enter director">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">TrailerURL</label>
+            <input type="text" class="form-control" placeholder="Enter Youtube trailer">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Poster</label>
+            <input type="file" class="form-control" accept="image/*">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" placeholder="Enter description" rows="5"></textarea>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary" asp-page="/Movie/ManageMovies">Save</button>
+            <a type="button" class="btn btn-outline-secondary" asp-page="/Movie/ManageMovies">Cancel</a>
+        </div>
+    </form>
+</div>
