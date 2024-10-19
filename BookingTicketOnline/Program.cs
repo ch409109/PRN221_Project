@@ -1,3 +1,9 @@
+using AutoMapper;
+using BookingTicketOnline.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using NToastNotify;
+
 namespace BookingTicketOnline
 {
     public class Program
@@ -8,8 +14,17 @@ namespace BookingTicketOnline
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddDbContext<PRN221_FinalProjectContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
+            builder.Services.AddRazorPages().AddNToastNotifyToastr(new ToastrOptions()
+            {
+                ProgressBar = true,
+                PositionClass = ToastPositions.TopLeft,
+                PreventDuplicates = true,
+                CloseButton = true,
+            });
 
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
