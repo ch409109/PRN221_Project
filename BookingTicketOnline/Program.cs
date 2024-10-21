@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -30,6 +30,15 @@ namespace BookingTicketOnline
                     options.LoginPath = "/Login"; 
                 });
 
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Thời gian hết hạn của session
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            builder.Services.AddTransient<EmailService>();
+
             var app = builder.Build();
 
 
@@ -49,6 +58,8 @@ namespace BookingTicketOnline
             app.UseAuthorization();
 
             app.UseAuthentication();
+
+            app.UseSession();
 
             app.MapRazorPages();
 
