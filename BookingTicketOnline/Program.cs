@@ -1,5 +1,6 @@
 using AutoMapper;
 using BookingTicketOnline.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
@@ -23,6 +24,12 @@ namespace BookingTicketOnline
                 CloseButton = true,
             });
 
+           builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login"; 
+                });
+
             var app = builder.Build();
 
 
@@ -40,6 +47,8 @@ namespace BookingTicketOnline
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.MapRazorPages();
 

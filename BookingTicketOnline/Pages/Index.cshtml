@@ -329,8 +329,18 @@ section{
             <li><a href="#coming">Coming</a></li>
             <li><a asp-page="/News/ListNews">Newsletter</a></li>
         </ul>
-        <a asp-page="/Login" class="btn">Sign In</a>
-        <a asp-page="/SignUp" class="btn">Sign Up</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <!-- Hiển thị tên người dùng nếu đã đăng nhập -->
+            <span class="user-greeting">Hello, @User.Identity.Name</span>
+            <a asp-page="/Logout" class="btn">Logout</a>
+        }
+        else
+        {
+            <!-- Hiển thị nút đăng nhập và đăng ký nếu chưa đăng nhập -->
+            <a asp-page="/Login" class="btn">Sign In</a>
+            <a asp-page="/SignUp" class="btn">Sign Up</a>
+        }
     </header>
 
     <!-- Home  -->
