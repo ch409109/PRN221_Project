@@ -16,20 +16,25 @@ namespace BookingTicketOnline
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<PRN221_FinalProjectContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
+            
+            // add toastr notification
             builder.Services.AddRazorPages().AddNToastNotifyToastr(new ToastrOptions()
             {
                 ProgressBar = true,
-                PositionClass = ToastPositions.TopLeft,
+                PositionClass = ToastPositions.TopRight,
                 PreventDuplicates = true,
                 CloseButton = true,
             });
 
+            // Add cookie authentication
            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
                     options.LoginPath = "/Login"; 
                 });
 
+
+            // Add session
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30); // Thời gian hết hạn của session
@@ -58,6 +63,8 @@ namespace BookingTicketOnline
             app.UseAuthorization();
 
             app.UseAuthentication();
+
+            app.UseNToastNotify();
 
             app.UseSession();
 
