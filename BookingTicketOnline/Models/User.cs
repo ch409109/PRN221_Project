@@ -46,5 +46,8 @@ namespace BookingTicketOnline.Models
         public virtual ICollection<Booking> Bookings { get; set; }
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         public virtual ICollection<News> News { get; set; }
+
+		[NotMapped]
+		public bool RememberMe { get; set; }
     }
 }

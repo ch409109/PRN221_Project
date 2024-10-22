@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BookingTicketOnline.Models; // Import user model
 using System.Linq; // For LINQ queries
@@ -11,29 +11,56 @@ namespace BookingTicketOnline.Pages
 {
     public class LoginModel : PageModel
     {
-        // Fake database context. Replace this with your actual DbContext
+
         private readonly PRN221_FinalProjectContext _context;
 
-        public LoginModel(PRN221_FinalProjectContext context)
+        public Models.User User { get; set; }
+        private IHttpContextAccessor Accessor;
+
+        private IRequestCookieCollection Cookies
+        {
+            get
+            {
+                return this.Accessor.HttpContext.Request.Cookies;
+            }
+        }
+
+        public LoginModel(PRN221_FinalProjectContext context, IHttpContextAccessor _accessor)
         {
             _context = context;
+            this.Accessor = _accessor;
         }
+
+       
 
         [BindProperty]
         public string Username { get; set; }
         [BindProperty]
         public string Password { get; set; }
 
-        public string ErrorMessage { get; set; }
+        [BindProperty]
+		public bool RememberMe { get; set; }
 
-        public void OnGet()
+		public string ErrorMessage { get; set; }
+
+		public void OnGet()
+		{
+			if (this.Cookies["UserName"] != null && this.Cookies["Password"] != null)
+			{
+				Username = this.Cookies["UserName"];
+				Password = this.Cookies["Password"];
+			}
+		}
+
+		public async Task<IActionResult> OnPostAsync()
         {
-        }
+			if (User == null)
+			{
+				User = new Models.User();
+			}
 
-        public async Task<IActionResult> OnPostAsync()
-        {
-            var user = _context.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
 
+			var user = _context.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
             if (user == null)
             {
                 ErrorMessage = "Invalid username or password";
@@ -47,21 +74,42 @@ namespace BookingTicketOnline.Pages
                 new Claim(ClaimTypes.Role, user.RoleId.ToString())
             };
 
+         
+
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity));
+
+         
+            if (RememberMe)
+            {
+                CookieOptions options = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(30),
+					HttpOnly = true, // Để ngăn truy cập từ JavaScript
+					Secure = true // Bảo mật bằng HTTPS
+				};
+                Response.Cookies.Append("UserName",Username, options);
+                Response.Cookies.Append("Password",Password, options);
+            }
+            else
+            {
+                Response.Cookies.Delete("UserName");
+                Response.Cookies.Delete("Password");
+            }
+
 
             switch (user.RoleId)
             {
                 case 1:
                     return RedirectToPage("/HomeAdmin");
                 case 2:
-                    return RedirectToPage("/Index"); 
+                    return RedirectToPage("/Index");
                 case 3:
-                    return RedirectToPage("/HomeStaff"); 
+                    return RedirectToPage("/HomeStaff");
                 default:
-                    return Page(); 
+                    return Page();
             }
         }
     }
