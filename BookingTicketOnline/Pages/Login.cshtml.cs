@@ -54,16 +54,12 @@ namespace BookingTicketOnline.Pages
 
 		public async Task<IActionResult> OnPostAsync()
         {
-			if (User == null)
-			{
-				User = new Models.User();
-			}
 
+            var user = _context.Users.FirstOrDefault(u => u.Username == Username);
 
-			var user = _context.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
-            if (user == null)
+            if (user == null || !BCrypt.Net.BCrypt.Verify(Password, user.Password)) // So sánh mật khẩu đã mã hóa
             {
-                ErrorMessage = "Invalid username or password";
+                ErrorMessage = "Invalid login attempt.";
                 return Page();
             }
 

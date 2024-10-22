@@ -13,8 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Website</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <script src="~/js/profile.js"></script>
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 </head>
@@ -329,11 +330,21 @@ section{
             <li><a href="#coming">Coming</a></li>
             <li><a asp-page="/News/ListNews">Newsletter</a></li>
         </ul>
+
         @if (User.Identity.IsAuthenticated)
         {
-            <!-- Hiển thị tên người dùng nếu đã đăng nhập -->
-            <span class="user-greeting">Hello, @User.Identity.Name</span>
-            <a asp-page="/Logout" class="btn">Logout</a>
+            <!-- Hiển thị tên người dùng và dropdown menu nếu đã đăng nhập -->
+            <div class="profile-dropdown">
+                <span class="user-name" onclick="toggleDropdown()">Hello, @User.Identity.Name</span>
+                <div id="dropdown-menu" class="dropdown-content">
+                    <ul>
+                        <li><a href="#">Edit Profile</a></li>
+                        <li><a href="#">Settings & Privacy</a></li>
+                        <li><a href="#">Help & Support</a></li>
+                        <li><a asp-page="/Logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
         }
         else
         {
@@ -342,6 +353,7 @@ section{
             <a asp-page="/SignUp" class="btn">Sign Up</a>
         }
     </header>
+
 
     <!-- Home  -->
     <section class="home swiper" id="home">

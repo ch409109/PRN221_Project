@@ -3,6 +3,7 @@ using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NToastNotify;
+using BCrypt.Net;
 
 namespace BookingTicketOnline.Pages
 {
@@ -28,6 +29,7 @@ namespace BookingTicketOnline.Pages
             {
                 return Page();
             }
+            string encryptPassword = BCrypt.Net.BCrypt.HashPassword(InputUser.Password);
 
             var user = new Models.User
             {
@@ -36,7 +38,7 @@ namespace BookingTicketOnline.Pages
                 Dob = InputUser.Dob,
                 PhoneNumber = InputUser.PhoneNumber,
                 Email = InputUser.Email,
-                Password = InputUser.Password,
+                Password = encryptPassword,
                 Status = "Active",
                 RoleId =2
             };

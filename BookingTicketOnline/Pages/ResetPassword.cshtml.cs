@@ -45,7 +45,7 @@ namespace BookingTicketOnline.Pages
             }
 
             // Cập nhật mật khẩu mới cho người dùng
-            user.Password = Password; // Bạn có thể hash mật khẩu tại đây nếu cần
+            user.Password = BCrypt.Net.BCrypt.HashPassword(Password);
 
             // Lưu thay đổi vào cơ sở dữ liệu
             await _context.SaveChangesAsync();
