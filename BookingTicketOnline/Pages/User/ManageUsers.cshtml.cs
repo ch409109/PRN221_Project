@@ -8,10 +8,11 @@ namespace BookingTicketOnline.Pages.User
 	public class ManageUsersModel : PageModel
 	{
 		private readonly PRN221_FinalProjectContext _context;
-
+		public List<Models.User> UsersSource { get; set; }
 		public ManageUsersModel(PRN221_FinalProjectContext context)
 		{
 			_context = context;
+			UsersSource = _context.Users.Include(r => r.Role).ToList();
 		}
 
 		[BindProperty(SupportsGet = true)]
@@ -23,36 +24,40 @@ namespace BookingTicketOnline.Pages.User
 		[BindProperty(SupportsGet = true)]
 		public string SelectedRole { get; set; }
 
-		[BindProperty]
-		public List<Models.User> Users { get; set; }
+		[BindProperty] 
+		public string Msg { get; set; }
+
+		public IList<Models.User> Users { get; set; }
 
 		public async Task OnGetAsync()
 		{
-			Users = await _context.Users.Include(r => r.Role).ToListAsync();
+			Users = UsersSource;
 		}
 
 		public async Task OnPostSearchAsync()
 		{
-			IQueryable<Models.User> query = _context.Users.Include(r => r.Role);
-			query = query.Where(u => u.FullName.Contains(SearchTerm) || u.Email.Contains(SearchTerm));
-			Users = await query.ToListAsync();
-		}
+			Users = new List<Models.User>();
 
-		public async Task OnGetFilterAsync()
-		{
-			IQueryable<Models.User> query = _context.Users;
-
-			if (!string.IsNullOrEmpty(SelectedStatus))
-			{
-				query = query.Where(u => u.Status == SelectedStatus);
+            if (string.IsNullOrWhiteSpace(SearchTerm) || string.IsNullOrWhiteSpace(SelectedRole) || string.IsNullOrWhiteSpace(SelectedStatus))
+            {
+				SearchTerm = "";
+            }
+            if (string.IsNullOrWhiteSpace(SearchTerm) && string.IsNullOrWhiteSpace(SelectedRole) && string.IsNullOrWhiteSpace(SelectedStatus))
+            {
+				Users = UsersSource;
 			}
-
-			if (!string.IsNullOrEmpty(SelectedRole))
-			{
-				query = query.Where(u => u.Role.RoleName == SelectedRole);
+            else
+            {
+				foreach (Models.User item in UsersSource)
+				{
+					if ((item.FullName.Contains(SearchTerm) || item.Email.Contains(SearchTerm))
+						&& (item.Role.RoleName.Contains(SelectedRole)) && (item.Status.Contains(SelectedStatus)))
+					{
+						Users.Add(item);
+					}
+				}
 			}
-
-			Users = await query.ToListAsync();
+            
 		}
 
 	}
