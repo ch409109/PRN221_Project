@@ -169,3 +169,60 @@ CREATE TABLE Showtime (
     FOREIGN KEY (CinemaID) REFERENCES Cinema(ID),
     FOREIGN KEY (RoomID) REFERENCES Room(ID)
 );
+
+INSERT INTO MovieCategory (Name) VALUES
+('Action'),
+('Comedy'),
+('Drama'),
+('Horror'),
+('Sci-Fi');
+INSERT INTO Role (RoleName) VALUES
+('Admin'),
+('User'),
+('Staff');
+INSERT INTO Movies (Title, Description, CategoryID, ReleaseDate, TrailerURL, ShowTime, Actor, Director, Poster, Status) VALUES
+('Inception', 'A mind-bending thriller by Christopher Nolan', 5, '2010-07-16', 'https://example.com/trailer/inception', '2010-07-16 19:00:00', 'Leonardo DiCaprio', 'Christopher Nolan', 'https://example.com/poster/inception.jpg', 'Available'),
+('The Dark Knight', 'A superhero film directed by Christopher Nolan', 1, '2008-07-18', 'https://example.com/trailer/darkknight', '2008-07-18 21:00:00', 'Christian Bale', 'Christopher Nolan', 'https://example.com/poster/darkknight.jpg', 'Available'),
+('Titanic', 'A romance film based on the tragic sinking of the Titanic', 3, '1997-12-19', 'https://example.com/trailer/titanic', '1997-12-19 18:00:00', 'Leonardo DiCaprio', 'James Cameron', 'https://example.com/poster/titanic.jpg', 'Available');
+INSERT INTO [User] (RoleID, Username, Password, Email, PhoneNumber, Dob, FullName, Status) VALUES
+(1, 'admin', 'password123', 'admin@example.com', '0123456789', '1980-01-01', 'Admin User', 'Active'),
+(2, 'john_doe', 'password123', 'john.doe@example.com', '0123456788', '1990-06-15', 'John Doe', 'Active'),
+(3, 'staff_01', 'password123', 'staff01@example.com', '0123456787', '1985-03-10', 'Staff One', 'Active');
+INSERT INTO Feedback (UserID, MovieID, Comments, CreateAt) VALUES
+(2, 1, 'Amazing movie with stunning visuals!', '2024-10-11 10:00:00'),
+(2, 3, 'Great love story, very touching.', '2024-10-11 11:00:00');
+INSERT INTO News (Title, Content, Image, CreateAt, UpdateAt, CreateBy) VALUES
+('New Release: Inception', 'Inception is now available in cinemas!', 'https://example.com/news/inception.jpg', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1);
+INSERT INTO Discount (Code, DiscountValue, StartDate, EndDate) VALUES
+('DISCOUNT10', 10.00, '2024-10-01', '2024-10-31'),
+('HALFOFF', 50.00, '2024-11-01', '2024-11-30');
+INSERT INTO Cinema (Location, City, Name) VALUES
+('123 Main Street', 'New York', 'Cinema One'),
+('456 Elm Street', 'Los Angeles', 'Cinema Two');
+INSERT INTO Room (Name, CinemaID, Rows, Columns) VALUES
+('Room 1', 1, 10, 20),
+('Room 2', 2, 12, 24);
+
+INSERT INTO Booking (BookingDate, CinemaID, MovieID, UserID, Status, TotalPrice) VALUES
+('2024-10-10 19:00:00', 1, 1, 2, 'Confirmed', 20.00),
+('2024-10-11 20:00:00', 2, 3, 2, 'Confirmed', 50.00);
+INSERT INTO Payment (BookingID, Amount, DiscountID) VALUES
+(1, 20.00, 1),
+(2, 25.00, 2);
+INSERT INTO Revenue (PaymentID, TotalRevenue, FromDate, ToDate) VALUES
+(1, 2000.00, '2024-10-01', '2024-10-10'),
+(2, 2500.00, '2024-10-11', '2024-10-20');
+INSERT INTO BookingSeatsDetail (SeatID, Price, BookingID) VALUES
+(1, 10.00, 1),
+(2, 10.00, 1),
+(3, 25.00, 2),
+(4, 25.00, 2);
+INSERT INTO FoodAndDrinks (Name, Price, Quantity) VALUES
+('Popcorn', 5.00, 100),
+('Soda', 3.00, 200);
+INSERT INTO BookingItem (FoodAndDrinksID, Quantity, Price, BookingID) VALUES
+(1, 1, 5.00, 1),
+(2, 2, 6.00, 2);
+INSERT INTO Showtime (MovieID, CinemaID, RoomID, Showtime, [Date]) VALUES
+(1, 1, 1, '2024-10-10 19:00:00', '2024-10-10'),
+(3, 2, 2, '2024-10-11 20:00:00', '2024-10-11');
