@@ -52,21 +52,21 @@
 			<tbody>
 				@foreach (var user in Model.Users)
 				{
-					<tr>
-						<td>@user.Id</td>
-						<td>@user.FullName</td>
-						<td>@user.Email</td>
-						<td>
-							<span class="badge @(user.Status == "Active" ? "bg-success" : user.Status == "Banned" ? "bg-danger" : "bg-secondary")">
+						<tr>
+							<td>@user.Id</td>
+							<td>@user.FullName</td>
+							<td>@user.Email</td>
+							<td>
+								<span class="badge @(user.Status == "Active" ? "bg-success" : user.Status == "Banned" ? "bg-danger" : "bg-secondary")">
 								@user.Status
-							</span>
-						</td>
-						<td>@user.Role?.RoleName</td>
-						<td class="text-center">
-							<a asp-page="/User/EditUser" asp-route-id="@user.Id"><i class="bi bi-pencil-square"></i></a>
-							<a asp-page="/User/DeleteUser" asp-route-id="@user.Id"><i class="bi bi-trash-fill"></i></a>
-						</td>
-					</tr>
+								</span>
+							</td>
+							<td>@user.Role?.RoleName</td>
+							<td class="text-center">
+								<a asp-page="/User/EditUser" asp-route-id="@user.Id"><i class="bi bi-pencil-square"></i></a>
+								<a asp-page="/User/DeleteUser" asp-route-id="@user.Id"><i class="bi bi-trash-fill"></i></a>
+							</td>
+						</tr>
 				}
 			</tbody>
 		</table>
