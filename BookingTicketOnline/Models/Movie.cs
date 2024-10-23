@@ -18,7 +18,6 @@ namespace BookingTicketOnline.Models
         public int? CategoryId { get; set; }
         public DateTime? ReleaseDate { get; set; }
         public string? TrailerUrl { get; set; }
-        public DateTime? ShowTime { get; set; }
         public string? Actor { get; set; }
         public string? Director { get; set; }
         public string? Poster { get; set; }

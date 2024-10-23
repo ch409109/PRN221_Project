@@ -31,7 +31,7 @@ namespace BookingTicketOnline.Pages
             this.Accessor = _accessor;
         }
 
-       
+
 
         [BindProperty]
         public string Username { get; set; }
@@ -39,20 +39,20 @@ namespace BookingTicketOnline.Pages
         public string Password { get; set; }
 
         [BindProperty]
-		public bool RememberMe { get; set; }
+        public bool RememberMe { get; set; }
 
-		public string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; }
 
-		public void OnGet()
-		{
-			if (this.Cookies["UserName"] != null && this.Cookies["Password"] != null)
-			{
-				Username = this.Cookies["UserName"];
-				Password = this.Cookies["Password"];
-			}
-		}
+        public void OnGet()
+        {
+            if (this.Cookies["UserName"] != null && this.Cookies["Password"] != null)
+            {
+                Username = this.Cookies["UserName"];
+                Password = this.Cookies["Password"];
+            }
+        }
 
-		public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
 
             var user = _context.Users.FirstOrDefault(u => u.Username == Username);
@@ -70,24 +70,24 @@ namespace BookingTicketOnline.Pages
                 new Claim(ClaimTypes.Role, user.RoleId.ToString())
             };
 
-         
+
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity));
 
-         
+
             if (RememberMe)
             {
                 CookieOptions options = new CookieOptions
                 {
                     Expires = DateTime.Now.AddDays(30),
-					HttpOnly = true, // Để ngăn truy cập từ JavaScript
-					Secure = true // Bảo mật bằng HTTPS
-				};
-                Response.Cookies.Append("UserName",Username, options);
-                Response.Cookies.Append("Password",Password, options);
+                    HttpOnly = true, // Để ngăn truy cập từ JavaScript
+                    Secure = true // Bảo mật bằng HTTPS
+                };
+                Response.Cookies.Append("UserName", Username, options);
+                Response.Cookies.Append("Password", Password, options);
             }
             else
             {

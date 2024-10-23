@@ -5,21 +5,52 @@
     Layout = "_AdminLayout";
 }
 
-<div class="container my-5">
 
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
-        <div class="flex-shrink-0 mb-3 mb-md-0">
-            <a class="btn btn-success" asp-page="/Cinema/CreateCinema">
-                <i class="bi bi-person-plus-fill me-2"></i> Add New Cinema
+<div class="container-fluid mb-4">
+    <div class="row align-items-center justify-content-between g-3">
+        <div class="col-12 col-md-auto">
+            <a class="btn btn-success w-100" asp-page="/Cinema/CreateCinema">
+                <i class="bi bi-plus-circle me-2"></i> Add New Cinema
             </a>
         </div>
-        <div class="input-group w-100 w-md-50">
-            <input type="text" class="form-control" placeholder="Search by name">
-            <button class="btn btn-outline-secondary" type="button">Search</button>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <form method="get" class="d-flex">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="searchString"
+                           value="@Model.CurrentFilter" placeholder="Search by name">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                    @if (!string.IsNullOrEmpty(Model.CurrentFilter))
+                    {
+                        <a class="btn btn-outline-secondary" asp-page="./ManageCinemas">
+                            <i class="bi bi-x-circle"></i> Clear
+                        </a>
+                    }
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <div class="table-responsive">
+<div class="table-responsive">
+    @if (!Model.cinemas.Any())
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            @if (!string.IsNullOrEmpty(Model.CurrentFilter))
+            {
+                <span>No cinemas found matching '@Model.CurrentFilter'</span>
+            }
+            else
+            {
+                <span>No cinemas found</span>
+            }
+        </div>
+    }
+    else
+    {
         <table class="table table-bordered table-hover">
             <thead class="table-light">
                 <tr>
@@ -27,51 +58,62 @@
                     <th>Name</th>
                     <th>Location</th>
                     <th>City</th>
-                    <th>Phone</th>
-                    <th>Email</th>
+                    <th>Status</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Cinema 1</td>
-                    <td>Hà Đông</td>
-                    <td>Hà Nội</td>
-                    <td>0999555444</td>
-                    <td>cinema1@gmail.com</td>
-                    <td class="text-center">
-                        <a asp-page="/Cinema/EditCinema"><i class="bi bi-pencil-square"></i></a>
-                        <a asp-page="/Cinema/DeleteCinema"><i class="bi bi-trash-fill"></i></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td>Cinema 2</td>
-                    <td>Phú Xuyên</td>
-                    <td>Hà Nội</td>
-                    <td>0111222897</td>
-                    <td>cinema2@gmail.com</td>
-                    <td class="text-center">
-                        <a asp-page="/Cinema/EditCinema"><i class="bi bi-pencil-square"></i></a>
-                        <a asp-page="/Cinema/DeleteCinema"><i class="bi bi-trash-fill"></i></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>3</td>
-                    <td>Cinema 3</td>
-                    <td>Cẩm Phả</td>
-                    <td>Quảng Ninh</td>
-                    <td>0111782345</td>
-                    <td>cinema3@gmail.com</td>
-                    <td class="text-center">
-                        <a asp-page="/Cinema//EditCinema"><i class="bi bi-pencil-square"></i></a>
-                        <a asp-page="/Cinema/DeleteCinema"><i class="bi bi-trash-fill"></i></a>
-                    </td>
-                </tr>
+                @foreach (var cinema in Model.cinemas)
+                {
+                    <tr>
+                        <td>@cinema.Id</td>
+                        <td>@cinema.Name</td>
+                        <td>@cinema.Location</td>
+                        <td>@cinema.City</td>
+                        @if (cinema.Status == "Active")
+                        {
+                            <td class="text-primary">@cinema.Status</td>
+                        }
+                        else
+                        {
+                            <td class="text-danger">@cinema.Status</td>
+                        }
+                        <td class="text-center">
+                            <a asp-page="/Cinema/EditCinema" asp-route-id="@cinema.Id"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-page="/Cinema/DeleteCinema" asp-route-id="@cinema.Id"><i class="bi bi-trash-fill"></i></a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
-    </div>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                @if (Model.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?pageNumber=@(Model.CurrentPage - 1)&searchString=@Model.CurrentFilter" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                }
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                        <a class="page-link" href="?pageNumber=@i&searchString=@Model.CurrentFilter">@i</a>
+                    </li>
+                }
+
+                @if (Model.CurrentPage < Model.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?pageNumber=@(Model.CurrentPage + 1)&searchString=@Model.CurrentFilter" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
 </div>

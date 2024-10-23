@@ -15,8 +15,8 @@ namespace BookingTicketOnline
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-            builder.Services.AddDbContext<PRN221_FinalProjectContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
-            
+            builder.Services.AddDbContext<PRN221_FinalProjectContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
+
             // add toastr notification
             builder.Services.AddRazorPages().AddNToastNotifyToastr(new ToastrOptions()
             {

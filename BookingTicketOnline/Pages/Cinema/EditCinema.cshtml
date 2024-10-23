@@ -6,30 +6,38 @@
 
 <div class="container my-5" style="max-width: 600px">
     <h2 class="text-center mb-4">Edit Cinema</h2>
-    <form>
-        <input hidden type="text" class="form-control" placeholder="1">
+    <form method="post">
+        <input hidden asp-for="@Model.cinema.Id" class="form-control">
+
         <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input type="text" class="form-control" placeholder="Enter name" required>
+            <label asp-for="cinema.Name" class="form-label">Name</label>
+            <input asp-for="cinema.Name" class="form-control" placeholder="Enter cinema name">
+            <span class="text-danger" asp-validation-for="cinema.Name"></span>
         </div>
+
         <div class="mb-3">
-            <label class="form-label">Location</label>
-            <input type="text" class="form-control" placeholder="Enter location" required>
+            <label asp-for="cinema.Location" class="form-label">Location</label>
+            <input asp-for="cinema.Location" class="form-control" placeholder="Enter location">
+            <span class="text-danger" asp-validation-for="cinema.Location"></span>
         </div>
+
         <div class="mb-3">
-            <label class="form-label">City</label>
-            <input type="text" class="form-control" placeholder="Enter city" required>
+            <label asp-for="cinema.City" class="form-label">City</label>
+            <input asp-for="cinema.City" class="form-control" placeholder="Enter city">
+            <span class="text-danger" asp-validation-for="cinema.City"></span>
         </div>
+
         <div class="mb-3">
-            <label class="form-label">Phone</label>
-            <input type="text" class="form-control" placeholder="Enter phone" required>
+            <label class="form-label">Status</label>
+            <select asp-for="cinema.Status" class="form-control">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+            <span asp-validation-for="cinema.Status" class="text-danger"></span>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="text" class="form-control" placeholder="Enter email" required>
-        </div>
+
         <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary" asp-page="/Cinema/ManageCinemas">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
             <a type="button" class="btn btn-outline-secondary" asp-page="/Cinema/ManageCinemas">Cancel</a>
         </div>
     </form>

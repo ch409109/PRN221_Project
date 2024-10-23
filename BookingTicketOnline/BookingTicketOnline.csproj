@@ -7,13 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="appsettings.json" />
+    <Content Remove="appsettings.Development.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Pages\Category\CreateCategory.cshtml" />
+    <None Include="Pages\Category\DeleteCategory.cshtml" />
+    <None Include="Pages\Category\EditCategory.cshtml" />
+    <None Include="Pages\Category\ManageCategories.cshtml" />
+    <None Include="Pages\Cinema\CreateCinema.cshtml" />
+    <None Include="Pages\Cinema\DeleteCinema.cshtml" />
+    <None Include="Pages\Cinema\EditCinema.cshtml" />
+    <None Include="Pages\Cinema\ManageCinemas.cshtml" />
+    <None Include="Pages\Foods\BookFoods.cshtml" />
+    <None Include="Pages\Foods\CreateFoods.cshtml" />
+    <None Include="Pages\Foods\DeleteFoods.cshtml" />
+    <None Include="Pages\Foods\EditFoods.cshtml" />
+    <None Include="Pages\Foods\ManageFoods.cshtml" />
+    <None Include="Pages\Movie\CreateMovie.cshtml" />
+    <None Include="Pages\Movie\DeleteMovie.cshtml" />
+    <None Include="Pages\Movie\EditMovie.cshtml" />
+    <None Include="Pages\Movie\ManageMovies.cshtml" />
+    <None Include="Pages\Movie\MovieDetails.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

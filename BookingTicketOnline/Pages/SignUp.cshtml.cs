@@ -40,7 +40,7 @@ namespace BookingTicketOnline.Pages
                 Email = InputUser.Email,
                 Password = encryptPassword,
                 Status = "Active",
-                RoleId =2
+                RoleId = 2
             };
 
             _context.Users.Add(user);

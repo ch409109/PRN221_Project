@@ -16,6 +16,7 @@ namespace BookingTicketOnline.Models
         public string? Location { get; set; }
         public string? City { get; set; }
         public string? Name { get; set; }
+        public string? Status { get; set; }
 
         public virtual ICollection<Booking> Bookings { get; set; }
         public virtual ICollection<Room> Rooms { get; set; }

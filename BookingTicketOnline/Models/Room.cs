@@ -7,18 +7,17 @@ namespace BookingTicketOnline.Models
     {
         public Room()
         {
-            Seats = new HashSet<Seat>();
+            Rows = new HashSet<Row>();
             Showtimes = new HashSet<Showtime>();
         }
 
         public int Id { get; set; }
         public string? Name { get; set; }
         public int? CinemaId { get; set; }
-        public int? Rows { get; set; }
-        public int? Columns { get; set; }
+        public int? NumberOfRows { get; set; }
 
         public virtual Cinema? Cinema { get; set; }
-        public virtual ICollection<Seat> Seats { get; set; }
+        public virtual ICollection<Row> Rows { get; set; }
         public virtual ICollection<Showtime> Showtimes { get; set; }
     }
 }
