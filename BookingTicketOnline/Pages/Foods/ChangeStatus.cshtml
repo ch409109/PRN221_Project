@@ -1,0 +1,47 @@
+﻿@page
+@model BookingTicketOnline.Pages.Foods.ChangeStatusModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container my-5" style="max-width: 600px">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center mb-0">Confirm Status Change</h2>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Are you sure you want to change this foods's status?</h5>
+            <p class="card-text">
+                <strong>Foods Name:</strong> @Model.Foods.Name
+            </p>
+            <p class="card-text">
+                <strong>Current Status:</strong>
+                <span class="badge @(Model.Foods.Status == "Active" ? "bg-success" : "bg-danger")">
+                    @Model.Foods.Status
+                </span>
+            </p>
+            <p class="card-text">
+                <strong>New Status:</strong>
+                <span class="badge @(Model.Foods.Status == "Active" ? "bg-danger" : "bg-success")">
+                    @(Model.Foods.Status == "Active" ? "Inactive" : "Active")
+                </span>
+            </p>
+            <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                Warning: This action will affect the foods's availability in the system.
+            </div>
+            <form method="post">
+                <input type="hidden" asp-for="Foods.Id" />
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn @(Model.Foods.Status == "Active" ? "btn-danger" : "btn-success")">
+                        <i class="bi @(Model.Foods.Status == "Active" ? "bi-x-circle" : "bi-check-circle") me-2"></i>
+                        @(Model.Foods.Status == "Active" ? "Deactivate" : "Activate")
+                    </button>
+                    <a class="btn btn-outline-secondary" asp-page="./FoodsDetails" asp-route-id="@Model.Foods.Id">
+                        <i class="bi bi-x-circle me-2"></i>Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

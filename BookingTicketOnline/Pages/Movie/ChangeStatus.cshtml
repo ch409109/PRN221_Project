@@ -1,0 +1,47 @@
+﻿@page
+@model BookingTicketOnline.Pages.Movie.ChangeStatusModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container my-5" style="max-width: 600px">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center mb-0">Confirm Status Change</h2>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Are you sure you want to change this movie's status?</h5>
+            <p class="card-text">
+                <strong>Movie Name:</strong> @Model.Movie.Title
+            </p>
+            <p class="card-text">
+                <strong>Current Status:</strong>
+                <span class="badge @(Model.Movie.Status == "Active" ? "bg-success" : "bg-danger")">
+                    @Model.Movie.Status
+                </span>
+            </p>
+            <p class="card-text">
+                <strong>New Status:</strong>
+                <span class="badge @(Model.Movie.Status == "Active" ? "bg-danger" : "bg-success")">
+                    @(Model.Movie.Status == "Active" ? "Inactive" : "Active")
+                </span>
+            </p>
+            <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                Warning: This action will affect the movie's availability in the system.
+            </div>
+            <form method="post">
+                <input type="hidden" asp-for="Movie.Id" />
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn @(Model.Movie.Status == "Active" ? "btn-danger" : "btn-success")">
+                        <i class="bi @(Model.Movie.Status == "Active" ? "bi-x-circle" : "bi-check-circle") me-2"></i>
+                        @(Model.Movie.Status == "Active" ? "Deactivate" : "Activate")
+                    </button>
+                    <a class="btn btn-outline-secondary" asp-page="./MovieDetailsAdmin" asp-route-id="@Model.Movie.Id">
+                        <i class="bi bi-x-circle me-2"></i>Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

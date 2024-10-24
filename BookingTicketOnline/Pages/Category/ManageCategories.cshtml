@@ -64,8 +64,12 @@
                         <td>@category.Id</td>
                         <td>@category.Name</td>
                         <td class="text-center">
-                            <a asp-page="/Category/EditCategory" asp-route-id="@category.Id"><i class="bi bi-pencil-square"></i></a>
-                            <a asp-page="/Category/DeleteCategory" asp-route-id="@category.Id"><i class="bi bi-trash-fill"></i></a>
+                            <a asp-page="/Category/EditCategory" asp-route-id="@category.Id" class="btn btn-sm btn-outline-primary me-2">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a asp-page="/Category/DeleteCategory" asp-route-id="@category.Id" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
                         </td>
                     </tr>
                 }

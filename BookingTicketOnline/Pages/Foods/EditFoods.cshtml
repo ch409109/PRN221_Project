@@ -9,6 +9,8 @@
 
         <input hidden asp-for="food.Id" />
 
+        <div asp-validation-summary="All"></div>
+
         <div class="mb-3">
             <label asp-for="food.Name" class="form-label">Name</label>
             <input asp-for="food.Name" class="form-control" asp-for="food.Name" placeholder="Enter name" />
@@ -28,17 +30,22 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="food.Image" class="form-label">Image</label>
-            <input type="file" class="form-control" asp-for="ImageFile" accept="image/*" />
+            <label class="form-label">Current Image</label>
+            @if (!string.IsNullOrEmpty(Model.food.Image))
+            {
+                <div class="mb-2">
+                    <img src="~/img/@Model.food.Image"
+                         class="img-fluid rounded"
+                         alt="Current food image"
+                         style="max-height: 200px" />
+                </div>
+            }
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Status</label>
-            <select asp-for="food.Status" class="form-control">
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-            </select>
-            <span asp-validation-for="food.Status" class="text-danger"></span>
+            <label asp-for="food.Image" class="form-label">New Image (Optional)</label>
+            <input type="file" class="form-control" asp-for="ImageFile" accept="image/*" />
+            <small class="form-text text-muted">Leave empty to keep current image</small>
         </div>
 
         <div class="d-flex justify-content-between">

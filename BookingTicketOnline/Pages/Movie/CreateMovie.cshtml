@@ -57,14 +57,6 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Status</label>
-            <select asp-for="movie.Status" class="form-control">
-                <option value="Active">Active</option>
-            </select>
-            <span asp-validation-for="movie.Status" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
             <label class="form-label">Description</label>
             <textarea asp-for="movie.Description" class="form-control" placeholder="Enter description" rows="5"></textarea>
             <span asp-validation-for="movie.Description" class="text-danger"></span>

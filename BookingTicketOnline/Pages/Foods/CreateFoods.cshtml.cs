@@ -48,6 +48,8 @@ namespace BookingTicketOnline.Pages.Foods
                 food.Image = fileName;
             }
 
+            food.Status = "Active";
+
             _context.FoodAndDrinks.Add(food);
             await _context.SaveChangesAsync();
             TempData["success"] = "Foods created successfully";

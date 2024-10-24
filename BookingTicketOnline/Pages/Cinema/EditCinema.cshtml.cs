@@ -40,10 +40,39 @@ namespace BookingTicketOnline.Pages.Cinema
                 return Page();
             }
 
+            var existingCinema = await _context.Cinemas.AsNoTracking().FirstOrDefaultAsync(c => c.Id == cinema.Id);
+
+            if (existingCinema == null)
+            {
+                return NotFound();
+            }
+
+            cinema.Status = existingCinema.Status;
+
             _context.Attach(cinema).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            TempData["success"] = "Cinema updated successfully";
-            return RedirectToPage("./ManageCinemas");
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                TempData["success"] = "Cinema updated successfully";
+                return RedirectToPage("./ManageCinemas");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CinemaExists(cinema.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        private bool CinemaExists(int id)
+        {
+            return _context.Cinemas.Any(e => e.Id == id);
         }
     }
 }

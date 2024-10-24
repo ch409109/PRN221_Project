@@ -14,7 +14,7 @@ namespace BookingTicketOnline.Pages.Foods
         public FoodAndDrink food { get; set; }
 
         [BindProperty]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
 
         public EditFoodsModel(PRN221_FinalProjectContext context, IWebHostEnvironment environment)
         {
@@ -24,7 +24,7 @@ namespace BookingTicketOnline.Pages.Foods
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            food = await _context.FoodAndDrinks.FindAsync(id);
+            food = await _context.FoodAndDrinks.AsNoTracking().FirstOrDefaultAsync(f => f.Id == id);
 
             if (food == null)
             {
@@ -36,24 +36,32 @@ namespace BookingTicketOnline.Pages.Foods
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (ImageFile == null)
+            {
+                ModelState.Remove("ImageFile");
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            var foodToUpdate = await _context.FoodAndDrinks.FindAsync(food.Id);
+            var foodToUpdate = await _context.FoodAndDrinks.AsNoTracking().FirstOrDefaultAsync(f => f.Id == food.Id);
 
             if (foodToUpdate == null)
             {
                 return NotFound();
             }
 
+            food.Status = foodToUpdate.Status;
+            food.Image = foodToUpdate.Image;
+
             foodToUpdate.Name = food.Name;
             foodToUpdate.Price = food.Price;
             foodToUpdate.Quantity = food.Quantity;
             foodToUpdate.Status = food.Status;
 
-            if (ImageFile != null)
+            if (ImageFile != null && ImageFile.Length > 0)
             {
                 var originalFileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
                 var fileExtension = Path.GetExtension(ImageFile.FileName);
@@ -78,10 +86,29 @@ namespace BookingTicketOnline.Pages.Foods
             }
 
             _context.Attach(foodToUpdate).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            TempData["success"] = "Foods updated successfully";
 
-            return RedirectToPage("./ManageFoods");
+            try
+            {
+                await _context.SaveChangesAsync();
+                TempData["success"] = "Foods updated successfully";
+                return RedirectToPage("./ManageFoods");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FoodExists(food.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        private bool FoodExists(int id)
+        {
+            return _context.FoodAndDrinks.Any(e => e.Id == id);
         }
     }
 }

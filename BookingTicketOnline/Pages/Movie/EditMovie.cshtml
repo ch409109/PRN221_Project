@@ -7,6 +7,8 @@
 <div class="container my-5" style="max-width: 600px">
     <h2 class="text-center mb-4">Update Movie</h2>
 
+    <div asp-validation-summary="All"></div>
+
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="movie.Id" />
 
@@ -55,26 +57,22 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Poster</label>
+            <label class="form-label">Current Image</label>
             @if (!string.IsNullOrEmpty(Model.movie.Poster))
             {
                 <div class="mb-2">
-                    <img src="~/img/@Model.movie.Poster" alt="Current Movie Poster"
-                         style="max-width: 200px; max-height: 300px;" class="img-thumbnail" />
-                    <p class="text-muted mt-1">Current poster</p>
+                    <img src="~/img/@Model.movie.Poster"
+                         class="img-fluid rounded"
+                         alt="Current movie image"
+                         style="max-height: 200px" />
                 </div>
             }
-            <input type="file" asp-for="ImageFile" class="form-control" accept="image/*">
-            <small class="text-muted">Leave empty if you don't want to change the poster</small>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Status</label>
-            <select asp-for="movie.Status" class="form-control">
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-            </select>
-            <span asp-validation-for="movie.Status" class="text-danger"></span>
+            <label asp-for="movie.Poster" class="form-label">New Image (Optional)</label>
+            <input type="file" class="form-control" asp-for="ImageFile" accept="image/*" />
+            <small class="form-text text-muted">Leave empty to keep current image</small>
         </div>
 
         <div class="mb-3">

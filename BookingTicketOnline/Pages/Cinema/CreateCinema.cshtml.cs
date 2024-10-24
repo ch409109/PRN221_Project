@@ -28,6 +28,8 @@ namespace BookingTicketOnline.Pages.Cinema
                 return Page();
             }
 
+            cinema.Status = "Active";
+
             _context.Cinemas.Add(cinema);
             await _context.SaveChangesAsync();
             TempData["success"] = "Cinema created successfully";
