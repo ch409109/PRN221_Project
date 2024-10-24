@@ -38,7 +38,7 @@ namespace BookingTicketOnline.Pages.User
 		{
 			Users = new List<Models.User>();
 
-            if (string.IsNullOrWhiteSpace(SearchTerm) || string.IsNullOrWhiteSpace(SelectedRole) || string.IsNullOrWhiteSpace(SelectedStatus))
+            if (string.IsNullOrWhiteSpace(SearchTerm))
             {
 				SearchTerm = "";
             }
