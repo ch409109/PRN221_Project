@@ -1,0 +1,64 @@
+﻿@page
+@model BookingTicketOnline.Pages.ManageDiscount.IndexModel
+@{
+    ViewData["Title"] = "Discounts Index";
+}
+<h1>Discounts</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount[0].Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount[0].DiscountValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount[0].EndDate)
+            </th>
+            <th>
+                Status <!-- Cột mới để hiển thị trạng thái -->
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Discount)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiscountValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @{
+                        // Tính toán trạng thái giảm giá
+                        var currentDate = DateTime.Now;
+                        var isActive = item.StartDate <= currentDate && item.EndDate >= currentDate;
+                        var statusText = isActive ? "Active" : "Inactive";
+                    }
+                    <span class="badge @(isActive ? "bg-success" : "bg-danger")">@statusText</span>
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
