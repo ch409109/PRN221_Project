@@ -34,13 +34,17 @@
 </div>
 
 <div class="d-flex flex-column flex-md-row justify-content-end flex-wrap mb-4">
-    <select class="form-select me-2 mb-2 mb-md-0" style="max-width: 200px;">
-        <option selected>Select category</option>
-        @foreach (var category in Model.categories)
-        {
-            <option value="3">@category.Name</option>
-        }
-    </select>
+    <form method="get" class="d-flex">
+        <select name="categoryId" class="form-select me-2 mb-2 mb-md-0" style="max-width: 200px;" onchange="this.form.submit()">
+            <option value="">All Categories</option>
+            @foreach (var category in Model.categories)
+            {
+                <option value="@category.Id" selected="@(Model.CategoryFilter == category.Id)">
+                    @category.Name
+                </option>
+            }
+        </select>
+    </form>
 </div>
 
 <div class="table-responsive">
@@ -65,11 +69,9 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
-                    <th>Description</th>
                     <th>Release Date</th>
-                    <th>Actor</th>
                     <th>Director</th>
-                    <th>Poster</th>
+                    <th>Genre</th>
                     <th>Status</th>
                     <th class="text-center">Actions</th>
                 </tr>
@@ -80,11 +82,9 @@
                     <tr>
                         <td>@movie.Id</td>
                         <td>@movie.Title</td>
-                        <td>@movie.Description</td>
                         <td>@movie.ReleaseDate</td>
-                        <td>@movie.Actor</td>
                         <td>@movie.Director</td>
-                        <td><img src="/img/@movie.Poster" alt="Inception" width="50" height="50"></td>
+                        <td>@movie.Category?.Name</td>
                         @if (movie.Status == "Active")
                         {
                             <td class="text-primary">@movie.Status</td>
@@ -94,8 +94,12 @@
                             <td class="text-danger">@movie.Status</td>
                         }
                         <td class="text-center">
-                            <a asp-page="/Movie/EditMovie" asp-route-id="@movie.Id"><i class="bi bi-pencil-square"></i></a>
-                            <a asp-page="/Movie/DeleteMovie" asp-route-id="@movie.Id"><i class="bi bi-trash-fill"></i></a>
+                            <a asp-page="/Movie/EditMovie" asp-route-id="@movie.Id" class="btn btn-sm btn-outline-primary me-2">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a asp-page="/Movie/MovieDetailsAdmin" asp-route-id="@movie.Id" class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-journal-text"></i> Details
+                            </a>
                         </td>
                     </tr>
                 }
@@ -107,7 +111,9 @@
                 @if (Model.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="?pageNumber=@(Model.CurrentPage - 1)&searchString=@Model.CurrentFilter" aria-label="Previous">
+                        <a class="page-link"
+                           href="?pageNumber=@(Model.CurrentPage - 1)&searchString=@Model.CurrentFilter&categoryId=@Model.CategoryFilter"
+                           aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>

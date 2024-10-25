@@ -5,17 +5,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookingTicketOnline.Pages.Cinema
 {
-    public class DeleteCinemaModel : PageModel
+    public class ChangeStatusModel : PageModel
     {
         private readonly PRN221_FinalProjectContext _context;
 
-        public DeleteCinemaModel(PRN221_FinalProjectContext context)
+        public ChangeStatusModel(PRN221_FinalProjectContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Models.Cinema cinema { get; set; }
+        public Models.Cinema Cinema { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -24,38 +24,42 @@ namespace BookingTicketOnline.Pages.Cinema
                 return NotFound();
             }
 
-            cinema = await _context.Cinemas.FirstOrDefaultAsync(m => m.Id == id);
+            Cinema = await _context.Cinemas.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (cinema == null)
+            if (Cinema == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (cinema == null || cinema.Id == 0)
+            if (Cinema == null || Cinema.Id == 0)
             {
                 return NotFound();
             }
 
             try
             {
-                var cinemaToDelete = await _context.Cinemas.FindAsync(cinema.Id);
-                if (cinemaToDelete != null)
-                {
-                    _context.Cinemas.Remove(cinemaToDelete);
-                    await _context.SaveChangesAsync();
-                }
-                TempData["success"] = "Cinema deleted successfully";
+                var cinemaToUpdate = await _context.Cinemas.FindAsync(Cinema.Id);
 
-                return RedirectToPage("./ManageCinemas");
+                if (cinemaToUpdate != null)
+                {
+                    cinemaToUpdate.Status = cinemaToUpdate.Status == "Active" ? "Inactive" : "Active";
+                    _context.Update(cinemaToUpdate);
+                    await _context.SaveChangesAsync();
+
+                    TempData["success"] = $"Cinema status has been changed to {cinemaToUpdate.Status} successfully";
+                    return RedirectToPage("./CinemaDetails", new { id = Cinema.Id });
+                }
+
+                return NotFound();
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty,
-                    "An error occurred while deleting the cinema. Please try again.");
+                TempData["error"] = "An error occurred while changing the cinema status. Please try again.";
                 return Page();
             }
         }

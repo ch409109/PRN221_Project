@@ -67,7 +67,12 @@ namespace BookingTicketOnline.Pages
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim("FullName", user.FullName),
-                new Claim(ClaimTypes.Role, user.RoleId.ToString())
+                new Claim(ClaimTypes.Role, user.RoleId.ToString()),
+                new Claim("Email", user.Email),
+                new Claim("PhoneNumber", user.PhoneNumber),
+                new Claim("Password", user.Password),
+                new Claim(ClaimTypes.DateOfBirth, user.Dob.HasValue ? user.Dob.Value.ToString("yyyy-MM-dd") : string.Empty),
+
             };
 
 

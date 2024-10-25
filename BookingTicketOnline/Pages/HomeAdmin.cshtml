@@ -26,21 +26,46 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Home</a>
                     </li>
-                    <li class="nav-item"></li>
-                    <a class="nav-link " href="#">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
-                    </li>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("1"))
+                        {
+                            <!-- Hiển thị tên người dùng và dropdown menu nếu đã đăng nhập -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Hello, @User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings & Privacy</a></li>
+                                    <li><a class="dropdown-item" href="#">Help & Support</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <script>
+                                window.location.href = "/AccessDenied";
+                            </script>
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("/Login");
+                    }
                 </ul>
             </div>
         </div>
     </header>
+
 
     <!-- Tiêu đề trang -->
     <div class="sticky-top bg-light py-3 shadow-sm">

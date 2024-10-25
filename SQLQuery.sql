@@ -170,20 +170,11 @@ CREATE TABLE Showtime (
     FOREIGN KEY (RoomID) REFERENCES Room(ID)
 );
 
-INSERT INTO MovieCategory (Name) VALUES
-('Action'),
-('Comedy'),
-('Drama'),
-('Horror'),
-('Sci-Fi');
 INSERT INTO Role (RoleName) VALUES
 ('Admin'),
 ('User'),
 ('Staff');
-INSERT INTO Movies (Title, Description, CategoryID, ReleaseDate, TrailerURL, ShowTime, Actor, Director, Poster, Status) VALUES
-('Inception', 'A mind-bending thriller by Christopher Nolan', 5, '2010-07-16', 'https://example.com/trailer/inception', '2010-07-16 19:00:00', 'Leonardo DiCaprio', 'Christopher Nolan', 'https://example.com/poster/inception.jpg', 'Available'),
-('The Dark Knight', 'A superhero film directed by Christopher Nolan', 1, '2008-07-18', 'https://example.com/trailer/darkknight', '2008-07-18 21:00:00', 'Christian Bale', 'Christopher Nolan', 'https://example.com/poster/darkknight.jpg', 'Available'),
-('Titanic', 'A romance film based on the tragic sinking of the Titanic', 3, '1997-12-19', 'https://example.com/trailer/titanic', '1997-12-19 18:00:00', 'Leonardo DiCaprio', 'James Cameron', 'https://example.com/poster/titanic.jpg', 'Available');
+
 INSERT INTO [User] (RoleID, Username, Password, Email, PhoneNumber, Dob, FullName, Status) VALUES
 (1, 'admin', 'password123', 'admin@example.com', '0123456789', '1980-01-01', 'Admin User', 'Active'),
 (2, 'john_doe', 'password123', 'john.doe@example.com', '0123456788', '1990-06-15', 'John Doe', 'Active'),
@@ -196,9 +187,7 @@ INSERT INTO News (Title, Content, Image, CreateAt, UpdateAt, CreateBy) VALUES
 INSERT INTO Discount (Code, DiscountValue, StartDate, EndDate) VALUES
 ('DISCOUNT10', 10.00, '2024-10-01', '2024-10-31'),
 ('HALFOFF', 50.00, '2024-11-01', '2024-11-30');
-INSERT INTO Cinema (Location, City, Name) VALUES
-('123 Main Street', 'New York', 'Cinema One'),
-('456 Elm Street', 'Los Angeles', 'Cinema Two');
+
 INSERT INTO Room (Name, CinemaID, Rows, Columns) VALUES
 ('Room 1', 1, 10, 20),
 ('Room 2', 2, 12, 24);
@@ -217,12 +206,46 @@ INSERT INTO BookingSeatsDetail (SeatID, Price, BookingID) VALUES
 (2, 10.00, 1),
 (3, 25.00, 2),
 (4, 25.00, 2);
-INSERT INTO FoodAndDrinks (Name, Price, Quantity) VALUES
-('Popcorn', 5.00, 100),
-('Soda', 3.00, 200);
+
 INSERT INTO BookingItem (FoodAndDrinksID, Quantity, Price, BookingID) VALUES
 (1, 1, 5.00, 1),
 (2, 2, 6.00, 2);
 INSERT INTO Showtime (MovieID, CinemaID, RoomID, Showtime, [Date]) VALUES
 (1, 1, 1, '2024-10-10 19:00:00', '2024-10-10'),
 (3, 2, 2, '2024-10-11 20:00:00', '2024-10-11');
+
+-- Insert into MovieCategory
+INSERT INTO MovieCategory (Name) VALUES 
+('Action'),
+('Horror'),
+('Romance'),
+('Animation'),
+('Science Fiction'),
+('Comedy');
+
+-- Insert into Movies
+INSERT INTO Movies (Title, Description, CategoryID, ReleaseDate, TrailerURL, Actor, Director, Poster, Status) VALUES
+('Spider-Man: No Way Home', 'Peter Parker deals with his exposed identity', 17, '2021-12-17', 'https://www.youtube.com/watch?v=JfVOs4VSpmA', 'Tom Holland, Zendaya', 'Jon Watts', 'spiderman.jpg', 'Active'),
+('Frozen 2', 'The adventure of Elsa and Anna in the enchanted forest', 20, '2019-11-22', 'https://www.youtube.com/watch?v=Zi4LMpSDccc', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'frozen2.jpg', 'Active'),
+('Inception', 'A thief who steals corporate secrets through dream-sharing technology', 21, '2010-07-16', 'https://www.youtube.com/watch?v=YoHD9XEInc0', 'Leonardo DiCaprio, Ellen Page', 'Christopher Nolan', 'inception.jpg', 'Active'),
+('The Conjuring', 'Paranormal investigators help a family terrorized by a dark presence', 18, '2013-07-19', 'https://www.youtube.com/watch?v=k10ETZ41q5o', 'Vera Farmiga, Patrick Wilson', 'James Wan', 'conjuring.jpg', 'Active'),
+('La La Land', 'A jazz musician and an aspiring actress fall in love', 19, '2016-12-09', 'https://www.youtube.com/watch?v=0pdqf4P9MB8', 'Ryan Gosling, Emma Stone', 'Damien Chazelle', 'lalaland.jpg', 'Active'),
+('The Hangover', 'A bachelor party in Las Vegas goes hilariously wrong', 22, '2009-06-05', 'https://www.youtube.com/watch?v=tlize92ffnY', 'Bradley Cooper, Ed Helms', 'Todd Phillips', 'hangover.jpg', 'Active');
+
+-- Insert into FoodAndDrinks
+INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
+('Tacos', 7.99, 100, 'tacos.jpg', 'Active'),
+('Coca Cola', 4.99, 200, 'coke.jpg', 'Active'),
+('Popcorn', 11.99, 150, 'popcorn.jpg', 'Active'),
+('French Fries', 5.99, 80, 'fries.jpg', 'Active'),
+('Cheese Nachos', 6.99, 70, 'nachos.jpg', 'Active'),
+('Classic Hotdog', 5.99, 90, 'hotdog.jpg', 'Active');
+
+-- Insert into Cinema
+INSERT INTO Cinema (Location, City, Name, Status) VALUES
+('123 Main Street', 'New York', 'AMC Empire 25', 'Active'),
+('456 Hollywood Blvd', 'Los Angeles', 'Regal LA LIVE', 'Active'),
+('789 Michigan Ave', 'Chicago', 'AMC River East 21', 'Active'),
+('321 Fillmore St', 'San Francisco', 'Century San Francisco', 'Active'),
+('654 Peachtree St', 'Atlanta', 'Regal Atlantic Station', 'Active'),
+('987 Congress Ave', 'Austin', 'Alamo Drafthouse Cinema', 'Active');

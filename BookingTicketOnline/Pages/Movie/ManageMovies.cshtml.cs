@@ -13,6 +13,9 @@ namespace BookingTicketOnline.Pages.Movie
         [BindProperty(SupportsGet = true)]
         public string CurrentFilter { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public int? CategoryFilter { get; set; }
+
         public int PageSize { get; set; } = 5;
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
@@ -24,25 +27,33 @@ namespace BookingTicketOnline.Pages.Movie
             _context = context;
         }
 
-        public async Task OnGetAsync(string searchString, int pageNumber = 1)
+        public async Task OnGetAsync(string searchString, int? categoryId, int pageNumber = 1)
         {
-            var totalItems = await _context.Movies.CountAsync();
-
-            TotalPages = (int)Math.Ceiling(totalItems / (double)PageSize);
-
-            CurrentPage = pageNumber;
-
             if (searchString != null)
             {
                 CurrentFilter = searchString;
             }
 
-            IQueryable<Models.Movie> movieQuery = _context.Movies;
+            if (categoryId != null)
+            {
+                CategoryFilter = categoryId;
+            }
+
+            IQueryable<Models.Movie> movieQuery = _context.Movies.Include(m => m.Category);
 
             if (!string.IsNullOrEmpty(CurrentFilter))
             {
                 movieQuery = movieQuery.Where(f => f.Title.Contains(CurrentFilter));
             }
+
+            if (CategoryFilter.HasValue)
+            {
+                movieQuery = movieQuery.Where(m => m.CategoryId == CategoryFilter.Value);
+            }
+
+            var totalItems = await movieQuery.CountAsync();
+            TotalPages = (int)Math.Ceiling(totalItems / (double)PageSize);
+            CurrentPage = pageNumber;
 
             movies = await movieQuery
                 .OrderBy(c => c.Title)

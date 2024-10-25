@@ -25,29 +25,27 @@ namespace BookingTicketOnline.Pages.Cinema
 
         public async Task OnGetAsync(string searchString, int pageNumber = 1)
         {
-            var totalItems = await _context.Cinemas.CountAsync();
-
-            TotalPages = (int)Math.Ceiling(totalItems / (double)PageSize);
-
-            CurrentPage = pageNumber;
+            IQueryable<Models.Cinema> cinemasQuery = _context.Cinemas;
 
             if (searchString != null)
             {
                 CurrentFilter = searchString;
             }
 
-            IQueryable<Models.Cinema> cinemasQuery = _context.Cinemas;
-
             if (!string.IsNullOrEmpty(CurrentFilter))
             {
-                cinemasQuery = cinemasQuery.Where(c =>
-                    c.Name.Contains(CurrentFilter));
+                cinemasQuery = cinemasQuery.Where(c => c.Name.Contains(CurrentFilter) || c.City.Contains(CurrentFilter));
             }
+
+            var totalItems = await cinemasQuery.CountAsync();
+            TotalPages = (int)Math.Ceiling(totalItems / (double)PageSize);
+
+            CurrentPage = pageNumber > TotalPages ? 1 : pageNumber;
 
             cinemas = await cinemasQuery
                 .OrderBy(c => c.Name)
-                .Skip((CurrentPage - 1) * PageSize) // Bỏ qua các mục của các trang trước
-                .Take(PageSize)                     // Lấy số mục cho trang hiện tại
+                .Skip((CurrentPage - 1) * PageSize)
+                .Take(PageSize)
                 .ToListAsync();
         }
     }

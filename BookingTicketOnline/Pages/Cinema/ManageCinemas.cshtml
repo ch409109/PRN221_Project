@@ -18,7 +18,7 @@
             <form method="get" class="d-flex">
                 <div class="input-group">
                     <input type="text" class="form-control" name="searchString"
-                           value="@Model.CurrentFilter" placeholder="Search by name">
+                           value="@Model.CurrentFilter" placeholder="Search by name or city">
                     <button class="btn btn-outline-secondary" type="submit">
                         <i class="bi bi-search"></i> Search
                     </button>
@@ -79,8 +79,12 @@
                             <td class="text-danger">@cinema.Status</td>
                         }
                         <td class="text-center">
-                            <a asp-page="/Cinema/EditCinema" asp-route-id="@cinema.Id"><i class="bi bi-pencil-square"></i></a>
-                            <a asp-page="/Cinema/DeleteCinema" asp-route-id="@cinema.Id"><i class="bi bi-trash-fill"></i></a>
+                            <a asp-page="/Cinema/EditCinema" asp-route-id="@cinema.Id" class="btn btn-sm btn-outline-primary me-2">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a asp-page="/Cinema/CinemaDetails" asp-route-id="@cinema.Id" class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-journal-text"></i> Details
+                            </a>
                         </td>
                     </tr>
                 }

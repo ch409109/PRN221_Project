@@ -1,0 +1,76 @@
+﻿@page
+@model BookingTicketOnline.Pages.Foods.FoodsDetailsModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center mb-0">Food and Drink Details</h2>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row mb-4">
+                        <div class="col-12 text-center">
+                            @if (!string.IsNullOrEmpty(Model.Foods.Image))
+                            {
+                                <img src="~/img/@Model.Foods.Image"
+                                     class="img-fluid rounded"
+                                     alt="@Model.Foods.Name"
+                                     style="max-height: 300px; width: auto;">
+                            }
+                            else
+                            {
+                                <img src="~/img/default-food.jpg"
+                                     class="img-fluid rounded"
+                                     alt="Default food image"
+                                     style="max-height: 300px; width: auto;">
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Name:</div>
+                        <div class="col-md-8">@Model.Foods.Name</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Price:</div>
+                        <div class="col-md-8">@Model.Foods.Price</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Quantity:</div>
+                        <div class="col-md-8">@Model.Foods.Quantity</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Status:</div>
+                        <div class="col-md-8">@Model.Foods.Status</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Status:</div>
+                        <div class="col-md-8">
+                            <span class="badge @(Model.Foods.Status == "Active" ? "bg-success" : "bg-danger")">
+                                @Model.Foods.Status
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-page="./ManageFoods" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>Back to List
+                        </a>
+                        <a asp-page="./ChangeStatus" asp-route-id="@Model.Foods.Id"
+                           class="btn @(Model.Foods.Status == "Active" ? "btn-danger" : "btn-success")">
+                            <i class="bi @(Model.Foods.Status == "Active" ? "bi-x-circle" : "bi-check-circle") me-2"></i>
+                            @(Model.Foods.Status == "Active" ? "Deactivate" : "Activate")
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,7 +14,7 @@ namespace BookingTicketOnline.Pages.Movie
         public Models.Movie movie { get; set; }
 
         [BindProperty]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
 
         public List<MovieCategory> categories { get; set; }
 
@@ -26,12 +26,7 @@ namespace BookingTicketOnline.Pages.Movie
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            movie = await _context.Movies.FindAsync(id);
+            movie = await _context.Movies.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
             categories = _context.MovieCategories.ToList();
 
             if (movie == null)
@@ -50,12 +45,15 @@ namespace BookingTicketOnline.Pages.Movie
                 return Page();
             }
 
-            var movieToUpdate = await _context.Movies.FindAsync(movie.Id);
+            var movieToUpdate = await _context.Movies.AsNoTracking().FirstOrDefaultAsync(m => m.Id == movie.Id);
 
             if (movieToUpdate == null)
             {
                 return NotFound();
             }
+
+            movie.Status = movieToUpdate.Status;
+            movie.Poster = movieToUpdate.Poster;
 
             movieToUpdate.Title = movie.Title;
             movieToUpdate.ReleaseDate = movie.ReleaseDate;
@@ -91,10 +89,29 @@ namespace BookingTicketOnline.Pages.Movie
             }
 
             _context.Attach(movieToUpdate).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            TempData["success"] = "Movie updated successfully";
 
-            return RedirectToPage("./ManageMovies");
+            try
+            {
+                await _context.SaveChangesAsync();
+                TempData["success"] = "Movie updated successfully";
+                return RedirectToPage("./ManageMovies");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FoodExists(movie.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        private bool FoodExists(int id)
+        {
+            return _context.Movies.Any(m => m.Id == id);
         }
     }
 }

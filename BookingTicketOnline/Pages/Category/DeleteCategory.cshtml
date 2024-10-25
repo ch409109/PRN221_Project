@@ -17,7 +17,7 @@
                 <i class="bi bi-exclamation-triangle me-2"></i>
                 Warning: This action cannot be undone. All movies associated with this category may be affected.
             </div>
-            <form method="post">
+            <form method="post" asp-route-id="@Model.category.Id">
                 <input type="hidden" asp-for="category.Id" />
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-danger">

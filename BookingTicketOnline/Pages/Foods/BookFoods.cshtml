@@ -1,103 +1,120 @@
 ﻿@page
 @model BookingTicketOnline.Pages.Foods.BookFoodsModel
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combo Bắp Nước</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: black;
-            margin: 0;
-            padding: 20px;
-        }
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="text-center mb-0">Popcorn & Drinks Combo</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        @foreach (var item in Model.FoodAndDrinks)
+                        {
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-3">
+                                        <img src="/img/@item.Image" class="img-fluid rounded-start h-100" alt="@item.Name">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5 class="card-title">@item.Name</h5>
+                                                <span class="text-primary fw-bold">$@item.Price.ToString("N0")</span>
+                                            </div>
+                                            <div class="d-flex align-items-center mt-2">
+                                                <label class="me-2">Quantity:</label>
+                                                <div class="input-group" style="width: 150px;">
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="decreaseQuantity(@item.Id)">-</button>
+                                                    <input type="number" class="form-control text-center"
+                                                           id="quantity-@item.Id"
+                                                           name="Quantities[@item.Id]"
+                                                           value="@(Model.Quantities.ContainsKey(item.Id) ? Model.Quantities[item.Id] : 0)"
+                                                           min="0" max="10"
+                                                           onchange="updateTotal()">
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="increaseQuantity(@item.Id)">+</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Total Amount:</h5>
+                                    <h5 class="text-primary mb-0" id="totalAmount">$0</h5>
+                                </div>
+                            </div>
+                        </div>
 
-        h1 {
-            text-align: center;
-        }
-
-        .combo-item {
-            display: flex;
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #fff;
-        }
-
-        .combo-image {
-            width: 70px;
-            height: 70px;
-            margin-right: 15px;
-        }
-
-        .combo-details {
-            flex: 1;
-        }
-
-        .combo-price {
-            font-weight: bold;
-            color: #e91e63; /* Màu hồng */
-        }
-
-        .total {
-            font-weight: bold;
-            text-align: right;
-        }
-
-        .continue-button {
-            display: block;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #4caf50;
-            color: white;
-            text-align: center;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.2s;
-        }
-
-            .continue-button:hover {
-                background-color: #45a049; /* Màu xanh lá đậm */
-            }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Combo Bắp Nước</h1>
-        <div class="combo-item">
-            <img class="combo-image" src="/img/combonuowc.jpg" alt="My Combo">
-            <div class="combo-details">
-                <p>MY COMBO - 89.000₫</p>
-                <p>1 bắp ngọt lớn + 1 nước siêu lớn</p>
-                <p class="combo-price">Nhận hàng trong ngày xem phim</p>
+                        <div class="d-grid gap-2 mt-3">
+                            <button type="submit" class="btn btn-primary">Continue to Checkout</button>
+                            <a asp-page="/Seat/BookSeat" class="btn btn-outline-secondary">Back</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="combo-item">
-            <img class="combo-image" src="/img/gia-bap-nuoc-cgv-1.jpg" alt="CGV Combo">
-            <div class="combo-details">
-                <p>BIG COMBO - 139.000₫</p>
-                <p>Có thể mua thêm tiện lợi với bắp phô mai và nước ngọt.</p>
-                <p class="combo-price">Nhận hàng trong ngày xem phim </p>
-            </div>
-        </div>
-        <div class="total">Tổng cộng: 0₫</div>
-        <a asp-page="/CheckOut" class="continue-button">Tiếp tục</a>
     </div>
-</body>
-</html>
+</div>
+
+@section Scripts {
+    <script>
+        const prices = @Html.Raw(Json.Serialize(Model.FoodAndDrinks.ToDictionary(x => x.Id, x => x.Price)));
+
+        function decreaseQuantity(id) {
+            const input = document.getElementById(`quantity-${id}`);
+            if (input.value > 0) {
+                input.value = parseInt(input.value) - 1;
+                updateTotal();
+                saveQuantities();
+            }
+        }
+
+        function increaseQuantity(id) {
+            const input = document.getElementById(`quantity-${id}`);
+            if (input.value < 10) {
+                input.value = parseInt(input.value) + 1;
+                updateTotal();
+                saveQuantities();
+            }
+        }
+
+        function updateTotal() {
+            let total = 0;
+            Object.keys(prices).forEach(id => {
+                const quantity = parseInt(document.getElementById(`quantity-${id}`).value);
+                total += quantity * prices[id];
+            });
+            document.getElementById('totalAmount').innerText = `$${total.toLocaleString()}`;
+        }
+
+        function saveQuantities() {
+            const quantities = {};
+            Object.keys(prices).forEach(id => {
+                quantities[id] = parseInt(document.getElementById(`quantity-${id}`).value);
+            });
+
+            fetch('?handler=UpdateQuantity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                },
+                body: JSON.stringify(quantities)
+            });
+        }
+
+        // Initialize total on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            updateTotal();
+        });
+    </script>
+}

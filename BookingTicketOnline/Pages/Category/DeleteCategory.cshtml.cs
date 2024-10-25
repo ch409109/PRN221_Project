@@ -33,7 +33,7 @@ namespace BookingTicketOnline.Pages.Category
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             if (category == null || category.Id == 0)
             {
@@ -42,7 +42,7 @@ namespace BookingTicketOnline.Pages.Category
 
             try
             {
-                var categoryToDelete = await _context.MovieCategories.FindAsync(category.Id);
+                var categoryToDelete = await _context.MovieCategories.FirstOrDefaultAsync(c => c.Id == category.Id);
                 if (categoryToDelete != null)
                 {
                     var hasMovies = await _context.Movies
@@ -50,8 +50,10 @@ namespace BookingTicketOnline.Pages.Category
 
                     if (hasMovies)
                     {
-                        ModelState.AddModelError(string.Empty,
-                            "Cannot delete category because it contains movies. Please remove or reassign the movies first.");
+                        category = categoryToDelete;
+
+                        TempData["error"] = "Cannot delete category because it contains movies. Please remove or reassign the movies first.";
+
                         return Page();
                     }
 
@@ -64,8 +66,9 @@ namespace BookingTicketOnline.Pages.Category
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty,
-                    "An error occurred while deleting the category. Please try again.");
+                category = await _context.MovieCategories.FirstOrDefaultAsync(c => c.Id == category.Id);
+
+                TempData["error"] = "An error occurred while deleting the category. Please try again.";
                 return Page();
             }
         }
