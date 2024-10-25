@@ -1,39 +1,44 @@
 ﻿@page
 @model BookingTicketOnline.Pages.User.CreateUserModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_AdminLayout";
 }
 
+<p>@Model.Msg</p>
 <div class="container my-5" style="max-width: 600px">
     <h2 class="text-center mb-4">Create User</h2>
-    <form>
+    <form method="post">
         <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+            <label asp-for="@Model.NewUser.Username" class="form-label"></label>
+            <input asp-for="@Model.NewUser.Username" class="form-control" placeholder="Enter username" required>
+            <span asp-validation-for="@Model.NewUser.Username" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+            <label asp-for="@Model.NewUser.Email" class="form-label"></label>
+            <input asp-for="@Model.NewUser.Email" class="form-control" placeholder="Enter Email" required>
+            <span asp-validation-for="@Model.NewUser.Email" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label class="form-label">Status</label>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="status">
+                <input class="form-check-input" type="checkbox" asp-for="@Model.IsActivated">
                 <label class="form-check-label" for="status">Active</label>
             </div>
         </div>
         <div class="mb-3">
-            <label for="role" class="form-label">Role</label>
-            <select class="form-select" id="role" required>
-                <option selected>Select role</option>
-                <option value="1">Admin</option>
-                <option value="2">Staff</option>
-                <option value="3">User</option>
-                <option value="4">Movie Theater Owner</option>
+            <label asp-for="@Model.NewUser.RoleId" class="form-label">Role</label>
+            <select asp-for="@Model.NewUser.RoleId" class="form-select" required>
+                <option value="" disabled selected>Select role</option>
+                @foreach(var role in @Model.Roles)
+                {
+                    <option value="@role.Id">@role.RoleName</option>
+                }
             </select>
+            <span asp-validation-for="@Model.NewUser.RoleId" class="text-danger"></span>
         </div>
         <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary" asp-page="/User/ManageUsers">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
             <a type="button" class="btn btn-outline-secondary" asp-page="/User/ManageUsers">Cancel</a>
         </div>
     </form>
