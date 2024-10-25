@@ -1,0 +1,61 @@
+﻿@page
+@model BookingTicketOnline.Pages.ManageDiscount.CreateModel
+@{
+    ViewData["Title"] = "Create Discount";
+}
+<h1>Create Discount</h1>
+
+<h4>Discount Information</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <!-- Căn giữa cột -->
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Input for Discount Code -->
+            <div class="form-group">
+                <label asp-for="Discount.Code" class="control-label"></label>
+                <input asp-for="Discount.Code" class="form-control" placeholder="Enter discount code" />
+                <span asp-validation-for="Discount.Code" class="text-danger"></span>
+            </div>
+
+            <!-- Input for Discount Value -->
+            <div class="form-group">
+                <label asp-for="Discount.DiscountValue" class="control-label"></label>
+                <input asp-for="Discount.DiscountValue" class="form-control" placeholder="Enter discount value" />
+                <span asp-validation-for="Discount.DiscountValue" class="text-danger"></span>
+            </div>
+
+            <!-- Input for Start Date -->
+            <div class="form-group">
+                <label asp-for="Discount.StartDate" class="control-label"></label>
+                <input asp-for="Discount.StartDate" class="form-control" type="date" />
+                <span asp-validation-for="Discount.StartDate" class="text-danger"></span>
+            </div>
+
+            <!-- Input for End Date -->
+            <div class="form-group">
+                <label asp-for="Discount.EndDate" class="control-label"></label>
+                <input asp-for="Discount.EndDate" class="form-control" type="date" />
+                <span asp-validation-for="Discount.EndDate" class="text-danger"></span>
+            </div>
+
+            <!-- Submit button -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
