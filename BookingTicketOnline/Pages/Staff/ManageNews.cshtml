@@ -70,6 +70,7 @@
 						<td>@news.CreateAt</td>
 						<td>@news.UpdateAt</td>
 						<td>@news.CreateBy</td>
+						
 						<td class="text-center">
 							<a asp-page="/Staff/EditNews" asp-route-id="@news.Id"><i class="bi bi-pencil-square"></i></a>
 							<form method="post" asp-page-handler="Delete" asp-route-id="@news.Id" class="d-inline">

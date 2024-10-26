@@ -1,6 +1,7 @@
-using BookingTicketOnline.Models;
+﻿using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.ManageNews
 {
@@ -49,6 +50,18 @@ namespace BookingTicketOnline.Pages.ManageNews
             }
             news.CreateAt = DateTime.Now;
             news.UpdateAt = DateTime.Now;
+            var userIdClaim = User.FindFirst(c => c.Type == "UserId")?.Value;
+
+            if (int.TryParse(userIdClaim, out var userId))
+            {
+                news.CreateBy = userId; // Gán giá trị đã chuyển đổi
+            }
+            else
+            {
+                // Xử lý trường hợp không lấy được ID người dùng
+                ModelState.AddModelError(string.Empty, "User ID not found."); // Thêm lỗi vào ModelState
+                return Page(); // Trả về trang hiện tại
+            }
 
             _context.News.Add(news);
             await _context.SaveChangesAsync();

@@ -66,6 +66,7 @@ namespace BookingTicketOnline.Pages
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
+                new Claim("UserId", user.Id.ToString()),
                 new Claim("FullName", user.FullName),
                 new Claim(ClaimTypes.Role, user.RoleId.ToString()),
                 new Claim("Email", user.Email),

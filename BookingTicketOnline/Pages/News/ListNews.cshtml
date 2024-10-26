@@ -164,7 +164,7 @@
             @foreach (var news in @Model.NewsList)
             {
                 <div class="news-item">
-                    <img src="/img/@news.Image" alt="@news.Title">
+                    <img src="~/img/NewsImage/@news.Image" alt="@news.Title">
                     <div class="news-content">
                         <h2 class="news-title">
                             <a asp-page="/News/NewsDetail" asp-route-id="@news.Id">@news.Title</a>
