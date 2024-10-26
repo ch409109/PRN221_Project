@@ -1,0 +1,106 @@
+﻿@page
+@model BookingTicketOnline.Pages.ManageNews.ManageNewsModel
+@{
+	Layout = "_StaffLayout";
+}
+
+<div class="container my-5">
+	<!-- Nút thêm tin tức -->
+	<div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+		<div class="flex-shrink-0 mb-3 mb-md-0">
+			<a class="btn btn-success" asp-page="/Staff/CreateNews">
+				<i class="bi bi-person-plus-fill me-2"></i> Add News
+			</a>
+		</div>
+	</div>
+	<form asp-page-handler="Search" method="post" class="my-4">
+		<div class="row g-3 align-items-center">
+			<!-- Select Bộ lọc -->
+			<div class="col-md-3">
+				
+			</div>
+
+			<div class="col-md-3">
+				
+			</div>
+
+			<!-- Input tìm kiếm -->
+			<div class="col-md-6">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search by Title" name="SearchTerm" value="@Model.SearchTerm" />
+					<button class="btn btn-outline-secondary" type="submit">
+						<i class="bi bi-search"></i> Search
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<!--Msg-->
+	@if (!string.IsNullOrEmpty(Model.Msg))
+	{
+		<div class="alert alert-info mt-4" role="alert">
+			<i class="bi bi-info-circle me-2"></i>
+			@Model.Msg
+		</div>
+	}
+
+
+	<!-- Bảng danh sách tin tức -->
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead class="table-light">
+				<tr>
+					<th>Title</th>
+					<th>Image</th>
+					<th>CreateAt</th>
+					<th>UpdateAt</th>
+					<th>CreateBy</th>
+					<th class="text-center">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var news in @Model.News)
+				{
+					<tr>
+						<td>@news.Title</td>
+						<td>
+							<img src="~/img/NewsImage/@news.Image" alt="News Image" style="width: 100px; height: auto;">
+						</td>
+						<td>@news.CreateAt</td>
+						<td>@news.UpdateAt</td>
+						<td>@news.CreateBy</td>
+						<td class="text-center">
+							<a asp-page="/Staff/EditNews" asp-route-id="@news.Id"><i class="bi bi-pencil-square"></i></a>
+							<form method="post" asp-page-handler="Delete" asp-route-id="@news.Id" class="d-inline">
+								<button type="submit" class="bi border-0 text-danger" onclick="return confirm('Are you sure you want to delete this news?');">
+									<i class="bi bi-trash-fill"></i>
+								</button>
+							</form>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<!--Page navigation-->
+	<nav aria-label="Page navigation example" class="container mt-4">
+		<ul class="pagination justify-content-center">
+			<li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+				<a class="page-link" asp-page-handler="Search" asp-route-CurrentPage="@(Model.CurrentPage - 1)">Previous</a>
+			</li>
+
+			@for (int i = 1; i <= Model.TotalPages; i++)
+			{
+				<li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+					<a class="page-link" asp-page-handler="Search" asp-route-CurrentPage="@i">@i</a>
+				</li>
+			}
+
+			<li class="page-item @(Model.CurrentPage == Model.TotalPages || Model.News.Count == 0 ? "disabled" : "")">
+				<a class="page-link" asp-page-handler="Search" asp-route-CurrentPage="@(Model.CurrentPage + 1)">Next</a>
+			</li>
+		</ul>
+	</nav>
+
+</div>
