@@ -53,15 +53,14 @@ namespace BookingTicketOnline.Pages.ManageNews
                 return NotFound();
             }
 
-            news.Title = newsToUpdate.Title;
-            news.Image = newsToUpdate.Image;
-            news.Content = newsToUpdate.Content;
-            news.UpdateAt = DateTime.Now;
+			newsToUpdate.Title = news.Title;
+			newsToUpdate.Content = news.Content;
+			newsToUpdate.UpdateAt = DateTime.Now;
 
-           
-           
 
-            if (ImageFile != null && ImageFile.Length > 0)
+
+
+			if (ImageFile != null && ImageFile.Length > 0)
             {
                 var originalFileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
                 var fileExtension = Path.GetExtension(ImageFile.FileName);

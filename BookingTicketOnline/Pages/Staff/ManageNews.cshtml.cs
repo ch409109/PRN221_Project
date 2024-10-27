@@ -38,9 +38,9 @@ namespace BookingTicketOnline.Pages.ManageNews
 
         private async Task LoadNewsAsync()
         {
-            NewsSource = await _context.News.ToListAsync();
+			NewsSource = await _context.News.Include(n => n.CreateByNavigation).OrderByDescending(n => n.CreateAt).ToListAsync();
 
-            var listNews = NewsSource
+			var listNews = NewsSource
                .Where(item => (string.IsNullOrWhiteSpace(SearchTerm) || item.Title.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)));
 
             int totalNews = listNews.Count();
