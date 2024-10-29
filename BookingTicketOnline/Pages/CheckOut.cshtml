@@ -1,62 +1,214 @@
 ﻿@page
 @model BookingTicketOnline.Pages.CheckOutModel
-
 @{
-    ViewData["Title"] = "_Layout";
+    ViewData["Title"] = "Checkout";
 }
 
+<style>
+    /* Giữ nguyên CSS như cũ */
+    .checkout-container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+
+    .step-number {
+        width: 30px;
+        height: 30px;
+        background: #dc3545;
+        color: white;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        font-size: 14px;
+    }
+
+    .step-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .price-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+
+    .price-value {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .payment-method {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+    }
+
+        .payment-method:hover {
+            border-color: #dc3545;
+            background-color: #fff9f9;
+        }
+
+        .payment-method img {
+            height: 30px;
+            object-fit: contain;
+            margin-right: 10px;
+        }
+
+    .total-section {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .btn-navigate {
+        padding: 10px 30px;
+        font-weight: 500;
+    }
+
+    .voucher-input {
+        position: relative;
+    }
+
+    .btn-apply {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 5px 15px;
+    }
+</style>
+
 <div class="container py-5">
-    <h2 class="text-center bg-black text-white p-3">THANH TOÁN</h2>
+    <div class="checkout-container p-4">
+        <!-- Header -->
+        <h2 class="text-center mb-5 text-uppercase fw-bold">CHECKOUT</h2>
 
-    <!-- Step 1: Giảm Giá -->
-    <div class="row my-4">
-        <div class="col-md-6">
-            <h5>Bước 1: GIẢM GIÁ</h5>
-            <div class="form-group mb-3">
-                <label for="voucher">Voucher</label>
-                <input type="text" id="voucher" class="form-control" placeholder="Nhập mã giảm giá">
+        <form method="post">
+            <!-- Step 1: Voucher -->
+            <div class="row mb-4">
+                <div class="col-md-7">
+                    <div class="step-title">
+                        <span class="step-number">1</span>
+                        Discount Code
+                    </div>
+                    <div class="voucher-input">
+                        <input type="text"
+                               asp-for="VoucherCode"
+                               class="form-control form-control-lg"
+                               placeholder="Enter your discount code">
+                        <button type="button"
+                                class="btn btn-outline-danger btn-apply"
+                                asp-page-handler="ApplyVoucher">
+                            Apply
+                        </button>
+                    </div>
+                    <span asp-validation-for="VoucherCode" class="text-danger"></span>
+                </div>
+                <div class="col-md-5">
+                    <div class="text-end">
+                        <div class="price-label">Subtotal</div>
+                        <div class="price-value">$@Model.TotalAmount.ToString("N2")</div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6 text-end">
-            <h5>Tổng cộng</h5>
-            <p>5.000.000 đ</p>
-        </div>
-    </div>
 
-    <!-- Step 2: Hình thức thanh toán -->
-    <div class="row my-4">
-        <div class="col-md-6">
-            <h5>Bước 2: HÌNH THỨC THANH TOÁN</h5>
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="radio" id="vnpay" checked>
-                <label class="form-check-label" for="vnpay">
-                    <img src="/img/vn" alt="VNPay" width="50"> VNPay
-                </label>
+            <!-- Step 2: Payment Method -->
+            <div class="row mb-4">
+                <div class="col-md-7">
+                    <div class="step-title">
+                        <span class="step-number">2</span>
+                        Payment Method
+                    </div>
+                    <div class="payment-method">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   asp-for="PaymentMethod"
+                                   value="VNPay"
+                                   checked>
+                            <label class="form-check-label d-flex align-items-center">
+                                <img src="~/img/vnpaylogo.png" alt="VNPay">
+                                <span class="ms-2">Pay with VNPay</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               asp-for="AgreeToTerms"
+                               required>
+                        <label class="form-check-label">
+                            I agree to the <a href="#" class="text-danger">terms and conditions</a>
+                        </label>
+                        <span asp-validation-for="AgreeToTerms" class="text-danger d-block"></span>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="text-end">
+                        <div class="price-label">Discount</div>
+                        <div class="price-value">$@Model.DiscountAmount.ToString("N2")</div>
+                    </div>
+                </div>
             </div>
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" id="agreeTerms">
-                <label class="form-check-label" for="agreeTerms">Tôi đồng ý với điều khoản sử dụng</label>
+
+            <!-- Total Section -->
+            <div class="total-section mt-4">
+                <div class="row">
+                    <div class="col-md-7">
+                        <p class="mb-0 text-muted">Please review your information before proceeding with payment</p>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="text-end">
+                            <div class="price-label fw-bold">Total Payment</div>
+                            <div class="price-value text-danger fs-4">$@Model.FinalAmount.ToString("N2")</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6 text-end">
-            <h5>Khuyến mãi</h5>
-            <p>0.00 đ</p>
-        </div>
-    </div>
 
-    <!-- Tổng số tiền thanh toán -->
-    <div class="row my-4">
-        <div class="col-md-6"></div>
-        <div class="col-md-6 text-end">
-            <h5 class="text-danger">Tổng số tiền thanh toán</h5>
-            <p class="text-danger">5.000.000 đ</p>
-        </div>
-    </div>
-
-    <!-- Buttons -->
-    <div class="d-flex justify-content-between">
-        <a asp-page="/Foods/BookFoods" class="btn btn-danger">Previous</a>
-        <button class="btn btn-danger">Check Out</button>
+            <!-- Navigation Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+                <a asp-page="/Foods/BookFoods" class="btn btn-outline-secondary btn-navigate">
+                    <i class="bi bi-arrow-left"></i> Back
+                </a>
+                <button type="submit"
+                        class="btn btn-danger btn-navigate"
+                        asp-page-handler="Checkout"
+                        disabled="@(!Model.AgreeToTerms)">
+                    Proceed to Payment
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 
+@section Scripts {
+    <script>
+        // Enable/disable checkout button based on terms agreement
+        document.getElementById('AgreeToTerms').addEventListener('change', function () {
+            document.querySelector('button[asp-page-handler="Checkout"]').disabled = !this.checked;
+        });
+
+        // Handle voucher application
+        document.querySelector('.btn-apply').addEventListener('click', function () {
+            // You can add AJAX call here to validate voucher
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

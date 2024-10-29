@@ -35,6 +35,20 @@ namespace BookingTicketOnline.Pages.Foods
             return Page();
         }
 
+        private decimal CalculateTotalAmount()
+        {
+            decimal total = 0;
+            foreach (var quantity in Quantities.Where(q => q.Value > 0))
+            {
+                var food = FoodAndDrinks.FirstOrDefault(f => f.Id == quantity.Key);
+                if (food != null)
+                {
+                    total += food.Price * quantity.Value;
+                }
+            }
+            return total;
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -44,6 +58,13 @@ namespace BookingTicketOnline.Pages.Foods
 
             HttpContext.Session.SetString("FoodQuantities",
                 JsonSerializer.Serialize(Quantities));
+
+            FoodAndDrinks = await _context.FoodAndDrinks
+            .Where(f => f.Status == "Active")
+            .ToListAsync();
+            decimal totalAmount = CalculateTotalAmount();
+            HttpContext.Session.SetString("FoodTotalAmount",
+                JsonSerializer.Serialize(totalAmount));
 
             // Filter selected items (quantity > 0)
             var selectedItems = Quantities
@@ -55,9 +76,18 @@ namespace BookingTicketOnline.Pages.Foods
                 })
                 .ToList();
 
-            if (!selectedItems.Any())
+            if (selectedItems.Any())
             {
-                return RedirectToPage("/Booking/Index");
+                HttpContext.Session.SetString("SelectedFoods",
+                    JsonSerializer.Serialize(selectedItems));
+            }
+            else
+            {
+                // Xóa dữ liệu đồ ăn trong session nếu không chọn món nào
+                HttpContext.Session.Remove("SelectedFoods");
+                HttpContext.Session.Remove("FoodQuantities");
+                HttpContext.Session.SetString("FoodTotalAmount",
+                    JsonSerializer.Serialize(0m)); // Lưu tổng tiền = 0
             }
 
             // Save to session or database
