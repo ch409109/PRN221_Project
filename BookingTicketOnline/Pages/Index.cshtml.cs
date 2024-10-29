@@ -13,15 +13,23 @@ public class IndexModel : PageModel
         _context = context;
     }
 
-    public List<Movie> Movies { get; set; }
+    public List<Movie> OpeningMovies { get; set; }
+    public List<Movie> ComingSoonMovies { get; set; }
 
     public async Task OnGetAsync()
     {
-        // Include the Category when fetching Movies
-        
-        Movies = await _context.Movies
-            .Include(m => m.Category) // Include the related Category
-            .Where(m => m.Status == "Active")
+        var currentDate = DateTime.Today;
+
+        // Filter "Opening This Week" movies based on status and release date
+        OpeningMovies = await _context.Movies
+            .Include(m => m.Category)
+            .Where(m => m.Status == "Active" && m.ReleaseDate <= currentDate)
+            .ToListAsync();
+
+        // Filter "Coming Soon" movies based on future release dates
+        ComingSoonMovies = await _context.Movies
+            .Include(m => m.Category)
+            .Where(m => m.Status == "Active" && m.ReleaseDate > currentDate)
             .ToListAsync();
     }
 }

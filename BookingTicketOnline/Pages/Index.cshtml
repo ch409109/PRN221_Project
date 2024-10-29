@@ -437,30 +437,56 @@
     </section>
 
     <!-- Movies  -->
+    <!-- Movies: Opening This Week -->
     <div class="movies" id="movies">
         <h2 class="heading">Opening This Week</h2>
         <div class="movies-container">
-            @if (Model.Movies == null || Model.Movies.Count == 0)
+            @if (Model.OpeningMovies == null || Model.OpeningMovies.Count == 0)
             {
                 <p>No movies are currently available.</p>
             }
             else
             {
-
-                foreach (var movie in Model.Movies)
-
+                foreach (var movie in Model.OpeningMovies)
                 {
                     <div class="box">
                         <div class="box-img">
                             <img src="~/img/@movie.Poster" alt="@movie.Title">
                         </div>
                         <h3><a asp-page="/Movie/MovieDetails">@movie.Title</a></h3>
-                        <span> 120 min |  @(movie.Category != null ? movie.Category.Name : "Category Not Available")</span>
+                        <span>120 min | @(movie.Category != null ? movie.Category.Name : "Category Not Available")</span>
                     </div>
                 }
             }
         </div>
     </div>
+
+    <br />
+
+    <!-- Movies: Coming Soon -->
+    <div class="movies" id="coming">
+        <h2 class="heading">Coming Soon</h2>
+        <div class="movies-container">
+            @if (Model.ComingSoonMovies == null || Model.ComingSoonMovies.Count == 0)
+            {
+                <p>No movies are currently available.</p>
+            }
+            else
+            {
+                foreach (var movie in Model.ComingSoonMovies)
+                {
+                    <div class="box">
+                        <div class="box-img">
+                            <img src="~/img/@movie.Poster" alt="@movie.Title">
+                        </div>
+                        <h3><a asp-page="/Movie/MovieDetails">@movie.Title</a></h3>
+                        <span>120 min | @(movie.Category != null ? movie.Category.Name : "Category Not Available")</span>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
 
 
     @* <!-- coming  -->
