@@ -1,0 +1,67 @@
+﻿@page
+@model BookingTicketOnline.Pages.ManageShowTime.IndexModel
+
+@{
+    ViewData["Title"] = "Showtime Index";
+    Layout = "_AdminLayout"; // Áp dụng layout giống như trong các trang quản lý khác
+}
+
+<div class="container my-5">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+        <h1>Showtime List</h1>
+        <p>
+            <a class="btn btn-success" asp-page="Create">Create New Showtime</a>
+        </p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Showtime[0].Showtime1)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Showtime[0].Date)
+                    </th>
+                    <th>
+                        Cinema
+                    </th>
+                    <th>
+                        Movie
+                    </th>
+                    <th>
+                        Room
+                    </th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Showtime)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Showtime1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cinema.Name) <!-- Thay đổi từ Id thành Name -->
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Movie.Title) <!-- Thay đổi từ Id thành Title -->
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Room.Name) <!-- Thay đổi từ Id thành Name -->
+                        </td>
+                        <td class="text-center">
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

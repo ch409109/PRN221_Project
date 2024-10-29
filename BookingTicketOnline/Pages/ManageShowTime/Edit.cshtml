@@ -1,0 +1,90 @@
+﻿@page
+@model BookingTicketOnline.Pages.ManageShowTime.EditModel
+
+@{
+    ViewData["Title"] = "Edit Showtime";
+}
+
+<h1>Edit Showtime</h1>
+<hr />
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Showtime.Id" />
+
+               
+
+                <div class="form-group mb-3">
+                    <label asp-for="Showtime.MovieId" class="control-label"></label>
+                    <select asp-for="Showtime.MovieId" class="form-control" asp-items="ViewBag.MovieId">
+                        <option value="">-- Select Movie --</option>
+                    </select>
+                    <span asp-validation-for="Showtime.MovieId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Showtime.CinemaId" class="control-label"></label>
+                    <select asp-for="Showtime.CinemaId" class="form-control" asp-items="ViewBag.CinemaId">
+                        <option value="">-- Select Cinema --</option>
+                    </select>
+                    <span asp-validation-for="Showtime.CinemaId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Showtime.RoomId" class="control-label"></label>
+                    <select asp-for="Showtime.RoomId" class="form-control" asp-items="ViewBag.RoomId">
+                        <option value="">-- Select Room --</option>
+                    </select>
+                    <span asp-validation-for="Showtime.RoomId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Showtime.Showtime1" class="control-label"></label>
+                    <input asp-for="Showtime.Showtime1" class="form-control" />
+                    <span asp-validation-for="Showtime.Showtime1" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Showtime.Date" class="control-label"></label>
+                    <input asp-for="Showtime.Date" class="form-control" type="date" />
+                    <span asp-validation-for="Showtime.Date" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-page="./Index" class="btn btn-secondary ms-2">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function loadShowtimeDetails(id) {
+            if (id) {
+                // Make an AJAX request to get the details of the selected showtime
+                $.getJSON('/ManageShowTime/GetShowtimeDetails/' + id, function (data) {
+                    $('#Showtime_MovieId').val(data.movieId);
+                    $('#Showtime_CinemaId').val(data.cinemaId);
+                    $('#Showtime_RoomId').val(data.roomId);
+                    $('#Showtime_Showtime1').val(data.showtime1);
+                    $('#Showtime_Date').val(data.date);
+                });
+            } else {
+                // Reset the fields if no showtime is selected
+                $('#Showtime_MovieId').val('');
+                $('#Showtime_CinemaId').val('');
+                $('#Showtime_RoomId').val('');
+                $('#Showtime_Showtime1').val('');
+                $('#Showtime_Date').val('');
+            }
+        }
+    </script>
+}

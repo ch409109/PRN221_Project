@@ -1,20 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace BookingTicketOnline.Pages
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly PRN221_FinalProjectContext _context;
+
+    public IndexModel(PRN221_FinalProjectContext context)
     {
-        private readonly ILogger<IndexModel> _logger;
+        _context = context;
+    }
 
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+    public List<Movie> Movies { get; set; }
 
-        public void OnGet()
-        {
-
-        }
+    public async Task OnGetAsync()
+    {
+        // Include the Category when fetching Movies
+        Movies = await _context.Movies
+            .Include(m => m.Category) // Include the related Category
+            .ToListAsync();
     }
 }

@@ -1,0 +1,91 @@
+﻿@page
+@model BookingTicketOnline.Pages.ManagerRevenue.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_AdminLayout"; // Áp dụng layout chung
+}
+<div class="container my-5">
+    <h1 class="mb-4">Revenue Details</h1>
+
+    <!-- Div bao quanh nội dung muốn xuất ra PDF -->
+    <div id="revenue-details" class="card shadow p-4">
+        <div class="mb-3">
+            <h4 class="text-primary">Revenue Summary</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold">
+                    @Html.DisplayNameFor(model => model.Revenue.TotalRevenue)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Revenue.TotalRevenue)
+                </dd>
+                <dt class="col-sm-3 fw-bold">
+                    @Html.DisplayNameFor(model => model.Revenue.FromDate)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Revenue.FromDate)
+                </dd>
+                <dt class="col-sm-3 fw-bold">
+                    @Html.DisplayNameFor(model => model.Revenue.ToDate)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Revenue.ToDate)
+                </dd>
+                <dt class="col-sm-3 fw-bold">
+                    Payment ID
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Revenue.Payment.Id)
+                </dd>
+            </dl>
+        </div>
+
+        <div class="mb-3">
+            <h4 class="text-primary">Revenue Breakdown</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold">Ticket Sales</dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.RevenueDetails.TicketSales)
+                </dd>
+                <dt class="col-sm-3 fw-bold">Concessions</dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.RevenueDetails.Concessions)
+                </dd>
+                <dt class="col-sm-3 fw-bold">Other Income</dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.RevenueDetails.OtherIncome)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-between">
+        <a class="btn btn-secondary" asp-page="./Index">
+            <i class="bi bi-arrow-left me-2"></i>Back to List
+        </a>
+
+        <!-- Nút Export to PDF -->
+        <button id="export-to-pdf" class="btn btn-primary">
+            <i class="bi bi-file-earmark-pdf-fill me-2"></i>Export to PDF
+        </button>
+    </div>
+</div>
+
+<!-- Thêm Bootstrap Icons và html2pdf.js CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+<!-- JavaScript Export to PDF -->
+<script>
+    document.getElementById("export-to-pdf").addEventListener("click", function () {
+        var element = document.getElementById('revenue-details');
+        html2pdf(element, {
+            margin: 10,
+            filename: 'Revenue_Details.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        });
+    });
+</script>

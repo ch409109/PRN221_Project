@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -22,6 +22,10 @@
     <None Include="Pages\Foods\CreateFoods.cshtml" />
     <None Include="Pages\Foods\EditFoods.cshtml" />
     <None Include="Pages\Foods\ManageFoods.cshtml" />
+    <None Include="Pages\ManageShowTime\Create.cshtml" />
+    <None Include="Pages\ManageShowTime\Delete.cshtml" />
+    <None Include="Pages\ManageShowTime\Edit.cshtml" />
+    <None Include="Pages\ManageShowTime\Index.cshtml" />
     <None Include="Pages\Movie\CreateMovie.cshtml" />
     <None Include="Pages\Movie\EditMovie.cshtml" />
     <None Include="Pages\Movie\ManageMovies.cshtml" />

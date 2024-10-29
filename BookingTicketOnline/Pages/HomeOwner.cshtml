@@ -1,5 +1,6 @@
 ﻿@page
-@model BookingTicketOnline.Pages.HomeOwnerModel
+@model BookingTicketOnline.Pages.HomeAdminModel
+
 @{
     Layout = null;
 }
@@ -10,152 +11,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Theatre Owner Dashboard</title>
+    <title>Admin Home Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet"
-          href="themify-icons-font-20241003T123558Z-001/themify-icons-font/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="OwnerPage.css"> <!-- Link tới file CSS -->
-
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-        }
-
-        .d-flex {
-            display: flex;
-        }
-
-        .sidebar {
-            height: 100vh; /* Chiều cao của sidebar 100% viewport */
-            position: fixed; /* Sidebar cố định */
-            left: 0; /* Đặt sidebar ở bên trái */
-            top: 0; /* Đặt sidebar ở trên cùng */
-            width: 250px; /* Chiều rộng của sidebar */
-            display: flex;
-            flex-direction: column; /* Để các phần tử trong sidebar xếp theo cột */
-            transition: transform 0.3s ease; /* Hiệu ứng chuyển đổi cho sidebar */
-            transform: translateX(-100%); /* Bắt đầu ở vị trí ẩn */
-            z-index: 1000; /* Đảm bảo sidebar nằm trên các phần tử khác */
-        }
-
-            .sidebar.show {
-                transform: translateX(0); /* Hiện sidebar khi thêm lớp 'show' */
-            }
-
-        .content {
-            flex: 1; /* Để chiếm hết không gian còn lại */
-            overflow-y: auto; /* Giúp cuộn nếu nội dung quá dài */
-            padding: 20px; /* Tạo khoảng cách cho nội dung */
-            transition: margin-left 0.3s ease; /* Hiệu ứng chuyển đổi cho main content */
-        }
-
-            .content.shift {
-                margin-left: 250px; /* Đẩy main content khi sidebar hiện */
-            }
-
-        .logout-button {
-            margin-bottom: 0; /* Đảm bảo không có margin dưới */
-        }
-
-        .sidebar h2 {
-            margin-bottom: 1rem; /* Tạo khoảng cách dưới tiêu đề */
-        }
-
-        .sidebar .nav-item {
-            margin: 0.5rem 0; /* Khoảng cách giữa các mục */
-        }
-
-        .sidebar .nav-link {
-            padding: 10px 15px; /* Padding cho các mục để chúng dễ nhấn */
-            border-radius: 5px; /* Bo tròn góc cho các mục */
-        }
-
-            .sidebar .nav-link:hover {
-                background-color: rgba(255, 255, 255, 0.2); /* Màu nền khi hover */
-            }
-    </style>
+    <link rel="stylesheet" href="StaffPage.css"> <!-- Link đến file CSS -->
 </head>
 
 <body>
-    <div class="d-flex" style="height: 100vh;">
-        <!-- Sidebar -->
-        <nav class="sidebar bg-dark text-white p-3" id="sidebar">
-            <button id="closeSidebar" class="btn btn-outline-light mb-3" style="width: 20%; position: absolute; top: 10px; right: 10px;">
-                <i class="ti-close"></i> <!-- Nút tắt sidebar -->
+
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">CineMatic System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <h2 class="text-center text-uppercase" style="margin-top: 30px;">Dashboard</h2>
-
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#manageRevenue">Manage Revenue</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#manageRooms">Manage Rooms</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="MangeSeat.html">Manage Seats</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#manageShowtimes">Manage Showtimes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#manageDiscountCoupons">Manage Discount Coupons</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#manageFoods">Manage Foods</a>
-                </li>
-            </ul>
-            <div class="mt-auto">
-                <a class="btn btn-danger w-100 logout-button" href="#logout">Logout</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item"></li>
+                    <a class="nav-link " href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </header>
 
-        <!-- Main Content -->
-
-        <button id="toggleSidebar" class="btn btn-outline-dark"
-                style="position: absolute; top: 10px; left: 10px;">
-            <i class="ti-menu"></i>
-        </button>
-
-        <div class="container-fluid content" id="mainContent">
-            <header class="text-dark p-4 text-center">
-                <h1>Manage Revenue</h1>
-            </header>
-            <div class="p-4">
-                <h2 id="manageRevenue">Manage Revenue</h2>
-                <p>Content for managing revenue goes here.</p>
-                <h2 id="manageRooms">Manage Rooms</h2>
-                <p>Content for managing rooms goes here.</p>
-                <h2 id="manageSeats">Manage Seats</h2>
-                <p>Content for managing seats goes here.</p>
-                <h2 id="manageShowtimes">Manage Showtimes</h2>
-                <p>Content for managing showtimes goes here.</p>
-                <h2 id="manageDiscountCoupons">Manage Discount Coupons</h2>
-                <p>Content for managing discount coupons goes here.</p>
-                <h2 id="manageFoods">Manage Foods</h2>
-                <p>Content for managing foods goes here.</p>
-            </div>
+    <!-- Tiêu đề trang -->
+    <div class="sticky-top bg-light py-3 shadow-sm">
+        <div class="container">
+            <h1 class="h4 mb-0">Owner Dashboard</h1>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const toggleButton = document.getElementById('toggleSidebar');
-        const closeButton = document.getElementById('closeSidebar');
-        const sidebar = document.getElementById('sidebar');
-        const mainContent = document.getElementById('mainContent');
+    <!-- Nội dung trang -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Manage Revenue</h5>
+                        <p class="card-text">View and manage Revenue.</p>
+                        <a asp-page="ManageRevenue/Index" class="btn btn-primary">Go to Manage Revenue</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Manage ShowTime</h5>
+                        <p class="card-text">View and manage Showtime.</p>
+                        <a asp-page="ManageShowTime/Index" class="btn btn-primary">Go to Manage Showtime</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Manage Discount</h5>
+                        <p class="card-text">View and manage Discount.</p>
+                        <a asp-page="ManageDiscount/Index" class="btn btn-primary">Go to Manage Discount</a>
+                    </div>
+                </div>
+            </div>
+            @*    <div class="col-md-6">
+            <div class="card mb-4">
+            <div class="card-body text-center">
+            <h5 class="card-title">Manage Film Categories</h5>
+            <p class="card-text">View and manage film categories.</p>
+            <a asp-page="/Category/ManageCategories" class="btn btn-primary">Go to Manage Film Categories</a>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6">
+            <div class="card mb-4">
+            <div class="card-body text-center">
+            <h5 class="card-title">Manage Cinemas</h5>
+            <p class="card-text">View and manage cinemas.</p>
+            <a asp-page="/Cinema/ManageCinemas" class="btn btn-primary">Go to Manage Cinemas</a>
+            </div>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="card mb-4">
+            <div class="card-body text-center">
+            <h5 class="card-title">Manage Movie Trailers</h5>
+            <p class="card-text">View and manage film trailers.</p>
+            <a href="manage_news.html" class="btn btn-primary">Go to Manage Film Trailers</a>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6">
+            <div class="card mb-4">
+            <div class="card-body text-center">
+            <h5 class="card-title">Manage Movies</h5>
+            <p class="card-text">View and manage movies.</p>
+            <a asp-page="/Movie/ManageMovies" class="btn btn-primary">Go to Manage Movies</a>
+            </div>
+            </div>
+            </div>
+            </div>
 
-        toggleButton.addEventListener('click', () => {
-            sidebar.classList.toggle('show'); // Hiện/ẩn sidebar
-            mainContent.classList.toggle('shift'); // Đẩy main content
-        });
+            <div class="row">
+            <div class="col-md-12 text-center">
+            <h3>Latest Updates</h3>
+            <div class="alert alert-info" role="alert">
+            Stay tuned for new updates and features coming soon!
+            </div>
+            </div>
+            </div> *@
+        </div>
 
-        closeButton.addEventListener('click', () => {
-            sidebar.classList.remove('show'); // Ẩn sidebar
-            mainContent.classList.remove('shift'); // Đưa main content về vị trí ban đầu
-        });
-    </script> <!-- Link tới file JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+

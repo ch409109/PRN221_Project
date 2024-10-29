@@ -13,307 +13,347 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Website</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-    <link rel="stylesheet" href="~/css/profile.css" />
-    <script src="~/js/profile.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 </head>
 <style>
-*{
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-    scroll-padding-top: 2rem;
-    scroll-behavior: smooth;
-}
-/* variables  */
-:root{
-    --main-color: #ff2c1f;
-    --text-color: #020307;
-    --bg-color: #fff;
-}
+    * {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        list-style: none;
+        scroll-padding-top: 2rem;
+        scroll-behavior: smooth;
+    }
+    /* variables  */
+    :root {
+        --main-color: #ff2c1f;
+        --text-color: #020307;
+        --bg-color: #fff;
+    }
 
-body{
-    background: var(--text-color);
-    color: var(--bg-color);
-}
-header{
-    position: fixed;
-    width: 100%;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 100px;
-    transition: 0.5s;
-    /* background: var(--main-color); */
-}
-header.shadow{
-    background: var(--bg-color);
-    box-shadow: 0 0 4px rgb(14 55 54/15%);
-}
-header.shadow .navbar a{
-    color: var(--text-color);
-}
-header.shadow .logo{
-    color: var(--text-color);
-}
+    body {
+        background: var(--text-color);
+        color: var(--bg-color);
+    }
+
+    header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 100px;
+        transition: 0.5s;
+        /* background: var(--main-color); */
+    }
+
+        header.shadow {
+            background: var(--bg-color);
+            box-shadow: 0 0 4px rgb(14 55 54/15%);
+        }
+
+            header.shadow .navbar a {
+                color: var(--text-color);
+            }
+
+            header.shadow .logo {
+                color: var(--text-color);
+            }
 
 
-.logo{
-    font-size: 1.1rem;
-    font-weight: 600;
-    align-items: center;
-    color: var(--bg-color);
-    display: flex;
-    column-gap: 0.5rem;
-}
-.bx{
-    color: var(--main-color);
-}
-.navbar{
-    display: flex;
-    column-gap: 5rem;
-}
-.navbar li{
-    position: relative;
-}
-.navbar a{
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--bg-color);
-}
-.navbar a::after{
-    content: '';
-    width: 0;
-    height: 2px;
-    background: var(--main-color);
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    transition: 0.4s all linear;
-}
-.navbar a:hover::after,
-.navbar .home-active::after{
-    width: 100%;
-}
-#menu-icon{
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1000001;
-    display: none;
-}
-.btn{
-    padding: 0.7rem 1.4rem;
-    background: var(--main-color);
-    color: var(--bg-color);
-    font-weight: 400;
-    border-radius: 0.5rem;
-}
-.btn:hover{
-    background: #fa1216;
-}
+    .logo {
+        font-size: 1.1rem;
+        font-weight: 600;
+        align-items: center;
+        color: var(--bg-color);
+        display: flex;
+        column-gap: 0.5rem;
+    }
 
-/* Home  */
-section{
-    padding: 4.5rem 0 1.5rem;
-}
-.container{
-    width: 100%;
-    min-height: 640px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: rgb(2, 3, 7,0.5);
-}
-.container img{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    z-index: -1;
-}
-.swiper-pagination-bullet{
-    width: 6px !important;
-    height: 6px !important;
-    border-radius: 0.2rem !important;
-    background: var(--bg-color) !important;
-    opacity: 1 !important;
-}
-.swiper-pagination-bullet-active{
-    width: 1.5rem !important;
-    background: var(--main-color) !important;
-}
-.home-text{
-    z-index: 1000;
-    padding: 0 150px;
-}
-.home-text span{
-    color: var(--bg-color);
-    font-weight: 500;
-    text-transform: uppercase;
-}
-.home-text h1{
-    color: var(--bg-color);
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-.play{
-    position: absolute;
-    right: 4rem;
-    bottom: 10%;
-}
-.play .bx{
-    background: var(--bg-color);
-    padding: 10px;
-    font-size: 2rem;
-    border-radius: 50%;
-    border: 4px solid rgb(2, 3, 7,0.5);
-    color: var(--main-color);
-}
-.play .bx:hover{
-    background: var(--main-color);
-    color: var(--bg-color);
-    transition: 0.2s all linear;
-}
-/* movies  */
-.heading{
-    max-width: 968px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 1.2rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    border-bottom: 1px solid var(--main-color);
-}
-.movies-container{
-    max-width: 968px;
-    margin-right: auto;
-    margin-left: auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px,auto));
-    gap: 1rem;
-    margin-top: 2rem;
-}
-.box .box-img{
-    width: 100%;
-    height: 270px;
-    cursor: pointer;
-}
-.box .box-img img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.box .box-img img:hover{
-    transform: translateY(-10px);
-    transition: 0.2s all linear;
-}
-.box h3{
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-.box span{
-    font-size: 14px;
-}
+    .bx {
+        color: var(--main-color);
+    }
 
-/* coming container  */
-.coming-container{
-    display: grid;
-    gap: 1rem;
-    max-width: 968px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2rem;
-}
-.coming-container .box img:hover{
-    transform: translateY(0);
-}
-.coming-container .box img{
-    border-radius: 15px;
-}
+    .navbar {
+        display: flex;
+        column-gap: 5rem;
+    }
 
-/* newsletter  */
-.newsletter{
-    max-width: 968px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    row-gap: 2rem;
-}
-.newsletter h2{
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-.newsletter form{
-    background: var(--bg-color);
-    padding: 10px;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-}
-.newsletter form input{
-    border: none;
-    outline: none;
-}
-.email{
-    width: 280px;
-}
-.newsletter form input::placeholder{
-    color: var(--text-color);
-    font-size: 0.8rem;
-    font-weight: 400;
-}
-.newsletter .btn{
-    text-transform: uppercase;
-    font-weight: 500;
-    cursor: pointer;
-}
+        .navbar li {
+            position: relative;
+        }
 
-/* footer  */
-.footer{
-    max-width: 968px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: space-between;
-}
-.social{
-    display: flex;
-    align-items: center;
-    column-gap: 0.5rem;
-}
-.social .bx{
-    background: var(--bg-color);
-    padding: 2px;
-    font-size: 2rem;
-    border-radius: 50%;
-    border: 4px solid rgb(2, 3, 7,0.4);
-    color: var(--main-color);
-}
-.social .bx:hover{
-    background: var(--main-color);
-    color: var(--bg-color);
-    transition: 0.2s all linear;
-}
+        .navbar a {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--bg-color);
+        }
 
-.copyright{
-    padding: 20px;
-    text-align: center;
-    color: var(--bg-color);
-}
+            .navbar a::after {
+                content: '';
+                width: 0;
+                height: 2px;
+                background: var(--main-color);
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                transition: 0.4s all linear;
+            }
+
+            .navbar a:hover::after,
+            .navbar .home-active::after {
+                width: 100%;
+            }
+
+    #menu-icon {
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1000001;
+        display: none;
+    }
+
+    .btn {
+        padding: 0.7rem 1.4rem;
+        background: var(--main-color);
+        color: var(--bg-color);
+        font-weight: 400;
+        border-radius: 0.5rem;
+    }
+
+        .btn:hover {
+            background: #fa1216;
+        }
+
+    /* Home  */
+    section {
+        padding: 4.5rem 0 1.5rem;
+    }
+
+    .container {
+        width: 100%;
+        min-height: 640px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: rgb(2, 3, 7,0.5);
+    }
+
+        .container img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: -1;
+        }
+
+    .swiper-pagination-bullet {
+        width: 6px !important;
+        height: 6px !important;
+        border-radius: 0.2rem !important;
+        background: var(--bg-color) !important;
+        opacity: 1 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        width: 1.5rem !important;
+        background: var(--main-color) !important;
+    }
+
+    .home-text {
+        z-index: 1000;
+        padding: 0 150px;
+    }
+
+        .home-text span {
+            color: var(--bg-color);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .home-text h1 {
+            color: var(--bg-color);
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+    .play {
+        position: absolute;
+        right: 4rem;
+        bottom: 10%;
+    }
+
+        .play .bx {
+            background: var(--bg-color);
+            padding: 10px;
+            font-size: 2rem;
+            border-radius: 50%;
+            border: 4px solid rgb(2, 3, 7,0.5);
+            color: var(--main-color);
+        }
+
+            .play .bx:hover {
+                background: var(--main-color);
+                color: var(--bg-color);
+                transition: 0.2s all linear;
+            }
+    /* movies  */
+    .heading {
+        max-width: 968px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--main-color);
+    }
+
+    .movies-container {
+        max-width: 968px;
+        margin-right: auto;
+        margin-left: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px,auto));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .box .box-img {
+        width: 100%;
+        height: 270px;
+        cursor: pointer;
+    }
+
+        .box .box-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+            .box .box-img img:hover {
+                transform: translateY(-10px);
+                transition: 0.2s all linear;
+            }
+
+    .box h3 {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .box span {
+        font-size: 14px;
+    }
+
+    /* coming container  */
+    .coming-container {
+        display: grid;
+        gap: 1rem;
+        max-width: 968px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2rem;
+    }
+
+        .coming-container .box img:hover {
+            transform: translateY(0);
+        }
+
+        .coming-container .box img {
+            border-radius: 15px;
+        }
+
+    /* newsletter  */
+    .newsletter {
+        max-width: 968px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: 2rem;
+    }
+
+        .newsletter h2 {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .newsletter form {
+            background: var(--bg-color);
+            padding: 10px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+            .newsletter form input {
+                border: none;
+                outline: none;
+            }
+
+    .email {
+        width: 280px;
+    }
+
+    .newsletter form input::placeholder {
+        color: var(--text-color);
+        font-size: 0.8rem;
+        font-weight: 400;
+    }
+
+    .newsletter .btn {
+        text-transform: uppercase;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    /* footer  */
+    .footer {
+        max-width: 968px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .social {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+    }
+
+        .social .bx {
+            background: var(--bg-color);
+            padding: 2px;
+            font-size: 2rem;
+            border-radius: 50%;
+            border: 4px solid rgb(2, 3, 7,0.4);
+            color: var(--main-color);
+        }
+
+            .social .bx:hover {
+                background: var(--main-color);
+                color: var(--bg-color);
+                transition: 0.2s all linear;
+            }
+
+    .copyright {
+        padding: 20px;
+        text-align: center;
+        color: var(--bg-color);
+    }
+
 </style>
 <body>
     <!-- Navbar  -->
@@ -330,20 +370,11 @@ section{
             <li><a href="#coming">Coming</a></li>
             <li><a asp-page="/News/ListNews">Newsletter</a></li>
         </ul>
-
         @if (User.Identity.IsAuthenticated)
         {
-            <!-- Hiển thị tên người dùng và dropdown menu nếu đã đăng nhập -->
-            <div class="profile-dropdown">
-                <span class="user-name" onclick="toggleDropdown()">Hello, @User.Identity.Name</span>
-                <div id="dropdown-menu" class="dropdown-content">
-                    <ul>
-                        <li><a asp-page="/UserProfile">Thông tin tài khoản</a></li>
-                        <li><a href="#">Lịch sử giao dịch</a></li>
-                        <li><a asp-page="/Logout">Đăng xuất</a></li>
-                    </ul>
-                </div>
-            </div>
+            <!-- Hiển thị tên người dùng nếu đã đăng nhập -->
+            <span class="user-greeting">Hello, @User.Identity.Name</span>
+            <a asp-page="/Logout" class="btn">Logout</a>
         }
         else
         {
@@ -352,7 +383,6 @@ section{
             <a asp-page="/SignUp" class="btn">Sign Up</a>
         }
     </header>
-
 
     <!-- Home  -->
     <section class="home swiper" id="home">
@@ -409,169 +439,108 @@ section{
     <!-- Movies  -->
     <div class="movies" id="movies">
         <h2 class="heading">Opening This Week</h2>
-        <!-- Movies container  -->
         <div class="movies-container">
-            <!-- box-1  -->
-            <div class="box">
-                <div class="box-img">
-                    <img src="./img/m1.jpg" alt="">
-                </div>
-                <h3><a asp-page="/Movie/MovieDetails">Dr.Strange</a></h3>
-                <span>120 min | Action</span>
-            </div>
-            <!-- box-2  -->
-            <div class="box">
-                <div class="box-img">
-                    <img src="./img/m2.jpg" alt="">
-                </div>
-                <h3>Pathan</h3>
-                <span>120 min | Action</span>
-            </div>
-            <!-- box-3  -->
-            <div class="box">
-                <div class="box-img">
-                    <img src="./img/m3.jpg" alt="">
-                </div>
-                <h3>Batman vs Superman</h3>
-                <span>120 min | Thriller</span>
-            </div>
-            <!-- box-4  -->
-            <div class="box">
-                <div class="box-img">
-                    <img src="./img/m4.jpg" alt="">
-                </div>
-                <h3>John Wick 2</h3>
-                <span>120 min | Action</span>
-            </div>
-            <!-- box-5  -->
-            <div class="box">
-                <div class="box-img">
-                    <img src="./img/m5.jpg" alt="">
-                </div>
-                <h3>Aquaman</h3>
-                <span>120 min | Adventure</span>
-            </div>
-            <!-- box-6  -->
-            <div class="box">
-                <div class="box-img">
-                    <img src="./img/m6.jpg" alt="">
-                </div>
-                <h3>Black Panther</h3>
-                <span>120 min | Thriller</span>
-            </div>
-            <!-- box-7  -->
-            <div class="box">
-                <div class="box-img">
-                    <img src="./img/m7.jpg" alt="">
-                </div>
-                <h3>Uncharted</h3>
-                <span>120 min | Adventure</span>
-            </div>
-            <!-- box-8  -->
-            <div class="box">
-                <div class="box-img">
-                    <img src="./img/m8.jpg" alt="">
-                </div>
-                <h3>Brahmastra</h3>
-                <span>120 min | Action</span>
-            </div>
-            <!-- box-9  -->
-            <div class="box">
-                <div class="box-img">
-                    <img src="./img/m9.jpg" alt="">
-                </div>
-                <h3>Mortal-Engines</h3>
-                <span>120 min | Action</span>
-            </div>
-            <!-- box-10  -->
-            <div class="box">
-                <div class="box-img">
-                    <img src="./img/m10.jpg" alt="">
-                </div>
-                <h3>UnderWorld Blood Wars</h3>
-                <span>120 min | Action</span>
-            </div>
+            @if (Model.Movies == null || Model.Movies.Count == 0)
+            {
+                <p>No movies are currently available.</p>
+            }
+            else
+            {
+
+                foreach (var movie in Model.Movies)
+
+                {
+                    <div class="box">
+                        <div class="box-img">
+                            <img src="~/img/@movie.Poster" alt="@movie.Title">
+                        </div>
+                        <h3><a asp-page="/Movie/MovieDetails">@movie.Title</a></h3>
+                        <span> 120 min |  @(movie.Category != null ? movie.Category.Name : "Category Not Available")</span>
+                    </div>
+                }
+            }
         </div>
     </div>
 
+
     @* <!-- coming  -->
     <section class="coming" id="coming">
-        <h2 class="heading">Coming Soon</h2>
-        <!-- coming contanier  -->
-        <div class="coming-container swiper">
-            <div class="swiper-wrapper">
-                <!-- box-1  -->
-                <div class="swiper-slide box">
-                    <div class="box-img">
-                        <img src="./img/c1.jpg" alt="">
-                    </div>
-                    <h3>Ant-Man and the Wasp:Quantumania</h3>
-                </div>
-                <!-- box-2  -->
-                <div class="swiper-slide box">
-                    <div class="box-img">
-                        <img src="./img/c2.jpg" alt="">
-                    </div>
-                    <h3>The Flash</h3>
-                </div>
-                <!-- box-3  -->
-                <div class="swiper-slide box">
-                    <div class="box-img">
-                        <img src="./img/c3.jpg" alt="">
-                    </div>
-                    <h3>Guardians of the Galaxy Vol.3</h3>
-                </div>
-                <!-- box-4  -->
-                <div class="swiper-slide box">
-                    <div class="box-img">
-                        <img src="./img/c4.jpg" alt="">
-                    </div>
-                    <h3>Shazam! Fury of the Gods</h3>
-                </div>
-                <!-- box-5  -->
-                <div class="swiper-slide box">
-                    <div class="box-img">
-                        <img src="./img/c5.jpg" alt="">
-                    </div>
-                    <h3>Aquaman and the Lost Kingdom</h3>
-                </div>
-                <!-- box-6  -->
-                <div class="swiper-slide box">
-                    <div class="box-img">
-                        <img src="./img/c6.jpg" alt="">
-                    </div>
-                    <h3>John Wick:Chapter 4</h3>
-                </div>
-                <!-- box-7 -->
-                <div class="swiper-slide box">
-                    <div class="box-img">
-                        <img src="./img/c7.jpg" alt="">
-                    </div>
-                    <h3>Transformer rise of the beasts</h3>
-                </div>
-                <!-- box-8  -->
-                <div class="swiper-slide box">
-                    <div class="box-img">
-                        <img src="./img/c8.jpg" alt="">
-                    </div>
-                    <h3>Mission: Impossible 7</h3>
-                </div>
-                <!-- box-9  -->
-                <div class="swiper-slide box">
-                    <div class="box-img">
-                        <img src="./img/c9.png" alt="">
-                    </div>
-                    <h3>Deadpool 3</h3>
-                </div>
-                <!-- box-10  -->
-                <div class="swiper-slide box">
-                    <div class="box-img">
-                        <img src="./img/c10.jpg" alt="">
-                    </div>
-                    <h3>Dune: Part two</h3>
-                </div>
-            </div>
-        </div>
+    <h2 class="heading">Coming Soon</h2>
+    <!-- coming contanier  -->
+    <div class="coming-container swiper">
+    <div class="swiper-wrapper">
+    <!-- box-1  -->
+    <div class="swiper-slide box">
+    <div class="box-img">
+    <img src="./img/c1.jpg" alt="">
+    </div>
+    <h3>Ant-Man and the Wasp:Quantumania</h3>
+    </div>
+    <!-- box-2  -->
+    <div class="swiper-slide box">
+    <div class="box-img">
+    <img src="./img/c2.jpg" alt="">
+    </div>
+    <h3>The Flash</h3>
+    </div>
+    <!-- box-3  -->
+    <div class="swiper-slide box">
+    <div class="box-img">
+    <img src="./img/c3.jpg" alt="">
+    </div>
+    <h3>Guardians of the Galaxy Vol.3</h3>
+    </div>
+    <!-- box-4  -->
+    <div class="swiper-slide box">
+    <div class="box-img">
+    <img src="./img/c4.jpg" alt="">
+    </div>
+    <h3>Shazam! Fury of the Gods</h3>
+    </div>
+    <!-- box-5  -->
+    <div class="swiper-slide box">
+    <div class="box-img">
+    <img src="./img/c5.jpg" alt="">
+    </div>
+    <h3>Aquaman and the Lost Kingdom</h3>
+    </div>
+    <!-- box-6  -->
+    <div class="swiper-slide box">
+    <div class="box-img">
+    <img src="./img/c6.jpg" alt="">
+    </div>
+    <h3>John Wick:Chapter 4</h3>
+    </div>
+    <!-- box-7 -->
+    <div class="swiper-slide box">
+    <div class="box-img">
+    <img src="./img/c7.jpg" alt="">
+    </div>
+    <h3>Transformer rise of the beasts</h3>
+    </div>
+    <!-- box-8  -->
+    <div class="swiper-slide box">
+    <div class="box-img">
+    <img src="./img/c8.jpg" alt="">
+    </div>
+    <h3>Mission: Impossible 7</h3>
+    </div>
+    <!-- box-9  -->
+    <div class="swiper-slide box">
+    <div class="box-img">
+    <img src="./img/c9.png" alt="">
+    </div>
+    <h3>Deadpool 3</h3>
+    </div>
+    <!-- box-10  -->
+    <div class="swiper-slide box">
+    <div class="box-img">
+    <img src="./img/c10.jpg" alt="">
+    </div>
+    <h3>Dune: Part two</h3>
+    </div>
+    </div>
+    </div>
     </section> *@
 
     <!-- Newsletter /\ -->
