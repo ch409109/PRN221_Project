@@ -14,9 +14,9 @@ namespace BookingTicketOnline.Pages
         [BindProperty]
         public string PaymentMethod { get; set; } = "VNPay";
 
-        [BindProperty]
-        [Required(ErrorMessage = "You must agree to the terms and conditions")]
-        public bool AgreeToTerms { get; set; }
+        //[BindProperty]
+        //[Required(ErrorMessage = "You must agree to the terms and conditions")]
+        //public bool AgreeToTerms { get; set; }
 
         public decimal TotalAmount { get; set; }
         public decimal DiscountAmount { get; set; }
@@ -86,12 +86,6 @@ namespace BookingTicketOnline.Pages
         {
             if (!ModelState.IsValid)
             {
-                return Page();
-            }
-
-            if (!AgreeToTerms)
-            {
-                ModelState.AddModelError(nameof(AgreeToTerms), "You must agree to the terms and conditions");
                 return Page();
             }
 

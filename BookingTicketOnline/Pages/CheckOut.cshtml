@@ -144,17 +144,7 @@
                                 <span class="ms-2">Pay with VNPay</span>
                             </label>
                         </div>
-                    </div>
-                    <div class="form-check mt-3">
-                        <input class="form-check-input"
-                               type="checkbox"
-                               asp-for="AgreeToTerms"
-                               required>
-                        <label class="form-check-label">
-                            I agree to the <a href="#" class="text-danger">terms and conditions</a>
-                        </label>
-                        <span asp-validation-for="AgreeToTerms" class="text-danger d-block"></span>
-                    </div>
+                    </div>                  
                 </div>
                 <div class="col-md-5">
                     <div class="text-end">
@@ -186,8 +176,7 @@
                 </a>
                 <button type="submit"
                         class="btn btn-danger btn-navigate"
-                        asp-page-handler="Checkout"
-                        disabled="@(!Model.AgreeToTerms)">
+                        asp-page-handler="Checkout">
                     Proceed to Payment
                 </button>
             </div>
@@ -197,11 +186,6 @@
 
 @section Scripts {
     <script>
-        // Enable/disable checkout button based on terms agreement
-        document.getElementById('AgreeToTerms').addEventListener('change', function () {
-            document.querySelector('button[asp-page-handler="Checkout"]').disabled = !this.checked;
-        });
-
         // Handle voucher application
         document.querySelector('.btn-apply').addEventListener('click', function () {
             // You can add AJAX call here to validate voucher
