@@ -18,9 +18,9 @@ namespace BookingTicketOnline.Pages.Seat
         [BindProperty]
         public List<Models.Row> Rows { get; set; } = new List<Models.Row>();
 
-        public async Task OnGetAsync(int Id)
+        public async Task OnGetAsync()
         {
-            HttpContext.Session.SetInt32("RoomID",Id);
+            var Id = HttpContext.Session.GetInt32("RoomID");
             Rows = await _context.Rows.Include(row => row.Seats).Where(row => row.RoomId == Id).ToListAsync();
 
         }

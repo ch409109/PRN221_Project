@@ -15,11 +15,21 @@ namespace BookingTicketOnline.Pages.Seat
         [BindProperty]
         public List<Models.Seat> Seats { get; set; }
         public List<Models.Row> Rows { get; set; }
+        [BindProperty]
+        public bool isEditing { get; set; }
         public async Task<IActionResult> OnGetAsync(string action)
         {
             var roomID = 1;
-            Rows = await _context.Rows.Include(s => s.Seats).Where(row => row.RoomId == roomID).ToListAsync();
-            Seats = await _context.Seats.Include(s => s.Row).Where(s => s.Row.RoomId == roomID).ToListAsync();
+            isEditing = action == "Modify" ? true : false;
+            if (isEditing)
+            {
+                Seats = await _context.Seats.Include(s => s.Row).Where(s => s.Row.RoomId == roomID).ToListAsync();
+            }
+            else
+            {
+
+            }
+
 
             return Page();
         }
