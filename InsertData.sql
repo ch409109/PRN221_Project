@@ -28,7 +28,7 @@ INSERT INTO [dbo].[Rows] ([RowName],[RoomID],[NumberOfColumns],[Type])
      VALUES
            ('A',1,14,'Regular'),('B',1,15,'Regular'),('C',1,15,'Regular'),
 		   ('D',1,15,'VIP'),('E',1,15,'VIP'),('F',1,15,'VIP'),
-		   ('G',1,15,'VIP'),('H',1,15,'VIP'),('J',1,15,'Sweetbox')
+		   ('G',1,15,'VIP'),('H',1,15,'VIP'),('J',1,15,'VIP')
 
 
 		   /*Manage Users*/

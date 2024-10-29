@@ -19,5 +19,11 @@ namespace BookingTicketOnline.Pages.Room
             IQueryable<Models.Room> query = _context.Rooms.Include(c => c.Cinema);
             Rooms = await query.Where(c => c.Cinema.Id == id).ToListAsync();
         }
+        public async Task<IActionResult> OnPostManageSeatAsync(int id)
+        {
+            HttpContext.Session.SetInt32("RoomID", id);
+            return RedirectToPage("/Seat/ManageSeats");
+        }
+
     }
 }

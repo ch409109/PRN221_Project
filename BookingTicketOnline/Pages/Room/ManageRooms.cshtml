@@ -29,10 +29,10 @@
                     <td>@count</td>
                     <td>@room.Name</td>
                     <td>
-                        @{
-                            HttpContext.Session.SetInt32("RoomID", room.Id);
-                        }
-                        <a class="btn btn-warning btn-sm" asp-page="/seat/manageseats" >Manage Room</a>
+                        <form method="post" asp-page-handler="ManageSeat">
+                            <input type="hidden" name="id" value="@room.Id" />
+                            <button type="submit" class="btn btn-warning btn-sm">Manage Room</button>
+                        </form>
                     </td>
                 </tr>
             }
