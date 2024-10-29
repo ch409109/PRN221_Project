@@ -74,8 +74,8 @@ INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
 ('Classic Hotdog', 5.99, 90, 'hotdog.jpg', 'Active');
 
 INSERT INTO BookingItem (FoodAndDrinksID, Quantity, Price, BookingID) VALUES
-(1, 1, 5.00, 1),
-(2, 2, 6.00, 2);
+(1, 1, 7.99, 1),
+(2, 2, 9.98, 2);
 
 INSERT INTO Showtime (MovieID, CinemaID, RoomID, Showtime, [Date]) VALUES
 (1, 1, 1, '2024-10-10 19:00:00', '2024-10-10'),
