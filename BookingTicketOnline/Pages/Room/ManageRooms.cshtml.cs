@@ -17,7 +17,7 @@ namespace BookingTicketOnline.Pages.Room
         public async Task OnGetAsync(int id)
         {
             IQueryable<Models.Room> query = _context.Rooms.Include(c => c.Cinema);
-            Rooms = await query.Where(c => c.CinemaId == id).ToListAsync();
+            Rooms = await query.Where(c => c.Cinema.Id == id).ToListAsync();
         }
     }
 }
