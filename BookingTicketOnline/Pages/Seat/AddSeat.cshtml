@@ -1,5 +1,5 @@
 ﻿@page
-@model BookingTicketOnline.Pages.Seat.ModifySeatModel
+@model BookingTicketOnline.Pages.Seat.AddSeatModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
 	Layout = "_Layout";
@@ -8,15 +8,19 @@
 <body>
 	<div class="container my-5">
 		<h2 class="text-center">Modify Seat</h2>
-		<form method="post" asp-page-handler="Save">
+		<form method="post">
 			<div class="mb-3">
-				<label for="seatName" class="form-label">Seat Name</label>
-				<select class="form-select" asp-for="@Model.Seat.SeatName" required>
-					@foreach (var seat in @Model.Seats)
+				<label for="seatName" class="form-label">Row Name</label>
+				<select class="form-select" asp-for="@Model.Seat.RowId" required>
+					@foreach (var row in @Model.Rows)
 					{
-						<option value="@seat.SeatName" )>@seat.SeatName</option>
+						<option value="@row.Id">@row.RowName</option>
 					}
 				</select>
+			</div>
+			<div class="mb-3">
+				<label for="seatName" class="form-label">Seat Number</label>
+				<input type="text" name="SeatNumber" class="form-control" required />
 			</div>
 			<div class="mb-3">
 				<label for="status" class="form-label">Status</label>
