@@ -18,8 +18,10 @@ public class IndexModel : PageModel
     public async Task OnGetAsync()
     {
         // Include the Category when fetching Movies
+        
         Movies = await _context.Movies
             .Include(m => m.Category) // Include the related Category
+            .Where(m => m.Status == "Active")
             .ToListAsync();
     }
 }
