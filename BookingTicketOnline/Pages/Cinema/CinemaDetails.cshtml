@@ -41,6 +41,9 @@
                         <a asp-page="./ManageCinemas" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left me-2"></i>Back to List
                         </a>
+                        <a asp-page="/Room/ManageRooms" asp-route-id="@Model.Cinema.Id" class="btn btn-outline-secondary">
+                            Manage Room <i class="bi bi-arrow-right me-2"></i>
+                        </a>
                         <a asp-page="./ChangeStatus" asp-route-id="@Model.Cinema.Id"
                            class="btn @(Model.Cinema.Status == "Active" ? "btn-danger" : "btn-success")">
                             <i class="bi @(Model.Cinema.Status == "Active" ? "bi-x-circle" : "bi-check-circle") me-2"></i>

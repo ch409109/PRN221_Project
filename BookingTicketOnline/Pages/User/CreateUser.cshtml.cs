@@ -36,7 +36,9 @@ namespace BookingTicketOnline.Pages.User
             SendEmail(NewUser.Username, password, NewUser.Email);
             string encryptPassword = BCrypt.Net.BCrypt.HashPassword(password);
             NewUser.Password = encryptPassword;
-
+            NewUser.FullName = "New User";
+            NewUser.Dob = DateTime.Now;
+            NewUser.PhoneNumber = "0123456789";
             _context.Users.Add(NewUser);
             await _context.SaveChangesAsync();
             return RedirectToPage("/User/ManageUsers");

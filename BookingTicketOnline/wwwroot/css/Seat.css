@@ -48,8 +48,11 @@ body {
 .vip-seat { background-color: red; }
 .sweetbox-seat { background-color: lightpink; }
 .booked-seat { background-color: gray; }
-.selected-seat { background-color: darkred; }
-.central-region { border: 2px solid limegreen; }
 .double-seat {
     width: 85px; /* Double the width of a single seat */
 }
+.hidden-seat {
+    display: none;
+}
+
+

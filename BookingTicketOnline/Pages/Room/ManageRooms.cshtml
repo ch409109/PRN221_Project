@@ -1,0 +1,41 @@
+﻿@page
+@model ManageRoomsModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelperss
+@{
+    Layout = "_AdminLayout";
+    var count = 1;
+}
+<div class="container mt-5">
+    <h1 class="text-center ">@Model.Rooms[0].Cinema.Name</h1>
+
+    <!-- Button to open Add Room Modal -->
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addRoomModal">
+        Add New Room
+    </button>
+
+    <!-- Room Table -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Room Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var room in Model.Rooms)
+            {
+                <tr>
+                    <td>@count</td>
+                    <td>@room.Name</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" asp-page="/seat/manageseats" asp-route-id="@room.Id">Manage Room</a>
+                    </td>
+                </tr>
+            }
+            @{
+                count += 1;
+            }
+        </tbody>
+    </table>
+</div>

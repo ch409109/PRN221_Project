@@ -5,7 +5,12 @@ namespace BookingTicketOnline.Pages
 {
     public class BookingHistoryModel : PageModel
     {
-        public void OnGet()
+
+		[BindProperty(SupportsGet = true)]
+		public int CurrentPage { get; set; } = 1;
+		public int PageSize { get; set; } = 5;
+		public int TotalPages { get; set; }
+		public void OnGet()
         {
         }
     }
