@@ -1,11 +1,28 @@
 ﻿USE PRN221_FinalProject
-/*Insert*/
-INSERT INTO Cinema (Location, City, Name) VALUES 
-(N'Tầng 3 & 4 – TTTM AEON MALL HÀ ĐÔNG, P. Dương Nội, Q. Hà Đông', N'Hà Nội', N'CGV Aeon Hà Đông'),
-(N'Tầng 4, Trung Tâm Thương Mại Vincom Ocean Park, Huyện Gia Lâm', N'Hà Nội', N'CGV Vincom Ocean Park');
+
+INSERT INTO MovieCategory (Name) VALUES 
+('Action'),
+('Horror'),
+('Romance'),
+('Animation'),
+('Science Fiction'),
+('Comedy');
+
+INSERT INTO Movies (Title, Description, CategoryID, ReleaseDate, TrailerURL, Actor, Director, Poster, Status) VALUES
+('Spider-Man: No Way Home', 'Peter Parker deals with his exposed identity', 1, '2021-12-17', 'https://www.youtube.com/watch?v=JfVOs4VSpmA', 'Tom Holland, Zendaya', 'Jon Watts', 'spiderman.jpg', 'Active'),
+('Frozen 2', 'The adventure of Elsa and Anna in the enchanted forest', 4, '2019-11-22', 'https://www.youtube.com/watch?v=Zi4LMpSDccc', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'frozen2.jpg', 'Active'),
+('Inception', 'A thief who steals corporate secrets through dream-sharing technology', 5, '2010-07-16', 'https://www.youtube.com/watch?v=YoHD9XEInc0', 'Leonardo DiCaprio, Ellen Page', 'Christopher Nolan', 'inception.jpg', 'Active'),
+('The Conjuring', 'Paranormal investigators help a family terrorized by a dark presence', 2, '2013-07-19', 'https://www.youtube.com/watch?v=k10ETZ41q5o', 'Vera Farmiga, Patrick Wilson', 'James Wan', 'conjuring.jpg', 'Active'),
+('La La Land', 'A jazz musician and an aspiring actress fall in love', 3, '2016-12-09', 'https://www.youtube.com/watch?v=0pdqf4P9MB8', 'Ryan Gosling, Emma Stone', 'Damien Chazelle', 'lalaland.jpg', 'Active'),
+('The Hangover', 'A bachelor party in Las Vegas goes hilariously wrong', 6, '2009-06-05', 'https://www.youtube.com/watch?v=tlize92ffnY', 'Bradley Cooper, Ed Helms', 'Todd Phillips', 'hangover.jpg', 'Active');
+
+INSERT INTO Cinema (Location, City, Name, Status) VALUES 
+(N'Tầng 3 & 4 – TTTM AEON MALL HÀ ĐÔNG, P. Dương Nội, Q. Hà Đông', N'Hà Nội', N'CGV Aeon Hà Đông', 'Active'),
+(N'Tầng 4, Trung Tâm Thương Mại Vincom Ocean Park, Huyện Gia Lâm', N'Hà Nội', N'CGV Vincom Ocean Park', 'Inactive');
 
 INSERT INTO [dbo].[Room] ([Name],[CinemaID],[NumberOfRows])
-     VALUES ('Starium',1,9)
+     VALUES ('Starium',1,9),
+			('Aquarius',1,9)
 
 INSERT INTO [dbo].[Rows] ([RowName],[RoomID],[NumberOfColumns],[Type])
      VALUES
@@ -23,7 +40,46 @@ INSERT INTO [User] (RoleID, Username, Password, Email, PhoneNumber, Dob, FullNam
 (2, 'TungNVHE170677', '123456', 'TungNVHE170677@fpt.edu.vn', '0987654321', '1995-05-20', N'Nguyễn Việt Tùng', 'Active'),
 (3, 'TuanTNHE163211', '123456', 'TuanTNHE163211@fpt.edu.vn', '0987654321', '1995-05-20', N'Trình Ngọc Tuân', 'Active'),
 (4, 'CongHTHE172673', '123456', 'CongHTHE172673@fpt.edu.vn', '0123456789', '1992-03-15', N'Hoàng Thành Công', 'Inactive'),
-(2, 'NhatLVHE176909', '123456', 'NhatLVHE176909@fpt.edu.vn', '0987654321', '1995-05-20', N'Lê Việt Nhật', 'Inactive')
+(2, 'NhatLVHE176909', '123456', 'NhatLVHE176909@fpt.edu.vn', '0987654321', '1995-05-20', N'Lê Việt Nhật', 'Inactive');
+
+INSERT INTO Feedback (UserID, MovieID, Comments, CreateAt) VALUES
+(2, 1, 'Amazing movie with stunning visuals!', '2024-10-11 10:00:00'),
+(2, 3, 'Great love story, very touching.', '2024-10-11 11:00:00');
+
+INSERT INTO News (Title, Content, Image, CreateAt, UpdateAt, CreateBy) VALUES
+('New Release: Inception', 'Inception is now available in cinemas!', 'https://example.com/news/inception.jpg', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1);
+
+INSERT INTO Discount (Code, DiscountValue, StartDate, EndDate) VALUES
+('DISCOUNT10', 10.00, '2024-10-01', '2024-10-31'),
+('HALFOFF', 50.00, '2024-11-01', '2024-11-30');
+
+INSERT INTO Booking (BookingDate, CinemaID, MovieID, UserID, Status, TotalPrice) VALUES
+('2024-10-10 19:00:00', 1, 1, 2, 'Confirmed', 20.00),
+('2024-10-11 20:00:00', 2, 3, 2, 'Confirmed', 50.00);
+
+INSERT INTO Payment (BookingID, Amount, DiscountID) VALUES
+(1, 20.00, 1),
+(2, 25.00, 2);
+
+INSERT INTO Revenue (PaymentID, TotalRevenue, FromDate, ToDate) VALUES
+(1, 2000.00, '2024-10-01', '2024-10-10'),
+(2, 2500.00, '2024-10-11', '2024-10-20');
+
+INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
+('Tacos', 7.99, 100, 'tacos.jpg', 'Active'),
+('Coca Cola', 4.99, 200, 'coke.jpg', 'Active'),
+('Popcorn', 11.99, 150, 'popcorn.jpg', 'Active'),
+('French Fries', 5.99, 80, 'fries.jpg', 'Active'),
+('Cheese Nachos', 6.99, 70, 'nachos.jpg', 'Active'),
+('Classic Hotdog', 5.99, 90, 'hotdog.jpg', 'Active');
+
+INSERT INTO BookingItem (FoodAndDrinksID, Quantity, Price, BookingID) VALUES
+(1, 1, 5.00, 1),
+(2, 2, 6.00, 2);
+
+INSERT INTO Showtime (MovieID, CinemaID, RoomID, Showtime, [Date]) VALUES
+(1, 1, 1, '2024-10-10 19:00:00', '2024-10-10'),
+(3, 2, 2, '2024-10-11 20:00:00', '2024-10-11');
 
 -- Insert seats for Row A (ID = 1)
 INSERT INTO Seat (SeatName, RowID, Status)
@@ -96,6 +152,12 @@ VALUES
 ('H7', 8, 'Available'), ('H8', 8, 'Available'), ('H9', 8, 'Available'),
 ('H10', 8, 'Available'), ('H11', 8, 'Available'), ('H12', 8, 'Available'),
 ('H13', 8, 'Available'), ('H14', 8, 'Available'), ('H15', 8, 'Available');
+
+INSERT INTO BookingSeatsDetail (SeatID, Price, BookingID) VALUES
+(1, 10.00, 1),
+(2, 10.00, 1),
+(3, 25.00, 2),
+(4, 25.00, 2);
 
 
 
