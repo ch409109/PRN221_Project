@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../css/swiper-bundle.min.css">
     <link rel="stylesheet" href="../css/styleMovieDetails.css">
     <link rel="stylesheet" href="../css/bb.css">
-    <title>Movie</title>
+    <title>@Model.Movie.Title</title>
     <style>
         .trailer-container {
             display: flex;
@@ -62,42 +62,15 @@
         <div class="breaking-bad">
             <div class="movie-description">
                 <div class="movie-image">
-                    <img src="../img/m1.jpg" alt="">
+                    <img src="@Model.Movie.Poster" alt="Movie Poster" />
                 </div>
                 <div class="movie-content">
-                    <div class="movie-trailer">
-                        <h1>Dr. Strange</h1>
-                        <div class="movie-type">
-                            <p>Crime</p>
-                            <div class="line"></div>
-                            <p>Drama</p>
-                            <div class="line"></div>
-                            <p>Thriller</p>
-                        </div>
-                    </div>
-                    <div class="imdb">
-                        <p>IMDb: 9,5</p>
-                        <p>5 Season</p>
-                        <p>18+</p>
-                        <p>USA, 2008,2013</p>
-                        <p>Creator: <span>Vince Gilligan</span></p>
-                        <p>Actors: <span>Bryan Cranston, Aaron Paul, Anna Gunn</span></p>
-                    </div>
-                    <div class="trailer">
-                        <div class="save">
-                            <i class="fa-regular fa-bookmark"></i>
-                            <i class="fa-regular fa-circle-down"></i>
-                            <i class="fa-regular fa-share-from-square"></i>
-                        </div>
-                        <div>
-                            @* <a class="btn-trailer" href="https://www.youtube.com/watch?v=aWzlQ2N6qqg">
-                                Watch Trailer
-                            </a> *@
-                            <a class="btn-trailer" asp-page="/BookDate">
-                                Book Now
-                            </a>
-                        </div>
-                    </div>
+                    <h1>@Model.Movie.Title</h1>
+                    <p><strong>Release Date:</strong> @Model.Movie.ReleaseDate?.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Category:</strong> @Model.Movie.CategoryId</p>
+                    <p><strong>Actors:</strong> @Model.Movie.Actor</p>
+                    <p><strong>Description:</strong> @Model.Movie.Description</p>
+                    <a class="btn-trailer" asp-page="/BookDate">Book Now</a>
                 </div>
             </div>
         </div>
@@ -115,10 +88,10 @@
     <div class="movie-desc-2">
         <h2>Description</h2>
         <p>
-            Breaking Bad is an American crime drama television series created and produced by Vince Gilligan. Set and filmed in Albuquerque, New Mexico, the series follows Walter White(Bryan Cranston), an underpaid, overqualified, and dispirited high-school chemistry teacher who is struggling with a recent diagnosis of  stage three lung cancer. White turns to a life of crime and partners with a former student, Jesse Pinkman(Aaron Paul), to produce and distribute methamphetamineto secure his family's financial future before he dies, while navigating the dangers of the criminal underworld. The show aired on AMC from January 20, 2008, to September 29, 2013, consisting of five seasons for a total of 62 episodes.
+            @Model.Movie.Description
         </p>
         <div class="bb-img">
-            <img src="../img/bg/bb.svg" alt="">
+            <img src="@Model.Movie.Poster" alt="Movie Poster" />
         </div>
     </div>
 
