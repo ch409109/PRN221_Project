@@ -159,6 +159,30 @@ INSERT INTO BookingSeatsDetail (SeatID, Price, BookingID) VALUES
 (3, 25.00, 2),
 (4, 25.00, 2);
 
+/*Insert Movies*/
+INSERT INTO Movies ( Title, Description, CategoryID, ReleaseDate, TrailerURL, Actor, Director, Poster, Status)
+VALUES
+( 'Interstellar', 'A team of explorers travel through a wormhole in space.', 5, '2014-11-07', 'https://www.youtube.com/watch?v=zSWdZVtXT7E', 'Matthew McConaughey, Anne Hathaway', 'Christopher Nolan', 'interstellar_poster.jpg', 'Poster'),
+( 'The Dark Knight', 'Batman raises the stakes in his war on crime.', 1, '2008-07-18', 'https://www.youtube.com/watch?v=EXeTwQWrcwY', 'Christian Bale, Heath Ledger', 'Christopher Nolan', 'dark_knight_poster.jpg', 'Poster'),
+( 'Titanic', 'A love story aboard the ill-fated RMS Titanic.', 3, '1997-12-19', 'https://www.youtube.com/watch?v=2e-eXJ6HgkQ', 'Leonardo DiCaprio, Kate Winslet', 'James Cameron', 'titanic_poster.jpg', 'Poster'),
+('Avatar 3', 'The continued adventures on Pandora.', 5, '2025-12-19', 'https://www.youtube.com/watch?v=YXtWPVFk5TQ', 'Sam Worthington, Zoe Saldana', 'James Cameron', 'avatar3_poster.jpg', 'Poster'),
+('Frozen 3', 'Elsa and Anna face a new journey.', 4, '2027-07-21', 'https://www.youtube.com/watch?v=xJgAypHXCZo', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'frozen3_poster.jpg', 'Poster'),
+( 'Interstellar', 'A team of explorers travel through a wormhole in space.', 5, '2014-11-07', 'https://www.youtube.com/watch?v=zSWdZVtXT7E', 'Matthew McConaughey, Anne Hathaway', 'Christopher Nolan', 'interstellar.jpg', 'Active'),
+    ( 'The Dark Knight', 'Batman raises the stakes in his war on crime.', 1, '2008-07-18', 'https://www.youtube.com/watch?v=EXeTwQWrcwY', 'Christian Bale, Heath Ledger', 'Christopher Nolan', 'dark_knight.jpg', 'Active'),
+    ( 'Toy Story 3', 'Woody and the gang face uncertain future.', 4, '2010-06-18', 'https://www.youtube.com/watch?v=JcpWXaA2qeg', 'Tom Hanks, Tim Allen', 'Lee Unkrich', 'toy_story3.jpg', 'Active'),
+    ( 'Titanic', 'A love story aboard the ill-fated RMS Titanic.', 3, '1997-12-19', 'https://www.youtube.com/watch?v=2e-eXJ6HgkQ', 'Leonardo DiCaprio, Kate Winslet', 'James Cameron', 'titanic.jpg', 'Active'),
+    ( 'The Matrix', 'A hacker discovers a shocking truth about reality.', 5, '1999-03-31', 'https://www.youtube.com/watch?v=m8e-FF8MsqU', 'Keanu Reeves, Laurence Fishburne', 'The Wachowskis', 'matrix.jpg', 'Active'),
+	('Forrest Gump', 'The life journey of a simple man with a big heart.', 3, '1994-07-06', 'https://www.youtube.com/watch?v=bLvqoHBptjg', 'Tom Hanks, Robin Wright', 'Robert Zemeckis', 'forrest_gump.jpg', 'Active'),
+	('Avatar 3', 'The continued adventures on Pandora.', 5, '2025-12-19', 'https://www.youtube.com/watch?v=YXtWPVFk5TQ', 'Sam Worthington, Zoe Saldana', 'James Cameron', 'avatar3.jpg', 'Active'),
+    ('Toy Story 5', 'Woody and friends face new adventures.', 4, '2026-06-15', 'https://www.youtube.com/watch?v=F8N0-ViM254', 'Tom Hanks, Tim Allen', 'Pixar Studios', 'toy_story5.jpg', 'Active'),
+    ('Justice League: Reborn', 'The heroes regroup for a new threat.', 1, '2026-11-10', 'https://www.youtube.com/watch?v=sztA63kSY5o', 'Gal Gadot, Ben Affleck', 'Zack Snyder', 'justice_league_reborn.jpg', 'Active'),
+    ('Frozen 3', 'Elsa and Anna face a new journey.', 4, '2027-07-21', 'https://www.youtube.com/watch?v=xJgAypHXCZo', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'frozen3.jpg', 'Active'),
+    ('Inception 2', 'A new mind-bending heist.', 5, '2028-05-18', 'https://www.youtube.com/watch?v=JOmD4JJ98_8', 'Joseph Gordon-Levitt, Leonardo DiCaprio', 'Christopher Nolan', 'inception2.jpg', 'Active'),
+	('Spider-Man: No Way Home', 'Peter Parker deals with his exposure as Spider-Man.', 1, '2021-12-17', 'https://www.youtube.com/watch?v=JfVOs4VSpmA', 'Tom Holland, Zendaya', 'Jon Watts', 'SpidermanNoWayHome_Poster.png', 'Poster'),
+	('Frozen 2', 'The adventure of Elsa and Anna.', 4, '2019-11-22', 'https://www.youtube.com/watch?v=Zi4LMpSDccc', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'Frozen2_Poster.jpg', 'Poster'),
+	('The Conjuring', 'Paranormal investigators help a family terrorized by a dark presence.', 2, '2025-07-19', 'https://www.youtube.com/watch?v=k10ETZ41q5o', 'Vera Farmiga, Patrick Wilson', 'James Wan', 'TheConjuring_Poster.webp', 'Poster');
+
+
 
 
 

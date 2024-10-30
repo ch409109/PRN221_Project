@@ -38,7 +38,7 @@ public class IndexModel : PageModel
             .Include(m => m.Category)
             .Where(m => m.Status == "Poster")
             .OrderBy(m => Guid.NewGuid())
-            .Take(3)
+            .Take(5)
             .ToListAsync();
     }
 }
