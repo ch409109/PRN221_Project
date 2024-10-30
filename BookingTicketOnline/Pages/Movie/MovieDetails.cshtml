@@ -77,8 +77,10 @@
     </div>
 
     <div class="trailer-container">
-        <iframe width="800" height="450" src="https://www.youtube.com/embed/aWzlQ2N6qqg"
-                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        <iframe width="800" height="450"
+                src="@Model.GetEmbedUrl(Model.Movie.TrailerUrl)"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
         </iframe>
     </div>
