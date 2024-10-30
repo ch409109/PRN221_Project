@@ -387,10 +387,10 @@
     <!-- Home  -->
     <section class="home swiper" id="home">
         <div class="swiper-wrapper">
-            @foreach (var movie in Model.OpeningMovies)
+            @foreach (var movie in Model.PosterMovies)
             {
                 <div class="swiper-slide container">
-                    <img src="~/img/@movie.Poster" alt="@movie.Title">
+                    <img src="~/img/@movie.Poster" alt="@movie.Title" class="poster-image">
                     <div class="home-text">
                         <span>@(movie.Category != null ? movie.Category.Name : "Category Not Available")</span>
                         <h1>@movie.Title</h1>
@@ -420,7 +420,7 @@
 
 
 
-    <!-- Movies  -->
+    
     <!-- Movies: Opening This Week -->
     <div class="movies" id="movies">
         <h2 class="heading">Opening This Week</h2>

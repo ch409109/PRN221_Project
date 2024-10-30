@@ -16,6 +16,8 @@ public class IndexModel : PageModel
     public List<Movie> OpeningMovies { get; set; }
     public List<Movie> ComingSoonMovies { get; set; }
 
+    public List<Movie> PosterMovies { get; set; }
+
     public async Task OnGetAsync()
     {
         var currentDate = DateTime.Today;
@@ -30,6 +32,13 @@ public class IndexModel : PageModel
         ComingSoonMovies = await _context.Movies
             .Include(m => m.Category)
             .Where(m => m.Status == "Active" && m.ReleaseDate > currentDate)
+            .ToListAsync();
+
+        PosterMovies = await _context.Movies
+            .Include(m => m.Category)
+            .Where(m => m.Status == "Poster")
+            .OrderBy(m => Guid.NewGuid())
+            .Take(3)
             .ToListAsync();
     }
 }
