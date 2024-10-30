@@ -62,12 +62,12 @@
         <div class="breaking-bad">
             <div class="movie-description">
                 <div class="movie-image">
-                    <img src="@Model.Movie.Poster" alt="Movie Poster" />
+                    <img src="~/img/@Model.Movie.Poster" alt="Movie Poster" />
                 </div>
                 <div class="movie-content">
                     <h1>@Model.Movie.Title</h1>
                     <p><strong>Release Date:</strong> @Model.Movie.ReleaseDate?.ToString("dd/MM/yyyy")</p>
-                    <p><strong>Category:</strong> @Model.Movie.CategoryId</p>
+                    <p><strong>Category:</strong> @Model.Movie.Category?.Name</p>
                     <p><strong>Actors:</strong> @Model.Movie.Actor</p>
                     <p><strong>Description:</strong> @Model.Movie.Description</p>
                     <a class="btn-trailer" asp-page="/BookDate">Book Now</a>

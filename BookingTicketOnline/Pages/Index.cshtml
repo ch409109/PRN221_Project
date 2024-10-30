@@ -413,7 +413,7 @@
                         <div class="box-img">
                             <img src="~/img/@movie.Poster" alt="@movie.Title">
                         </div>
-                        <h3><a asp-page="/Movie/MovieDetails">@movie.Title</a></h3>
+                        <h3><a asp-page="/Movie/MovieDetails" asp-route-id="@movie.Id">@movie.Title</a></h3>
                         <span>120 min | @(movie.Category != null ? movie.Category.Name : "Category Not Available")</span>
                     </div>
                 }
@@ -439,7 +439,7 @@
                         <div class="box-img">
                             <img src="~/img/@movie.Poster" alt="@movie.Title">
                         </div>
-                        <h3><a asp-page="/Movie/MovieDetails">@movie.Title</a></h3>
+                        <h3><a asp-page="/Movie/MovieDetails" asp-route-id="@movie.Id">@movie.Title</a></h3>
                         <span>120 min | @(movie.Category != null ? movie.Category.Name : "Category Not Available")</span>
                     </div>
                 }
