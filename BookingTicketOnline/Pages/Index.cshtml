@@ -387,13 +387,37 @@
     <!-- Home  -->
     <section class="home swiper" id="home">
         <div class="swiper-wrapper">
+            @foreach (var movie in Model.OpeningMovies)
+            {
                 <div class="swiper-slide container">
-                    <img src="~/img/WebPoster.jpg">
+                    <img src="~/img/@movie.Poster" alt="@movie.Title">
+                    <div class="home-text">
+                        <span>@(movie.Category != null ? movie.Category.Name : "Category Not Available")</span>
+                        <h1>@movie.Title</h1>
+                    </div>
                 </div>
-            
+            }
         </div>
         <div class="swiper-pagination"></div>
     </section>
+
+    <!-- Add Swiper JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            // Configure Swiper to auto-slide every 3 seconds
+            autoplay: {
+                delay: 3000, // Delay in milliseconds
+                disableOnInteraction: false, // Keeps autoplay even after interaction
+            },
+            loop: true, // Enable loop to continuously slide
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    </script>
+
 
 
     <!-- Movies  -->
