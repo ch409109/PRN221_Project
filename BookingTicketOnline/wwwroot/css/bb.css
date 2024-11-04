@@ -237,8 +237,10 @@ h2{
     cursor: pointer;
 }
 
-.footer{
-    margin-top: 6rem;
+.footer {
+    margin-top: 5rem;
+    padding-bottom: 4rem;
+    padding-top: 1rem;
 }
 
 
