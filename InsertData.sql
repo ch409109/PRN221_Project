@@ -54,7 +54,7 @@ INSERT INTO Discount (Code, DiscountValue, StartDate, EndDate) VALUES
 ('HALFOFF', 50.00, '2024-11-01', '2024-11-30');
 
 INSERT INTO Booking (BookingDate, CinemaID, MovieID, UserID, Status, TotalPrice) VALUES
-('2024-10-10 19:00:00', 1, 1, 2, 'Confirmed', 20.00),
+('2024-10-10 19:00:00', 1, 1, 2, 'Unused', 20.00),
 ('2024-10-11 20:00:00', 2, 3, 2, 'Confirmed', 50.00);
 
 INSERT INTO Payment (BookingID, Amount, DiscountID) VALUES
