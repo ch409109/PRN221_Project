@@ -133,9 +133,9 @@
                                 <div class="movie-rate__rate-star">
                                     <p>Đánh giá phim: </p>
                                     @{
-                                        int fullStars = (int)(@Model.AverageRating / 2); // Calculate full stars (average rating scaled to 5)
+                                        int fullStars = (int)(@Model.AverageRating); // Calculate full stars (average rating scaled to 5)
                                         int halfStar = (@Model.AverageRating % 2 >= 0.5) ? 1 : 0; // Check if half-star should be added
-                                        int emptyStars = 5 - fullStars - halfStar; // Calculate remaining empty stars
+                                        int emptyStars = 10 - fullStars - halfStar; // Calculate remaining empty stars
                                     }
 
                                     <!-- Display full stars -->
