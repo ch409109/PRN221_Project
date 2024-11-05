@@ -35,44 +35,44 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-           <nav class="sidebar">
+           @* <nav class="sidebar">
                 <a class="sidebar__brand" style="color:white; font-size:20px" asp-page="/Index">CineMatic</a>
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="/" style="color:white; font-size:20px">
                             <div class="sidebar__icon">
-                                <i class="fa fa-home"></i>
+                                <i class="fa fa-home" style="color:white; font-size:40px"></i>
                             </div>
-                            Trang chủ <span class="sr-only">(current)</span>
+                            <span class="sr-only" style="color:white; font-size:40px"> Trang chủ</span>
                         </a>
                     </li>
-            </nav> 
+            </nav>  *@
 
       
 
-            <main role="main" class="main">
+            <main role="main" class="main" style="margin-left:0px">
                 <!-- Add Font Awesome if not already included -->
 
                 <nav class="navbar top-menu">
                     <ul class="navbar-nav d-flex flex-row w-100">
                         <li class="nav-item active">
-                            <a class="nav-link" style="font-size: 15px" href="list-movies.html">Đề cử <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" style="font-size: 15px; font-weight:bold" asp-page="/Index">Cinematic  <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 15px" href="list-movies.html">Phim lẻ mới</a>
+                            <a class="nav-link" style="font-size: 15px" asp-page="/Index">Phim mới </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 15px" href="list-movies.html">Phim bộ mới</a>
+                            <a class="nav-link" style="font-size: 15px" asp-page="/Index">Phim đang chiếu </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 15px" href="list-movies.html">Phim sắp chiếu</a>
+                            <a class="nav-link" style="font-size: 15px" asp-page="/News/ListNews">Tin tức</a>
                         </li>
-
-                        <li class="nav-item" style="margin-left:800px">
-                            <a class="nav-link" style="font-size: 15px" href="login.html">Đăng nhập</a>
+                        <li class="nav-item ml-auto"></li>
+                        <li class="nav-item" >
+                            <a class="nav-link" style="font-size: 15px"  asp-page="/Login">Đăng nhập</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 15px" href="register.html">Đăng ký</a>
+                            <a class="nav-link" style="font-size: 15px" asp-page="/SignUp" >Đăng ký</a>
                         </li>
                     </ul>
                 </nav>
@@ -126,24 +126,38 @@
                                 <div class="movie-rate__point">
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <p>
-                                        <span>8.1</span> /10<br>
-                                        <span class="rv">56 Đánh giá</span>
+                                        <span>@Model.AverageRating.ToString("0.0")</span> / 10<br>
+                                        <span class="rv">@Model.TotalReviews Đánh giá</span>
                                     </p>
                                 </div>
                                 <div class="movie-rate__rate-star">
                                     <p>Đánh giá phim: </p>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    @{
+                                        int fullStars = (int)(@Model.AverageRating / 2); // Calculate full stars (average rating scaled to 5)
+                                        int halfStar = (@Model.AverageRating % 2 >= 0.5) ? 1 : 0; // Check if half-star should be added
+                                        int emptyStars = 5 - fullStars - halfStar; // Calculate remaining empty stars
+                                    }
+
+                                    <!-- Display full stars -->
+                                    @for (int i = 0; i < fullStars; i++)
+                                    {
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    }
+
+                                    <!-- Display half star if applicable -->
+                                    @if (halfStar == 1)
+                                    {
+                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                    }
+
+                                    <!-- Display empty stars -->
+                                    @for (int i = 0; i < emptyStars; i++)
+                                    {
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    }
                                 </div>
                             </div>
+
                             <div class="cast-bio movie-nav-tabs">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
@@ -171,7 +185,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="comments">
+                <div class="comments" style="margin-top: 5%">
                     <h2>Comments</h2>
                     <div class="comment-box">
                         <input type="text" placeholder="Leave a Comment">

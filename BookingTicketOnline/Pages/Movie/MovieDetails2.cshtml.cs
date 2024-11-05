@@ -10,6 +10,8 @@ namespace BookingTicketOnline.Pages.Movie
         private readonly PRN221_FinalProjectContext _context;
 
         public Models.Movie? Movie { get; set; }
+        public int TotalReviews { get; set; }
+        public float AverageRating { get; set; }
 
         public MovieDetails2Model(PRN221_FinalProjectContext context)
         {
@@ -21,6 +23,17 @@ namespace BookingTicketOnline.Pages.Movie
             Movie = await _context.Movies
             .Include(m => m.Category)
             .FirstOrDefaultAsync(m => m.Id == id);
+
+            var feedbacks = await _context.Feedbacks
+             .Where(f => f.MovieId == id)
+             .ToListAsync();
+
+
+            if (feedbacks.Any())
+            {
+                AverageRating = (float)feedbacks.Average(f => f.Rate ?? 0);
+                TotalReviews = feedbacks.Count;
+            }
         }
 
         public string GetEmbedUrl(string url)

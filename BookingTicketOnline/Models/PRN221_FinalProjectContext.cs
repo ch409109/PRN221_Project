@@ -168,6 +168,8 @@ namespace BookingTicketOnline.Models
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
+                entity.Property(e => e.Rate).HasColumnName("Rate");
+
                 entity.HasOne(d => d.Movie)
                     .WithMany(p => p.Feedbacks)
                     .HasForeignKey(d => d.MovieId)

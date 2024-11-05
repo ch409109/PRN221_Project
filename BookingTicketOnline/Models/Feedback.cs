@@ -10,7 +10,7 @@ namespace BookingTicketOnline.Models
         public int? MovieId { get; set; }
         public string? Comments { get; set; }
         public DateTime? CreateAt { get; set; }
-
+        public double? Rate { get; set; }
         public virtual Movie? Movie { get; set; }
         public virtual User? User { get; set; }
     }
