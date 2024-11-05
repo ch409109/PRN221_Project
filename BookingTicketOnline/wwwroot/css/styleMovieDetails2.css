@@ -161,6 +161,9 @@ p {
     margin-bottom: 1rem;
 }
 
+
+ 
+
 abbr[title],
 abbr[data-original-title] {
     text-decoration: underline;
@@ -11691,9 +11694,9 @@ button:focus {
 
     .top-menu .nav-link {
         color: #fff;
-        font-size: 30px;
+        font-size: 15px;
         text-transform: uppercase;
-        padding: 0 30px;
+        padding: 0 20px;
     }
 
         .top-menu .nav-link:hover {
@@ -11730,7 +11733,7 @@ button:focus {
 
     .sidebar .nav-link {
         border-radius: 0;
-        font-size: 1em;
+        font-size: 20px;
         padding: 30px 0;
         text-align: center;
         text-transform: uppercase;
@@ -11741,7 +11744,7 @@ button:focus {
     background: #393939;
     width: 150px;
     height: 100px;
-    font-size: 36px;
+    font-size: 20px;
     line-height: 96px;
     text-align: center;
     font-weight: bold;
