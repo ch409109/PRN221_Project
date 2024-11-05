@@ -66,12 +66,12 @@ INSERT INTO Revenue (PaymentID, TotalRevenue, FromDate, ToDate) VALUES
 (2, 2500.00, '2024-10-11', '2024-10-20');
 
 INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
-('Tacos', 7.99, 100, 'tacos.jpg', 'Active'),
-('Coca Cola', 4.99, 200, 'coke.jpg', 'Active'),
-('Popcorn', 11.99, 150, 'popcorn.jpg', 'Active'),
-('French Fries', 5.99, 80, 'fries.jpg', 'Active'),
-('Cheese Nachos', 6.99, 70, 'nachos.jpg', 'Active'),
-('Classic Hotdog', 5.99, 90, 'hotdog.jpg', 'Active');
+('Tacos', 30000, 100, 'tacos.jpg', 'Active'),
+('Coca Cola', 13000, 200, 'coke.jpg', 'Active'),
+('Popcorn', 15000, 150, 'popcorn.jpg', 'Active'),
+('French Fries', 25000, 80, 'fries.jpg', 'Active'),
+('Cheese Nachos', 50000, 70, 'nachos.jpg', 'Active'),
+('Classic Hotdog', 30000, 90, 'hotdog.jpg', 'Active');
 
 INSERT INTO BookingItem (FoodAndDrinksID, Quantity, Price, BookingID) VALUES
 (1, 1, 7.99, 1),
