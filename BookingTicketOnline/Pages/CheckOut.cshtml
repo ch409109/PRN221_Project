@@ -109,13 +109,18 @@
                                asp-for="VoucherCode"
                                class="form-control form-control-lg"
                                placeholder="Enter your discount code">
-                        <button type="button"
+                        <button type="submit"
                                 class="btn btn-outline-danger btn-apply"
                                 asp-page-handler="ApplyVoucher">
                             Apply
                         </button>
                     </div>
                     <span asp-validation-for="VoucherCode" class="text-danger"></span>
+                    @if (!string.IsNullOrEmpty(ViewData["VoucherMessage"]?.ToString()))
+                    {
+                        <div class="alert alert-success">@ViewData["VoucherMessage"]</div>
+                    }
+
                 </div>
                 <div class="col-md-5">
                     <div class="text-end">
@@ -144,7 +149,7 @@
                                 <span class="ms-2">Pay with VNPay</span>
                             </label>
                         </div>
-                    </div>                  
+                    </div>
                 </div>
                 <div class="col-md-5">
                     <div class="text-end">
@@ -162,6 +167,8 @@
                     </div>
                     <div class="col-md-5">
                         <div class="text-end">
+                            <div class="price-label">Discount</div>
+                            <div class="price-value">$@Model.DiscountAmount.ToString("N2")</div>
                             <div class="price-label fw-bold">Total Payment</div>
                             <div class="price-value text-danger fs-4">$@Model.FinalAmount.ToString("N2")</div>
                         </div>

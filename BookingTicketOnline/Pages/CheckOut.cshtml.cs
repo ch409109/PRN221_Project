@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookingTicketOnline.Models;
+using BookingTicketOnline.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
@@ -8,6 +10,17 @@ namespace BookingTicketOnline.Pages
 {
     public class CheckOutModel : PageModel
     {
+        private readonly IVNPayService _vNPayService;
+        private readonly IConfiguration _configuration;
+        private readonly PRN221_FinalProjectContext _context;
+
+        public CheckOutModel(IVNPayService vNPayService, IConfiguration configuration, PRN221_FinalProjectContext context)
+        {
+            _vNPayService = vNPayService;
+            _configuration = configuration;
+            _context = context;
+        }
+
         [BindProperty]
         public string? VoucherCode { get; set; }
 
@@ -17,29 +30,16 @@ namespace BookingTicketOnline.Pages
         public decimal TotalAmount { get; set; }
         public decimal DiscountAmount { get; set; }
         public decimal FinalAmount { get; set; }
-
-        //private readonly IVoucherService _voucherService;
-        //private readonly IPaymentService _paymentService;
-
-        //public CheckOutModel(IVoucherService voucherService, IPaymentService paymentService)
-        //{
-        //    _voucherService = voucherService;
-        //    _paymentService = paymentService;
-        //}
-
-        public CheckOutModel()
-        {
-
-        }
-
         public void OnGet()
         {
-            // Load booking details from session or database
-            // This is just example data
-            //TotalAmount = 50.00M;
-            //DiscountAmount = 0;
-            //FinalAmount = TotalAmount - DiscountAmount;
+            LoadTotalAmountFromSession();
 
+            DiscountAmount = 0;
+            FinalAmount = TotalAmount - DiscountAmount;
+        }
+
+        private void LoadTotalAmountFromSession()
+        {
             var foodTotalStr = HttpContext.Session.GetString("FoodTotalAmount");
             if (!string.IsNullOrEmpty(foodTotalStr))
             {
@@ -49,33 +49,35 @@ namespace BookingTicketOnline.Pages
             {
                 TotalAmount = 0;
             }
-
-            // Tính toán giá cuối cùng
-            DiscountAmount = 0; // Hoặc lấy từ service nếu có
-            FinalAmount = TotalAmount - DiscountAmount;
         }
-
         public async Task<IActionResult> OnPostApplyVoucherAsync()
         {
+            LoadTotalAmountFromSession();
+
             if (string.IsNullOrWhiteSpace(VoucherCode))
             {
-                return BadRequest("Please enter a discount code");
+                ModelState.AddModelError("VoucherCode", "Please enter a discount code");
+                FinalAmount = TotalAmount;
+                return Page();
             }
 
-            //var discount = await _voucherservice.validateandgetdiscountasync(vouchercode);
-            //if (discount > 0)
-            //{
-            //    DiscountAmount = discount;
-            //    FinalAmount = TotalAmount - DiscountAmount;
-            //    return new JsonResult(new
-            //    {
-            //        success = true,
-            //        discountAmount = DiscountAmount,
-            //        finalAmount = FinalAmount
-            //    });
-            //}
+            var discount = _context.Discounts.FirstOrDefault(d => d.Code == VoucherCode && d.EndDate >= DateTime.Now);
 
-            return BadRequest("Invalid discount code");
+            if (discount == null || discount.EndDate < DateTime.Now)
+            {
+                ModelState.AddModelError("VoucherCode", "Invalid or expired discount code");
+                FinalAmount = TotalAmount;
+                return Page();
+            }
+
+            DiscountAmount = TotalAmount * (discount.DiscountValue / 100);
+            FinalAmount = TotalAmount - DiscountAmount;
+
+            ViewData["VoucherMessage"] = "Discount code applied successfully. Total updated.";
+
+            ModelState.Clear();
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostCheckoutAsync()
@@ -85,14 +87,20 @@ namespace BookingTicketOnline.Pages
                 return Page();
             }
 
-            // Process payment with VNPay
-            //var paymentUrl = await _paymentService.CreatePaymentUrl(
-            //    amount: FinalAmount,
-            //    orderDescription: "Movie Ticket Payment",
-            //    orderType: "billpayment"
-            //);
+            var payment = new PaymentInformation
+            {
+                OrderType = "billpayment",
+                Amount = FinalAmount,
+                OrderDescription = "Thanh toan ve xem phim",
+                Name = "Thanh toan ve xem phim",
+                OrderId = DateTime.Now.Ticks.ToString(),
+                IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "127.0.0.1"
+            };
 
-            return Redirect(null);
+            var url = _vNPayService.CreatePaymentUrl(payment,
+                $"{Request.Scheme}://{Request.Host}/PaymentCallback");
+
+            return Redirect(url);
         }
     }
 }

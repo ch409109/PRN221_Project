@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using BookingTicketOnline.Configurations;
 using BookingTicketOnline.Models;
+using BookingTicketOnline.Services.Implementations;
+using BookingTicketOnline.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -27,11 +30,11 @@ namespace BookingTicketOnline
             });
 
             // Add cookie authentication
-           builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = "/Login"; 
-                });
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                 .AddCookie(options =>
+                 {
+                     options.LoginPath = "/Login";
+                 });
 
 
             // Add session
@@ -43,6 +46,10 @@ namespace BookingTicketOnline
             });
 
             builder.Services.AddTransient<EmailService>();
+
+            builder.Services.Configure<VNPayConfig>(
+    builder.Configuration.GetSection("VNPay"));
+            builder.Services.AddScoped<IVNPayService, VNPayService>();
 
             var app = builder.Build();
 

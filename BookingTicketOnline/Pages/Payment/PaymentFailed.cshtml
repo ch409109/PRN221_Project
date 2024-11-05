@@ -1,0 +1,16 @@
+﻿@page
+@model BookingTicketOnline.Pages.Payment.PaymentFailedModel
+@{
+    ViewData["Title"] = "Payment Failed";
+}
+
+<div class="container py-5">
+    <div class="card text-center">
+        <div class="card-body">
+            <i class="bi bi-x-circle text-danger" style="font-size: 4rem;"></i>
+            <h2 class="card-title mt-3">Payment Failed</h2>
+            <p class="card-text">Sorry, your payment could not be processed. Please try again or contact support.</p>
+            <a href="/Checkout" class="btn btn-primary mt-3">Try Again</a>
+        </div>
+    </div>
+</div>
