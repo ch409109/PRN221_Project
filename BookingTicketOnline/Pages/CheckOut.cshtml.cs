@@ -1,5 +1,6 @@
 ﻿using BookingTicketOnline.Models;
 using BookingTicketOnline.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -30,12 +31,19 @@ namespace BookingTicketOnline.Pages
         public decimal TotalAmount { get; set; }
         public decimal DiscountAmount { get; set; }
         public decimal FinalAmount { get; set; }
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            LoadTotalAmountFromSession();
+            if (!User.Identity.IsAuthenticated)
+            {
+                var returnUrl = Url.Page("/CheckOut");
+                return RedirectToPage("/Login", new { ReturnUrl = returnUrl });
+            }
 
+            LoadTotalAmountFromSession();
             DiscountAmount = 0;
             FinalAmount = TotalAmount - DiscountAmount;
+
+            return Page();
         }
 
         private void LoadTotalAmountFromSession()

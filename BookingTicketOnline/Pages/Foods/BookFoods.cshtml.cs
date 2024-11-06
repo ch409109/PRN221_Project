@@ -66,6 +66,18 @@ namespace BookingTicketOnline.Pages.Foods
             HttpContext.Session.SetString("FoodTotalAmount",
                 JsonSerializer.Serialize(totalAmount));
 
+            //var userIdClaim = User.FindFirst("UserId")?.Value;
+            //if (userIdClaim == null)
+            //{
+            //    return RedirectToPage("/Login", new { ReturnUrl = "/CheckOut" });
+            //}
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                // Redirect to the login page with a ReturnUrl to /CheckOut
+                return RedirectToPage("/Login", new { ReturnUrl = "/CheckOut" });
+            }
+
             // Filter selected items (quantity > 0)
             var selectedItems = Quantities
                 .Where(q => q.Value > 0)

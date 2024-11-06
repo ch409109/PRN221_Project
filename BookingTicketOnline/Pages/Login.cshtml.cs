@@ -52,7 +52,7 @@ namespace BookingTicketOnline.Pages
             }
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
 
             var user = _context.Users.FirstOrDefault(u => u.Username == Username);
@@ -76,12 +76,16 @@ namespace BookingTicketOnline.Pages
 
             };
 
-
-
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity));
+
+            // ------------------------------------
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
 
 
             if (RememberMe)

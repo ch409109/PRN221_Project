@@ -23,6 +23,18 @@ namespace BookingTicketOnline.Pages.Payment
             if (PaymentResponse.Success)
             {
                 // Thêm code cập nhật database ở đây
+                var random = new Random();
+                string ticketCode = $"{(char)random.Next('A', 'Z' + 1)}{(char)random.Next('A', 'Z' + 1)}{random.Next(100000, 999999)}";
+
+                var userIdClaim = User.FindFirst("UserId")?.Value;
+
+                var booking = new Booking
+                {
+                    UserId = Int32.Parse(userIdClaim),
+
+                };
+
+
                 return RedirectToPage("/Payment/PaymentSuccess");
             }
 
