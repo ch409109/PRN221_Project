@@ -15,6 +15,7 @@ namespace BookingTicketOnline.Models
         public string? Name { get; set; }
         public int? CinemaId { get; set; }
         public int? NumberOfRows { get; set; }
+
         public virtual Cinema? Cinema { get; set; }
         public virtual ICollection<Row> Rows { get; set; }
         public virtual ICollection<Showtime> Showtimes { get; set; }

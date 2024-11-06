@@ -18,7 +18,8 @@ namespace BookingTicketOnline.Models
         public int? MovieId { get; set; }
         public int? UserId { get; set; }
         public string? Status { get; set; }
-        public decimal? TotalPrice { get; set; }
+        public int? TotalPrice { get; set; }
+        public string? TicketCode { get; set; }
 
         public virtual Cinema? Cinema { get; set; }
         public virtual Movie? Movie { get; set; }

@@ -82,10 +82,14 @@ namespace BookingTicketOnline.Pages
 
         public async Task<IActionResult> OnPostCheckoutAsync()
         {
+            LoadTotalAmountFromSession();
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
+            FinalAmount = TotalAmount - DiscountAmount;
 
             var payment = new PaymentInformation
             {
@@ -98,7 +102,7 @@ namespace BookingTicketOnline.Pages
             };
 
             var url = _vNPayService.CreatePaymentUrl(payment,
-                $"{Request.Scheme}://{Request.Host}/PaymentCallback");
+                $"{Request.Scheme}://{Request.Host}/Payment/PaymentCallback");
 
             return Redirect(url);
         }

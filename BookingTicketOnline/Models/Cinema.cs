@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace BookingTicketOnline.Models
 {
@@ -14,19 +13,9 @@ namespace BookingTicketOnline.Models
         }
 
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Location is required")]
-        [MaxLength(200, ErrorMessage = "Location cannot be longer than 200 characters")]
-        public string Location { get; set; }
-
-        [Required(ErrorMessage = "City is required")]
-        [MaxLength(60, ErrorMessage = "City cannot be longer than 100 characters")]
-        public string City { get; set; }
-
-        [Required(ErrorMessage = "Name is required")]
-        [MaxLength(200, ErrorMessage = "Name cannot be longer than 200 characters")]
-        public string Name { get; set; }
-        
+        public string? Location { get; set; }
+        public string? City { get; set; }
+        public string? Name { get; set; }
         public string? Status { get; set; }
 
         public virtual ICollection<Booking> Bookings { get; set; }

@@ -37,7 +37,7 @@ namespace BookingTicketOnline.Pages.Foods
 
         private decimal CalculateTotalAmount()
         {
-            decimal total = 0;
+            int total = 0;
             foreach (var quantity in Quantities.Where(q => q.Value > 0))
             {
                 var food = FoodAndDrinks.FirstOrDefault(f => f.Id == quantity.Key);

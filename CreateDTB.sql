@@ -55,6 +55,7 @@ CREATE TABLE Feedback (
     MovieID INT,
     Comments NVARCHAR(1000),
     CreateAt DATETIME,
+	Rate FLOAT,
     FOREIGN KEY (UserID) REFERENCES [User](ID),
     FOREIGN KEY (MovieID) REFERENCES Movies(ID)
 );
@@ -71,7 +72,7 @@ CREATE TABLE News (
 CREATE TABLE Discount (
     ID INT PRIMARY KEY IDENTITY(1,1),
     Code NVARCHAR(50),
-    DiscountValue DECIMAL(5,2),
+    DiscountValue INT,
     StartDate DATE,
     EndDate DATE
 );
@@ -112,7 +113,8 @@ CREATE TABLE Booking (
     MovieID INT,
     UserID INT,
     Status NVARCHAR(50),
-    TotalPrice DECIMAL(10,2),
+    TotalPrice INT,
+	TicketCode VARCHAR(50) UNIQUE,
     FOREIGN KEY (CinemaID) REFERENCES Cinema(ID),
     FOREIGN KEY (MovieID) REFERENCES Movies(ID),
     FOREIGN KEY (UserID) REFERENCES [User](ID)
@@ -120,7 +122,7 @@ CREATE TABLE Booking (
 CREATE TABLE Payment (
     ID INT PRIMARY KEY IDENTITY(1,1),
     BookingID INT,
-    Amount DECIMAL(10,2),
+    Amount INT,
     DiscountID INT,
     FOREIGN KEY (BookingID) REFERENCES Booking(ID),
     FOREIGN KEY (DiscountID) REFERENCES Discount(ID)
@@ -128,7 +130,7 @@ CREATE TABLE Payment (
 CREATE TABLE Revenue (
     ID INT PRIMARY KEY IDENTITY(1,1),
     PaymentID INT,
-    TotalRevenue DECIMAL(15,2),
+    TotalRevenue INT,
     FromDate DATE,
     ToDate DATE,
     FOREIGN KEY (PaymentID) REFERENCES Payment(ID)
@@ -136,7 +138,7 @@ CREATE TABLE Revenue (
 CREATE TABLE BookingSeatsDetail (
     ID INT PRIMARY KEY IDENTITY(1,1),
     SeatID INT,
-    Price DECIMAL(10,2),
+    Price INT,
     BookingID INT,
     FOREIGN KEY (SeatID) REFERENCES Seat(ID),
     FOREIGN KEY (BookingID) REFERENCES Booking(ID)
@@ -144,7 +146,7 @@ CREATE TABLE BookingSeatsDetail (
 CREATE TABLE FoodAndDrinks (
     ID INT PRIMARY KEY IDENTITY(1,1),
     Name NVARCHAR(100),
-    Price DECIMAL(10,2),
+    Price INT,
     Quantity INT,
 	[Image] VARCHAR(MAX),
 	Status VARCHAR(15)
@@ -153,7 +155,7 @@ CREATE TABLE BookingItem (
     ID INT PRIMARY KEY IDENTITY(1,1),
     FoodAndDrinksID INT,
     Quantity INT,
-    Price DECIMAL(10,2),
+    Price INT,
     BookingID INT,
     FOREIGN KEY (FoodAndDrinksID) REFERENCES FoodAndDrinks(ID),
     FOREIGN KEY (BookingID) REFERENCES Booking(ID)
@@ -170,6 +172,3 @@ CREATE TABLE Showtime (
     FOREIGN KEY (RoomID) REFERENCES Room(ID)
 );
 
-
-ALTER TABLE [PRN221_FinalProject].[dbo].[Feedback]
-ADD Rate FLOAT;

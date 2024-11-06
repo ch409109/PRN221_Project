@@ -12,7 +12,7 @@ namespace BookingTicketOnline.Models
 
         public int Id { get; set; }
         public int? BookingId { get; set; }
-        public decimal? Amount { get; set; }
+        public int? Amount { get; set; }
         public int? DiscountId { get; set; }
 
         public virtual Booking? Booking { get; set; }

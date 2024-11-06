@@ -125,7 +125,7 @@
                 <div class="col-md-5">
                     <div class="text-end">
                         <div class="price-label">Subtotal</div>
-                        <div class="price-value">$@Model.TotalAmount.ToString("N2")</div>
+                        <div class="price-value">@Model.TotalAmount</div>
                     </div>
                 </div>
             </div>
@@ -154,7 +154,7 @@
                 <div class="col-md-5">
                     <div class="text-end">
                         <div class="price-label">Discount</div>
-                        <div class="price-value">$@Model.DiscountAmount.ToString("N2")</div>
+                        <div class="price-value">@Model.DiscountAmount</div>
                     </div>
                 </div>
             </div>
@@ -168,9 +168,9 @@
                     <div class="col-md-5">
                         <div class="text-end">
                             <div class="price-label">Discount</div>
-                            <div class="price-value">$@Model.DiscountAmount.ToString("N2")</div>
+                            <div class="price-value">@Model.DiscountAmount</div>
                             <div class="price-label fw-bold">Total Payment</div>
-                            <div class="price-value text-danger fs-4">$@Model.FinalAmount.ToString("N2")</div>
+                            <div class="price-value text-danger fs-4">@Model.FinalAmount</div>
                         </div>
                     </div>
                 </div>

@@ -42,28 +42,28 @@ INSERT INTO [User] (RoleID, Username, Password, Email, PhoneNumber, Dob, FullNam
 (4, 'CongHTHE172673', '123456', 'CongHTHE172673@fpt.edu.vn', '0123456789', '1992-03-15', N'Hoàng Thành Công', 'Inactive'),
 (2, 'NhatLVHE176909', '123456', 'NhatLVHE176909@fpt.edu.vn', '0987654321', '1995-05-20', N'Lê Việt Nhật', 'Inactive');
 
-INSERT INTO Feedback (UserID, MovieID, Comments, CreateAt) VALUES
-(2, 1, 'Amazing movie with stunning visuals!', '2024-10-11 10:00:00'),
-(2, 3, 'Great love story, very touching.', '2024-10-11 11:00:00');
+INSERT INTO Feedback (UserID, MovieID, Comments, CreateAt, Rate) VALUES
+(2, 1, 'Amazing movie with stunning visuals!', '2024-10-11 10:00:00', 4.5),
+(2, 3, 'Great love story, very touching.', '2024-10-11 11:00:00', 4);
 
 INSERT INTO News (Title, Content, Image, CreateAt, UpdateAt, CreateBy) VALUES
 ('New Release: Inception', 'Inception is now available in cinemas!', 'https://example.com/news/inception.jpg', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1);
 
 INSERT INTO Discount (Code, DiscountValue, StartDate, EndDate) VALUES
-('DISCOUNT10', 10.00, '2024-10-01', '2024-10-31'),
-('HALFOFF', 50.00, '2024-11-01', '2024-11-30');
+('DISCOUNT10', 10, '2024-10-01', '2024-10-31'),
+('HALFOFF', 50, '2024-11-01', '2024-11-30');
 
-INSERT INTO Booking (BookingDate, CinemaID, MovieID, UserID, Status, TotalPrice) VALUES
-('2024-10-10 19:00:00', 1, 1, 2, 'Unused', 20.00),
-('2024-10-11 20:00:00', 2, 3, 2, 'Confirmed', 50.00);
+INSERT INTO Booking (BookingDate, CinemaID, MovieID, UserID, Status, TotalPrice, TicketCode) VALUES
+('2024-10-10 19:00:00', 1, 1, 2, 'Unused', 100000, 'HE172673'),
+('2024-10-11 20:00:00', 2, 3, 2, 'Confirmed', 2000000, 'HS999999');
 
 INSERT INTO Payment (BookingID, Amount, DiscountID) VALUES
-(1, 20.00, 1),
-(2, 25.00, 2);
+(1, 100000, 1),
+(2, 350000, 2);
 
 INSERT INTO Revenue (PaymentID, TotalRevenue, FromDate, ToDate) VALUES
-(1, 2000.00, '2024-10-01', '2024-10-10'),
-(2, 2500.00, '2024-10-11', '2024-10-20');
+(1, 1000000, '2024-10-01', '2024-10-10'),
+(2, 20000000, '2024-10-11', '2024-10-20');
 
 INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
 ('Tacos', 30000, 100, 'tacos.jpg', 'Active'),
@@ -74,8 +74,8 @@ INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
 ('Classic Hotdog', 30000, 90, 'hotdog.jpg', 'Active');
 
 INSERT INTO BookingItem (FoodAndDrinksID, Quantity, Price, BookingID) VALUES
-(1, 1, 7.99, 1),
-(2, 2, 9.98, 2);
+(1, 1, 30000, 1),
+(2, 2, 26000, 2);
 
 INSERT INTO Showtime (MovieID, CinemaID, RoomID, Showtime, [Date]) VALUES
 (1, 1, 1, '2024-10-10 19:00:00', '2024-10-10'),
@@ -154,10 +154,10 @@ VALUES
 ('H13', 8, 'Available'), ('H14', 8, 'Available'), ('H15', 8, 'Available');
 
 INSERT INTO BookingSeatsDetail (SeatID, Price, BookingID) VALUES
-(1, 10.00, 1),
-(2, 10.00, 1),
-(3, 25.00, 2),
-(4, 25.00, 2);
+(1, 100000, 1),
+(2, 1500000, 1),
+(3, 1200000, 2),
+(4, 70000, 2);
 
 /*Insert Movies*/
 INSERT INTO Movies ( Title, Description, CategoryID, ReleaseDate, TrailerURL, Actor, Director, Poster, Status)

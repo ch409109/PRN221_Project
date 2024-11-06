@@ -29,7 +29,7 @@ namespace BookingTicketOnline.Pages
 						.Include(b => b.BookingItems)
 							.ThenInclude(bi => bi.FoodAndDrinks)
 						.ToListAsync();
-			TotalPages = (int)Math.Ceiling(bookings.Count / (double)PageSize);
+			TotalPages = (int)Math.Ceiling(Bookings.Count / (double)PageSize);
 
 			bookings = Bookings.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
 
