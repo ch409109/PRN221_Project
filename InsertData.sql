@@ -36,11 +36,11 @@ INSERT INTO Role (RoleName) VALUES
 ('Admin'),('Customer'),('Movie Theater Owner'),('Staff');
 
 INSERT INTO [User] (RoleID, Username, Password, Email, PhoneNumber, Dob, FullName, Status) VALUES 
-(1, 'admin', '123456', 'admin@example.com', '0123456789', '1990-01-01', 'Administrator', 'Active'),
-(2, 'TungNVHE170677', '123456', 'TungNVHE170677@fpt.edu.vn', '0987654321', '1995-05-20', N'Nguyễn Việt Tùng', 'Active'),
-(3, 'TuanTNHE163211', '123456', 'TuanTNHE163211@fpt.edu.vn', '0987654321', '1995-05-20', N'Trình Ngọc Tuân', 'Active'),
-(4, 'CongHTHE172673', '123456', 'CongHTHE172673@fpt.edu.vn', '0123456789', '1992-03-15', N'Hoàng Thành Công', 'Inactive'),
-(2, 'NhatLVHE176909', '123456', 'NhatLVHE176909@fpt.edu.vn', '0987654321', '1995-05-20', N'Lê Việt Nhật', 'Inactive');
+(1, 'admin', '$2a$10$737LB5CDYczpbBp4Es/BRuxmTxzhU7ith0lHbWyd748eOKfIUzhEW', 'admin@example.com', '0123456789', '1990-01-01', 'Administrator', 'Active'),
+(2, 'TungNVHE170677', '$2a$10$737LB5CDYczpbBp4Es/BRuxmTxzhU7ith0lHbWyd748eOKfIUzhEW', 'TungNVHE170677@fpt.edu.vn', '0987654321', '1995-05-20', N'Nguyễn Việt Tùng', 'Active'),
+(3, 'TuanTNHE163211', '$2a$10$737LB5CDYczpbBp4Es/BRuxmTxzhU7ith0lHbWyd748eOKfIUzhEW', 'TuanTNHE163211@fpt.edu.vn', '0987654321', '1995-05-20', N'Trình Ngọc Tuân', 'Active'),
+(4, 'CongHTHE172673', '$2a$10$737LB5CDYczpbBp4Es/BRuxmTxzhU7ith0lHbWyd748eOKfIUzhEW', 'CongHTHE172673@fpt.edu.vn', '0123456789', '1992-03-15', N'Hoàng Thành Công', 'Inactive'),
+(2, 'NhatLVHE176909', '$2a$10$737LB5CDYczpbBp4Es/BRuxmTxzhU7ith0lHbWyd748eOKfIUzhEW', 'NhatLVHE176909@fpt.edu.vn', '0987654321', '1995-05-20', N'Lê Việt Nhật', 'Inactive');
 
 INSERT INTO Feedback (UserID, MovieID, Comments, CreateAt, Rate) VALUES
 (2, 1, 'Amazing movie with stunning visuals!', '2024-10-11 10:00:00', 4.5),
