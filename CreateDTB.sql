@@ -169,3 +169,7 @@ CREATE TABLE Showtime (
     FOREIGN KEY (CinemaID) REFERENCES Cinema(ID),
     FOREIGN KEY (RoomID) REFERENCES Room(ID)
 );
+
+
+ALTER TABLE [PRN221_FinalProject].[dbo].[Feedback]
+ADD Rate FLOAT;
