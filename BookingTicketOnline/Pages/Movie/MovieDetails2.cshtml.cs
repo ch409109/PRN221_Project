@@ -10,8 +10,19 @@ namespace BookingTicketOnline.Pages.Movie
         private readonly PRN221_FinalProjectContext _context;
 
         public Models.Movie? Movie { get; set; }
+        public List<Feedback> Feedbacks { get; set; } = new();
         public int TotalReviews { get; set; }
         public float AverageRating { get; set; }
+
+
+        [BindProperty]
+        public string CommentText { get; set; } = string.Empty;
+
+        [BindProperty]
+        public int Rate { get; set; }
+
+        public bool CanComment { get; private set; } = false;
+
 
         public MovieDetails2Model(PRN221_FinalProjectContext context)
         {
@@ -24,16 +35,51 @@ namespace BookingTicketOnline.Pages.Movie
             .Include(m => m.Category)
             .FirstOrDefaultAsync(m => m.Id == id);
 
-            var feedbacks = await _context.Feedbacks
-             .Where(f => f.MovieId == id)
-             .ToListAsync();
+            Feedbacks = await _context.Feedbacks
+                 .Where(f => f.MovieId == id)
+                 .Include(f => f.User)
+                 .ToListAsync();
 
 
-            if (feedbacks.Any())
+            if (Feedbacks.Any())
             {
-                AverageRating = (float)feedbacks.Average(f => f.Rate ?? 0);
-                TotalReviews = feedbacks.Count;
+                AverageRating = (float)Feedbacks.Average(f => f.Rate ?? 0);
+                TotalReviews = Feedbacks.Count;
             }
+
+            var userIdClaim = User.FindFirst("UserId")?.Value;
+
+            if (userIdClaim != null && int.TryParse(userIdClaim, out int userId))
+            {
+                CanComment = await _context.Bookings
+                    .AnyAsync(b => b.UserId == userId && b.MovieId == id && b.Status == "Confirmed");
+            }
+            else
+            {
+                CanComment = false;
+            }
+        }
+
+        public async Task<IActionResult> OnPostAsync(int id)
+        {
+            var userIdClaim = User.FindFirst("UserId")?.Value;
+            if (userIdClaim == null || !int.TryParse(userIdClaim, out int userId))
+            {
+                return RedirectToPage("/Login");
+            }
+            var newFeedback = new Feedback
+            {
+                MovieId = id,
+                UserId = userId,
+                Comments = CommentText,
+                Rate = Rate,
+                CreateAt = DateTime.Now
+            };
+
+            _context.Feedbacks.Add(newFeedback);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("/Movie/MovieDetails2", new { id = id });
         }
 
         public string GetEmbedUrl(string url)

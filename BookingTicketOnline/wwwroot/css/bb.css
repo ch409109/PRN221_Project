@@ -215,7 +215,7 @@ h2{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 2rem;
+    gap: 14rem;
 }
 
 .user-com h4{

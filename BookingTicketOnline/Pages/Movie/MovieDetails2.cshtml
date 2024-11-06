@@ -30,29 +30,32 @@
                 max-width: 300px;
             }
         }
+
+        .rating {
+            direction: rtl;
+            font-size: 1.5em;
+        }
+
+            .rating input[type="radio"] {
+                display: none;
+            }
+
+            .rating label {
+                color: lightgray;
+                cursor: pointer;
+            }
+
+                .rating input[type="radio"]:checked ~ label,
+                .rating label:hover,
+                .rating label:hover ~ label {
+                    color: gold;
+                }
     </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-           @* <nav class="sidebar">
-                <a class="sidebar__brand" style="color:white; font-size:20px" asp-page="/Index">CineMatic</a>
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/" style="color:white; font-size:20px">
-                            <div class="sidebar__icon">
-                                <i class="fa fa-home" style="color:white; font-size:40px"></i>
-                            </div>
-                            <span class="sr-only" style="color:white; font-size:40px"> Trang chủ</span>
-                        </a>
-                    </li>
-            </nav>  *@
-
-      
-
             <main role="main" class="main" style="margin-left:0px">
-                <!-- Add Font Awesome if not already included -->
-
                 <nav class="navbar top-menu">
                     <ul class="navbar-nav d-flex flex-row w-100">
                         <li class="nav-item active">
@@ -68,17 +71,14 @@
                             <a class="nav-link" style="font-size: 15px" asp-page="/News/ListNews">Tin tức</a>
                         </li>
                         <li class="nav-item ml-auto"></li>
-                        <li class="nav-item" >
-                            <a class="nav-link" style="font-size: 15px"  asp-page="/Login">Đăng nhập</a>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 15px" asp-page="/Login">Đăng nhập</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 15px" asp-page="/SignUp" >Đăng ký</a>
+                            <a class="nav-link" style="font-size: 15px" asp-page="/SignUp">Đăng ký</a>
                         </li>
                     </ul>
                 </nav>
-
-
-                <!-- /.top-menu -->
 
                 <div class="cast-container" style="background-image: url(../img/@Model.Movie.Poster)">
                     <div class="cast-wrap d-flex">
@@ -181,95 +181,87 @@
                                         <iframe width="660" height="415" src="@Model.GetEmbedUrl(Model.Movie.TrailerUrl)" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
                                         <img class="img-fluid" src="@Model.Movie.Poster" alt="">
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="comments" style="margin-top: 5%">
-                    <h2>Comments</h2>
-                    <div class="comment-box">
-                        <input type="text" placeholder="Leave a Comment">
+                    <div class="comments" style="margin-top: 5%">
+                        <h2>Bình luận</h2>
+                        @if (Model.CanComment)
+                        {
+                            <div class="comment-box">
+                                <form method="post">
+                                    <div class="rating">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <input type="radio" id="star-@i" name="Rate" value="@i" />
+                                            <label for="star-@i" title="Rate @i stars">★</label>
+                                        }
+                                    </div>
+                                    <input type="text" name="CommentText" placeholder="Leave a Comment" required />
+                                    <button type="submit">Submit</button>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            <p style="color: red;">You must have purchased a ticket to comment on this movie.</p>
+                        }
+
+                        <div class="users">
+                            @foreach (var feedback in Model.Feedbacks)
+                            {
+                                <div class="user">
+                                    <div class="user-com" style="padding-bottom: 0.5rem">
+                                        <div class="info" style="gap: 14rem">
+                                            <div class="name">
+                                                <h4 style="padding-bottom: 0px">@feedback.User?.Username</h4>
+                                                <div class="rating">
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (i <= (int)(feedback.Rate ?? 0))
+                                                        {
+                                                            <span style="color: gold;">★</span> <!-- Ngôi sao được đánh giá -->
+                                                        }
+                                                        else
+                                                        {
+                                                            <span style="color: lightgray;">★</span> <!-- Ngôi sao chưa được đánh giá -->
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="date">
+                                                <p style="padding-bottom: 0px">@feedback.CreateAt?.ToString("dd/MM/yyyy") <span>@feedback.CreateAt?.ToString("hh:mm tt")</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="comment">
+                                            <p>@feedback.Comments</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
                     </div>
 
-                    <div class="users">
-                        <div class="user">
-                            <div class="profile">
-                                <img src="../img/profile/nina.svg" alt="">
-                            </div>
-                            <div class="user-com">
-                                <div class="info">
-                                    <div class="name">
-                                        <h4>Nia Rene</h4>
-                                    </div>
-                                    <div class="date">
-                                        <p>25/01/2023 <span>11:36 PM</span></p>
-                                    </div>
-                                </div>
-                                <div class="comment">
-                                    <p>
-                                        One of the greatest shows ever, the pacing is excellent. The characters are well developed and entertaining.
-                                    </p>
-                                </div>
-                            </div>
+
+                    <footer class="footer">
+                        <div>
+                            <h4>Movies</h4>
+                            <h4>Animated Movies</h4>
                         </div>
-                        <div class="user">
-                            <div class="profile">
-                                <img src="../img/profile/dannie.svg" alt="">
-                            </div>
-                            <div class="user-com">
-                                <div class="info">
-                                    <div class="name">
-                                        <h4>Dannie Giles</h4>
-                                    </div>
-                                    <div class="date">
-                                        <p>23/01/2023 <span>04:28 PM</span></p>
-                                    </div>
-                                </div>
-                                <div class="comment">
-                                    <p>
-                                        I cannot stress enough how good this show is. I've watched a lot of TV in my life and this show still remains the best show I've ever seen.
-                                    </p>
-                                </div>
-                            </div>
+                        <div>
+                            <h4>Privacy Policy</h4>
+                            <h4>Terms of Use</h4>
                         </div>
-                        <div class="user">
-                            <div class="profile">
-                                <img src="../img/profile/ronnie.svg" alt="">
-                            </div>
-                            <div class="user-com">
-                                <div class="info">
-                                    <div class="name">
-                                        <h4>Ronnie Joss</h4>
-                                    </div>
-                                    <div class="date">
-                                        <p>20/01/2023 <span>09:18 AM</span></p>
-                                    </div>
-                                </div>
-                                <div class="comment">
-                                    <p class="warning">Warning: Spoiler</p>
-                                </div>
-                            </div>
+                        <div>
+                            <h4>Help Center</h4>
+                            <h4>FAQ</h4>
                         </div>
-                    </div>
-                </div>
-                <footer class="footer">
-                    <div>
-                        <h4>Movies</h4>
-                        <h4>Animated Movies</h4>
-                    </div>
-                    <div>
-                        <h4>Privacy Policy</h4>
-                        <h4>Terms of Use</h4>
-                    </div>
-                    <div>
-                        <h4>Help Center</h4>
-                        <h4>FAQ</h4>
-                    </div>
-                    <div>
-                        <h4>Follow Us</h4>
-                        <h4>Support</h4>
-                    </div>
-                </footer>
+                        <div>
+                            <h4>Follow Us</h4>
+                            <h4>Support</h4>
+                        </div>
+                    </footer>
             </main>
         </div>
     </div>
