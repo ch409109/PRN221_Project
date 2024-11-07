@@ -11,7 +11,7 @@ namespace BookingTicketOnline.Pages
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToPage("/Login");
+            return RedirectToPage("/Index");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookingTicketOnline.Models
 {
@@ -14,11 +15,32 @@ namespace BookingTicketOnline.Models
 
         public int Id { get; set; }
         public int? RoleId { get; set; }
+
+        [Required(ErrorMessage = "Tên đăng nhập không được để trống")]
+        [StringLength(50, ErrorMessage = "Tên đăng nhập không được vượt quá 50 ký tự")]
+        [MinLength(4, ErrorMessage = "Tên đăng nhập phải có tối thiểu 6 ký tự")]
         public string Username { get; set; } = null!;
+
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự", MinimumLength = 6)]
         public string Password { get; set; } = null!;
+
+        [Required(ErrorMessage = "Email không được để trống")]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
         public string? Email { get; set; }
+
+        [Required(ErrorMessage = "Số điện thoại không được để trống")]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         public string? PhoneNumber { get; set; }
+
+        [Required(ErrorMessage = "Ngày sinh không được để trống")]
+        [Range(typeof(DateTime), "1920-01-01", "2020-12-31", ErrorMessage = "Ngày sinh không hợp lệ")]
+        [DataType(DataType.Date)]
         public DateTime? Dob { get; set; }
+
+        [Required(ErrorMessage = "Họ và tên không được để trống")]
+        [StringLength(100, ErrorMessage = "Họ và tên không được vượt quá 100 ký tự")]
+        [MinLength(4, ErrorMessage = "Tên đăng nhập phải có tối thiểu 4 ký tự")]
         public string? FullName { get; set; }
         public string? Status { get; set; }
 

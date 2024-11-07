@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,13 +9,11 @@ namespace BookingTicketOnline.Pages
 {
     public class SignUpModel : PageModel
     {
-        private readonly IToastNotification _toastNotification;
         private readonly PRN221_FinalProjectContext _context;
 
-        public SignUpModel(PRN221_FinalProjectContext context, IToastNotification toastNotification)
+        public SignUpModel(PRN221_FinalProjectContext context)
         {
             _context = context;
-            _toastNotification = toastNotification;
         }
 
         [BindProperty]
@@ -46,7 +44,7 @@ namespace BookingTicketOnline.Pages
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            _toastNotification.AddSuccessToastMessage("Register Sucessfull");
+            TempData["success"] = "Bạn đã tạo tài khoản thành công";
 
             return RedirectToPage("/Index");
         }

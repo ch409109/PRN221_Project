@@ -39,18 +39,22 @@
                                     <div class="form-group">
                                         <label class="form-label">Họ và tên</label>
                                         <input type="text" class="form-control" asp-for="FullName">
+                                        <span asp-validation-for="FullName" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Email</label>
                                         <input type="text" class="form-control" asp-for="Email">
+                                        <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Số điện thoại</label>
                                         <input type="text" class="form-control" asp-for="PhoneNumber">
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Ngày sinh</label>
                                         <input type="date" class="form-control" asp-for="Dob">
+                                        <span asp-validation-for="Dob" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <a href="#" onclick="toggleChangePassword()" style="display: inline-block; margin-top: 5px;">Đổi mật khẩu</a>
@@ -60,10 +64,12 @@
                                         <div class="form-group">
                                             <label class="form-label">Mật khẩu mới</label>
                                             <input type="password" asp-for="NewPassword" class="form-control" />
+                                            <span asp-validation-for="NewPassword" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Xác nhận mật khẩu mới</label>
                                             <input type="password" asp-for="ConfirmPassword" class="form-control" />
+                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>

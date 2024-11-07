@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="../css/swiper-bundle.min.css">
     <link rel="stylesheet" href="../css/styleMovieDetails.css">
     <link rel="stylesheet" href="../css/bb.css">
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <script src="~/js/profile.js"></script>
     <style>
         .modal-backdrop.show {
             z-index: 0
@@ -90,30 +92,28 @@
                         <li class="nav-item">
                             <a class="nav-link" style="font-size: 15px" asp-page="/News/ListNews">Tin tức</a>
                         </li>
+                        <li class="nav-item ml-auto"></li>
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item ml-auto">
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 15px; font-weight: bold;">
-                                        Hello, @User.Identity.Name
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                        <li><a class="dropdown-item" asp-page="/UserProfile">User Profile</a></li>
-                                        <li><a class="dropdown-item" asp-page="/BookingHistory">Booking History</a></li>
-                                        <li><a class="dropdown-item" asp-page="/Logout">Logout</a></li>
+                            <div class="profile-dropdown">
+                                <span class="user-name" onclick="toggleDropdown()" style="font-size: 25px;margin-right: 40px;padding: 20px;">
+                                    <i class="fa fa-user-circle" style="margin-right: 5px;"></i> @User.Identity.Name
+                                </span>
+                                <div id="dropdown-menu" class="dropdown-content">
+                                    <ul>
+                                        <li><a asp-page="/UserProfile">Thông tin tài khoản</a></li>
+                                        <li><a href="#">Lịch sử giao dịch</a></li>
+                                        <li><a asp-page="/Logout">Đăng xuất</a></li>
                                     </ul>
                                 </div>
-                            </li>
+                            </div>
                         }
                         else
                         {
-                            <li class="nav-item ml-auto">
-                                <a asp-page="/Login" class="nav-link" style="font-size: 15px;">Đăng nhập</a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-page="/SignUp" class="nav-link" style="font-size: 15px;">Đăng ký</a>
-                            </li>
+                            <!-- Hiển thị nút đăng nhập và đăng ký nếu chưa đăng nhập -->
+                            <a class="nav-link" asp-page="/Login">Đăng nhập</a>
+                            <a class="nav-link" asp-page="/SignUp">Đăng kí</a>
                         }
                     </ul>
                 </nav>

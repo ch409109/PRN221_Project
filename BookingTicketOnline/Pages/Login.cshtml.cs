@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookingTicketOnline.Pages
 {
@@ -34,8 +35,15 @@ namespace BookingTicketOnline.Pages
 
 
         [BindProperty]
+        [Required(ErrorMessage = "Tên đăng nhập không được để trống")]
+        [StringLength(50, ErrorMessage = "Tên đăng nhập không được vượt quá 50 ký tự")]
+        [MinLength(6, ErrorMessage = "Tên đăng nhập phải có tối thiểu 6 ký tự")]
         public string Username { get; set; }
+
+
         [BindProperty]
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự", MinimumLength = 6)]
         public string Password { get; set; }
 
         [BindProperty]
@@ -55,11 +63,29 @@ namespace BookingTicketOnline.Pages
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
 
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
+            {
+                TempData["error"] = "Tên đăng nhập và mật khẩu không được để trống.";
+                return Page();
+            }
+
             var user = _context.Users.FirstOrDefault(u => u.Username == Username);
 
-            if (user == null || !BCrypt.Net.BCrypt.Verify(Password, user.Password)) // So sánh mật khẩu đã mã hóa
+            if (user == null)
             {
-                ErrorMessage = "Invalid login attempt.";
+                TempData["error"] = "Người dùng không tồn tại.";
+                return Page();
+            }
+
+            if (user.Password == null)
+            {
+                TempData["error"] = "Người dùng chưa có mật khẩu được đặt.";
+                return Page();
+            }
+
+            if (!BCrypt.Net.BCrypt.Verify(Password, user.Password))
+            {
+                TempData["error"] = "Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.";
                 return Page();
             }
 

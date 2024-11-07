@@ -1,6 +1,7 @@
 ﻿@page
 @model BookingTicketOnline.Pages.SignUpModel
-@await Component.InvokeAsync("NToastNotify")
+<partial name="_Notification" />
+
 
 @{
     Layout = null;
@@ -16,6 +17,7 @@
     <title>Đăng ký</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Main css -->
     <link rel="stylesheet" href="css/sty1e.css">
@@ -33,32 +35,32 @@
                             <div class="form-group">
                                 <label asp-for="InputUser.FullName"><i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 20px;"></i></label>
                                 <input type="text" asp-for="InputUser.FullName" placeholder="Họ và tên" />
-                                <span asp-validation-for="InputUser.FullName" class="text-danger"></span>
+                                <span asp-validation-for="InputUser.FullName" class="text-danger" style="color: red"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="InputUser.Username"><i class="fa fa-user " aria-hidden="true" style="font-size: 20px;"></i></label>
                                 <input type="text" asp-for="InputUser.Username" placeholder="Tên đăng nhập"  />
-                                <span asp-validation-for="InputUser.Username" class="text-danger"></span>
+                                <span asp-validation-for="InputUser.Username" class="text-danger" style="color: red"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="InputUser.Password"><i class="fa fa-unlock-alt" aria-hidden="true" style="font-size: 20px;"></i></label>
                                 <input type="password" asp-for="InputUser.Password" placeholder="Mật khẩu" />
-                                <span asp-validation-for="InputUser.Password" class="text-danger"></span>
+                                <span asp-validation-for="InputUser.Password" class="text-danger" style="color: red"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="InputUser.Email"><i class="fa fa-envelope" aria-hidden="true" style="font-size: 20px;"></i></label>
                                 <input type="email" asp-for="InputUser.Email" placeholder="Email"/>
-                                <span asp-validation-for="InputUser.Email" class="text-danger"></span>
+                                <span asp-validation-for="InputUser.Email" class="text-danger" style="color: red"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="InputUser.Dob"><i class="fa fa-calendar" aria-hidden="true" style="font-size: 20px;"></i></label>
                                 <input type="date" asp-for="InputUser.Dob"  />
-                                <span asp-validation-for="InputUser.Dob" class="text-danger"></span>
+                                <span asp-validation-for="InputUser.Dob" class="text-danger" style="color: red"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="InputUser.PhoneNumber"><i class="fa fa-phone-square" aria-hidden="true" style="font-size: 20px;"></i></label>
                                 <input type="text" asp-for="InputUser.PhoneNumber" placeholder="Số điện thoại"  />
-                                <span asp-validation-for="InputUser.PhoneNumber" class="text-danger"></span>
+                                <span asp-validation-for="InputUser.PhoneNumber" class="text-danger" style="color: red"></span>
                             </div>
                             <div class="form-group form-button">
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Đăng ký" />

@@ -16,21 +16,45 @@ namespace BookingTicketOnline.Pages
             _context = context;
         }
         [BindProperty]
+        [Required(ErrorMessage = "Họ và tên không được để trống")]
+        [StringLength(100, ErrorMessage = "Họ và tên không được vượt quá 100 ký tự")]
+        [MinLength(4, ErrorMessage = "Tên đăng nhập phải có tối thiểu 4 ký tự")]
         public string? FullName { get; set; }
         public string? Username { get; set; }
+
+
         [BindProperty]
+        [Required(ErrorMessage = "Email không được để trống")]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
         public string? Email { get; set; }
+
+
         [BindProperty]
+        [Required(ErrorMessage = "Số điện thoại không được để trống")]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         public string? PhoneNumber { get; set; }
+
+
         public string? Password { get; set; }
+
+
         [BindProperty]
+        [Required(ErrorMessage = "Ngày sinh không được để trống")]
+        [Range(typeof(DateTime), "1920-01-01", "2020-12-31", ErrorMessage = "Ngày sinh không hợp lệ")]
+        [DataType(DataType.Date)]
         public DateTime? Dob { get; set; }
+
+
         public string? Role { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự", MinimumLength = 6)]
         public string? NewPassword { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự", MinimumLength = 6)]
         [Compare("NewPassword", ErrorMessage = "Mật khẩu xác nhận không khớp")]
         public string? ConfirmPassword { get; set; }
         public void OnGet()
