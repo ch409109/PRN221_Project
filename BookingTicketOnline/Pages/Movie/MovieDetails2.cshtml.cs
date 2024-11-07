@@ -102,5 +102,6 @@ namespace BookingTicketOnline.Pages.Movie
 
             return url; // Trả về nguyên URL nếu không match các pattern trên
         }
+
     }
 }

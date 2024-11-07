@@ -7,10 +7,8 @@
 @functions {
     public async Task<IActionResult> OnGet()
     {
-        // Thực hiện việc đăng xuất
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-        // Chuyển hướng về trang đăng nhập
-        return RedirectToPage("/Login");
+        return RedirectToPage("/Index");
     }
 }

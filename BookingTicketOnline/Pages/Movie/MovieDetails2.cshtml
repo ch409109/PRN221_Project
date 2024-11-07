@@ -50,6 +50,26 @@
                 .rating label:hover ~ label {
                     color: gold;
                 }
+
+        .rating {
+            position: relative;
+            display: inline-block;
+            font-size: 24px; /* điều chỉnh kích thước sao */
+            line-height: 1;
+        }
+
+        .gray-stars {
+            color: lightgray;
+        }
+
+        .stars {
+            color: gold;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -70,15 +90,34 @@
                         <li class="nav-item">
                             <a class="nav-link" style="font-size: 15px" asp-page="/News/ListNews">Tin tức</a>
                         </li>
-                        <li class="nav-item ml-auto"></li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="font-size: 15px" asp-page="/Login">Đăng nhập</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="font-size: 15px" asp-page="/SignUp">Đăng ký</a>
-                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item ml-auto">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 15px; font-weight: bold;">
+                                        Hello, @User.Identity.Name
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                        <li><a class="dropdown-item" asp-page="/UserProfile">User Profile</a></li>
+                                        <li><a class="dropdown-item" asp-page="/BookingHistory">Booking History</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Logout">Logout</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ml-auto">
+                                <a asp-page="/Login" class="nav-link" style="font-size: 15px;">Đăng nhập</a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/SignUp" class="nav-link" style="font-size: 15px;">Đăng ký</a>
+                            </li>
+                        }
                     </ul>
                 </nav>
+
 
                 <div class="cast-container" style="background-image: url(../img/@Model.Movie.Poster)">
                     <div class="cast-wrap d-flex">
@@ -192,7 +231,7 @@
                             <div class="comment-box">
                                 <form method="post">
                                     <div class="rating">
-                                        @for (int i = 1; i <= 5; i++)
+                                        @for (int i = 5; i >= 1; i--)
                                         {
                                             <input type="radio" id="star-@i" name="Rate" value="@i" />
                                             <label for="star-@i" title="Rate @i stars">★</label>
@@ -217,17 +256,12 @@
                                             <div class="name">
                                                 <h4 style="padding-bottom: 0px">@feedback.User?.Username</h4>
                                                 <div class="rating">
-                                                    @for (int i = 1; i <= 5; i++)
-                                                    {
-                                                        if (i <= (int)(feedback.Rate ?? 0))
-                                                        {
-                                                            <span style="color: gold;">★</span> <!-- Ngôi sao được đánh giá -->
-                                                        }
-                                                        else
-                                                        {
-                                                            <span style="color: lightgray;">★</span> <!-- Ngôi sao chưa được đánh giá -->
-                                                        }
-                                                    }
+                                                    <div class="stars" style="width: @(feedback.Rate * 20)%;">
+                                                        ★★★★★
+                                                    </div>
+                                                    <div class="gray-stars">
+                                                        ★★★★★
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="date">
@@ -273,6 +307,7 @@
     <script>window.jQuery || document.write('<script src="../js/jquery.min.js"><\/script>')</script>
     <script src="../js/vendor/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
