@@ -129,11 +129,11 @@ CREATE TABLE Payment (
 );
 CREATE TABLE Revenue (
     ID INT PRIMARY KEY IDENTITY(1,1),
-    PaymentID INT,
+    CinemaID INT,
     TotalRevenue INT,
     FromDate DATE,
     ToDate DATE,
-    FOREIGN KEY (PaymentID) REFERENCES Payment(ID)
+    FOREIGN KEY (CinemaID) REFERENCES Cinema(ID)
 );
 CREATE TABLE BookingSeatsDetail (
     ID INT PRIMARY KEY IDENTITY(1,1),

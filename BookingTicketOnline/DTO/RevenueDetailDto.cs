@@ -5,6 +5,8 @@
         public decimal TicketSales { get; set; }
         public decimal Concessions { get; set; }
         public decimal OtherIncome { get; set; }
+
+        public string CinemaName { get; set; } = string.Empty;
     }
 
 }

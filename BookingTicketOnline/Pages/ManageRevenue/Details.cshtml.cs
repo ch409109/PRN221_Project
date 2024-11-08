@@ -30,30 +30,16 @@ namespace BookingTicketOnline.Pages.ManagerRevenue
                 return NotFound();
             }
 
-            // Lấy thông tin doanh thu
             Revenue = await _context.Revenues
-                .Include(r => r.Payment) // Bao gồm dữ liệu Payment nếu cần
-                .FirstOrDefaultAsync(m => m.Id == id);
+            .Include(r => r.Cinema)
+            .FirstOrDefaultAsync(m => m.Id == id);
 
             if (Revenue == null)
             {
                 return NotFound();
             }
 
-            // Tính toán TicketSales từ TotalPrice của mô hình Booking
-            RevenueDetails.TicketSales = await _context.Bookings
-                .Where(b => b.Id == Revenue.Payment.BookingId) // Ví dụ về điều kiện lọc
-                .SumAsync(b => (decimal?)b.TotalPrice) ?? 0; // Cung cấp giá trị mặc định là 0 nếu null
-
-            // Tính toán Concessions từ DiscountValue của Payment
-            RevenueDetails.Concessions = await _context.Payments
-                .Where(p => p.DiscountId == p.Discount.Id) // Ví dụ về điều kiện lọc
-                .SumAsync(p => (decimal?)p.Discount.DiscountValue) ?? 0; // Cung cấp giá trị mặc định là 0 nếu null
-                                                                         // Tính toán OtherIncome từ TotalPrice của BookingItem
-            RevenueDetails.OtherIncome = await _context.BookingItems
-                .Where(bi => bi.BookingId == bi.Booking.Id)
-                .SumAsync(bi => (decimal?)bi.Price) ?? 0; // Cung cấp giá trị mặc định là 0 nếu null
-
+            RevenueDetails.CinemaName = Revenue.Cinema?.Name ?? "Unknown Cinema";
 
             return Page();
 

@@ -61,9 +61,11 @@ INSERT INTO Payment (BookingID, Amount, DiscountID) VALUES
 (1, 100000, 1),
 (2, 350000, 2);
 
-INSERT INTO Revenue (PaymentID, TotalRevenue, FromDate, ToDate) VALUES
-(1, 1000000, '2024-10-01', '2024-10-10'),
-(2, 20000000, '2024-10-11', '2024-10-20');
+INSERT INTO Revenue (CinemaID, TotalRevenue, Quarters, Years) VALUES
+(1, 11000000, 4, 2024),
+(1, 23000000, 4, 2024),
+(2, 11000000, 4, 2024),
+(2, 77000000, 4, 2024);
 
 INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
 ('Tacos', 30000, 100, 'tacos.jpg', 'Active'),
