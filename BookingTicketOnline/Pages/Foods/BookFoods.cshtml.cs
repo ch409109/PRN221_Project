@@ -66,12 +66,6 @@ namespace BookingTicketOnline.Pages.Foods
             HttpContext.Session.SetString("FoodTotalAmount",
                 JsonSerializer.Serialize(totalAmount));
 
-            //var userIdClaim = User.FindFirst("UserId")?.Value;
-            //if (userIdClaim == null)
-            //{
-            //    return RedirectToPage("/Login", new { ReturnUrl = "/CheckOut" });
-            //}
-
             if (!User.Identity.IsAuthenticated)
             {
                 // Redirect to the login page with a ReturnUrl to /CheckOut
@@ -87,6 +81,8 @@ namespace BookingTicketOnline.Pages.Foods
                     Quantity = q.Value
                 })
                 .ToList();
+
+            HttpContext.Session.SetString("SelectedItems", JsonSerializer.Serialize(selectedItems));
 
             if (selectedItems.Any())
             {

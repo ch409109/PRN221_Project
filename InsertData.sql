@@ -1,5 +1,6 @@
 ﻿USE PRN221_FinalProject
 
+/*MovieCategory*/
 INSERT INTO MovieCategory (Name) VALUES 
 ('Action'),
 ('Horror'),
@@ -7,34 +8,39 @@ INSERT INTO MovieCategory (Name) VALUES
 ('Animation'),
 ('Science Fiction'),
 ('Comedy');
-
-INSERT INTO Movies (Title, Description, CategoryID, ReleaseDate, TrailerURL, Actor, Director, Poster, Status) VALUES
-('Spider-Man: No Way Home', 'Peter Parker deals with his exposed identity', 1, '2021-12-17', 'https://www.youtube.com/watch?v=JfVOs4VSpmA', 'Tom Holland, Zendaya', 'Jon Watts', 'spiderman.jpg', 'Active'),
-('Frozen 2', 'The adventure of Elsa and Anna in the enchanted forest', 4, '2019-11-22', 'https://www.youtube.com/watch?v=Zi4LMpSDccc', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'frozen2.jpg', 'Active'),
-('Inception', 'A thief who steals corporate secrets through dream-sharing technology', 5, '2010-07-16', 'https://www.youtube.com/watch?v=YoHD9XEInc0', 'Leonardo DiCaprio, Ellen Page', 'Christopher Nolan', 'inception.jpg', 'Active'),
-('The Conjuring', 'Paranormal investigators help a family terrorized by a dark presence', 2, '2013-07-19', 'https://www.youtube.com/watch?v=k10ETZ41q5o', 'Vera Farmiga, Patrick Wilson', 'James Wan', 'conjuring.jpg', 'Active'),
-('La La Land', 'A jazz musician and an aspiring actress fall in love', 3, '2016-12-09', 'https://www.youtube.com/watch?v=0pdqf4P9MB8', 'Ryan Gosling, Emma Stone', 'Damien Chazelle', 'lalaland.jpg', 'Active'),
-('The Hangover', 'A bachelor party in Las Vegas goes hilariously wrong', 6, '2009-06-05', 'https://www.youtube.com/watch?v=tlize92ffnY', 'Bradley Cooper, Ed Helms', 'Todd Phillips', 'hangover.jpg', 'Active');
-
-INSERT INTO Cinema (Location, City, Name, Status) VALUES 
-(N'Tầng 3 & 4 – TTTM AEON MALL HÀ ĐÔNG, P. Dương Nội, Q. Hà Đông', N'Hà Nội', N'CGV Aeon Hà Đông', 'Active'),
-(N'Tầng 4, Trung Tâm Thương Mại Vincom Ocean Park, Huyện Gia Lâm', N'Hà Nội', N'CGV Vincom Ocean Park', 'Inactive');
-
-INSERT INTO [dbo].[Room] ([Name],[CinemaID],[NumberOfRows])
-     VALUES ('Starium',1,9),
-			('Aquarius',1,9)
-
-INSERT INTO [dbo].[Rows] ([RowName],[RoomID],[NumberOfColumns],[Type])
-     VALUES
-           ('A',1,14,'Regular'),('B',1,15,'Regular'),('C',1,15,'Regular'),
-		   ('D',1,15,'VIP'),('E',1,15,'VIP'),('F',1,15,'VIP'),
-		   ('G',1,15,'VIP'),('H',1,15,'VIP'),('J',1,15,'VIP')
-
-
-		   /*Manage Users*/
+/*Role*/
 INSERT INTO Role (RoleName) VALUES 
 ('Admin'),('Customer'),('Movie Theater Owner'),('Staff');
 
+/*Movies*/
+INSERT INTO Movies (Title, Description, CategoryID, ReleaseDate, Duration, TrailerURL, Actor, Director, Poster, Status) VALUES
+('Spider-Man: No Way Home', 'Peter Parker deals with his exposed identity', 1, '2021-12-17', '02:28:00', 'https://www.youtube.com/watch?v=JfVOs4VSpmA', 'Tom Holland, Zendaya', 'Jon Watts', 'spiderman.jpg', 'Active'),
+('Frozen 2', 'The adventure of Elsa and Anna in the enchanted forest', 4, '2019-11-22', '01:43:00',  'https://www.youtube.com/watch?v=Zi4LMpSDccc', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'frozen2.jpg', 'Active'),
+('Inception', 'A thief who steals corporate secrets through dream-sharing technology', 5, '2010-07-16', '02:28:00', 'https://www.youtube.com/watch?v=YoHD9XEInc0', 'Leonardo DiCaprio, Ellen Page', 'Christopher Nolan', 'inception.jpg', 'Active'),
+('The Conjuring', 'Paranormal investigators help a family terrorized by a dark presence', 2, '2013-07-19', '01:52:00', 'https://www.youtube.com/watch?v=k10ETZ41q5o', 'Vera Farmiga, Patrick Wilson', 'James Wan', 'conjuring.jpg', 'Active'),
+('La La Land', 'A jazz musician and an aspiring actress fall in love', 3, '2016-12-09', '02:08:00', 'https://www.youtube.com/watch?v=0pdqf4P9MB8', 'Ryan Gosling, Emma Stone', 'Damien Chazelle', 'lalaland.jpg', 'Active'),
+('The Hangover', 'A bachelor party in Las Vegas goes hilariously wrong', 6, '2009-06-05', '01:40:00', 'https://www.youtube.com/watch?v=tlize92ffnY', 'Bradley Cooper, Ed Helms', 'Todd Phillips', 'hangover.jpg', 'Active'),
+('Interstellar', 'A team of explorers travel through a wormhole in space.', 5, '2014-11-07', '02:49:00', 'https://www.youtube.com/watch?v=zSWdZVtXT7E', 'Matthew McConaughey, Anne Hathaway', 'Christopher Nolan', 'interstellar_poster.jpg', 'Poster'),
+('The Dark Knight', 'Batman raises the stakes in his war on crime.', 1, '2008-07-18', '02:32:00', 'https://www.youtube.com/watch?v=EXeTwQWrcwY', 'Christian Bale, Heath Ledger', 'Christopher Nolan', 'dark_knight_poster.jpg', 'Poster'),
+('Titanic', 'A love story aboard the ill-fated RMS Titanic.', 3, '1997-12-19', '03:14:00', 'https://www.youtube.com/watch?v=2e-eXJ6HgkQ', 'Leonardo DiCaprio, Kate Winslet', 'James Cameron', 'titanic_poster.jpg', 'Poster'),
+('Avatar 3', 'The continued adventures on Pandora.', 5, '2025-12-19', '02:56:00', 'https://www.youtube.com/watch?v=YXtWPVFk5TQ', 'Sam Worthington, Zoe Saldana', 'James Cameron', 'avatar3_poster.jpg', 'Poster'),
+('Frozen 3', 'Elsa and Anna face a new journey.', 4, '2027-07-21', '01:45:00', 'https://www.youtube.com/watch?v=xJgAypHXCZo', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'frozen3_poster.jpg', 'Poster'),
+('Interstellar', 'A team of explorers travel through a wormhole in space.', 5, '2014-11-07', '02:49:00', 'https://www.youtube.com/watch?v=zSWdZVtXT7E', 'Matthew McConaughey, Anne Hathaway', 'Christopher Nolan', 'interstellar.jpg', 'Active'),
+('The Dark Knight', 'Batman raises the stakes in his war on crime.', 1, '2008-07-18', '02:32:00', 'https://www.youtube.com/watch?v=EXeTwQWrcwY', 'Christian Bale, Heath Ledger', 'Christopher Nolan', 'dark_knight.jpg', 'Active'),
+('Toy Story 3', 'Woody and the gang face uncertain future.', 4, '2010-06-18', '01:43:00', 'https://www.youtube.com/watch?v=JcpWXaA2qeg', 'Tom Hanks, Tim Allen', 'Lee Unkrich', 'toy_story3.jpg', 'Active'),
+('Titanic', 'A love story aboard the ill-fated RMS Titanic.', 3, '1997-12-19', '03:14:00', 'https://www.youtube.com/watch?v=2e-eXJ6HgkQ', 'Leonardo DiCaprio, Kate Winslet', 'James Cameron', 'titanic.jpg', 'Active'),
+('The Matrix', 'A hacker discovers a shocking truth about reality.', 5, '1999-03-31', '02:16:00', 'https://www.youtube.com/watch?v=m8e-FF8MsqU', 'Keanu Reeves, Laurence Fishburne', 'The Wachowskis', 'matrix.jpg', 'Active'),
+('Forrest Gump', 'The life journey of a simple man with a big heart.', 3, '1994-07-06', '02:22:00', 'https://www.youtube.com/watch?v=bLvqoHBptjg', 'Tom Hanks, Robin Wright', 'Robert Zemeckis', 'forrest_gump.jpg', 'Active'),
+('Avatar 3', 'The continued adventures on Pandora.', 5, '2025-12-19', '02:56:00', 'https://www.youtube.com/watch?v=YXtWPVFk5TQ', 'Sam Worthington, Zoe Saldana', 'James Cameron', 'avatar3.jpg', 'Active'),
+('Toy Story 5', 'Woody and friends face new adventures.', 4, '2026-06-15', '01:30:00', 'https://www.youtube.com/watch?v=F8N0-ViM254', 'Tom Hanks, Tim Allen', 'Pixar Studios', 'toy_story5.jpg', 'Active'),
+('Justice League: Reborn', 'The heroes regroup for a new threat.', 1, '2026-11-10', '02:00:00', 'https://www.youtube.com/watch?v=sztA63kSY5o', 'Gal Gadot, Ben Affleck', 'Zack Snyder', 'justice_league_reborn.jpg', 'Active'),
+('Frozen 3', 'Elsa and Anna face a new journey.', 4, '2027-07-21', '01:45:00', 'https://www.youtube.com/watch?v=xJgAypHXCZo', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'frozen3.jpg', 'Active'),
+('Inception 2', 'A new mind-bending heist.', 5, '2028-05-18', '02:28:00', 'https://www.youtube.com/watch?v=JOmD4JJ98_8', 'Joseph Gordon-Levitt, Leonardo DiCaprio', 'Christopher Nolan', 'inception2.jpg', 'Active'),
+('Spider-Man: No Way Home', 'Peter Parker deals with his exposure as Spider-Man.', 1, '2021-12-17', '02:28:00', 'https://www.youtube.com/watch?v=JfVOs4VSpmA', 'Tom Holland, Zendaya', 'Jon Watts', 'SpidermanNoWayHome_Poster.png', 'Poster'),
+('Frozen 2', 'The adventure of Elsa and Anna.', 4, '2019-11-22', '01:43:00', 'https://www.youtube.com/watch?v=Zi4LMpSDccc', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'Frozen2_Poster.jpg', 'Poster'),
+('The Conjuring', 'Paranormal investigators help a family terrorized by a dark presence.', 2, '2025-07-19', '01:52:00', 'https://www.youtube.com/watch?v=k10ETZ41q5o', 'Vera Farmiga, Patrick Wilson', 'James Wan', 'TheConjuring_Poster.webp', 'Poster');
+
+/*[User]*/
 INSERT INTO [User] (RoleID, Username, Password, Email, PhoneNumber, Dob, FullName, Status) VALUES 
 (1, 'admin', '$2a$10$737LB5CDYczpbBp4Es/BRuxmTxzhU7ith0lHbWyd748eOKfIUzhEW', 'admin@example.com', '0123456789', '1990-01-01', 'Administrator', 'Active'),
 (2, 'TungNVHE170677', '$2a$10$737LB5CDYczpbBp4Es/BRuxmTxzhU7ith0lHbWyd748eOKfIUzhEW', 'TungNVHE170677@fpt.edu.vn', '0987654321', '1995-05-20', N'Nguyễn Việt Tùng', 'Active'),
@@ -42,47 +48,40 @@ INSERT INTO [User] (RoleID, Username, Password, Email, PhoneNumber, Dob, FullNam
 (4, 'CongHTHE172673', '$2a$10$737LB5CDYczpbBp4Es/BRuxmTxzhU7ith0lHbWyd748eOKfIUzhEW', 'CongHTHE172673@fpt.edu.vn', '0123456789', '1992-03-15', N'Hoàng Thành Công', 'Inactive'),
 (2, 'NhatLVHE176909', '$2a$10$737LB5CDYczpbBp4Es/BRuxmTxzhU7ith0lHbWyd748eOKfIUzhEW', 'NhatLVHE176909@fpt.edu.vn', '0987654321', '1995-05-20', N'Lê Việt Nhật', 'Inactive');
 
+/*Feedback*/
 INSERT INTO Feedback (UserID, MovieID, Comments, CreateAt, Rate) VALUES
 (2, 1, 'Amazing movie with stunning visuals!', '2024-10-11 10:00:00', 4.5),
 (2, 3, 'Great love story, very touching.', '2024-10-11 11:00:00', 4);
 
+/*News*/
 INSERT INTO News (Title, Content, Image, CreateAt, UpdateAt, CreateBy) VALUES
 ('New Release: Inception', 'Inception is now available in cinemas!', 'https://example.com/news/inception.jpg', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1);
 
+/*Discount*/
 INSERT INTO Discount (Code, DiscountValue, StartDate, EndDate) VALUES
 ('DISCOUNT10', 10, '2024-10-01', '2024-10-31'),
 ('HALFOFF', 50, '2024-11-01', '2024-11-30');
 
-INSERT INTO Booking (BookingDate, CinemaID, MovieID, UserID, Status, TotalPrice, TicketCode) VALUES
-('2024-10-10 19:00:00', 1, 1, 2, 'Unused', 100000, 'HE172673'),
-('2024-10-11 20:00:00', 2, 3, 2, 'Confirmed', 2000000, 'HS999999');
+/*Cinema*/
+INSERT INTO Cinema (Location, City, Name, Status) VALUES 
+(N'Tầng 3 & 4 – TTTM AEON MALL HÀ ĐÔNG, P. Dương Nội, Q. Hà Đông', N'Hà Nội', N'CGV Aeon Hà Đông', 'Active'),
+(N'Tầng 4, Trung Tâm Thương Mại Vincom Ocean Park, Huyện Gia Lâm', N'Hà Nội', N'CGV Vincom Ocean Park', 'Inactive');
 
-INSERT INTO Payment (BookingID, Amount, DiscountID) VALUES
-(1, 100000, 1),
-(2, 350000, 2);
+/*Room*/
+INSERT INTO [dbo].[Room] ([Name],[CinemaID],[NumberOfRows]) VALUES
+    ('Starium', 1, 9),         -- Phòng chiếu "Starium" thuộc rạp "CGV Aeon Hà Đông"
+    ('Aquarius', 1, 9),        -- Phòng chiếu "Aquarius" thuộc rạp "CGV Aeon Hà Đông"
+    ('Orion', 2, 8),           -- Phòng chiếu "Orion" thuộc rạp "CGV Vincom Ocean Park"
+    ('Hercules', 2, 8);        -- Phòng chiếu "Hercules" thuộc rạp "CGV Vincom Ocean Park"
 
-INSERT INTO Revenue (CinemaID, TotalRevenue, Quarters, Years) VALUES
-(1, 11000000, 4, 2024),
-(1, 23000000, 4, 2024),
-(2, 11000000, 4, 2024),
-(2, 77000000, 4, 2024);
+/*Rows*/
+INSERT INTO [dbo].[Rows] ([RowName],[RoomID],[NumberOfColumns],[Type])
+     VALUES
+           ('A',1,14,'Regular'),('B',1,15,'Regular'),('C',1,15,'Regular'),
+		   ('D',1,15,'VIP'),('E',1,15,'VIP'),('F',1,15,'VIP'),
+		   ('G',1,15,'VIP'),('H',1,15,'VIP'),('J',1,15,'VIP')
 
-INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
-('Tacos', 30000, 100, 'tacos.jpg', 'Active'),
-('Coca Cola', 13000, 200, 'coke.jpg', 'Active'),
-('Popcorn', 15000, 150, 'popcorn.jpg', 'Active'),
-('French Fries', 25000, 80, 'fries.jpg', 'Active'),
-('Cheese Nachos', 50000, 70, 'nachos.jpg', 'Active'),
-('Classic Hotdog', 30000, 90, 'hotdog.jpg', 'Active');
-
-INSERT INTO BookingItem (FoodAndDrinksID, Quantity, Price, BookingID) VALUES
-(1, 1, 30000, 1),
-(2, 2, 26000, 2);
-
-INSERT INTO Showtime (MovieID, CinemaID, RoomID, Showtime, [Date]) VALUES
-(1, 1, 1, '2024-10-10 19:00:00', '2024-10-10'),
-(3, 2, 2, '2024-10-11 20:00:00', '2024-10-11');
-
+/*Seat*/
 -- Insert seats for Row A (ID = 1)
 INSERT INTO Seat (SeatName, RowID, Status)
 VALUES
@@ -155,37 +154,159 @@ VALUES
 ('H10', 8, 'Available'), ('H11', 8, 'Available'), ('H12', 8, 'Available'),
 ('H13', 8, 'Available'), ('H14', 8, 'Available'), ('H15', 8, 'Available');
 
-INSERT INTO BookingSeatsDetail (SeatID, Price, BookingID) VALUES
-(1, 100000, 1),
-(2, 1500000, 1),
-(3, 1200000, 2),
-(4, 70000, 2);
+
+/*Revenue*/
+INSERT INTO Revenue (CinemaID, [Quarter], [Year], TotalRevenue) VALUES
+(1, 3, 2024, 1000000),
+(2, 3, 2024, 2000000);
+
+/*FoodAndDrinks*/
+INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
+('Tacos', 30000, 100, 'tacos.jpg', 'Active'),
+('Coca Cola', 13000, 200, 'coke.jpg', 'Active'),
+('Popcorn', 15000, 150, 'popcorn.jpg', 'Active'),
+('French Fries', 25000, 80, 'fries.jpg', 'Active'),
+('Cheese Nachos', 50000, 70, 'nachos.jpg', 'Active'),
+('Classic Hotdog', 30000, 90, 'hotdog.jpg', 'Active');
+
+
+/*Showtime*/
+-- RoomID 1 là "Starium" tại CGV Aeon Hà Đông và RoomID 2 là "Aquarius" cũng tại CGV Aeon Hà Đông
+
+-- Showtime cho phim Spider-Man: No Way Home (Duration 2:28)
+INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES
+(1, 1, '10:00:00', '12:28:00', '2024-11-08'),
+(1, 1, '13:00:00', '15:28:00', '2024-11-08'),
+(1, 1, '16:00:00', '18:28:00', '2024-11-08'),
+(1, 1, '19:00:00', '21:28:00', '2024-11-08'),
+(1, 1, '22:00:00', '00:28:00', '2024-11-08');
+
+-- Showtime cho phim Frozen 2 (Duration 1:43)
+INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES
+(2, 2, '10:00:00', '11:43:00', '2024-11-08'),
+(2, 2, '12:00:00', '13:43:00', '2024-11-08'),
+(2, 2, '14:00:00', '15:43:00', '2024-11-08'),
+(2, 2, '16:00:00', '17:43:00', '2024-11-08'),
+(2, 2, '18:00:00', '19:43:00', '2024-11-08');
+
+-- RoomID 3 là "Orion" tại CGV Vincom Ocean Park và RoomID 4 là "Hercules" tại CGV Vincom Ocean Park
+
+-- Showtime cho phim Inception (Duration 2:28)
+INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES
+(3, 3, '10:00:00', '12:28:00', '2024-11-08'),
+(3, 3, '13:00:00', '15:28:00', '2024-11-08'),
+(3, 3, '16:00:00', '18:28:00', '2024-11-08'),
+(3, 3, '19:00:00', '21:28:00', '2024-11-08'),
+(3, 3, '22:00:00', '00:28:00', '2024-11-08');
+
+-- Showtime cho phim The Conjuring (Duration 1:52)
+INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES
+(4, 4, '10:00:00', '11:52:00', '2024-11-08'),
+(4, 4, '12:15:00', '14:07:00', '2024-11-08'),
+(4, 4, '14:30:00', '16:22:00', '2024-11-08'),
+(4, 4, '16:45:00', '18:37:00', '2024-11-08'),
+(4, 4, '19:00:00', '20:52:00', '2024-11-08');
+
+/* Suất chiếu ngày 2024-11-10 */
+INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES 
+(1, 1, '09:00:00', '11:28:00', '2024-11-10'),
+(2, 1, '12:00:00', '13:43:00', '2024-11-10'),
+(3, 1, '14:30:00', '16:58:00', '2024-11-10'),
+(4, 1, '17:30:00', '19:22:00', '2024-11-10'),
+(5, 1, '20:00:00', '22:08:00', '2024-11-10'),
+
+(1, 2, '10:00:00', '12:28:00', '2024-11-10'),
+(3, 2, '13:00:00', '15:28:00', '2024-11-10'),
+(5, 2, '16:00:00', '18:08:00', '2024-11-10'),
+(6, 2, '18:30:00', '20:10:00', '2024-11-10'),
+(2, 2, '20:30:00', '22:13:00', '2024-11-10');
+
+/* Suất chiếu ngày 2024-11-11 */
+INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES 
+(2, 1, '09:00:00', '10:43:00', '2024-11-11'),
+(4, 1, '11:00:00', '12:52:00', '2024-11-11'),
+(5, 1, '13:30:00', '15:38:00', '2024-11-11'),
+(1, 1, '16:00:00', '18:28:00', '2024-11-11'),
+(3, 1, '19:00:00', '21:28:00', '2024-11-11'),
+
+(6, 2, '10:00:00', '11:40:00', '2024-11-11'),
+(1, 2, '12:00:00', '14:28:00', '2024-11-11'),
+(3, 2, '15:00:00', '17:28:00', '2024-11-11'),
+(4, 2, '17:45:00', '19:37:00', '2024-11-11'),
+(2, 2, '20:00:00', '21:43:00', '2024-11-11');
+
+/* Suất chiếu ngày 2024-11-12 */
+INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES 
+(3, 1, '09:00:00', '11:28:00', '2024-11-12'),
+(5, 1, '12:00:00', '14:08:00', '2024-11-12'),
+(1, 1, '15:00:00', '17:28:00', '2024-11-12'),
+(4, 1, '17:45:00', '19:37:00', '2024-11-12'),
+(2, 1, '20:00:00', '21:43:00', '2024-11-12'),
+
+(5, 2, '09:30:00', '11:38:00', '2024-11-12'),
+(6, 2, '12:00:00', '13:40:00', '2024-11-12'),
+(3, 2, '14:00:00', '16:28:00', '2024-11-12'),
+(2, 2, '17:00:00', '18:43:00', '2024-11-12'),
+(1, 2, '19:00:00', '21:28:00', '2024-11-12');
+
+
+/*Booking*/
+-- TungNVHE170677 (UserID = 2)
+INSERT INTO Booking (UserID, ShowtimeID, BookingDate, Status, TotalPrice, TicketCode) VALUES
+(2, 1, '2024-11-05 09:00:00', 'Confirmed', 120000, 'TK001TUNG'), -- Xác nhận và sử dụng
+(2, 2, '2024-11-06 13:00:00', 'Unused', 100000, 'TK002TUNG'),   -- Đặt nhưng chưa sử dụng
+(2, 3, '2024-11-07 10:00:00', 'Expired', 150000, 'TK003TUNG'),  -- Vé đã hết hạn
+(2, 4, '2024-11-08 17:30:00', 'Canceled', 200000, 'TK004TUNG'), -- Vé đã bị hủy
+(2, 5, '2024-11-09 20:30:00', 'Confirmed', 180000, 'TK005TUNG'); -- Xác nhận và sử dụng
+
+-- NhatLVHE176909 (UserID = 5)
+INSERT INTO Booking (UserID, ShowtimeID, BookingDate, Status, TotalPrice, TicketCode) VALUES
+(5, 1, '2024-11-05 09:00:00', 'Confirmed', 120000, 'TK001NHAT'), -- Xác nhận và sử dụng
+(5, 2, '2024-11-06 13:00:00', 'Unused', 100000, 'TK002NHAT'),   -- Đặt nhưng chưa sử dụng
+(5, 3, '2024-11-07 10:00:00', 'Expired', 150000, 'TK003NHAT'),  -- Vé đã hết hạn
+(5, 4, '2024-11-08 17:30:00', 'Canceled', 200000, 'TK004NHAT'), -- Vé đã bị hủy
+(5, 5, '2024-11-09 20:30:00', 'Confirmed', 180000, 'TK005NHAT'); -- Xác nhận và sử dụng
+
+
+/*Payment*/
+INSERT INTO Payment (BookingID, Amount, DiscountID) VALUES
+(1, 120000, 1),  -- Thanh toán cho BookingID 1 với giảm giá 10%
+(2, 100000, NULL),  -- Thanh toán cho BookingID 2 không có giảm giá
+(3, 150000, 2),  -- Thanh toán cho BookingID 3 với giảm giá 5%
+(4, 200000, NULL),  -- Thanh toán cho BookingID 4 không có giảm giá
+(5, 180000, 3);  -- Thanh toán cho BookingID 5 với giảm giá 15%
+
+/*BookingSeatDetails*/
+INSERT INTO BookingSeatsDetail (SeatID, Price, BookingID)
+VALUES
+(1, 120000, 1),  -- A1 (Regular)
+(2, 120000, 1),  -- A2 (Regular)
+(16, 125000, 1), -- D1 (VIP)
+
+-- Chèn dữ liệu cho BookingID 2 (ghế B1, B2, E1)
+(17, 120000, 2),  -- B1 (Regular)
+(18, 120000, 2),  -- B2 (Regular)
+(31, 125000, 2);  -- E1 (VIP)
+
+/*BookingItem*/
+-- Chèn dữ liệu cho BookingID 1 (2 phần Tacos và 3 phần Popcorn)
+INSERT INTO BookingItem (FoodAndDrinksID, Quantity, Price, BookingID)
+VALUES
+(1, 2, 30000, 1),  -- Tacos (2 phần)
+(3, 3, 15000, 1);  -- Popcorn (3 phần)
+
+-- Chèn dữ liệu cho BookingID 2 (1 phần Coca Cola và 2 phần French Fries)
+INSERT INTO BookingItem (FoodAndDrinksID, Quantity, Price, BookingID)
+VALUES
+(2, 1, 13000, 2),  -- Coca Cola (1 phần)
+(4, 2, 25000, 2);  -- French Fries (2 phần)
+
+
+
+
+
+
 
 /*Insert Movies*/
-INSERT INTO Movies ( Title, Description, CategoryID, ReleaseDate, TrailerURL, Actor, Director, Poster, Status)
-VALUES
-( 'Interstellar', 'A team of explorers travel through a wormhole in space.', 5, '2014-11-07', 'https://www.youtube.com/watch?v=zSWdZVtXT7E', 'Matthew McConaughey, Anne Hathaway', 'Christopher Nolan', 'interstellar_poster.jpg', 'Poster'),
-( 'The Dark Knight', 'Batman raises the stakes in his war on crime.', 1, '2008-07-18', 'https://www.youtube.com/watch?v=EXeTwQWrcwY', 'Christian Bale, Heath Ledger', 'Christopher Nolan', 'dark_knight_poster.jpg', 'Poster'),
-( 'Titanic', 'A love story aboard the ill-fated RMS Titanic.', 3, '1997-12-19', 'https://www.youtube.com/watch?v=2e-eXJ6HgkQ', 'Leonardo DiCaprio, Kate Winslet', 'James Cameron', 'titanic_poster.jpg', 'Poster'),
-('Avatar 3', 'The continued adventures on Pandora.', 5, '2025-12-19', 'https://www.youtube.com/watch?v=YXtWPVFk5TQ', 'Sam Worthington, Zoe Saldana', 'James Cameron', 'avatar3_poster.jpg', 'Poster'),
-('Frozen 3', 'Elsa and Anna face a new journey.', 4, '2027-07-21', 'https://www.youtube.com/watch?v=xJgAypHXCZo', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'frozen3_poster.jpg', 'Poster'),
-( 'Interstellar', 'A team of explorers travel through a wormhole in space.', 5, '2014-11-07', 'https://www.youtube.com/watch?v=zSWdZVtXT7E', 'Matthew McConaughey, Anne Hathaway', 'Christopher Nolan', 'interstellar.jpg', 'Active'),
-    ( 'The Dark Knight', 'Batman raises the stakes in his war on crime.', 1, '2008-07-18', 'https://www.youtube.com/watch?v=EXeTwQWrcwY', 'Christian Bale, Heath Ledger', 'Christopher Nolan', 'dark_knight.jpg', 'Active'),
-    ( 'Toy Story 3', 'Woody and the gang face uncertain future.', 4, '2010-06-18', 'https://www.youtube.com/watch?v=JcpWXaA2qeg', 'Tom Hanks, Tim Allen', 'Lee Unkrich', 'toy_story3.jpg', 'Active'),
-    ( 'Titanic', 'A love story aboard the ill-fated RMS Titanic.', 3, '1997-12-19', 'https://www.youtube.com/watch?v=2e-eXJ6HgkQ', 'Leonardo DiCaprio, Kate Winslet', 'James Cameron', 'titanic.jpg', 'Active'),
-    ( 'The Matrix', 'A hacker discovers a shocking truth about reality.', 5, '1999-03-31', 'https://www.youtube.com/watch?v=m8e-FF8MsqU', 'Keanu Reeves, Laurence Fishburne', 'The Wachowskis', 'matrix.jpg', 'Active'),
-	('Forrest Gump', 'The life journey of a simple man with a big heart.', 3, '1994-07-06', 'https://www.youtube.com/watch?v=bLvqoHBptjg', 'Tom Hanks, Robin Wright', 'Robert Zemeckis', 'forrest_gump.jpg', 'Active'),
-	('Avatar 3', 'The continued adventures on Pandora.', 5, '2025-12-19', 'https://www.youtube.com/watch?v=YXtWPVFk5TQ', 'Sam Worthington, Zoe Saldana', 'James Cameron', 'avatar3.jpg', 'Active'),
-    ('Toy Story 5', 'Woody and friends face new adventures.', 4, '2026-06-15', 'https://www.youtube.com/watch?v=F8N0-ViM254', 'Tom Hanks, Tim Allen', 'Pixar Studios', 'toy_story5.jpg', 'Active'),
-    ('Justice League: Reborn', 'The heroes regroup for a new threat.', 1, '2026-11-10', 'https://www.youtube.com/watch?v=sztA63kSY5o', 'Gal Gadot, Ben Affleck', 'Zack Snyder', 'justice_league_reborn.jpg', 'Active'),
-    ('Frozen 3', 'Elsa and Anna face a new journey.', 4, '2027-07-21', 'https://www.youtube.com/watch?v=xJgAypHXCZo', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'frozen3.jpg', 'Active'),
-    ('Inception 2', 'A new mind-bending heist.', 5, '2028-05-18', 'https://www.youtube.com/watch?v=JOmD4JJ98_8', 'Joseph Gordon-Levitt, Leonardo DiCaprio', 'Christopher Nolan', 'inception2.jpg', 'Active'),
-	('Spider-Man: No Way Home', 'Peter Parker deals with his exposure as Spider-Man.', 1, '2021-12-17', 'https://www.youtube.com/watch?v=JfVOs4VSpmA', 'Tom Holland, Zendaya', 'Jon Watts', 'SpidermanNoWayHome_Poster.png', 'Poster'),
-	('Frozen 2', 'The adventure of Elsa and Anna.', 4, '2019-11-22', 'https://www.youtube.com/watch?v=Zi4LMpSDccc', 'Kristen Bell, Idina Menzel', 'Chris Buck', 'Frozen2_Poster.jpg', 'Poster'),
-	('The Conjuring', 'Paranormal investigators help a family terrorized by a dark presence.', 2, '2025-07-19', 'https://www.youtube.com/watch?v=k10ETZ41q5o', 'Vera Farmiga, Patrick Wilson', 'James Wan', 'TheConjuring_Poster.webp', 'Poster');
-
-
-
-
 
 

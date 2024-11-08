@@ -28,9 +28,9 @@ namespace BookingTicketOnline.Pages
         [BindProperty]
         public string PaymentMethod { get; set; } = "VNPay";
 
-        public decimal TotalAmount { get; set; }
-        public decimal DiscountAmount { get; set; }
-        public decimal FinalAmount { get; set; }
+        public int TotalAmount { get; set; }
+        public int DiscountAmount { get; set; }
+        public int FinalAmount { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
             if (!User.Identity.IsAuthenticated)
@@ -51,7 +51,7 @@ namespace BookingTicketOnline.Pages
             var foodTotalStr = HttpContext.Session.GetString("FoodTotalAmount");
             if (!string.IsNullOrEmpty(foodTotalStr))
             {
-                TotalAmount = JsonSerializer.Deserialize<decimal>(foodTotalStr);
+                TotalAmount = JsonSerializer.Deserialize<int>(foodTotalStr);
             }
             else
             {
@@ -78,7 +78,12 @@ namespace BookingTicketOnline.Pages
                 return Page();
             }
 
-            DiscountAmount = TotalAmount * (discount.DiscountValue / 100);
+            if (discount != null)
+            {
+                HttpContext.Session.SetInt32("DiscountId", discount.Id);
+            }
+
+            DiscountAmount = (int)(TotalAmount * ((decimal)discount.DiscountValue / 100));
             FinalAmount = TotalAmount - DiscountAmount;
 
             ViewData["VoucherMessage"] = "Discount code applied successfully. Total updated.";
@@ -98,6 +103,7 @@ namespace BookingTicketOnline.Pages
             }
 
             FinalAmount = TotalAmount - DiscountAmount;
+            HttpContext.Session.SetInt32("TotalPrice", FinalAmount);
 
             var payment = new PaymentInformation
             {

@@ -30,6 +30,7 @@ CREATE TABLE Movies (
     Description NVARCHAR(MAX),
     CategoryID INT,
     ReleaseDate DATE,
+	Duration TIME,
     TrailerURL NVARCHAR(255),
     Actor NVARCHAR(255),
     Director NVARCHAR(255),
@@ -76,6 +77,7 @@ CREATE TABLE Discount (
     StartDate DATE,
     EndDate DATE
 );
+
 CREATE TABLE Cinema (
     ID INT PRIMARY KEY IDENTITY(1,1),
     Location NVARCHAR(255),
@@ -106,34 +108,55 @@ CREATE TABLE Seat (
     Status NVARCHAR(255),
     FOREIGN KEY (RowID) REFERENCES [Rows](ID)
 );
+
+
+CREATE TABLE Revenue (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    CinemaID INT,
+    [Quarter] INT,
+    [Year] INT,
+	TotalRevenue INT,
+    FOREIGN KEY (CinemaID) REFERENCES Cinema(ID)
+);
+
+CREATE TABLE FoodAndDrinks (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100),
+    Price INT,
+    Quantity INT,
+	[Image] VARCHAR(MAX),
+	Status VARCHAR(15)
+);
+
+CREATE TABLE Showtime (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    MovieID INT,
+    RoomID INT,
+    StartTime TIME,
+	EndTime Time,
+    [Date] DATETIME,
+    FOREIGN KEY (MovieID) REFERENCES Movies(ID),
+    FOREIGN KEY (RoomID) REFERENCES Room(ID)
+);
+
 CREATE TABLE Booking (
     ID INT PRIMARY KEY IDENTITY(1,1),
-    BookingDate DATETIME,
-    CinemaID INT,
-    MovieID INT,
     UserID INT,
+    ShowtimeID INT,
+    BookingDate DATETIME,
     Status NVARCHAR(50),
     TotalPrice INT,
 	TicketCode VARCHAR(50) UNIQUE,
-    FOREIGN KEY (CinemaID) REFERENCES Cinema(ID),
-    FOREIGN KEY (MovieID) REFERENCES Movies(ID),
+    FOREIGN KEY (ShowtimeID) REFERENCES Showtime(ID),
     FOREIGN KEY (UserID) REFERENCES [User](ID)
 );
 CREATE TABLE Payment (
     ID INT PRIMARY KEY IDENTITY(1,1),
     BookingID INT,
     Amount INT,
-    DiscountID INT,
+    DiscountID INT NULL,  -- Thêm NULL để cho phép DiscountID có thể có giá trị NULL
     FOREIGN KEY (BookingID) REFERENCES Booking(ID),
-    FOREIGN KEY (DiscountID) REFERENCES Discount(ID)
-);
-CREATE TABLE Revenue (
-    ID INT PRIMARY KEY IDENTITY(1,1),
-    CinemaID INT,
-    TotalRevenue INT,
-    FromDate DATE,
-    ToDate DATE,
-    FOREIGN KEY (CinemaID) REFERENCES Cinema(ID)
+    FOREIGN KEY (DiscountID) REFERENCES Discount(ID)  -- Foreign key với NULL được phép
 );
 CREATE TABLE BookingSeatsDetail (
     ID INT PRIMARY KEY IDENTITY(1,1),
@@ -142,14 +165,6 @@ CREATE TABLE BookingSeatsDetail (
     BookingID INT,
     FOREIGN KEY (SeatID) REFERENCES Seat(ID),
     FOREIGN KEY (BookingID) REFERENCES Booking(ID)
-);
-CREATE TABLE FoodAndDrinks (
-    ID INT PRIMARY KEY IDENTITY(1,1),
-    Name NVARCHAR(100),
-    Price INT,
-    Quantity INT,
-	[Image] VARCHAR(MAX),
-	Status VARCHAR(15)
 );
 CREATE TABLE BookingItem (
     ID INT PRIMARY KEY IDENTITY(1,1),
@@ -160,15 +175,3 @@ CREATE TABLE BookingItem (
     FOREIGN KEY (FoodAndDrinksID) REFERENCES FoodAndDrinks(ID),
     FOREIGN KEY (BookingID) REFERENCES Booking(ID)
 );
-CREATE TABLE Showtime (
-    ID INT PRIMARY KEY IDENTITY(1,1),
-    MovieID INT,
-    CinemaID INT,
-    RoomID INT,
-    Showtime DATETIME,
-    [Date] DATETIME,
-    FOREIGN KEY (MovieID) REFERENCES Movies(ID),
-    FOREIGN KEY (CinemaID) REFERENCES Cinema(ID),
-    FOREIGN KEY (RoomID) REFERENCES Room(ID)
-);
-
