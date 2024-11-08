@@ -138,6 +138,8 @@ namespace BookingTicketOnline.Pages
                     return RedirectToPage("/HomeAdmin");
                 case 2:
                     return RedirectToPage("/Index");
+                case 3:
+                    return RedirectToPage("/HomeOwner");
                 case 4:
                     return RedirectToPage("/HomeStaff");
                 default:

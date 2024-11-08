@@ -50,7 +50,7 @@ namespace BookingTicketOnline.Pages.ManagerRevenue
         private async Task LoadDataAsync()
         {
             CinemaList = new SelectList(await _context.Cinemas.ToListAsync(), "Id", "Name");
-            YearList = new SelectList(await _context.Revenues.Select(r => r.Years).Distinct().ToListAsync());
+            YearList = new SelectList(await _context.Revenues.Select(r => r.Year).Distinct().ToListAsync());
 
             var revenueQuery = _context.Revenues.Include(r => r.Cinema).AsQueryable();
 
@@ -60,11 +60,11 @@ namespace BookingTicketOnline.Pages.ManagerRevenue
             }
             if (SelectedYear.HasValue)
             {
-                revenueQuery = revenueQuery.Where(r => r.Years == SelectedYear.Value);
+                revenueQuery = revenueQuery.Where(r => r.Year == SelectedYear.Value);
             }
             if (SelectedQuarter.HasValue)
             {
-                revenueQuery = revenueQuery.Where(r => r.Quarters == SelectedQuarter.Value);
+                revenueQuery = revenueQuery.Where(r => r.Quarter == SelectedQuarter.Value);
             }
 
             Revenue = await revenueQuery.ToListAsync();

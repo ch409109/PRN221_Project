@@ -208,28 +208,29 @@
             }
     /* movies  */
     .heading {
-        max-width: 968px;
+        max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
-        font-size: 1.2rem;
+        margin-top: 2%;
+        text-align:left;
         font-weight: 500;
         text-transform: uppercase;
+        font-weight:bold;
         border-bottom: 1px solid var(--main-color);
     }
-
     .movies-container {
-        max-width: 968px;
+        max-width: 1200px;
         margin-right: auto;
         margin-left: auto;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px,auto));
+        grid-template-columns: repeat(6, 1fr);
         gap: 1rem;
         margin-top: 2rem;
     }
 
     .box .box-img {
         width: 100%;
-        height: 270px;
+        height: 320px;
         cursor: pointer;
     }
 
@@ -237,6 +238,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 3px;
         }
 
             .box .box-img img:hover {
@@ -245,12 +247,17 @@
             }
 
     .box h3 {
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: 500;
+        margin-top: 0.5rem;
+        text-align: center;
     }
 
     .box span {
         font-size: 14px;
+        text-align: center;
+        display: block;
+        margin-top: 0.3rem;
     }
 
     /* coming container  */
@@ -270,6 +277,16 @@
         .coming-container .box img {
             border-radius: 15px;
         }
+
+    #searchInput {
+        padding: 0.5rem;
+        font-size: 1rem;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-left: 71%;
+        margin-top: 10px;
+    }
 
     /* newsletter  */
     .newsletter {
@@ -427,12 +444,11 @@
         });
     </script>
 
-
-
     
     <!-- Movies: Opening This Week -->
     <div class="movies" id="movies">
         <h2 class="heading">Opening This Week</h2>
+        <input type="text" id="searchInput" placeholder="Tìm kiếm phim..." onkeyup="searchMovies()" />
         <div class="movies-container">
             @if (Model.OpeningMovies == null || Model.OpeningMovies.Count == 0)
             {
@@ -447,7 +463,17 @@
                             <img src="~/img/@movie.Poster" alt="@movie.Title">
                         </div>
                         <h3><a asp-page="/Movie/MovieDetails2" asp-route-id="@movie.Id">@movie.Title</a></h3>
-                        <span>120 min | @(movie.Category != null ? movie.Category.Name : "Category Not Available")</span>
+                        <span>
+                            @if (movie.Duration.HasValue)
+                            {
+                                @($"{movie.Duration.Value.TotalMinutes} phút")
+                            }
+                            else
+                            {
+                                @("Duration Not Available")
+                            }
+                            | @(movie.Category != null ? movie.Category.Name : "Category Not Available")
+                        </span>
                     </div>
                 }
             }
@@ -473,94 +499,22 @@
                             <img src="~/img/@movie.Poster" alt="@movie.Title">
                         </div>
                         <h3><a asp-page="/Movie/MovieDetails2" asp-route-id="@movie.Id">@movie.Title</a></h3>
-                        <span>120 min | @(movie.Category != null ? movie.Category.Name : "Category Not Available")</span>
+                        <span>
+                            @if (movie.Duration.HasValue)
+                            {
+                                @($"{movie.Duration.Value.TotalMinutes} phút")
+                            }
+                            else
+                            {
+                                @("Duration Not Available")
+                            }
+                            | @(movie.Category != null ? movie.Category.Name : "Category Not Available")
+                        </span>
                     </div>
                 }
             }
         </div>
     </div>
-
-
-
-    @* <!-- coming  -->
-    <section class="coming" id="coming">
-    <h2 class="heading">Coming Soon</h2>
-    <!-- coming contanier  -->
-    <div class="coming-container swiper">
-    <div class="swiper-wrapper">
-    <!-- box-1  -->
-    <div class="swiper-slide box">
-    <div class="box-img">
-    <img src="./img/c1.jpg" alt="">
-    </div>
-    <h3>Ant-Man and the Wasp:Quantumania</h3>
-    </div>
-    <!-- box-2  -->
-    <div class="swiper-slide box">
-    <div class="box-img">
-    <img src="./img/c2.jpg" alt="">
-    </div>
-    <h3>The Flash</h3>
-    </div>
-    <!-- box-3  -->
-    <div class="swiper-slide box">
-    <div class="box-img">
-    <img src="./img/c3.jpg" alt="">
-    </div>
-    <h3>Guardians of the Galaxy Vol.3</h3>
-    </div>
-    <!-- box-4  -->
-    <div class="swiper-slide box">
-    <div class="box-img">
-    <img src="./img/c4.jpg" alt="">
-    </div>
-    <h3>Shazam! Fury of the Gods</h3>
-    </div>
-    <!-- box-5  -->
-    <div class="swiper-slide box">
-    <div class="box-img">
-    <img src="./img/c5.jpg" alt="">
-    </div>
-    <h3>Aquaman and the Lost Kingdom</h3>
-    </div>
-    <!-- box-6  -->
-    <div class="swiper-slide box">
-    <div class="box-img">
-    <img src="./img/c6.jpg" alt="">
-    </div>
-    <h3>John Wick:Chapter 4</h3>
-    </div>
-    <!-- box-7 -->
-    <div class="swiper-slide box">
-    <div class="box-img">
-    <img src="./img/c7.jpg" alt="">
-    </div>
-    <h3>Transformer rise of the beasts</h3>
-    </div>
-    <!-- box-8  -->
-    <div class="swiper-slide box">
-    <div class="box-img">
-    <img src="./img/c8.jpg" alt="">
-    </div>
-    <h3>Mission: Impossible 7</h3>
-    </div>
-    <!-- box-9  -->
-    <div class="swiper-slide box">
-    <div class="box-img">
-    <img src="./img/c9.png" alt="">
-    </div>
-    <h3>Deadpool 3</h3>
-    </div>
-    <!-- box-10  -->
-    <div class="swiper-slide box">
-    <div class="box-img">
-    <img src="./img/c10.jpg" alt="">
-    </div>
-    <h3>Dune: Part two</h3>
-    </div>
-    </div>
-    </div>
-    </section> *@
 
     <!-- Newsletter /\ -->
     <section class="newsletter" id="newsletter">
@@ -587,7 +541,17 @@
     <div class="copyright">
         <p>&#169; CineMatic All Right Reserved</p>
     </div>
+    <script>
+        function searchMovies() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const movieBoxes = document.querySelectorAll('.movies-container .box');
 
+            movieBoxes.forEach(box => {
+                const title = box.querySelector('h3').innerText.toLowerCase();
+                box.style.display = title.includes(input) ? '' : 'none';
+            });
+        }
+    </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>

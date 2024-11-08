@@ -209,7 +209,9 @@ namespace BookingTicketOnline.Models
 
 				entity.Property(e => e.Title).HasMaxLength(255);
 
-				entity.Property(e => e.TrailerUrl)
+                entity.Property(e => e.Duration).HasColumnType("time");
+
+                entity.Property(e => e.TrailerUrl)
 					.HasMaxLength(255)
 					.HasColumnName("TrailerURL");
 
