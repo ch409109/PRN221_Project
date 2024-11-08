@@ -2,7 +2,7 @@
 @model BookingTicketOnline.Pages.ManagerRevenue.IndexModel
 @{
     ViewData["Title"] = "Revenue Index";
-    Layout = "_AdminLayout";
+    Layout = "_MovieTheaterOwnerLayout";
 }
 
 <div class="container my-5">
@@ -55,8 +55,8 @@
                     <tr>
                         <td>@item.Cinema?.Name</td>
                         <td>@(item.TotalRevenue?.ToString("N0") ?? "0")</td>
-                        <td> Quý @item.Quarters</td>
-                        <td>@item.Years</td>
+                        <td> Quý @item.Quarter</td>
+                        <td>@item.Year</td>
                         <td>
                             <a asp-page="/ManageRevenue/Details" asp-route-id="@item.Id">
                                 <i class="bi bi-eye"></i>

@@ -8,8 +8,8 @@ namespace BookingTicketOnline.Models
 		public int Id { get; set; }
 		public int? CinemaId { get; set; }
 		public int? TotalRevenue { get; set; }
-		public int? Quarters { get; set; }
-		public int? Years { get; set; }
+		public int? Quarter { get; set; }
+		public int? Year { get; set; }
 		public virtual Cinema? Cinema { get; set; }
 	}
 }
