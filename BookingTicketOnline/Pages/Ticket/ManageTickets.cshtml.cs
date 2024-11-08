@@ -20,28 +20,28 @@ namespace BookingTicketOnline.Pages.Ticket
         public void OnGet()
         {
         }
-        public async Task OnPostSearchAsync()
-        {
-			    booking = await _context.Bookings
-                .Include(b => b.User)
-				.Include(b => b.Movie)
-				.Include(b => b.Cinema)
-					.ThenInclude(c => c.Showtimes)
-				.Include(b => b.BookingSeatsDetails)
-					.ThenInclude(bsd => bsd.Seat)
-				.Include(b => b.BookingItems)
-					.ThenInclude(bi => bi.FoodAndDrinks)
-				.FirstOrDefaultAsync(b => SearchTerm.Equals(b.Id.ToString()));
-            if (booking == null)
-            {
+		public async Task OnPostSearchAsync()
+		{
+			booking = await _context.Bookings
+			.Include(b => b.User)
+			.Include(b => b.Movie)
+			.Include(b => b.Cinema)
+				.ThenInclude(c => c.Showtimes)
+			.Include(b => b.BookingSeatsDetails)
+				.ThenInclude(bsd => bsd.Seat)
+			.Include(b => b.BookingItems)
+				.ThenInclude(bi => bi.FoodAndDrinks)
+			.FirstOrDefaultAsync(b => SearchTerm.Equals(b.TicketCode));
+			if (booking == null)
+			{
 				Msg = $"Ticket code \"{SearchTerm}\" does not exist.";
 			}
-            else
-            {
-                return;
-            }
+			else
+			{
+				return;
+			}
 
-        }
+		}
 		public async Task OnPostConfirmAsync(int id)
 		{
 			var confirmedBooking = await _context.Bookings.FindAsync(id);

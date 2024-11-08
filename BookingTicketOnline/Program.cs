@@ -48,7 +48,7 @@ namespace BookingTicketOnline
             builder.Services.AddTransient<EmailService>();
 
             builder.Services.Configure<VNPayConfig>(
-    builder.Configuration.GetSection("VNPay"));
+            builder.Configuration.GetSection("VNPay"));
             builder.Services.AddScoped<IVNPayService, VNPayService>();
 
             var app = builder.Build();
