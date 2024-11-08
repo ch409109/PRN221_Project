@@ -52,7 +52,7 @@ namespace BookingTicketOnline.Pages.Movie
             if (userIdClaim != null && int.TryParse(userIdClaim, out int userId))
             {
                 CanComment = await _context.Bookings
-                    .AnyAsync(b => b.UserId == userId && b.MovieId == id && b.Status == "Confirmed");
+                    .AnyAsync(b => b.UserId == userId /*&& b.MovieId == id*/ && b.Status == "Confirmed");
             }
             else
             {

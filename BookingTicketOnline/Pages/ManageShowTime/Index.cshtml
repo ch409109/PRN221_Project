@@ -1,67 +1,70 @@
 ﻿@page
 @model BookingTicketOnline.Pages.ManageShowTime.IndexModel
-
 @{
-    ViewData["Title"] = "Showtime Index";
-    Layout = "_AdminLayout"; // Áp dụng layout giống như trong các trang quản lý khác
+    ViewData["Title"] = "Manage ShowTime";
 }
 
-<div class="container my-5">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
-        <h1>Showtime List</h1>
-        <p>
-            <a class="btn btn-success" asp-page="Create">Create New Showtime</a>
-        </p>
-    </div>
+<h2>Showtime Schedule</h2>
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Showtime[0].Showtime1)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Showtime[0].Date)
-                    </th>
-                    <th>
-                        Cinema
-                    </th>
-                    <th>
-                        Movie
-                    </th>
-                    <th>
-                        Room
-                    </th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Showtime)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Showtime1)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cinema.Name) <!-- Thay đổi từ Id thành Name -->
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Movie.Title) <!-- Thay đổi từ Id thành Title -->
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Room.Name) <!-- Thay đổi từ Id thành Name -->
-                        </td>
-                        <td class="text-center">
-                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+<!-- Calendar view with weekly slots -->
+<div class="container mt-4">
+    <div class="calendar-view">
+        <div class="row text-center bg-primary text-white">
+            <div class="col">Sunday</div>
+            <div class="col">Monday</div>
+            <div class="col">Tuesday</div>
+            <div class="col">Wednesday</div>
+            <div class="col">Thursday</div>
+            <div class="col">Friday</div>
+            <div class="col">Saturday</div>
+        </div>
+        <div class="row border">
+            @foreach (var day in Enumerable.Range(0, 7))
+            {
+                <div class="col border">
+                    <div class="day-slot">
+                        <strong>@DateTime.Today.AddDays(day).ToString("dd MMM yyyy")</strong>
+                        <ul class="showtime-list mt-2">
+                            @foreach (var show in Model.Showtimes.Where(s => s.Date?.DayOfWeek == (DayOfWeek)day))
+                            {
+                                <li>
+                                    <strong>@show.Movie?.Title</strong><br />
+                                    Room: @show.Room?.Name <br />
+                                    Start: @show.StartTime <br />
+                                    End: @show.EndTime
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </div>
+
+<!-- Styling for calendar view -->
+<style>
+    .calendar-view {
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    .day-slot {
+        padding: 8px;
+        min-height: 150px;
+    }
+
+    .showtime-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+        .showtime-list li {
+            background: #e3f2fd;
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 5px;
+        }
+</style>

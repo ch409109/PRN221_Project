@@ -24,9 +24,9 @@ namespace BookingTicketOnline.Pages.Ticket
 		{
 			booking = await _context.Bookings
 			.Include(b => b.User)
-			.Include(b => b.Movie)
-			.Include(b => b.Cinema)
-				.ThenInclude(c => c.Showtimes)
+			//.Include(b => b.Movie)
+			//.Include(b => b.Cinema)
+				//.ThenInclude(c => c.Showtimes)
 			.Include(b => b.BookingSeatsDetails)
 				.ThenInclude(bsd => bsd.Seat)
 			.Include(b => b.BookingItems)

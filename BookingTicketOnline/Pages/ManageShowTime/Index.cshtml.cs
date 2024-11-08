@@ -11,24 +11,24 @@ namespace BookingTicketOnline.Pages.ManageShowTime
 {
     public class IndexModel : PageModel
     {
-        private readonly BookingTicketOnline.Models.PRN221_FinalProjectContext _context;
+        private readonly PRN221_FinalProjectContext _context;
 
-        public IndexModel(BookingTicketOnline.Models.PRN221_FinalProjectContext context)
+        public IndexModel(PRN221_FinalProjectContext context)
         {
             _context = context;
         }
 
-        public IList<Showtime> Showtime { get;set; } = default!;
+        public List<Models.Showtime> Showtimes { get; set; }
 
         public async Task OnGetAsync()
         {
-            if (_context.Showtimes != null)
-            {
-                Showtime = await _context.Showtimes
-                .Include(s => s.Cinema)
+
+            Showtimes = await _context.Showtimes
                 .Include(s => s.Movie)
-                .Include(s => s.Room).ToListAsync();
-            }
+                .Include(s => s.Room)
+                    .ThenInclude(r => r.Cinema)
+                .ToListAsync();
         }
+
     }
 }

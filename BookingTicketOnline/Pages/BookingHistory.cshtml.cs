@@ -20,18 +20,18 @@ namespace BookingTicketOnline.Pages
 		public List<Models.Booking> bookings { get; set; }
 		public async Task OnGetAsync()
 		{
-			var Bookings = await _context.Bookings
-						.Include(b => b.Movie)
-						.Include(b => b.Cinema)
-							.ThenInclude(c => c.Showtimes)
-						.Include(b => b.BookingSeatsDetails)
-							.ThenInclude(bsd => bsd.Seat)
-						.Include(b => b.BookingItems)
-							.ThenInclude(bi => bi.FoodAndDrinks)
-						.ToListAsync();
-			TotalPages = (int)Math.Ceiling(Bookings.Count / (double)PageSize);
+			//var Bookings = await _context.Bookings
+			//			.Include(b => b.Movie)
+			//			.Include(b => b.Cinema)
+			//				.ThenInclude(c => c.Showtimes)
+			//			.Include(b => b.BookingSeatsDetails)
+			//				.ThenInclude(bsd => bsd.Seat)
+			//			.Include(b => b.BookingItems)
+			//				.ThenInclude(bi => bi.FoodAndDrinks)
+			//			.ToListAsync();
+			//TotalPages = (int)Math.Ceiling(Bookings.Count / (double)PageSize);
 
-			bookings = Bookings.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
+			//bookings = Bookings.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
 
 		}
 	}

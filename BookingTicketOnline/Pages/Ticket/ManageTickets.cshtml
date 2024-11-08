@@ -102,7 +102,7 @@
 											<th>@Model.booking.TicketCode</th>
 											<th>@Model.booking.User?.FullName</th>
 											<th>@Model.booking.User?.PhoneNumber</th>
-											<th>@Model.booking.Movie?.Title</th>
+											@* <th>@Model.booking.Movie?.Title</th> *@
 											<th>@Model.booking.BookingDate</th>
 											<th>
 												@foreach (var seat in Model.booking.BookingSeatsDetails)

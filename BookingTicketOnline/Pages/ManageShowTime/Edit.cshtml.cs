@@ -19,89 +19,89 @@ namespace BookingTicketOnline.Pages.ManageShowTime
             _context = context;
         }
 
-        [BindProperty]
-        public Showtime Showtime { get; set; } = default!;
+        //    [BindProperty]
+        //    public Showtime Showtime { get; set; } = default!;
 
-        public List<SelectListItem> ExistingShowtimes { get; set; } = new List<SelectListItem>();
+        //    public List<SelectListItem> ExistingShowtimes { get; set; } = new List<SelectListItem>();
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            // Populate the existing showtimes for the dropdown
-            ExistingShowtimes = await _context.Showtimes
-                .Select(s => new SelectListItem
-                {
-                    Value = s.Id.ToString(),
-                    Text = $"{s.Showtime1} - {s.Movie.Title} - Room {s.RoomId}"
-                }).ToListAsync();
+        //    public async Task<IActionResult> OnGetAsync(int? id)
+        //    {
+        //        // Populate the existing showtimes for the dropdown
+        //        ExistingShowtimes = await _context.Showtimes
+        //            .Select(s => new SelectListItem
+        //            {
+        //                Value = s.Id.ToString(),
+        //                //Text = $"{s.Showtime1} - {s.Movie.Title} - Room {s.RoomId}"
+        //            }).ToListAsync();
 
-            if (id == null || _context.Showtimes == null)
-            {
-                return NotFound();
-            }
+        //        if (id == null || _context.Showtimes == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-            var showtime = await _context.Showtimes.Include(s => s.Movie).Include(s => s.Cinema).Include(s => s.Room).FirstOrDefaultAsync(m => m.Id == id);
-            if (showtime == null)
-            {
-                return NotFound();
-            }
+        //        var showtime = await _context.Showtimes.Include(s => s.Movie).Include(s => s.Bookings).Include(s => s.Room).FirstOrDefaultAsync(m => m.Id == id);
+        //        if (showtime == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-            Showtime = showtime;
-            ViewData["CinemaId"] = new SelectList(_context.Cinemas, "Id", "Name");
-            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Title");
-            ViewData["RoomId"] = new SelectList(_context.Rooms, "Id", "Name");
+        //        Showtime = showtime;
+        //        ViewData["CinemaId"] = new SelectList(_context.Cinemas, "Id", "Name");
+        //        ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "Title");
+        //        ViewData["RoomId"] = new SelectList(_context.Rooms, "Id", "Name");
 
-            return Page();
-        }
+        //        return Page();
+        //    }
 
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+        //    public async Task<IActionResult> OnPostAsync()
+        //    {
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return Page();
+        //        }
 
-            _context.Attach(Showtime).State = EntityState.Modified;
+        //        _context.Attach(Showtime).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ShowtimeExists(Showtime.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //        try
+        //        {
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!ShowtimeExists(Showtime.Id))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
 
-            return RedirectToPage("./Index");
-        }
+        //        return RedirectToPage("./Index");
+        //    }
 
-        private bool ShowtimeExists(int id)
-        {
-            return (_context.Showtimes?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        //    private bool ShowtimeExists(int id)
+        //    {
+        //        return (_context.Showtimes?.Any(e => e.Id == id)).GetValueOrDefault();
+        //    }
 
-        // New method to get showtime details
-        public async Task<JsonResult> OnGetGetShowtimeDetails(int id)
-        {
-            var showtime = await _context.Showtimes
-                .Where(s => s.Id == id)
-                .Select(s => new
-                {
-                    s.MovieId,
-                    s.CinemaId,
-                    s.RoomId,
-                    s.Showtime1,
-                    s.Date
-                })
-                .FirstOrDefaultAsync();
+        //    // New method to get showtime details
+        //    public async Task<JsonResult> OnGetGetShowtimeDetails(int id)
+        //    {
+        //        var showtime = await _context.Showtimes
+        //            .Where(s => s.Id == id)
+        //            .Select(s => new
+        //            {
+        //                s.MovieId,
+        //                //s.CinemaId,
+        //                s.RoomId,
+        //                //s.Showtime1,
+        //                s.Date
+        //            })
+        //            .FirstOrDefaultAsync();
 
-            return new JsonResult(showtime);
-        }
+        //        return new JsonResult(showtime);
+        //    }
     }
 }

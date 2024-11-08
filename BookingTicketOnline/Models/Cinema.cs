@@ -5,23 +5,19 @@ namespace BookingTicketOnline.Models
 {
     public partial class Cinema
     {
-		public Cinema()
-		{
-			Bookings = new HashSet<Booking>();
-			Revenues = new HashSet<Revenue>();
-			Rooms = new HashSet<Room>();
-			Showtimes = new HashSet<Showtime>();
-		}
+        public Cinema()
+        {
+            Revenues = new HashSet<Revenue>();
+            Rooms = new HashSet<Room>();
+        }
 
-		public int Id { get; set; }
-		public string? Location { get; set; }
-		public string? City { get; set; }
-		public string? Name { get; set; }
-		public string? Status { get; set; }
+        public int Id { get; set; }
+        public string? Location { get; set; }
+        public string? City { get; set; }
+        public string? Name { get; set; }
+        public string? Status { get; set; }
 
-		public virtual ICollection<Booking> Bookings { get; set; }
-		public virtual ICollection<Revenue> Revenues { get; set; }
-		public virtual ICollection<Room> Rooms { get; set; }
-		public virtual ICollection<Showtime> Showtimes { get; set; }
-	}
+        public virtual ICollection<Revenue> Revenues { get; set; }
+        public virtual ICollection<Room> Rooms { get; set; }
+    }
 }

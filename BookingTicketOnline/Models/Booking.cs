@@ -13,16 +13,14 @@ namespace BookingTicketOnline.Models
         }
 
         public int Id { get; set; }
-        public DateTime? BookingDate { get; set; }
-        public int? CinemaId { get; set; }
-        public int? MovieId { get; set; }
         public int? UserId { get; set; }
+        public int? ShowtimeId { get; set; }
+        public DateTime? BookingDate { get; set; }
         public string? Status { get; set; }
         public int? TotalPrice { get; set; }
         public string? TicketCode { get; set; }
 
-        public virtual Cinema? Cinema { get; set; }
-        public virtual Movie? Movie { get; set; }
+        public virtual Showtime? Showtime { get; set; }
         public virtual User? User { get; set; }
         public virtual ICollection<BookingItem> BookingItems { get; set; }
         public virtual ICollection<BookingSeatsDetail> BookingSeatsDetails { get; set; }

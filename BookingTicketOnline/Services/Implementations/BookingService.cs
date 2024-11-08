@@ -30,8 +30,8 @@ namespace BookingTicketOnline.Services.Implementations
             var booking = new Booking
             {
                 UserId = userId,
-                CinemaId = cinemaId,
-                MovieId = movieId,
+                //CinemaId = cinemaId,
+                //MovieId = movieId,
                 TicketCode = ticketCode,
                 BookingDate = DateTime.Now,
                 Status = "Unused",

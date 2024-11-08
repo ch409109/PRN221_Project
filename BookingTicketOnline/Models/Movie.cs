@@ -7,7 +7,6 @@ namespace BookingTicketOnline.Models
     {
         public Movie()
         {
-            Bookings = new HashSet<Booking>();
             Feedbacks = new HashSet<Feedback>();
             Showtimes = new HashSet<Showtime>();
         }
@@ -17,6 +16,7 @@ namespace BookingTicketOnline.Models
         public string? Description { get; set; }
         public int? CategoryId { get; set; }
         public DateTime? ReleaseDate { get; set; }
+        public TimeSpan? Duration { get; set; }
         public string? TrailerUrl { get; set; }
         public string? Actor { get; set; }
         public string? Director { get; set; }
@@ -24,7 +24,6 @@ namespace BookingTicketOnline.Models
         public string? Status { get; set; }
 
         public virtual MovieCategory? Category { get; set; }
-        public virtual ICollection<Booking> Bookings { get; set; }
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         public virtual ICollection<Showtime> Showtimes { get; set; }
     }

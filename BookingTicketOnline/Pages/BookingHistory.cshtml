@@ -63,8 +63,8 @@
 				<div class="col">
 					<div class="card h-100">
 						<div class="card-body">
-							<h5 class="card-title">@booking.Movie.Title</h5>
-							<p class="card-text">Theater: @booking.Cinema.Name</p>
+							@* <h5 class="card-title">@booking.Movie.Title</h5> *@
+							@* <p class="card-text">Theater: @booking.Cinema.Name</p> *@
 							<p class="card-text">Booking Date:@booking.BookingDate</p>
 							<p class="card-text">
 								Tickets: @booking.BookingSeatsDetails.Count() | Total Price: @(booking.TotalPrice + booking.BookingItems.Sum(bi => bi.Price * bi.Quantity))
@@ -91,8 +91,8 @@
 								<div class="row">
 									<!-- Thông tin -->
 									<div class="col-md-6">
-										<p><strong>Movie:</strong> @booking.Movie.Title</p>
-										<p><strong>Theater:</strong> @booking.Cinema.Name</p>
+	@* 									<p><strong>Movie:</strong> @booking.Movie.Title</p>
+										<p><strong>Theater:</strong> @booking.Cinema.Name</p> *@
 										<p><strong>Date:</strong> @DateTime.Now</p>
 										<p><strong>Showtime:</strong> 16:10 ~ 18:13</p>
 										<p><strong>Seat:</strong>
@@ -101,7 +101,7 @@
 									</div>
 									<!-- Hình ảnh -->
 									<div class="col-md-6 text-center">
-										<img src="@booking.Movie.Poster" alt="@booking.Movie.Title" class="img-fluid">
+										@* <img src="@booking.Movie.Poster" alt="@booking.Movie.Title" class="img-fluid"> *@
 									</div>
 								</div>
 							</div>
