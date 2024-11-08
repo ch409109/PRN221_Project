@@ -22,8 +22,6 @@ namespace BookingTicketOnline.Models
         public string? Director { get; set; }
         public string? Poster { get; set; }
         public string? Status { get; set; }
-        public TimeSpan? Duration { get; set; }
-
         public virtual MovieCategory? Category { get; set; }
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         public virtual ICollection<Showtime> Showtimes { get; set; }
