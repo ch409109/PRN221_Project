@@ -208,139 +208,63 @@
 </head>
 <body>
 
+
     <div class="container">
         <div class="header">
-            <h1>
-                Lịch Chiếu Dr. Strange
-            </h1>
+            <h1>Lịch Chiếu @Model.Movie?.Title</h1>
             <div class="location-select">
-                <button class="location-button" onclick="toggleDropdown()">Hà Nội <span>▼</span></button>
+                <button class="location-button" onclick="toggleDropdown()">@Model.SelectedCity <span>▼</span></button>
                 <div class="dropdown" id="dropdown">
-                    <div onclick="selectLocation('Hà Nội')">Hà Nội</div>
-                    <div onclick="selectLocation('TP.HCM')">TP.HCM</div>
+                    <div onclick="changeCity('Hà Nội')">Hà Nội</div>
+                    <div onclick="changeCity('TP.HCM')">TP.HCM</div>
                 </div>
             </div>
         </div>
 
 
         <div class="dates">
-            <div class="date">
-                <div class="day">13</div>
-                <div class="weekday">Chủ nhật</div>
-            </div>
-            <div class="date">
-                <div class="day">14</div>
-                <div class="weekday">Thứ hai</div>
-            </div>
-            <div class="date">
-                <div class="day">15</div>
-                <div class="weekday">Thứ ba</div>
-            </div>
-            <div class="date">
-                <div class="day">16</div>
-                <div class="weekday">Thứ tư</div>
-            </div>
-            <div class="date selected">
-                <div class="day">17</div>
-                <div class="weekday">Thứ năm</div>
-            </div>
-            <div class="date">
-                <div class="day">18</div>
-                <div class="weekday">Thứ sáu</div>
-            </div>
-            <div class="date">
-                <div class="day">19</div>
-                <div class="weekday">Thứ bảy</div>
-            </div>
-            <div class="date">
-                <div class="day">20</div>
-                <div class="weekday">Chủ nhật</div>
-            </div>
+            @foreach (var date in Model.WeekDates)
+            {
+                var isSelected = date.Date == Model.SelectedDate.Date;
+                <div class="date @(isSelected ? "selected" : "")" onclick="changeDate('@date.ToString("yyyy-MM-dd")')">
+                    <div class="day">@date.Day</div>
+                    <div class="weekday">@date.ToString("dddd", new System.Globalization.CultureInfo("vi-VN"))</div>
+                </div>
+            }
         </div>
 
-        <div class="showtime">
-            <p class="address">BHD Star Discovery</p>
-            <p>Tầng 8 Trung tâm thương mại Discovery, 36 đường Cầu Giấy, Đống Đa, Hà Nội</p>
-            <div class="time-buttons">
-                <a asp-page="/Seat/BookSeat" class="time-button">19:20</a>
-                <a asp-page="/Seat/BookSeat" class="time-button">22:55</a>
+        @if (!Model.Showtimes.Any())
+        {
+            <div class="no-showtime-message">
+                <i>🎬</i>
+                <h3>Không có suất chiếu nào</h3>
+                <p>Rất tiếc, không có suất chiếu nào cho phim "@Model.Movie?.Title" vào ngày @Model.SelectedDate.ToString("dd/MM/yyyy") tại @Model.SelectedCity</p>
+                <p>Vui lòng chọn một ngày khác hoặc kiểm tra lịch chiếu tại thành phố khác.</p>
             </div>
-        </div>
-        <div class="showtime">
-            <p class="address">BHD Star Phạm Ngọc Thạch</p>
-            <p>Tầng 8 Vincom Plaza Phạm Ngọc Thạch, 2 đường Phạm Ngọc Thạch, Đống Đa, Hà Nội</p>
-            <div class="time-buttons">
-                <a asp-page="/Seat/BookSeat" class="time-button">19:20</a>
-                <a asp-page="/Seat/BookSeat" class="time-button">22:55</a>
-            </div>
-        </div>
-        <div class="showtime">
-            <p class="address">BHD Star The Garden</p>
-            <p>Tầng 1 Garden Shopping Center, đường Mễ Trì, Nam Từ Liêm, Hà Nội</p>
-            <div class="time-buttons">
-                <a asp-page="/Seat/BookSeat" class="time-button">19:20</a>
-                <a asp-page="/Seat/BookSeat" class="time-button">21:00</a>
-            </div>
-        </div>
-
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-
-        @* <div class="feedback-section">
-            <h2>Phản hồi của người dùng</h2>
-
-            <div class="feedback">
-                <div class="avatar"></div>
-                <div class="feedback-content">
-                    <div class="user">Hứa Tấn Trung</div>
-                    <div class="rating">
-                        <span>⭐</span><span>(10/10)</span>
+        }
+        else
+        {
+            @foreach (var cinema in Model.Showtimes)
+            {
+                <div class="showtime">
+                    <p class="address">@cinema.Cinema.Name</p>
+                    <p>@cinema.Cinema.Location</p>
+                    <div class="time-buttons">
+                        @foreach (var slot in cinema.ShowtimeSlots)
+                        {
+                            <form method="post" asp-page-handler="SelectShowtime" asp-route-showtimeId="@slot.ShowtimeId" style="display: inline;">
+                                <button type="submit" class="time-button">
+                                    @slot.StartTime.ToString(@"hh\:mm")
+                                </button>
+                            </form>
+                        }
                     </div>
-                    <div>18/10 mới chiếu mà 8/10 đưa vào mục Phim Đang chiếu???</div>
                 </div>
-            </div>
-
-            <div class="feedback">
-                <div class="avatar"></div>
-                <div class="feedback-content">
-                    <div class="user">Trần Phùng Yến</div>
-                    <div class="rating">
-                        <span>⭐</span><span>(8/10)</span>
-                    </div>
-                    <div>Chưa xem nhưng vì có chị Thu Trang nên sẽ ủng hộ ❤️✨, phim khá hay cuốn hút, thêm dàn diễn viên mình thích nữa nên ủng hộ phim khi chiếu nhé.</div>
-                </div>
-            </div>
-
-            <div class="feedback">
-                <div class="avatar"></div>
-                <div class="feedback-content">
-                    <div class="user">Vy Hoài Anh</div>
-                    <div class="rating">
-                        <span>⭐</span><span>(6/10)</span>
-                    </div>
-                    <div>Đừng nghèo nội dung quá nha.</div>
-                </div>
-            </div>
-
-            <div class="feedback">
-                <div class="avatar"></div>
-                <div class="feedback-content">
-                    <div class="user">Lê Mỹ Kiều</div>
-                    <div class="rating">
-                        <span>⭐</span><span>(10/10)</span>
-                    </div>
-                    <div>Cực phẩm!</div>
-                </div>
-            </div>
-
-        </div> *@
+            }
+        }
     </div>
 
-    <footer>
-        &copy; 2024 Lịch Chiếu Phim
-    </footer>
+    <footer>&copy; 2024 Lịch Chiếu Phim</footer>
 
     <script>
         function toggleDropdown() {
@@ -351,6 +275,14 @@
         function selectLocation(location) {
             document.querySelector(".location-button").innerText = location + ' ▼';
             document.getElementById("dropdown").style.display = "none";
+        }
+
+        function changeCity(city) {
+            window.location.href = `?city=${encodeURIComponent(city)}&date=@Model.SelectedDate.ToString("yyyy-MM-dd")`;
+        }
+
+        function changeDate(date) {
+            window.location.href = `?city=@Model.SelectedCity&date=${date}`;
         }
 
         // Đóng dropdown khi click ra ngoài

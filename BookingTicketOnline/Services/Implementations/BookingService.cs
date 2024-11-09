@@ -20,6 +20,7 @@ namespace BookingTicketOnline.Services.Implementations
 
             try
             {
+                var showtimeId = _httpContextAccessor.HttpContext.Session.GetInt32("ShowtimeId");
                 var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst("UserId");
                 if (userIdClaim == null)
                 {
@@ -33,7 +34,8 @@ namespace BookingTicketOnline.Services.Implementations
                     TicketCode = GenerateTicketCode(),
                     BookingDate = DateTime.Now,
                     Status = "Pending",
-                    TotalPrice = totalPrice
+                    TotalPrice = totalPrice,
+                    ShowtimeId = showtimeId
                 };
 
                 _context.Bookings.Add(booking);
