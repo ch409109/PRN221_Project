@@ -2,6 +2,7 @@ using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.Foods
 {
@@ -24,6 +25,13 @@ namespace BookingTicketOnline.Pages.Foods
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
+            var roleIdClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(roleIdClaim) || roleIdClaim != "3")
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+
             food = await _context.FoodAndDrinks.AsNoTracking().FirstOrDefaultAsync(f => f.Id == id);
 
             if (food == null)

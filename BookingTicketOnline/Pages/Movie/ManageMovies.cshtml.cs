@@ -2,6 +2,7 @@ using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.Movie
 {
@@ -27,8 +28,15 @@ namespace BookingTicketOnline.Pages.Movie
             _context = context;
         }
 
-        public async Task OnGetAsync(string searchString, int? categoryId, int pageNumber = 1)
+        public async Task<IActionResult> OnGetAsync(string searchString, int? categoryId, int pageNumber = 1)
         {
+            var roleIdClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(roleIdClaim) || roleIdClaim != "1")
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+
             if (searchString != null)
             {
                 CurrentFilter = searchString;
@@ -62,6 +70,8 @@ namespace BookingTicketOnline.Pages.Movie
                 .ToListAsync();
 
             categories = await _context.MovieCategories.ToListAsync();
+
+            return Page();
         }
     }
 }

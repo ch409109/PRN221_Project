@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.Cinema
 {
@@ -23,8 +24,15 @@ namespace BookingTicketOnline.Pages.Cinema
             _context = context;
         }
 
-        public async Task OnGetAsync(string searchString, int pageNumber = 1)
+        public async Task<IActionResult> OnGetAsync(string searchString, int pageNumber = 1)
         {
+            var roleIdClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(roleIdClaim) || roleIdClaim != "1")
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+
             IQueryable<Models.Cinema> cinemasQuery = _context.Cinemas;
 
             if (searchString != null)
@@ -47,6 +55,8 @@ namespace BookingTicketOnline.Pages.Cinema
                 .Skip((CurrentPage - 1) * PageSize)
                 .Take(PageSize)
                 .ToListAsync();
+
+            return Page();
         }
     }
 }

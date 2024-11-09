@@ -1,6 +1,7 @@
 using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.Category
 {
@@ -18,6 +19,12 @@ namespace BookingTicketOnline.Pages.Category
 
         public IActionResult OnGet()
         {
+            var roleIdClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(roleIdClaim) || roleIdClaim != "1")
+            {
+                return RedirectToPage("/AccessDenied");
+            }
             return Page();
         }
 

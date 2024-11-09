@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.Foods
 {
@@ -29,8 +30,15 @@ namespace BookingTicketOnline.Pages.Foods
             _context = context;
         }
 
-        public async Task OnGetAsync(string searchString, int pageNumber = 1)
+        public async Task<IActionResult> OnGetAsync(string searchString, int pageNumber = 1)
         {
+            var roleIdClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(roleIdClaim) || roleIdClaim != "3")
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+
             IQueryable<Models.FoodAndDrink> foodsQuery = _context.FoodAndDrinks;
 
             if (searchString != null)
@@ -59,6 +67,8 @@ namespace BookingTicketOnline.Pages.Foods
                 .Skip((CurrentPage - 1) * PageSize)
                 .Take(PageSize)
                 .ToListAsync();
+
+            return Page();
         }
     }
 }

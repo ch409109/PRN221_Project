@@ -39,6 +39,25 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label">Duration</label>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group">
+                        <input asp-for="DurationHours" class="form-control" type="number" min="0" max="23" placeholder="Hours">
+                        <span class="input-group-text">hours</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <input asp-for="DurationMinutes" class="form-control" type="number" min="0" max="59" placeholder="Minutes">
+                        <span class="input-group-text">minutes</span>
+                    </div>
+                </div>
+            </div>
+            <span asp-validation-for="movie.Duration" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Actors</label>
             <input asp-for="movie.Actor" class="form-control" placeholder="Enter actors">
             <span asp-validation-for="movie.Actor" class="text-danger"></span>

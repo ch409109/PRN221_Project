@@ -2,6 +2,7 @@ using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.Movie
 {
@@ -16,6 +17,12 @@ namespace BookingTicketOnline.Pages.Movie
         [BindProperty]
         public IFormFile? ImageFile { get; set; }
 
+        [BindProperty]
+        public int DurationHours { get; set; }
+
+        [BindProperty]
+        public int DurationMinutes { get; set; }
+
         public List<MovieCategory> categories { get; set; }
 
         public EditMovieModel(PRN221_FinalProjectContext context, IWebHostEnvironment environment)
@@ -26,6 +33,13 @@ namespace BookingTicketOnline.Pages.Movie
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
+            var roleIdClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(roleIdClaim) || roleIdClaim != "1")
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+
             movie = await _context.Movies.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
             categories = _context.MovieCategories.ToList();
 
@@ -63,6 +77,7 @@ namespace BookingTicketOnline.Pages.Movie
             movieToUpdate.TrailerUrl = movie.TrailerUrl;
             movieToUpdate.Status = movie.Status;
             movieToUpdate.CategoryId = movie.CategoryId;
+            movieToUpdate.Duration = movie.Duration;
 
             if (ImageFile != null)
             {
@@ -98,7 +113,7 @@ namespace BookingTicketOnline.Pages.Movie
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FoodExists(movie.Id))
+                if (!MovieExists(movie.Id))
                 {
                     return NotFound();
                 }
@@ -109,7 +124,7 @@ namespace BookingTicketOnline.Pages.Movie
             }
         }
 
-        private bool FoodExists(int id)
+        private bool MovieExists(int id)
         {
             return _context.Movies.Any(m => m.Id == id);
         }

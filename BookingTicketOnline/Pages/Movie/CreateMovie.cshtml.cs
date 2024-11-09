@@ -1,6 +1,7 @@
 using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.Movie
 {
@@ -22,8 +23,21 @@ namespace BookingTicketOnline.Pages.Movie
         [BindProperty]
         public IFormFile ImageFile { get; set; }
 
+        [BindProperty]
+        public int DurationHours { get; set; }
+
+        [BindProperty]
+        public int DurationMinutes { get; set; }
+
         public IActionResult OnGet()
         {
+            var roleIdClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(roleIdClaim) || roleIdClaim != "1")
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+
             categories = _context.MovieCategories.ToList();
             return Page();
         }
@@ -52,6 +66,8 @@ namespace BookingTicketOnline.Pages.Movie
             }
 
             movie.Status = "Active";
+
+            movie.Duration = new TimeSpan(DurationHours, DurationMinutes, 0);
 
             _context.Movies.Add(movie);
             _context.SaveChanges();

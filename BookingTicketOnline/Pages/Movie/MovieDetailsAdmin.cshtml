@@ -47,6 +47,10 @@
                         <div class="col-md-8">@Model.Movie.ReleaseDate</div>
                     </div>
                     <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Duration:</div>
+                        <div class="col-md-8">@Model.Movie.Duration?.ToString(@"hh\:mm\:ss")</div>
+                    </div>
+                    <div class="row mb-3">
                         <div class="col-md-4 fw-bold">Actors:</div>
                         <div class="col-md-8">@Model.Movie.Actor</div>
                     </div>
@@ -71,11 +75,14 @@
                         <a asp-page="./ManageMovies" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left me-2"></i>Back to List
                         </a>
-                        <a asp-page="./ChangeStatus" asp-route-id="@Model.Movie.Id"
-                           class="btn @(Model.Movie.Status == "Active" ? "btn-danger" : "btn-success")">
-                            <i class="bi @(Model.Movie.Status == "Active" ? "bi-x-circle" : "bi-check-circle") me-2"></i>
-                            @(Model.Movie.Status == "Active" ? "Deactivate" : "Activate")
-                        </a>
+                        @if (Model.Movie.Status != "Poster")
+                        {
+                            <a asp-page="./ChangeStatus" asp-route-id="@Model.Movie.Id"
+                               class="btn @(Model.Movie.Status == "Active" ? "btn-danger" : "btn-success")">
+                                <i class="bi @(Model.Movie.Status == "Active" ? "bi-x-circle" : "bi-check-circle") me-2"></i>
+                                @(Model.Movie.Status == "Active" ? "Deactivate" : "Activate")
+                            </a>
+                        }
                     </div>
                 </div>
             </div>
