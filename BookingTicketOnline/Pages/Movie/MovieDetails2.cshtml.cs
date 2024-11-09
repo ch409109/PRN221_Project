@@ -40,6 +40,7 @@ namespace BookingTicketOnline.Pages.Movie
                  .Include(f => f.User)
                  .ToListAsync();
 
+            HttpContext.Session.SetInt32("MovieId", Movie.Id);
 
             if (Feedbacks.Any())
             {

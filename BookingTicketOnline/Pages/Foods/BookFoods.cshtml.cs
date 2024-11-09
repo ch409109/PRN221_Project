@@ -75,14 +75,15 @@ namespace BookingTicketOnline.Pages.Foods
             // Filter selected items (quantity > 0)
             var selectedItems = Quantities
                 .Where(q => q.Value > 0)
-                .Select(q => new
+                .Select(q => new Item
                 {
-                    FoodId = q.Key,
+                    Id = q.Key,
                     Quantity = q.Value
                 })
                 .ToList();
 
-            HttpContext.Session.SetString("SelectedItems", JsonSerializer.Serialize(selectedItems));
+            HttpContext.Session.SetString("SelectedItems",
+                JsonSerializer.Serialize(selectedItems));
 
             if (selectedItems.Any())
             {

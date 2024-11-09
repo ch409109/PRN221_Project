@@ -14,67 +14,77 @@ namespace BookingTicketOnline.Services.Implementations
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<IActionResult> ProcessBookingAsync(int? cinemaId, int? movieId, List<(int FoodAndDrinkId, int Quantity)>? selectedItems, int? discountId = null)
+        public async Task<IActionResult> ProcessBookingAsync(int? totalPrice, List<(int FoodAndDrinkId, int Quantity)> selectedItems, int? discountId = null)
         {
-            var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst("UserId");
+            using var transaction = await _context.Database.BeginTransactionAsync();
 
-            if (userIdClaim == null)
+            try
             {
-                return new UnauthorizedResult();
-            }
-            int userId = int.Parse(userIdClaim.Value);
-
-            var random = new Random();
-            string ticketCode = $"{(char)random.Next('A', 'Z' + 1)}{(char)random.Next('A', 'Z' + 1)}{random.Next(100000, 999999)}";
-
-            var booking = new Booking
-            {
-                UserId = userId,
-                TicketCode = ticketCode,
-                BookingDate = DateTime.Now,
-                Status = "Unused",
-                TotalPrice = _httpContextAccessor.HttpContext.Session.GetInt32("TotalPrice")
-            };
-
-            _context.Bookings.Add(booking);
-            await _context.SaveChangesAsync();
-
-            foreach (var item in selectedItems)
-            {
-                var foodItem = await _context.FoodAndDrinks.FindAsync(item.FoodAndDrinkId);
-
-                if (foodItem != null)
+                var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst("UserId");
+                if (userIdClaim == null)
                 {
-                    var totalItemPrice = foodItem.Price * item.Quantity;
-
-                    var bookingItem = new BookingItem
-                    {
-                        BookingId = booking.Id,
-                        FoodAndDrinksId = item.FoodAndDrinkId,
-                        Quantity = item.Quantity,
-                        Price = totalItemPrice
-                    };
-
-                    _context.BookingItems.Add(bookingItem);
-
-                    foodItem.Quantity -= item.Quantity;
+                    return new UnauthorizedResult();
                 }
-            }
+                int userId = int.Parse(userIdClaim.Value);
 
-            if (discountId.HasValue)
-            {
+                var booking = new Booking
+                {
+                    UserId = userId,
+                    TicketCode = GenerateTicketCode(),
+                    BookingDate = DateTime.Now,
+                    Status = "Pending",
+                    TotalPrice = totalPrice
+                };
+
+                _context.Bookings.Add(booking);
+                await _context.SaveChangesAsync();
+
+                foreach (var (foodAndDrinkId, quantity) in selectedItems)
+                {
+                    var foodItem = await _context.FoodAndDrinks.FindAsync(foodAndDrinkId);
+                    if (foodItem != null && foodItem.Quantity >= quantity)
+                    {
+                        var bookingItem = new BookingItem
+                        {
+                            BookingId = booking.Id,
+                            FoodAndDrinksId = foodAndDrinkId,
+                            Quantity = quantity,
+                            Price = foodItem.Price * quantity
+                        };
+
+                        _context.BookingItems.Add(bookingItem);
+                        foodItem.Quantity -= quantity;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException($"Insufficient quantity for food item {foodItem?.Name}");
+                    }
+                }
+
                 var payment = new Payment
                 {
                     BookingId = booking.Id,
-                    Amount = booking.TotalPrice,
+                    Amount = totalPrice,
                     DiscountId = discountId
                 };
 
                 _context.Payments.Add(payment);
-            }
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
 
-            await _context.SaveChangesAsync();
-            return new OkResult();
+                return new OkObjectResult(new { BookingId = booking.Id });
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
+
+        private string GenerateTicketCode()
+        {
+            var random = new Random();
+            return $"{(char)random.Next('A', 'Z' + 1)}{(char)random.Next('A', 'Z' + 1)}{random.Next(100000, 999999)}";
         }
     }
 }

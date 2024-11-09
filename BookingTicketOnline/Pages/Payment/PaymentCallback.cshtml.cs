@@ -11,38 +11,61 @@ namespace BookingTicketOnline.Pages.Payment
     {
         private readonly IVNPayService _vnPayService;
         private readonly BookingService _bookingService;
+        private ILogger<PaymentCallbackModel> _logger;
 
         public PaymentResponseModel PaymentResponse { get; set; } = new();
 
-        public PaymentCallbackModel(IVNPayService vnPayService, BookingService bookingService)
+        public PaymentCallbackModel(IVNPayService vnPayService, BookingService bookingService, ILogger<PaymentCallbackModel> logger)
         {
             _vnPayService = vnPayService;
             _bookingService = bookingService;
+            _logger = logger;
         }
 
         public async Task<IActionResult> OnGet()
         {
-            PaymentResponse = _vnPayService.PaymentExecute(Request.Query);
-
-            if (PaymentResponse.Success)
+            try
             {
-                // Thêm code cập nhật database ở đây
-                var selectedItemsJson = HttpContext.Session.GetString("SelectedItems");
-                var selectedItems = selectedItemsJson != null ? JsonSerializer.Deserialize<List<Item>>(selectedItemsJson)
-                                                              : new List<Item>();
-                var selectedItemsProcessed = selectedItems.Select(item => (item.Id, item.Quantity)).ToList();
+                PaymentResponse = _vnPayService.PaymentExecute(Request.Query);
 
-                var bookingDate = DateTime.Now;
-                var discountId = HttpContext.Session.GetInt32("DiscountId");
-                var userId = User.FindFirst("UserId")?.Value;
-                int? cinemaId = null; ;
-                int? movieId = HttpContext.Session.GetInt32("MovieId");
+                if (PaymentResponse.Success)
+                {
+                    // Lấy dữ liệu từ session
+                    var selectedItemsJson = HttpContext.Session.GetString("SelectedItems");
+                    // Chuyển đổi JSON thành List<(int FoodAndDrinkId, int Quantity)>
+                    var selectedItems = selectedItemsJson != null
+                        ? JsonSerializer.Deserialize<List<Item>>(selectedItemsJson)?
+                            .Select(item => (FoodAndDrinkId: item.Id, Quantity: item.Quantity))
+                            .ToList()
+                        : new List<(int FoodAndDrinkId, int Quantity)>();
 
-                await _bookingService.ProcessBookingAsync(cinemaId, movieId, selectedItemsProcessed, discountId);
-                return RedirectToPage("/Payment/PaymentSuccess");
+                    var totalPrice = HttpContext.Session.GetInt32("TotalPrice") ?? 0;
+                    var discountId = HttpContext.Session.GetInt32("DiscountId");
+
+                    // Xử lý đặt vé
+                    var result = await _bookingService.ProcessBookingAsync(
+                        totalPrice,
+                        selectedItems,
+                        discountId
+                    );
+
+                    // Xóa dữ liệu session
+                    HttpContext.Session.Remove("SelectedItems");
+                    HttpContext.Session.Remove("TotalPrice");
+                    HttpContext.Session.Remove("DiscountId");
+                    HttpContext.Session.Remove("FoodQuantities");
+                    HttpContext.Session.Remove("FoodTotalAmount");
+
+                    return RedirectToPage("/Payment/PaymentSuccess");
+                }
+
+                return RedirectToPage("/Payment/PaymentFailed");
             }
-
-            return RedirectToPage("/Payment/PaymentFailed");
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error processing payment callback");
+                return RedirectToPage("/Payment/PaymentFailed");
+            }
         }
     }
 }

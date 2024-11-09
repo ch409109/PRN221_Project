@@ -35,29 +35,32 @@ namespace BookingTicketOnline.Pages
         {
             if (!User.Identity.IsAuthenticated)
             {
-                var returnUrl = Url.Page("/CheckOut");
-                return RedirectToPage("/Login", new { ReturnUrl = returnUrl });
+                return RedirectToPage("/Login", new { ReturnUrl = "/CheckOut" });
             }
 
             LoadTotalAmountFromSession();
-            DiscountAmount = 0;
-            FinalAmount = TotalAmount - DiscountAmount;
+            var discountId = HttpContext.Session.GetInt32("DiscountId");
+            if (discountId.HasValue)
+            {
+                var discount = await _context.Discounts.FindAsync(discountId.Value);
+                if (discount != null)
+                {
+                    DiscountAmount = (int)(TotalAmount * ((decimal)discount.DiscountValue / 100));
+                }
+            }
 
+            FinalAmount = TotalAmount - DiscountAmount;
             return Page();
         }
 
         private void LoadTotalAmountFromSession()
         {
             var foodTotalStr = HttpContext.Session.GetString("FoodTotalAmount");
-            if (!string.IsNullOrEmpty(foodTotalStr))
-            {
-                TotalAmount = JsonSerializer.Deserialize<int>(foodTotalStr);
-            }
-            else
-            {
-                TotalAmount = 0;
-            }
+            TotalAmount = !string.IsNullOrEmpty(foodTotalStr)
+                ? JsonSerializer.Deserialize<int>(foodTotalStr)
+                : 0;
         }
+
         public async Task<IActionResult> OnPostApplyVoucherAsync()
         {
             LoadTotalAmountFromSession();
@@ -95,11 +98,21 @@ namespace BookingTicketOnline.Pages
 
         public async Task<IActionResult> OnPostCheckoutAsync()
         {
-            LoadTotalAmountFromSession();
-
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            LoadTotalAmountFromSession();
+
+            var discountId = HttpContext.Session.GetInt32("DiscountId");
+            if (discountId.HasValue)
+            {
+                var discount = await _context.Discounts.FindAsync(discountId.Value);
+                if (discount != null)
+                {
+                    DiscountAmount = (int)(TotalAmount * ((decimal)discount.DiscountValue / 100));
+                }
             }
 
             FinalAmount = TotalAmount - DiscountAmount;
