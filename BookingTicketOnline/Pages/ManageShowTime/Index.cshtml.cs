@@ -19,16 +19,29 @@ namespace BookingTicketOnline.Pages.ManageShowTime
         }
 
         public List<Models.Showtime> Showtimes { get; set; }
+        public List<Models.Movie> Movies { get; set; }
+        public List<Models.Room> Rooms { get; set; }
 
-        public async Task OnGetAsync()
+        public DateTime StartOfWeek { get; set; }
+
+        public async Task OnGetAsync(int? weekOffset)
         {
+            // Xác định tuần hiện tại hoặc tuần được điều hướng
+            StartOfWeek = DateTime.Now.AddDays(-(int)DateTime.Now.DayOfWeek);
+            if (weekOffset.HasValue)
+            {
+                StartOfWeek = StartOfWeek.AddDays(weekOffset.Value * 7);
+            }
 
+            // Lấy các suất chiếu của tuần
             Showtimes = await _context.Showtimes
                 .Include(s => s.Movie)
                 .Include(s => s.Room)
-                    .ThenInclude(r => r.Cinema)
+                .Where(s => s.Date >= StartOfWeek && s.Date < StartOfWeek.AddDays(7) && s.RoomId == 1)
                 .ToListAsync();
-        }
 
+            Movies = await _context.Movies.ToListAsync();
+            Rooms = await _context.Rooms.ToListAsync();
+        }
     }
 }

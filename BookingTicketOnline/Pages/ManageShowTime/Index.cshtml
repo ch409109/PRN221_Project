@@ -1,70 +1,116 @@
-﻿@page
+﻿@page "{weekOffset:int?}"
 @model BookingTicketOnline.Pages.ManageShowTime.IndexModel
 @{
-    ViewData["Title"] = "Manage ShowTime";
+    ViewData["Title"] = "Weekly Showtime Scheduler";
+    var startOfWeek = Model.StartOfWeek;
+    int weekOffset = RouteData.Values["weekOffset"] != null ? int.Parse(RouteData.Values["weekOffset"].ToString()) : 0;
 }
 
-<h2>Showtime Schedule</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <style>
+            <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .scheduler {
+            display: inline-block;
+            text-align: left;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .table-container {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 2px;
+            margin-top: 20px;
+        }
+        .table-container div {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .time-slot {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+        .event {
+            background-color: #3399ff;
+            color: white;
+            padding: 4px;
+            border-radius: 4px;
+        }
+        .day-header {
+            background-color: #eee;
+            font-weight: bold;
+        }
+        .button-container {
+            margin: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+    </style>
+    </style>
+</head>
+<body>
 
-<!-- Calendar view with weekly slots -->
-<div class="container mt-4">
-    <div class="calendar-view">
-        <div class="row text-center bg-primary text-white">
-            <div class="col">Sunday</div>
-            <div class="col">Monday</div>
-            <div class="col">Tuesday</div>
-            <div class="col">Wednesday</div>
-            <div class="col">Thursday</div>
-            <div class="col">Friday</div>
-            <div class="col">Saturday</div>
+    <div class="scheduler">
+        <div class="header">Weekly Showtime Scheduler</div>
+        <div class="button-container">
+            <a asp-page="./Index" asp-route-weekOffset="@(weekOffset - 1)">
+                <button>&#9664; Previous Week</button>
+            </a>
+            <span>@startOfWeek.ToString("MMM d") - @startOfWeek.AddDays(6).ToString("MMM d, yyyy")</span>
+            <a asp-page="./Index" asp-route-weekOffset="@(weekOffset + 1)">
+                <button>Next Week &#9654;</button>
+            </a>
         </div>
-        <div class="row border">
-            @foreach (var day in Enumerable.Range(0, 7))
+
+        <div class="table-container">
+            <!-- Header row with days -->
+            <div></div>
+            @for (int i = 0; i < 7; i++)
             {
-                <div class="col border">
-                    <div class="day-slot">
-                        <strong>@DateTime.Today.AddDays(day).ToString("dd MMM yyyy")</strong>
-                        <ul class="showtime-list mt-2">
-                            @foreach (var show in Model.Showtimes.Where(s => s.Date?.DayOfWeek == (DayOfWeek)day))
-                            {
-                                <li>
-                                    <strong>@show.Movie?.Title</strong><br />
-                                    Room: @show.Room?.Name <br />
-                                    Start: @show.StartTime <br />
-                                    End: @show.EndTime
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
+                <div class="day-header">@startOfWeek.AddDays(i).ToString("ddd M/d")</div>
+            }
+
+            <!-- Time slots and events -->
+            @for (int hour = 0; hour < 24; hour++)
+            {
+                <div class="time-slot">@hour:00</div>
+                @for (int day = 0; day < 7; day++)
+                {
+                    var currentDay = startOfWeek.AddDays(day);
+                    var showtime = Model.Showtimes.FirstOrDefault(s => s.Date == currentDay.Date && s.StartTime?.Hours == hour);
+
+                    if (showtime != null)
+                    {
+                        <div class="event">
+                            @showtime.Movie?.Title - @showtime.Room?.Name
+                            <br />
+                            @showtime.StartTime?.ToString(@"hh\:mm") - @showtime.EndTime?.ToString(@"hh\:mm")
+                        </div>
+                    }
+                    else
+                    {
+                        <div></div>
+                    }
+                }
             }
         </div>
     </div>
-</div>
 
-<!-- Styling for calendar view -->
-<style>
-    .calendar-view {
-        border: 1px solid #ddd;
-        padding: 10px;
-        border-radius: 8px;
-        background-color: #f9f9f9;
-    }
-
-    .day-slot {
-        padding: 8px;
-        min-height: 150px;
-    }
-
-    .showtime-list {
-        list-style-type: none;
-        padding: 0;
-    }
-
-        .showtime-list li {
-            background: #e3f2fd;
-            margin: 5px 0;
-            padding: 5px;
-            border-radius: 5px;
-        }
-</style>
+</body>
+</html>
