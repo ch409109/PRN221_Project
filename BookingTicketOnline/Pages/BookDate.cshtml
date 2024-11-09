@@ -207,9 +207,11 @@
     </style>
 </head>
 <body>
-
-
     <div class="container">
+        <a href="/Movie/MovieDetails2?id=@Model.Movie?.Id" class="back-button">
+            <i>←</i> Quay lại
+        </a>
+
         <div class="header">
             <h1>Lịch Chiếu @Model.Movie?.Title</h1>
             <div class="location-select">
@@ -220,7 +222,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="dates">
             @foreach (var date in Model.WeekDates)

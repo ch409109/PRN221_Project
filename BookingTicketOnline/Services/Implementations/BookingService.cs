@@ -14,7 +14,7 @@ namespace BookingTicketOnline.Services.Implementations
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<IActionResult> ProcessBookingAsync(int? totalPrice, List<(int FoodAndDrinkId, int Quantity)> selectedItems, int? discountId = null)
+        public async Task<Booking> ProcessBookingAsync(int? totalPrice, List<(int FoodAndDrinkId, int Quantity)> selectedItems, int? discountId = null)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
 
@@ -24,7 +24,7 @@ namespace BookingTicketOnline.Services.Implementations
                 var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst("UserId");
                 if (userIdClaim == null)
                 {
-                    return new UnauthorizedResult();
+                    throw new UnauthorizedAccessException("User not authorized.");
                 }
                 int userId = int.Parse(userIdClaim.Value);
 
@@ -74,7 +74,7 @@ namespace BookingTicketOnline.Services.Implementations
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
-                return new OkObjectResult(new { BookingId = booking.Id });
+                return booking;
             }
             catch (Exception)
             {
