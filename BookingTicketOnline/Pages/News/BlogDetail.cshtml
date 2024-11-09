@@ -11,55 +11,53 @@
     <link rel="stylesheet" href="../css/blog.css" />
     <link rel="stylesheet" href="../css/mobile.css" />
     <link rel="stylesheet" href="../css/blogpost.css" />
-    <title>Cinematic-Blog Detail</title>
+    <title>Cinematic-Trang tin tức</title>
 </head>
 <style>
     .row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
 </style>
 <body>
     <div class="max-width-1 m-auto">
         <hr>
     </div>
     <div class="post-img">
-        <img src="~/img/NewsImage/@Model.news.Image" alt="">
+        <img src="~/img/NewsImage/@Model.news.Image" style="height: 100%;" alt="News Image">
     </div>
     <div class="m-auto blog-post-content max-width-2 m-auto my-2">
-        <h1 class="font1">The heaven for bloggers</h1>
+        <h1 class="font1">@Model.news.Title</h1>
         <div class="blogpost-meta">
             <div class="author-info">
-                <div>
-                    <b>
-                        Author - @Model.news.CreateByNavigation?.Username
-                    </b>
-                </div>
-                <div>@Model.news.CreateAt</div>
+                <div><b>Người tạo - @Model.news.CreateByNavigation?.Username</b></div>
+                <div>Ngày đăng - @Model.news.CreateAt?.ToString("dd/MM/yyyy")</div>
             </div>
-          
         </div>
         <p class="font1">
-           @Model.news.Content
+            @Model.news.Content
         </p>
     </div>
 
     <div class="max-width-1 m-auto"><hr></div>
     <div class="home-articles max-width-1 m-auto font2">
-        <h2>People who read this also read</h2>
+        <h2>Các tin khác</h2>
         <div class="row">
-            @foreach (var news in @Model.News)
+            @foreach (var item in Model.News)
             {
                 <div class="home-article more-post">
                     <div class="home-article-img">
-                        <img src="~/img/NewsImage/@Model.news.Image" alt="article">
+                        <img src="~/img/NewsImage/@item.Image" style="width: 300px; height:225px" alt="article">
+                    </div>
+                    <div class="home-article-content font1 center">
+                        <a asp-page="/News/BlogDetail" asp-route-id="@item.Id">
+                            <h3>@item.Title</h3>
+                        </a>
+                        <div>@item.CreateByNavigation?.Username</div>
+                        <span>@item.CreateAt?.ToString("dd/MM/yyyy")</span>
+                    </div>
                 </div>
-                <div class="home-article-content font1 center">
-                        <a asp-page="/News/BlogDetail" asp-route-id="@news.Id"><h3>@Model.news.Title</h3></a>
-                    <div>@Model.news.CreateByNavigation?.Username</div>
-                    <span>@Model.news.CreateAt</span>
-                </div>
-            </div>
             }
         </div>
     </div>

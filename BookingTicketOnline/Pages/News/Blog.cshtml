@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/utils.css">
     <link rel="stylesheet" href="../css/blog.css">
     <link rel="stylesheet" href="../css/mobile.css">
-    <title>Cinematic-Blog</title>
+    <title>Cinematic-Trang tin tức</title>
 </head>
 <body>
     <div class="max-width-1 m-auto">
@@ -22,14 +22,14 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search by Title" name="SearchTerm" value="@Model.SearchTerm" />
                     <button class="btn btn-outline-secondary" type="submit">
-                        <i class="bi bi-search"></i> Search
+                        <i class="bi bi-search"></i> Tìm kiếm
                     </button>
                 </div>
             </div>
         </div>
     </form>
     <div class="home-articles max-width-1 m-auto font2">
-        <h2>Featured Articles</h2>
+        <h2>Tin tức</h2>
         @foreach (var news in @Model.News)
     {
             <div class="home-article">
