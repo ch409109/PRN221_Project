@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BookingTicketOnline.Models;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.ManageDiscount
 {
@@ -20,12 +21,21 @@ namespace BookingTicketOnline.Pages.ManageDiscount
 
         public IList<Discount> Discount { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            var roleIdClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(roleIdClaim) || roleIdClaim != "3")
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+
             if (_context.Discounts != null)
             {
                 Discount = await _context.Discounts.ToListAsync();
             }
+
+            return Page();
         }
     }
 }

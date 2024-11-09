@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BookingTicketOnline.Models;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.ManageDiscount
 {
@@ -20,6 +21,13 @@ namespace BookingTicketOnline.Pages.ManageDiscount
 
         public IActionResult OnGet()
         {
+            var roleIdClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(roleIdClaim) || roleIdClaim != "3")
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+
             return Page();
         }
 
@@ -37,6 +45,7 @@ namespace BookingTicketOnline.Pages.ManageDiscount
 
             _context.Discounts.Add(Discount);
             await _context.SaveChangesAsync();
+            TempData["success"] = "Discount voucher created successfully";
 
             return RedirectToPage("./Index");
         }

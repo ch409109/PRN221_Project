@@ -2,6 +2,7 @@
 @model BookingTicketOnline.Pages.ManageDiscount.IndexModel
 @{
     ViewData["Title"] = "Discounts Index";
+    Layout = "_OwnerLayout";
 }
 <h1>Discounts</h1>
 
@@ -55,8 +56,7 @@
                     <span class="badge @(isActive ? "bg-success" : "bg-danger")">@statusText</span>
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
                 </td>
             </tr>
         }

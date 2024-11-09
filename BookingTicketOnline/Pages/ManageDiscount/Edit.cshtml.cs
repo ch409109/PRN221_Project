@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BookingTicketOnline.Models;
+using System.Security.Claims;
 
 namespace BookingTicketOnline.Pages.ManageDiscount
 {
@@ -24,6 +25,13 @@ namespace BookingTicketOnline.Pages.ManageDiscount
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            var roleIdClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(roleIdClaim) || roleIdClaim != "3")
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+
             if (id == null || _context.Discounts == null)
             {
                 return NotFound();
@@ -37,9 +45,6 @@ namespace BookingTicketOnline.Pages.ManageDiscount
             Discount = discount;
             return Page();
         }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -47,11 +52,25 @@ namespace BookingTicketOnline.Pages.ManageDiscount
                 return Page();
             }
 
-            _context.Attach(Discount).State = EntityState.Modified;
+            var existingDiscount = await _context.Discounts
+                .AsNoTracking()
+                .FirstOrDefaultAsync(d => d.Id == Discount.Id);
+
+            if (existingDiscount == null)
+            {
+                return NotFound();
+            }
+
+            existingDiscount.Code = Discount.Code;
+            existingDiscount.DiscountValue = Discount.DiscountValue;
+            existingDiscount.EndDate = Discount.EndDate;
+
+            _context.Attach(existingDiscount).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
+                TempData["success"] = "Discount voucher updated successfully";
             }
             catch (DbUpdateConcurrencyException)
             {
