@@ -63,8 +63,7 @@ namespace BookingTicketOnline.Pages.Foods
             .Where(f => f.Status == "Active")
             .ToListAsync();
             decimal totalAmount = CalculateTotalAmount();
-            HttpContext.Session.SetString("FoodTotalAmount",
-                JsonSerializer.Serialize(totalAmount));
+            HttpContext.Session.SetInt32("FoodTotalAmount", (int)totalAmount);
 
             if (!User.Identity.IsAuthenticated)
             {

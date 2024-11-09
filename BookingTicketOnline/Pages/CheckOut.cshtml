@@ -97,11 +97,35 @@
         <h2 class="text-center mb-5 text-uppercase fw-bold">CHECKOUT</h2>
 
         <form method="post">
-            <!-- Step 1: Voucher -->
+            <!-- Step 1: Order Summary -->
             <div class="row mb-4">
                 <div class="col-md-7">
                     <div class="step-title">
                         <span class="step-number">1</span>
+                        Order Summary
+                    </div>
+                    <div class="order-details p-3 border rounded">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Seats Total:</span>
+                            <span>@Model.SeatTotalAmount.ToString("N0") VND</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Foods Total:</span>
+                            <span>@Model.FoodTotalAmount.ToString("N0") VND</span>
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold border-top pt-2">
+                            <span>Subtotal:</span>
+                            <span>@Model.TotalAmount.ToString("N0") VND</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Voucher -->
+            <div class="row mb-4">
+                <div class="col-md-7">
+                    <div class="step-title">
+                        <span class="step-number">2</span>
                         Discount Code
                     </div>
                     <div class="voucher-input">
@@ -118,23 +142,22 @@
                     <span asp-validation-for="VoucherCode" class="text-danger"></span>
                     @if (!string.IsNullOrEmpty(ViewData["VoucherMessage"]?.ToString()))
                     {
-                        <div class="alert alert-success">@ViewData["VoucherMessage"]</div>
+                        <div class="alert alert-success mt-2">@ViewData["VoucherMessage"]</div>
                     }
-
                 </div>
                 <div class="col-md-5">
                     <div class="text-end">
-                        <div class="price-label">Subtotal</div>
-                        <div class="price-value">@Model.TotalAmount</div>
+                        <div class="price-label">Discount Amount</div>
+                        <div class="price-value">@Model.DiscountAmount.ToString("N0") VND</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 2: Payment Method -->
+            <!-- Step 3: Payment Method -->
             <div class="row mb-4">
                 <div class="col-md-7">
                     <div class="step-title">
-                        <span class="step-number">2</span>
+                        <span class="step-number">3</span>
                         Payment Method
                     </div>
                     <div class="payment-method">
@@ -151,12 +174,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
-                    <div class="text-end">
-                        <div class="price-label">Discount</div>
-                        <div class="price-value">@Model.DiscountAmount</div>
-                    </div>
-                </div>
             </div>
 
             <!-- Total Section -->
@@ -167,10 +184,12 @@
                     </div>
                     <div class="col-md-5">
                         <div class="text-end">
+                            <div class="price-label">Subtotal</div>
+                            <div class="price-value">@Model.TotalAmount.ToString("N0") VND</div>
                             <div class="price-label">Discount</div>
-                            <div class="price-value">@Model.DiscountAmount</div>
-                            <div class="price-label fw-bold">Total Payment</div>
-                            <div class="price-value text-danger fs-4">@Model.FinalAmount</div>
+                            <div class="price-value">@Model.DiscountAmount.ToString("N0") VND</div>
+                            <div class="price-label fw-bold mt-2">Total Payment</div>
+                            <div class="price-value text-danger fs-4">@Model.FinalAmount.ToString("N0") VND</div>
                         </div>
                     </div>
                 </div>

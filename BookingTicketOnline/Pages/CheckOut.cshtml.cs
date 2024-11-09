@@ -1,10 +1,7 @@
 ﻿using BookingTicketOnline.Models;
 using BookingTicketOnline.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Text.Json;
 
 namespace BookingTicketOnline.Pages
@@ -28,9 +25,12 @@ namespace BookingTicketOnline.Pages
         [BindProperty]
         public string PaymentMethod { get; set; } = "VNPay";
 
+        public int SeatTotalAmount { get; set; }
+        public int FoodTotalAmount { get; set; }
         public int TotalAmount { get; set; }
         public int DiscountAmount { get; set; }
         public int FinalAmount { get; set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
             if (!User.Identity.IsAuthenticated)
@@ -38,7 +38,7 @@ namespace BookingTicketOnline.Pages
                 return RedirectToPage("/Login", new { ReturnUrl = "/CheckOut" });
             }
 
-            LoadTotalAmountFromSession();
+            LoadAmountsFromSession();
             var discountId = HttpContext.Session.GetInt32("DiscountId");
             if (discountId.HasValue)
             {
@@ -53,17 +53,21 @@ namespace BookingTicketOnline.Pages
             return Page();
         }
 
-        private void LoadTotalAmountFromSession()
+        private void LoadAmountsFromSession()
         {
-            var foodTotalStr = HttpContext.Session.GetString("FoodTotalAmount");
-            TotalAmount = !string.IsNullOrEmpty(foodTotalStr)
-                ? JsonSerializer.Deserialize<int>(foodTotalStr)
-                : 0;
+            // Lấy tổng tiền ghế
+            SeatTotalAmount = HttpContext.Session.GetInt32("SeatTotalAmount") ?? 0;
+
+            // Lấy tổng tiền đồ ăn
+            FoodTotalAmount = HttpContext.Session.GetInt32("FoodTotalAmount") ?? 0;
+
+            // Tính tổng tiền
+            TotalAmount = SeatTotalAmount + FoodTotalAmount;
         }
 
         public async Task<IActionResult> OnPostApplyVoucherAsync()
         {
-            LoadTotalAmountFromSession();
+            LoadAmountsFromSession();
 
             if (string.IsNullOrWhiteSpace(VoucherCode))
             {
@@ -103,7 +107,7 @@ namespace BookingTicketOnline.Pages
                 return Page();
             }
 
-            LoadTotalAmountFromSession();
+            LoadAmountsFromSession();
 
             var discountId = HttpContext.Session.GetInt32("DiscountId");
             if (discountId.HasValue)

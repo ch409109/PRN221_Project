@@ -1,5 +1,7 @@
 ﻿using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace BookingTicketOnline.Services.Implementations
 {
@@ -40,6 +42,27 @@ namespace BookingTicketOnline.Services.Implementations
 
                 _context.Bookings.Add(booking);
                 await _context.SaveChangesAsync();
+
+                var selectedSeatIdsJson = _httpContextAccessor.HttpContext.Session.GetString("SelectedSeatIds");
+                if (!string.IsNullOrEmpty(selectedSeatIdsJson))
+                {
+                    var selectedSeatIds = JsonSerializer.Deserialize<List<int>>(selectedSeatIdsJson);
+                    var seats = await _context.Seats
+                        .Include(s => s.Row)
+                        .Where(s => selectedSeatIds.Contains(s.Id))
+                        .ToListAsync();
+
+                    foreach (var seat in seats)
+                    {
+                        var bookingSeat = new BookingSeatsDetail
+                        {
+                            BookingId = booking.Id,
+                            SeatId = seat.Id,
+                            Price = seat.Row.Type.ToLower() == "vip" ? 150000 : 120000
+                        };
+                        _context.BookingSeatsDetails.Add(bookingSeat);
+                    }
+                }
 
                 foreach (var (foodAndDrinkId, quantity) in selectedItems)
                 {
