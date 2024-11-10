@@ -1,4 +1,4 @@
-using BookingTicketOnline.Models;
+﻿using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +31,24 @@ namespace BookingTicketOnline.Pages.User
         }
         public async Task<ActionResult> OnPostAsync()
         {
+            var existingUserByEmail = await _context.Users
+            .FirstOrDefaultAsync(u => u.Email == NewUser.Email);
+            if (existingUserByEmail != null)
+            {
+                TempData["error"] = "Email đã tồn tại trong hệ thống!";
+                Roles = await _context.Roles.ToListAsync();
+                return Page();
+            }
+
+            var existingUserByUsername = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == NewUser.Username);
+            if (existingUserByUsername != null)
+            {
+                TempData["error"] = "Username đã tồn tại trong hệ thống!";
+                Roles = await _context.Roles.ToListAsync();
+                return Page();
+            }
+
             NewUser.Status = IsActivated ? "Active" : "Inactive";
             string password = GeneratedPassword();
             SendEmail(NewUser.Username, password, NewUser.Email);
@@ -41,6 +59,7 @@ namespace BookingTicketOnline.Pages.User
             NewUser.PhoneNumber = "0123456789";
             _context.Users.Add(NewUser);
             await _context.SaveChangesAsync();
+            TempData["success"] = "Tạo tài khoản thành công!";
             return RedirectToPage("/User/ManageUsers");
         }
 
