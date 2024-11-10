@@ -12,7 +12,7 @@ namespace BookingTicketOnline.Pages.Movie
         public Models.Movie? Movie { get; set; }
         public List<Feedback> Feedbacks { get; set; } = new();
         public int TotalReviews { get; set; }
-        public float AverageRating { get; set; }
+        public double AverageRating { get; set; }
 
 
         [BindProperty]
@@ -38,13 +38,14 @@ namespace BookingTicketOnline.Pages.Movie
             Feedbacks = await _context.Feedbacks
                  .Where(f => f.MovieId == id)
                  .Include(f => f.User)
+                 .OrderByDescending(f => f.CreateAt)
                  .ToListAsync();
 
             HttpContext.Session.SetInt32("MovieId", Movie.Id);
 
             if (Feedbacks.Any())
             {
-                AverageRating = (float)Feedbacks.Average(f => f.Rate ?? 0);
+                AverageRating = Feedbacks.Average(f => f.Rate ?? 0);
                 TotalReviews = Feedbacks.Count;
             }
 
@@ -53,7 +54,9 @@ namespace BookingTicketOnline.Pages.Movie
             if (userIdClaim != null && int.TryParse(userIdClaim, out int userId))
             {
                 CanComment = await _context.Bookings
-                    .AnyAsync(b => b.UserId == userId /*&& b.MovieId == id*/ && b.Status == "Confirmed");
+                    .AnyAsync(b => b.UserId == userId
+                    && b.Showtime.MovieId == id
+                    && b.Status == "Confirmed");
             }
             else
             {

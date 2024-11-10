@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Website</title>
+    <title>Cinematic</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
@@ -52,7 +52,7 @@
         justify-content: space-between;
         padding: 15px 100px;
         transition: 0.5s;
-        /* background: var(--main-color); */
+        background: #0e0e0e36;
     }
 
         header.shadow {
@@ -70,12 +70,13 @@
 
 
     .logo {
-        font-size: 1.1rem;
+        font-size: 30px;
         font-weight: 600;
         align-items: center;
         color: var(--bg-color);
         display: flex;
         column-gap: 0.5rem;
+        
     }
 
     .bx {
@@ -92,8 +93,8 @@
         }
 
         .navbar a {
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 1.1rem;
+            font-weight: 700;
             color: var(--bg-color);
         }
 
@@ -150,7 +151,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: inherit;
             object-position: center;
             z-index: -1;
         }
@@ -382,31 +383,31 @@
 
         <!-- menu  -->
         <ul class="navbar">
-            <li><a href="#home" class="home-active">Home</a></li>
-            <li><a href="#movies">Movies</a></li>
+            <li><a href="#home" class="home-active">Trang chủ</a></li>
+            <li><a href="#movies">Phim</a></li>
             <li><a href="#coming">Coming</a></li>
-            <li><a asp-page="/News/Blog">Newsletter</a></li>
-        </ul>
-        <!-- Link Swiper's CSS -->
-        @if (User.Identity.IsAuthenticated)
-        {
-            <div class="profile-dropdown">
-                <span class="user-name" onclick="toggleDropdown()">Hello, @User.Identity.Name</span>
-                <div id="dropdown-menu" class="dropdown-content">
-                    <ul>
-                        <li><a asp-page="/UserProfile">Thông tin tài khoản</a></li>
-                        <li><a asp-page="/BookingHistory">Lịch sử giao dịch</a></li>
-                        <li><a asp-page="/Logout">Đăng xuất</a></li>
-                    </ul>
+            <li><a asp-page="/News/Blog">Tin Tức</a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="profile-dropdown">
+                    <span class="user-name" onclick="toggleDropdown()">Hello, @User.Identity.Name</span>
+                    <div id="dropdown-menu" class="dropdown-content">
+                        <ul>
+                            <li><a asp-page="/UserProfile">Thông tin tài khoản</a></li>
+                            <li><a asp-page="/BookingHistory">Lịch sử giao dịch</a></li>
+                            <li><a asp-page="/Logout">Đăng xuất</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        }
-        else
-        {
-            <!-- Hiển thị nút đăng nhập và đăng ký nếu chưa đăng nhập -->
-            <a asp-page="/Login" class="btn">Sign In</a>
-            <a asp-page="/SignUp" class="btn">Sign Up</a>
-        }
+            }
+            else
+            {
+                <!-- Đưa các nút vào trong navbar để chúng nằm cạnh nhau -->
+                <li><a asp-page="/Login" class="btn">Đăng nhập</a></li>
+                <li><a asp-page="/SignUp" class="btn">Đăng ký</a></li>
+            }
+        </ul>
+
 
     </header>
 
@@ -462,7 +463,7 @@
                         <div class="box-img">
                             <img src="~/img/@movie.Poster" alt="@movie.Title">
                         </div>
-                        <h3><a asp-page="/Movie/MovieDetails2" asp-route-id="@movie.Id">@movie.Title</a></h3>
+                        <h3><a asp-page="/Movie/MovieDetails2" asp-route-id="@movie.Id" style="color: white; font-weight: bold;  font-size: 18px">@movie.Title</a></h3>
                         <span>
                             @if (movie.Duration.HasValue)
                             {
@@ -498,7 +499,9 @@
                         <div class="box-img">
                             <img src="~/img/@movie.Poster" alt="@movie.Title">
                         </div>
-                        <h3><a asp-page="/Movie/MovieDetails2" asp-route-id="@movie.Id">@movie.Title</a></h3>
+                        <h3>
+                            <a asp-page="/Movie/MovieDetails2" asp-route-id="@movie.Id" style="color: white; font-weight: bold; font-size: 18px">@movie.Title</a>
+                        </h3>
                         <span>
                             @if (movie.Duration.HasValue)
                             {

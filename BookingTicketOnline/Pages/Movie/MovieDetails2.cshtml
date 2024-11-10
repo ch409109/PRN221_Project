@@ -113,7 +113,7 @@
                         {
                             <!-- Hiển thị nút đăng nhập và đăng ký nếu chưa đăng nhập -->
                             <a class="nav-link" asp-page="/Login">Đăng nhập</a>
-                            <a class="nav-link" asp-page="/SignUp">Đăng kí</a>
+                            <a class="nav-link" asp-page="/SignUp">Đăng ký</a>
                         }
                     </ul>
                 </nav>
@@ -165,34 +165,38 @@
                                 <div class="movie-rate__point">
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <p>
-                                        <span>@Model.AverageRating.ToString("0.0")</span> / 10<br>
+                                        <span>@Model.AverageRating.ToString("0.0")</span> / 5<br>
                                         <span class="rv">@Model.TotalReviews Đánh giá</span>
                                     </p>
                                 </div>
                                 <div class="movie-rate__rate-star">
                                     <p>Đánh giá phim: </p>
                                     @{
-                                        int fullStars = (int)(@Model.AverageRating); // Calculate full stars (average rating scaled to 5)
-                                        int halfStar = (@Model.AverageRating % 2 >= 0.5) ? 1 : 0; // Check if half-star should be added
-                                        int emptyStars = 10 - fullStars - halfStar; // Calculate remaining empty stars
+                                        double rating = @Model.AverageRating;
+
+                                        // Tính số sao đầy, làm tròn xuống
+                                        int fullStars = (int)Math.Floor(rating);
+
+                                        // Tính số sao nửa, chỉ hiển thị khi phần thập phân lớn hơn hoặc bằng 0.5
+                                        int halfStar = (rating - fullStars >= 0.5) ? 1 : 0;
+
+                                        // Tính số sao trống
+                                        int emptyStars = 5 - fullStars - halfStar;
                                     }
 
-                                    <!-- Display full stars -->
                                     @for (int i = 0; i < fullStars; i++)
                                     {
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star full-star"></i>
                                     }
 
-                                    <!-- Display half star if applicable -->
                                     @if (halfStar == 1)
                                     {
-                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-half-o half-star"></i>
                                     }
 
-                                    <!-- Display empty stars -->
                                     @for (int i = 0; i < emptyStars; i++)
                                     {
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o empty-star"></i>
                                     }
                                 </div>
                             </div>
@@ -233,12 +237,12 @@
                                     <div class="rating">
                                         @for (int i = 5; i >= 1; i--)
                                         {
-                                            <input type="radio" id="star-@i" name="Rate" value="@i" />
+                                            <input type="radio" id="star-@i" name="Rate" value="@i" /> 
                                             <label for="star-@i" title="Rate @i stars">★</label>
                                         }
-                                    </div>
-                                    <input type="text" name="CommentText" placeholder="Leave a Comment" required />
-                                    <button type="submit">Submit</button>
+                                    </div> <br />
+                                    <input type="text" name="CommentText" placeholder="Leave a Comment" required style="width: 600px" />
+                                    <button type="submit" style="padding: 12px 12px 12px 12px; background-color: #171B27; color: white; border: none; border-radius: 4px; cursor: pointer; height: 60px">Gửi</button>
                                 </form>
                             </div>
                         }
