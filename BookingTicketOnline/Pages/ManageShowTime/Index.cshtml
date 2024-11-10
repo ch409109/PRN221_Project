@@ -1,6 +1,7 @@
 ﻿@page "{weekOffset:int?}"
 @model BookingTicketOnline.Pages.ManageShowTime.IndexModel
 @{
+	Layout = "_MovieTheaterOwnerLayout";
 	ViewData["Title"] = "Weekly Showtime Scheduler";
 	var startOfWeek = Model.StartOfWeek;
 	int weekOffset = RouteData.Values["weekOffset"] != null ? int.Parse(RouteData.Values["weekOffset"].ToString()) : 0;

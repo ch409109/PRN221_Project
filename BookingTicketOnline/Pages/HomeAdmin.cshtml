@@ -2,7 +2,7 @@
 @model BookingTicketOnline.Pages.HomeAdminModel
 
 @{
-    Layout = null;
+    Layout = "_AdminLayout";
 }
 
 <!DOCTYPE html>
@@ -17,81 +17,24 @@
 </head>
 
 <body>
-
-    <!-- Header -->
-    <header class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">CineMatic System</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
-                    </li>
-
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        if (User.IsInRole("1"))
-                        {
-                            <!-- Hiển thị tên người dùng và dropdown menu nếu đã đăng nhập -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Hello, @User.Identity.Name
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                                    <li><a class="dropdown-item" href="#">Settings & Privacy</a></li>
-                                    <li><a class="dropdown-item" href="#">Help & Support</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Logout">Logout</a></li>
-                                </ul>
-                            </li>
-                        }
-                        else
-                        {
-                            <script>
-                                window.location.href = "/AccessDenied";
-                            </script>
-                        }
-                    }
-                    else
-                    {
-                        Response.Redirect("/Login");
-                    }
-                </ul>
-            </div>
-        </div>
-    </header>
-
-
-    <!-- Tiêu đề trang -->
-    <div class="sticky-top bg-light py-3 shadow-sm">
-        <div class="container">
-            <h1 class="h4 mb-0">Admin Dashboard</h1>
-        </div>
-    </div>
-
     <!-- Nội dung trang -->
     <div class="container my-5">
         <div class="row">
             <div class="col-md-6">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Manage Users</h5>
-                        <p class="card-text">View and manage users.</p>
-                        <a asp-page="User/ManageUsers" class="btn btn-primary">Go to Manage Users</a>
+                        <h5 class="card-title">Quản lý người dùng</h5>
+                        <p class="card-text">Xem và quản lý người dùng.</p>
+                        <a asp-page="User/ManageUsers" class="btn btn-primary">Đi đến trang quản lý người dùng</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Manage Film Categories</h5>
-                        <p class="card-text">View and manage film categories.</p>
-                        <a asp-page="/Category/ManageCategories" class="btn btn-primary">Go to Manage Film Categories</a>
+                        <h5 class="card-title">Quản lý danh mục phim</h5>
+                        <p class="card-text">Xem và quản lý danh mục phim.</p>
+                        <a asp-page="/Category/ManageCategories" class="btn btn-primary">Đi đến trang quản lý danh mục phim</a>
                     </div>
                 </div>
             </div>
@@ -100,43 +43,24 @@
             <div class="col-md-6">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Manage Cinemas</h5>
-                        <p class="card-text">View and manage cinemas.</p>
-                        <a asp-page="/Cinema/ManageCinemas" class="btn btn-primary">Go to Manage Cinemas</a>
+                        <h5 class="card-title">Quản lý rạp phim</h5>
+                        <p class="card-text">Xem và quản lý danh sách rạp phim.</p>
+                        <a asp-page="/Cinema/ManageCinemas" class="btn btn-primary">Đi đến trang quản lý danh sách rạp phim</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Manage Movie Trailers</h5>
-                        <p class="card-text">View and manage film trailers.</p>
-                        <a href="manage_news.html" class="btn btn-primary">Go to Manage Film Trailers</a>
+                        <h5 class="card-title">Quản lý bộ phim</h5>
+                        <p class="card-text">Xem và quản lý danh sách bộ phim.</p>
+                        <a asp-page="/Movie/ManageMovies" class="btn btn-primary">Đi đến trang quản lý danh sách bộ phim</a>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card mb-4">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Manage Movies</h5>
-                        <p class="card-text">View and manage movies.</p>
-                        <a asp-page="/Movie/ManageMovies" class="btn btn-primary">Go to Manage Movies</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h3>Latest Updates</h3>
-                <div class="alert alert-info" role="alert">
-                    Stay tuned for new updates and features coming soon!
                 </div>
             </div>
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
