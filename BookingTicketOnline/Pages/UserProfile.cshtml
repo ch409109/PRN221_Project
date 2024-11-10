@@ -1,20 +1,15 @@
 ﻿@page
 @model BookingTicketOnline.Pages.UserProfileModel
-@{
-    Layout = null;
-}
 
-
-<!--Website: wwww.codingdung.com-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodingDung | Profile Template</title>
-    <link rel="stylesheet" href="profiletemp.css">
+    <title>Account settings</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
@@ -27,8 +22,7 @@
                 <div class="row no-gutters row-bordered row-border-light">
                     <div class="col-md-3 pt-0">
                         <div class="list-group list-group-flush account-settings-links">
-                            <a class="list-group-item list-group-item-action active" data-toggle="list"
-                               href="#account-general">General</a>
+                            <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
                         </div>
                     </div>
                     <div class="col-md-9">
@@ -38,22 +32,22 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label class="form-label">Họ và tên</label>
-                                        <input type="text" class="form-control" asp-for="FullName">
+                                        <input type="text" class="form-control" asp-for="FullName" id="FullName" onchange="checkChanges()">
                                         <span asp-validation-for="FullName" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Email</label>
-                                        <input type="text" class="form-control" asp-for="Email">
+                                        <input type="text" class="form-control" asp-for="Email" id="Email" onchange="checkChanges()">
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Số điện thoại</label>
-                                        <input type="text" class="form-control" asp-for="PhoneNumber">
+                                        <input type="text" class="form-control" asp-for="PhoneNumber" id="PhoneNumber" onchange="checkChanges()">
                                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Ngày sinh</label>
-                                        <input type="date" class="form-control" asp-for="Dob">
+                                        <input type="date" class="form-control" asp-for="Dob" id="Dob" onchange="checkChanges()">
                                         <span asp-validation-for="Dob" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
@@ -63,18 +57,18 @@
                                     <div id="changePasswordFields" style="display:none;">
                                         <div class="form-group">
                                             <label class="form-label">Mật khẩu mới</label>
-                                            <input type="password" asp-for="NewPassword" class="form-control" />
+                                            <input type="password" asp-for="NewPassword" class="form-control" id="NewPassword" onchange="checkChanges()" />
                                             <span asp-validation-for="NewPassword" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Xác nhận mật khẩu mới</label>
-                                            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+                                            <input type="password" asp-for="ConfirmPassword" class="form-control" id="ConfirmPassword" onchange="checkChanges()" />
                                             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-right mt-3">
-                                    <button type="submit" class="btn btn-primary">Save changes</button>&nbsp;
+                                    <button type="submit" class="btn btn-primary" id="saveButton" style="display:none;">Save changes</button>&nbsp;
                                     <button type="button" class="btn btn-default">Cancel</button>
                                 </div>
                             </div>
@@ -85,23 +79,26 @@
         </div>
     </form>
 
-                        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-                        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
-                        <script>
-                            // Script để hiển thị hoặc ẩn trường mật khẩu mới
-                            function toggleChangePassword() {
-                                var changePasswordFields = document.getElementById('changePasswordFields');
-                                if (changePasswordFields.style.display === 'none') {
-                                    changePasswordFields.style.display = 'block';
-                                } else {
-                                    changePasswordFields.style.display = 'none';
-                                }
-                            }
-                        </script>
-                        <script type="text/javascript">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 
-                        </script>
+    <script>
+        // Kiểm tra sự thay đổi trong các trường thông tin
+        function checkChanges() {
+            var saveButton = document.getElementById('saveButton');
+            saveButton.style.display = 'inline-block';
+        }
+
+        // Ẩn/hiện trường mật khẩu mới
+        function toggleChangePassword() {
+            var changePasswordFields = document.getElementById('changePasswordFields');
+            if (changePasswordFields.style.display === 'none') {
+                changePasswordFields.style.display = 'block';
+            } else {
+                changePasswordFields.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 
 </html>

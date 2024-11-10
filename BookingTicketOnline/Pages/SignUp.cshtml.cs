@@ -27,6 +27,13 @@ namespace BookingTicketOnline.Pages
             {
                 return Page();
             }
+
+            bool userExists = _context.Users.Any(u => u.Username == InputUser.Username || u.Email == InputUser.Email);
+            if (userExists)
+            {
+                TempData["error"] = "Tên đăng nhập hoặc email đã tồn tại.";
+                return Page();
+            }
             string encryptPassword = BCrypt.Net.BCrypt.HashPassword(InputUser.Password);
 
             var user = new Models.User

@@ -88,6 +88,13 @@ namespace BookingTicketOnline.Pages
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
             if (user == null) return NotFound();
 
+            var emailExists = await _context.Users.AnyAsync(u => u.Email == Email && u.Username != username);
+            if (emailExists)
+            {
+                ModelState.AddModelError("Email", "Email đã tồn tại.");
+                return Page();
+            }
+
             user.FullName = FullName;
             user.Email = Email;
             user.PhoneNumber = PhoneNumber;
@@ -100,7 +107,10 @@ namespace BookingTicketOnline.Pages
 
             await _context.SaveChangesAsync();
 
+            TempData["success"] = "Thông tin của bạn đã được cập nhật thành công.";
+
             return RedirectToPage("/UserProfile");
         }
+
     }
 }
