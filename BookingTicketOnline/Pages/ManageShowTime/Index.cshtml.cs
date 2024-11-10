@@ -17,14 +17,21 @@ namespace BookingTicketOnline.Pages.ManageShowTime
         {
             _context = context;
         }
+		public List<Models.Showtime> Showtimes { get; set; }
+		public List<Models.Movie> Movies { get; set; }
+		public List<Models.Room> Rooms { get; set; }
 
-        public List<Models.Showtime> Showtimes { get; set; }
-        public List<Models.Movie> Movies { get; set; }
-        public List<Models.Room> Rooms { get; set; }
+		[BindProperty(SupportsGet = true)]
+		public bool isAutoRendered { get; set; }
 
-        public DateTime StartOfWeek { get; set; }
+		[BindProperty]
+		public Models.Showtime Showtime { get; set; } = new Models.Showtime();
+		public Models.Room? room { get; set; }
+		public DateTime StartOfWeek { get; set; }
 
-        public async Task OnGetAsync(int? weekOffset)
+
+
+		public async Task OnGetAsync(int? weekOffset)
         {
             // Xác định tuần hiện tại hoặc tuần được điều hướng
             StartOfWeek = DateTime.Now.AddDays(-(int)DateTime.Now.DayOfWeek);
@@ -37,7 +44,7 @@ namespace BookingTicketOnline.Pages.ManageShowTime
             Showtimes = await _context.Showtimes
                 .Include(s => s.Movie)
                 .Include(s => s.Room)
-                .Where(s => s.Date >= StartOfWeek && s.Date < StartOfWeek.AddDays(7) && s.RoomId == 1)
+                .Where(s => s.Date >= StartOfWeek && s.Date < StartOfWeek.AddDays(7))
                 .ToListAsync();
 
             Movies = await _context.Movies.ToListAsync();

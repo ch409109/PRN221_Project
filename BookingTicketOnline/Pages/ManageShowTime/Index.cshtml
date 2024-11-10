@@ -1,116 +1,110 @@
 ﻿@page "{weekOffset:int?}"
 @model BookingTicketOnline.Pages.ManageShowTime.IndexModel
 @{
-    ViewData["Title"] = "Weekly Showtime Scheduler";
-    var startOfWeek = Model.StartOfWeek;
-    int weekOffset = RouteData.Values["weekOffset"] != null ? int.Parse(RouteData.Values["weekOffset"].ToString()) : 0;
+	ViewData["Title"] = "Weekly Showtime Scheduler";
+	var startOfWeek = Model.StartOfWeek;
+	int weekOffset = RouteData.Values["weekOffset"] != null ? int.Parse(RouteData.Values["weekOffset"].ToString()) : 0;
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>@ViewData["Title"]</title>
-    <style>
-            <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .scheduler {
-            display: inline-block;
-            text-align: left;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .header {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .table-container {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 2px;
-            margin-top: 20px;
-        }
-        .table-container div {
-            padding: 8px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
-        .time-slot {
-            background-color: #f9f9f9;
-            font-weight: bold;
-        }
-        .event {
-            background-color: #3399ff;
-            color: white;
-            padding: 4px;
-            border-radius: 4px;
-        }
-        .day-header {
-            background-color: #eee;
-            font-weight: bold;
-        }
-        .button-container {
-            margin: 10px;
-        }
-        button {
-            padding: 8px 16px;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-    </style>
-    </style>
+	<meta charset="UTF-8">
+	<title>@ViewData["Title"]</title>
+	<link href="~/css/Showtime.css" rel="stylesheet" />
 </head>
 <body>
 
-    <div class="scheduler">
-        <div class="header">Weekly Showtime Scheduler</div>
-        <div class="button-container">
-            <a asp-page="./Index" asp-route-weekOffset="@(weekOffset - 1)">
-                <button>&#9664; Previous Week</button>
-            </a>
-            <span>@startOfWeek.ToString("MMM d") - @startOfWeek.AddDays(6).ToString("MMM d, yyyy")</span>
-            <a asp-page="./Index" asp-route-weekOffset="@(weekOffset + 1)">
-                <button>Next Week &#9654;</button>
-            </a>
-        </div>
+	<div class="scheduler">
+		<div class="header">Weekly Showtime Scheduler</div>
+		<div class="button-container">
+			<a asp-page="./Index" asp-route-weekOffset="@(weekOffset - 1)">
+				<button>&#9664; Previous Week</button>
+			</a>
+			<span>@startOfWeek.ToString("MMM d") - @startOfWeek.AddDays(6).ToString("MMM d, yyyy")</span>
+			<a asp-page="./Index" asp-route-weekOffset="@(weekOffset + 1)">
+				<button>Next Week &#9654;</button>
+			</a>
+		</div>
 
-        <div class="table-container">
-            <!-- Header row with days -->
-            <div></div>
-            @for (int i = 0; i < 7; i++)
-            {
-                <div class="day-header">@startOfWeek.AddDays(i).ToString("ddd M/d")</div>
-            }
+		<div class="scheduler-content">
+			<!-- Table container for schedule -->
+			<div class="table-container">
+				<!-- Header row with days -->
+				<div></div>
+				@for (int i = 0; i < 7; i++)
+				{
+					<div class="day-header">@startOfWeek.AddDays(i).ToString("ddd M/d")</div>
+				}
 
-            <!-- Time slots and events -->
-            @for (int hour = 0; hour < 24; hour++)
-            {
-                <div class="time-slot">@hour:00</div>
-                @for (int day = 0; day < 7; day++)
-                {
-                    var currentDay = startOfWeek.AddDays(day);
-                    var showtime = Model.Showtimes.FirstOrDefault(s => s.Date == currentDay.Date && s.StartTime?.Hours == hour);
+				<!-- Time slots and events -->
+				@for (int hour = 0; hour < 24; hour++)
+				{
+					<div class="time-slot">@hour:00</div>
+					@for (int day = 0; day < 7; day++)
+					{
+						var currentDay = startOfWeek.AddDays(day);
+						var showtime = Model.Showtimes.FirstOrDefault(s => s.Date == currentDay.Date && s.StartTime?.Hours == hour);
 
-                    if (showtime != null)
-                    {
-                        <div class="event">
-                            @showtime.Movie?.Title - @showtime.Room?.Name
-                            <br />
-                            @showtime.StartTime?.ToString(@"hh\:mm") - @showtime.EndTime?.ToString(@"hh\:mm")
-                        </div>
-                    }
-                    else
-                    {
-                        <div></div>
-                    }
-                }
-            }
-        </div>
-    </div>
+						if (showtime != null)
+						{
+							<a asp-page-handler="SelectShowtime" asp-route-id="@showtime.Id" asp-route-weekOffset="@weekOffset">
+								<div class="event">
+									@showtime.Movie?.Title
+									<br />
+									@showtime.StartTime?.ToString(@"hh\:mm") - @showtime.EndTime?.ToString(@"hh\:mm")
+								</div>
+							</a>
+						}
+						else
+						{
+							<div></div>
+						}
+					}
+				}
+			</div>
+			<!-- Add/Edit Showtime Form -->
+			<div class="showtime-form">
+				<h3>Add/Edit Showtime</h3>
+				<form method="post" asp-page-handler="SaveShowtime">
+					<input type="hidden" id="showtimeId" name="Id" />
+
+					<label for="movie">Movie:</label>
+					<select id="movie" name="MovieId">
+						@foreach (var movie in Model.Movies)
+						{
+							<option value="@movie.Id">@movie.Title</option>
+						}
+					</select>
+
+					<label for="room">Room:</label>
+					<select id="room" name="RoomId">
+						@foreach (var room in Model.Rooms)
+						{
+							<option value="@room.Id">@room.Name</option>
+						}
+					</select>
+
+					<label for="date">Date:</label>
+					<input type="date" id="date" name="Date" />
+
+					<label for="startTime">Start Time:</label>
+					<input type="time" id="startTime" name="StartTime" />
+
+					<label for="endTime">End Time:</label>
+					<input type="time" id="endTime" name="EndTime" />
+
+					<div class="auto-render-container">
+						<input onclick="alert('This action will automatically generate showtimes for that day!')" type="checkbox" asp-for="@Model.isAutoRendered" class="auto-render-checkbox" />
+						<label for="isAutoRendered" class="auto-render-label">Auto Generate Showtime?</label>
+					</div>
+					<button type="submit">Save</button>
+					<button type="button" onclick="clearForm()">Cancel</button>
+				</form>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>
+

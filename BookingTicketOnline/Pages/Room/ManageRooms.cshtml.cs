@@ -24,6 +24,5 @@ namespace BookingTicketOnline.Pages.Room
             HttpContext.Session.SetInt32("RoomID", id);
             return RedirectToPage("/Seat/ManageSeats");
         }
-
     }
 }

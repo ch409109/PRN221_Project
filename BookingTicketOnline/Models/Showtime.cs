@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookingTicketOnline.Models
 {
@@ -11,9 +12,13 @@ namespace BookingTicketOnline.Models
         }
 
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Please select a movie.")]
         public int? MovieId { get; set; }
         public int? RoomId { get; set; }
-        public TimeSpan? StartTime { get; set; }
+
+		[Required(ErrorMessage = "Thởi gian bắt đầu bộ phim chưa được thêm")]
+		public TimeSpan? StartTime { get; set; }
         public TimeSpan? EndTime { get; set; }
         public DateTime? Date { get; set; }
 

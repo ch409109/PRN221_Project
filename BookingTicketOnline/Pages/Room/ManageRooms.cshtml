@@ -1,44 +1,43 @@
 ﻿@page
 @model ManageRoomsModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelperss
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    Layout = "_AdminLayout";
-    var count = 1;
+	Layout = "_AdminLayout";
+	var count = 1;
 }
 <div class="container mt-5">
-    <h1 class="text-center ">@Model.Rooms[0].Cinema.Name</h1>
+	<h1 class="text-center mb-4">@Model.Rooms[0].Cinema.Name</h1>
 
-    <!-- Button to open Add Room Modal -->
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addRoomModal">
-        Add New Room
-    </button>
+	<!-- Button to open Add Room Modal -->
+	<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addRoomModal">
+		<i class="bi bi-plus-circle"></i> Add New Room
+	</button>
 
-    <!-- Room Table -->
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Room Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var room in Model.Rooms)
-            {
-                <tr>
-                    <td>@count</td>
-                    <td>@room.Name</td>
-                    <td>
-                        <form method="post" asp-page-handler="ManageSeat">
-                            <input type="hidden" name="id" value="@room.Id" />
-                            <button type="submit" class="btn btn-warning btn-sm">Manage Room</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-            @{
-                count += 1;
-            }
-        </tbody>
-    </table>
+	<!-- Room Table -->
+	<table class="table table-bordered table-striped">
+		<thead class="table-dark">
+			<tr>
+				<th class="text-center">STT</th>
+				<th class="text-center">Room Name</th>
+				<th class="text-center">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var room in Model.Rooms)
+			{
+				<tr>
+					<td class="text-center">@count</td>
+					<td>@room.Name</td>
+					<td class="text-center">
+						<!-- Manage Seat Button -->
+						<form method="post" asp-page-handler="ManageSeat" class="d-inline ms-2">
+							<input type="hidden" name="id" value="@room.Id" />
+							<button type="submit" class="btn btn-success btn-sm">Manage Seat</button>
+						</form>
+					</td>
+				</tr>
+				count += 1;
+			}
+		</tbody>
+	</table>
 </div>
