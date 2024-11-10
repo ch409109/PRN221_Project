@@ -16,6 +16,18 @@ namespace BookingTicketOnline.Services.Implementations
             _httpContextAccessor = httpContextAccessor;
         }
 
+        private async Task<bool> AreSeatsDuplicateBookedAsync(int showtimeId, List<int> seatIds)
+        {
+            var duplicateBookings = await _context.BookingSeatsDetails
+                .Include(bs => bs.Booking)
+                .Where(bs => bs.Booking.ShowtimeId == showtimeId &&
+                            seatIds.Contains(bs.SeatId.Value) &&
+                            bs.Booking.Status != "Cancelled")
+                .AnyAsync();
+
+            return duplicateBookings;
+        }
+
         public async Task<Booking> ProcessBookingAsync(int? totalPrice, List<(int FoodAndDrinkId, int Quantity)> selectedItems, int? discountId = null)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
@@ -23,6 +35,24 @@ namespace BookingTicketOnline.Services.Implementations
             try
             {
                 var showtimeId = _httpContextAccessor.HttpContext.Session.GetInt32("ShowtimeId");
+                if (!showtimeId.HasValue)
+                {
+                    throw new InvalidOperationException("Showtime not found in session.");
+                }
+
+                var selectedSeatIdsJson = _httpContextAccessor.HttpContext.Session.GetString("SelectedSeatIds");
+                if (string.IsNullOrEmpty(selectedSeatIdsJson))
+                {
+                    throw new InvalidOperationException("No seats selected.");
+                }
+
+                var selectedSeatIds = JsonSerializer.Deserialize<List<int>>(selectedSeatIdsJson);
+
+                if (await AreSeatsDuplicateBookedAsync(showtimeId.Value, selectedSeatIds))
+                {
+                    throw new InvalidOperationException("One or more selected seats have already been booked.");
+                }
+
                 var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst("UserId");
                 if (userIdClaim == null)
                 {
@@ -43,25 +73,20 @@ namespace BookingTicketOnline.Services.Implementations
                 _context.Bookings.Add(booking);
                 await _context.SaveChangesAsync();
 
-                var selectedSeatIdsJson = _httpContextAccessor.HttpContext.Session.GetString("SelectedSeatIds");
-                if (!string.IsNullOrEmpty(selectedSeatIdsJson))
-                {
-                    var selectedSeatIds = JsonSerializer.Deserialize<List<int>>(selectedSeatIdsJson);
-                    var seats = await _context.Seats
-                        .Include(s => s.Row)
-                        .Where(s => selectedSeatIds.Contains(s.Id))
-                        .ToListAsync();
+                var seats = await _context.Seats
+                    .Include(s => s.Row)
+                    .Where(s => selectedSeatIds.Contains(s.Id))
+                    .ToListAsync();
 
-                    foreach (var seat in seats)
+                foreach (var seat in seats)
+                {
+                    var bookingSeat = new BookingSeatsDetail
                     {
-                        var bookingSeat = new BookingSeatsDetail
-                        {
-                            BookingId = booking.Id,
-                            SeatId = seat.Id,
-                            Price = seat.Row.Type.ToLower() == "vip" ? 150000 : 120000
-                        };
-                        _context.BookingSeatsDetails.Add(bookingSeat);
-                    }
+                        BookingId = booking.Id,
+                        SeatId = seat.Id,
+                        Price = seat.Row.Type.ToLower() == "vip" ? 150000 : 120000
+                    };
+                    _context.BookingSeatsDetails.Add(bookingSeat);
                 }
 
                 foreach (var (foodAndDrinkId, quantity) in selectedItems)
@@ -98,6 +123,11 @@ namespace BookingTicketOnline.Services.Implementations
                 await transaction.CommitAsync();
 
                 return booking;
+            }
+            catch (InvalidOperationException)
+            {
+                await transaction.RollbackAsync();
+                throw;
             }
             catch (Exception)
             {
