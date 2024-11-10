@@ -9,7 +9,7 @@
     <div class="row align-items-center justify-content-between g-3">
         <div class="col-12 col-md-auto">
             <a class="btn btn-success w-100" asp-page="/Movie/CreateMovie">
-                <i class="bi bi-plus-circle me-2"></i> Add New Movie
+                <i class="bi bi-plus-circle me-2"></i> Thêm bộ phim mới
             </a>
         </div>
 
@@ -17,14 +17,14 @@
             <form method="get" class="d-flex">
                 <div class="input-group">
                     <input type="text" class="form-control" name="searchString"
-                           value="@Model.CurrentFilter" placeholder="Search by title">
+                           value="@Model.CurrentFilter" placeholder="Tìm kiếm theo tiêu đề">
                     <button class="btn btn-outline-secondary" type="submit">
-                        <i class="bi bi-search"></i> Search
+                        <i class="bi bi-search"></i> Tìm kiếm
                     </button>
                     @if (!string.IsNullOrEmpty(Model.CurrentFilter))
                     {
                         <a class="btn btn-outline-secondary" asp-page="./ManageMovies">
-                            <i class="bi bi-x-circle"></i> Clear
+                            <i class="bi bi-x-circle"></i> Xóa
                         </a>
                     }
                 </div>
@@ -36,7 +36,7 @@
 <div class="d-flex flex-column flex-md-row justify-content-end flex-wrap mb-4">
     <form method="get" class="d-flex">
         <select name="categoryId" class="form-select me-2 mb-2 mb-md-0" style="max-width: 200px;" onchange="this.form.submit()">
-            <option value="">All Categories</option>
+            <option value="">Tất cả các thể loại</option>
             @foreach (var category in Model.categories)
             {
                 <option value="@category.Id" selected="@(Model.CategoryFilter == category.Id)">
@@ -67,20 +67,20 @@
         <table class="table table-bordered table-hover">
             <thead class="table-light">
                 <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Release Date</th>
-                    <th>Director</th>
-                    <th>Genre</th>
-                    <th>Status</th>
-                    <th class="text-center">Actions</th>
+                   @*  <th>ID</th> *@
+                    <th>Tên bộ phim</th>
+                    <th>Ngày phát hành</th>
+                    <th>Đạo diễn</th>
+                    <th>Thể loại</th>
+                    <th>Trạng thái</th>
+                    <th class="text-center">Hành động</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var movie in Model.movies)
                 {
                     <tr>
-                        <td>@movie.Id</td>
+                       @*  <td>@movie.Id</td> *@
                         <td>@movie.Title</td>
                         <td>@movie.ReleaseDate</td>
                         <td>@movie.Director</td>
@@ -95,10 +95,10 @@
                         }
                         <td class="text-center">
                             <a asp-page="/Movie/EditMovie" asp-route-id="@movie.Id" class="btn btn-sm btn-outline-primary me-2">
-                                <i class="bi bi-pencil-square"></i> Edit
+                                <i class="bi bi-pencil-square"></i> Sửa
                             </a>
                             <a asp-page="/Movie/MovieDetailsAdmin" asp-route-id="@movie.Id" class="btn btn-sm btn-outline-info">
-                                <i class="bi bi-journal-text"></i> Details
+                                <i class="bi bi-journal-text"></i> Xem chi tiết
                             </a>
                         </td>
                     </tr>

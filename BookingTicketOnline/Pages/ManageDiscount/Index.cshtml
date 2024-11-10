@@ -1,13 +1,13 @@
 ﻿@page
 @model BookingTicketOnline.Pages.ManageDiscount.IndexModel
 @{
-    ViewData["Title"] = "Discounts Index";
+    ViewData["Title"] = "Quản lý mã giảm giá";
     Layout = "_MovieTheaterOwnerLayout";
 }
-<h1>Discounts</h1>
+<h1>Mã giảm giá</h1>
 
 <p>
-    <a asp-page="Create" class="btn btn-success">Create New</a>
+    <a asp-page="Create" class="btn btn-success">Tạo mới</a>
 </p>
 <table class="table">
     <thead>
@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.Discount[0].EndDate)
             </th>
             <th>
-                Status <!-- Cột mới để hiển thị trạng thái -->
+                Trạng thái
             </th>
             <th></th>
         </tr>
@@ -56,7 +56,7 @@
                     <span class="badge @(isActive ? "bg-success" : "bg-danger")">@statusText</span>
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Sứa</a>
                 </td>
             </tr>
         }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,16 +61,24 @@ namespace BookingTicketOnline.Pages.ManageDiscount
                 return NotFound();
             }
 
+            if (Discount.EndDate < DateTime.Today)
+            {
+                TempData["error"] = "Ngày kết thúc không hợp lệ !!!";
+                return Page();
+            }
+
             existingDiscount.Code = Discount.Code;
             existingDiscount.DiscountValue = Discount.DiscountValue;
             existingDiscount.EndDate = Discount.EndDate;
+
+
 
             _context.Attach(existingDiscount).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
-                TempData["success"] = "Discount voucher updated successfully";
+                TempData["success"] = "Cập nhật thông tin mã giảm giá thành công !!!";
             }
             catch (DbUpdateConcurrencyException)
             {

@@ -10,7 +10,7 @@
         <div class="col-12 col-md-8">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h2 class="text-center mb-0">Movie Details</h2>
+                    <h2 class="text-center mb-0">Chi tiết phim</h2>
                 </div>
 
                 <div class="card-body">
@@ -35,31 +35,31 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Title:</div>
+                        <div class="col-md-4 fw-bold">Tên bộ phim</div>
                         <div class="col-md-8">@Model.Movie.Title</div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Genre:</div>
+                        <div class="col-md-4 fw-bold">Thể loại</div>
                         <div class="col-md-8">@Model.Movie.Category?.Name</div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Release Date:</div>
+                        <div class="col-md-4 fw-bold">Ngày phát hành</div>
                         <div class="col-md-8">@Model.Movie.ReleaseDate</div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Duration:</div>
+                        <div class="col-md-4 fw-bold">Thời lượng</div>
                         <div class="col-md-8">@Model.Movie.Duration?.ToString(@"hh\:mm\:ss")</div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Actors:</div>
+                        <div class="col-md-4 fw-bold">Diễn viên</div>
                         <div class="col-md-8">@Model.Movie.Actor</div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Director:</div>
+                        <div class="col-md-4 fw-bold">Đạo diễn</div>
                         <div class="col-md-8">@Model.Movie.Director</div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Status:</div>
+                        <div class="col-md-4 fw-bold">Trạng thái</div>
                         <div class="col-md-8">
                             <span class="badge @(Model.Movie.Status == "Active" ? "bg-success" : "bg-danger")">
                                 @Model.Movie.Status
@@ -67,13 +67,13 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Description:</div>
+                        <div class="col-md-4 fw-bold">Mô tả</div>
                         <div class="col-md-8">@Model.Movie.Description</div>
                     </div>
 
                     <div class="d-flex justify-content-between mt-4">
                         <a asp-page="./ManageMovies" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-2"></i>Back to List
+                            <i class="bi bi-arrow-left me-2"></i>Quay lại 
                         </a>
                         @if (Model.Movie.Status != "Poster")
                         {

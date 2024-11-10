@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create Discount";
     Layout = "_OwnerLayout";
 }
-<h1>Create Discount</h1>
+<h1>Tạo mã giảm giá</h1>
 
-<h4>Discount Information</h4>
+<h4>Thông tin mã giảm giá</h4>
 <hr />
 <div class="row">
     <div class="col-md-6 offset-md-3">
@@ -16,42 +16,42 @@
 
             <!-- Input for Discount Code -->
             <div class="form-group">
-                <label asp-for="Discount.Code" class="control-label"></label>
+                <label asp-for="Discount.Code" class="control-label">Mã code</label>
                 <input asp-for="Discount.Code" class="form-control" placeholder="Enter discount code" />
                 <span asp-validation-for="Discount.Code" class="text-danger"></span>
             </div>
 
             <!-- Input for Discount Value -->
             <div class="form-group">
-                <label asp-for="Discount.DiscountValue" class="control-label"></label>
+                <label asp-for="Discount.DiscountValue" class="control-label">Giá trị (%)</label>
                 <input asp-for="Discount.DiscountValue" class="form-control" placeholder="Enter discount value" />
                 <span asp-validation-for="Discount.DiscountValue" class="text-danger"></span>
             </div>
 
             <!-- Input for Start Date -->
             <div class="form-group">
-                <label asp-for="Discount.StartDate" class="control-label"></label>
+                <label asp-for="Discount.StartDate" class="control-label">Ngày bắt đầu </label>
                 <input asp-for="Discount.StartDate" class="form-control" type="date" />
                 <span asp-validation-for="Discount.StartDate" class="text-danger"></span>
             </div>
 
             <!-- Input for End Date -->
             <div class="form-group">
-                <label asp-for="Discount.EndDate" class="control-label"></label>
+                <label asp-for="Discount.EndDate" class="control-label">Ngày kết thúc</label>
                 <input asp-for="Discount.EndDate" class="form-control" type="date" />
                 <span asp-validation-for="Discount.EndDate" class="text-danger"></span>
             </div>
 
             <!-- Submit button -->
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Tạo mới" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div class="text-center">
-    <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+    <a asp-page="Index" class="btn btn-secondary">Quay lại</a>
 </div>
 
 @section Scripts {

@@ -8,7 +8,7 @@
     <div class="row align-items-center justify-content-between g-3">
         <div class="col-12 col-md-auto">
             <a class="btn btn-success w-100" asp-page="/Category/CreateCategory">
-                <i class="bi bi-plus-circle me-2"></i> Add New Category
+                <i class="bi bi-plus-circle me-2"></i> Thêm thể loại phim mới
             </a>
         </div>
 
@@ -16,14 +16,14 @@
             <form method="get" class="d-flex">
                 <div class="input-group">
                     <input type="text" class="form-control" name="searchString"
-                           value="@Model.CurrentFilter" placeholder="Search by name">
+                           value="@Model.CurrentFilter" placeholder="Tìm kiếm theo tên">
                     <button class="btn btn-outline-secondary" type="submit">
-                        <i class="bi bi-search"></i> Search
+                        <i class="bi bi-search"></i> Tìm kiếm
                     </button>
                     @if (!string.IsNullOrEmpty(Model.CurrentFilter))
                     {
                         <a class="btn btn-outline-secondary" asp-page="./ManageCategories">
-                            <i class="bi bi-x-circle"></i> Clear
+                            <i class="bi bi-x-circle"></i> Xóa
                         </a>
                     }
                 </div>
@@ -52,9 +52,9 @@
         <table class="table table-bordered table-hover">
             <thead class="table-light">
                 <tr>
-                    <th>Category ID</th>
-                    <th>Name</th>
-                    <th class="text-center">Actions</th>
+                    <th>Số thư tự </th>
+                    <th>Thể loại</th>
+                    <th class="text-center">Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,10 +65,10 @@
                         <td>@category.Name</td>
                         <td class="text-center">
                             <a asp-page="/Category/EditCategory" asp-route-id="@category.Id" class="btn btn-sm btn-outline-primary me-2">
-                                <i class="bi bi-pencil-square"></i> Edit
+                                <i class="bi bi-pencil-square"></i> Sửa
                             </a>
                             <a asp-page="/Category/DeleteCategory" asp-route-id="@category.Id" class="btn btn-sm btn-outline-danger">
-                                <i class="bi bi-trash"></i> Delete
+                                <i class="bi bi-trash"></i> Xóa
                             </a>
                         </td>
                     </tr>

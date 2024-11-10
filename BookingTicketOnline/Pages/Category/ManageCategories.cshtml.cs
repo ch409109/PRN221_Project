@@ -50,7 +50,7 @@ namespace BookingTicketOnline.Pages.Category
             CurrentPage = pageNumber > TotalPages ? 1 : pageNumber;
 
             categories = await categoriesQuery
-                .OrderBy(c => c.Name)
+                .OrderBy(c => c.Id)
                 .Skip((CurrentPage - 1) * PageSize)
                 .Take(PageSize)
                 .ToListAsync();
