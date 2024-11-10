@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
+using OfficeOpenXml;
 
 namespace BookingTicketOnline
 {
@@ -51,6 +52,8 @@ namespace BookingTicketOnline
             builder.Services.Configure<VNPayConfig>(
             builder.Configuration.GetSection("VNPay"));
             builder.Services.AddScoped<IVNPayService, VNPayService>();
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             var app = builder.Build();
 

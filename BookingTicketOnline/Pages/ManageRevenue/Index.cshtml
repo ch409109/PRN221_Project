@@ -1,8 +1,8 @@
 ﻿@page
 @model BookingTicketOnline.Pages.ManagerRevenue.IndexModel
 @{
-    ViewData["Title"] = "Revenue Index";
     Layout = "_MovieTheaterOwnerLayout";
+    ViewData["Title"] = "Revenue Index";
 }
 
 <div class="container my-5">
@@ -54,6 +54,22 @@
             </table>
         </div>
     </div>
+
+    <form method="post" asp-page-handler="ExportToExcel" class="mt-3">
+        <div class="input-group">
+            <select asp-for="SelectedCinemaId" asp-items="Model.CinemaList" class="form-select me-2">
+                <option value="">Chọn rạp</option>
+            </select>
+            <select asp-for="SelectedMonth" asp-items="Model.MonthList" class="form-select me-2">
+                <option value="">Chọn tháng</option>
+            </select>
+            <select asp-for="SelectedYear" asp-items="Model.YearList" class="form-select me-2">
+                <option value="">Chọn năm</option>
+            </select>
+            <button class="btn btn-success">Xuất Excel</button>
+        </div>
+    </form>
+
 </div>
 
 @section Scripts {
