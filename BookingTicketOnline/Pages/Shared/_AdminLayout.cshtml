@@ -13,26 +13,51 @@
 <body>
     <header class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-page="/HomeAdmin">CineMatic System</a>
+            <a class="navbar-brand" asp-page="/HomeStaff">CineMatic System</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Manage Resources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="/Logout">Logout</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("1"))
+                        {
+                            <!-- Hiển thị tên người dùng và dropdown menu nếu đã đăng nhập -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Hello, @User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-page="/UserProfile">Thông tin cá nhân</a></li>
+                                    <li><a class="dropdown-item" asp-page="/HomeAdmin">Trang quản lý</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Index">Trang đặt vé</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Logout">Đăng xuất</a></li>
+                                </ul>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <script>
+                                window.location.href = "/AccessDenied";
+                            </script>
+                        }
+                    }
+                    else
+                    {
+                        <script>
+                            window.location.href = "/Login";
+                        </script>
+                    }
                 </ul>
             </div>
         </div>
     </header>
 
     <div class="bg-dark text-white p-4 text-center">
-        <h1>Resource Management</h1>
+        <h1>Trang Quản Lý của Admin</h1>
     </div>
 
     <div class="container my-5">

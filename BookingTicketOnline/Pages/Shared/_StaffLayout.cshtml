@@ -1,6 +1,4 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,10 +20,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" asp-page="/HomeStaff">Home</a>
-                    </li>
-
                     @if (User.Identity.IsAuthenticated)
                     {
                         if (User.IsInRole("4"))
@@ -36,10 +30,10 @@
                                     Hello, @User.Identity.Name
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-page="/UserProfile">Edit Profile</a></li>
-                                    <li><a class="dropdown-item" href="#">Settings & Privacy</a></li>
-                                    <li><a class="dropdown-item" href="#">Help & Support</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Logout">Logout</a></li>
+                                    <li><a class="dropdown-item" asp-page="/UserProfile">Thông tin cá nhân</a></li>
+                                    <li><a class="dropdown-item" asp-page="/HomeStaff">Trang quản lý</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Index">Trang đặt vé</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Logout">Đăng xuất</a></li>
                                 </ul>
                             </li>
 
@@ -63,7 +57,7 @@
     </header>
 
     <div class="bg-dark text-white p-1 text-center">
-        <h1>Staff Management</h1>
+        <h1>Trang Quản Lý của Staff</h1>
     </div>
 
     <div class="container my-5">

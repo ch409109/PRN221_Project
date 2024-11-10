@@ -8,72 +8,87 @@
 <div class="container my-5">
     <h1 class="mb-4">Revenue Management</h1>
 
+    <!-- Form for filtering -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
-        <!-- Form for filtering -->
         <form method="get" class="w-100 w-md-50">
             <div class="input-group">
-                <!-- Combobox for selecting Cinema -->
                 <select asp-for="SelectedCinemaId" asp-items="Model.CinemaList" class="form-select me-2">
                     <option value="">Chọn rạp</option>
                 </select>
-                <!-- Combobox for selecting Year -->
                 <select asp-for="SelectedYear" asp-items="Model.YearList" class="form-select me-2">
                     <option value="">Chọn năm</option>
                 </select>
-                <!-- Combobox for selecting Quarter -->
-                <select asp-for="SelectedQuarter" class="form-select me-2">
-                    <option value="">Chọn Quý</option>
-                    <option value="1">Quý 1</option>
-                    <option value="2">Quý 2</option>
-                    <option value="3">Quý 3</option>
-                    <option value="4">Quý 4</option>
-                </select>
                 <button class="btn btn-outline-primary" type="submit" style="margin-right: 1%">Filter</button>
-
-               
             </div>
-        </form>
-        <form method="post">
-            <button class="btn btn-outline-primary" type="submit">Refresh</button>
         </form>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
-                <tr>
-                    <th>Cinema</th>
-                    <th>Total Revenue</th>
-                    <th>Quarter</th>
-                    <th>Year</th>
-                    <th>View</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Revenue)
-                {
+    <div class="row">
+        <!-- Revenue Chart -->
+        <div class="col-md-8">
+            <h3>Doanh thu theo tháng</h3>
+            <canvas id="revenueChart"></canvas>
+        </div>
+
+        <!-- Top Selling Movies Table -->
+        <div class="col-md-4">
+            <h3>Top Phim Bán Chạy</h3>
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
                     <tr>
-                        <td>@item.Cinema?.Name</td>
-                        <td>@(item.TotalRevenue?.ToString("N0") ?? "0")</td>
-                        <td> Quý @item.Quarter</td>
-                        <td>@item.Year</td>
-                        <td>
-                            <a asp-page="/ManageRevenue/Details" asp-route-id="@item.Id">
-                                <i class="bi bi-eye"></i>
-                            </a>
-                        </td>
+                        <th>Phim</th>
+                        <th>Doanh thu</th>
+                        <th>Vé bán ra</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var movie in Model.TopSellingMovies)
+                    {
+                        <tr>
+                            <td>@movie.MovieTitle</td>
+                            <td>@movie.TotalRevenue.ToString("N0")</td>
+                            <td>@movie.TicketsSold</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<!-- Include Bootstrap Icons for styling -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
-
 @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // JavaScript for client-side filter (if needed)
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Model.MonthlyRevenueData.Select(m => $"Tháng {m.Month}"))),
+                datasets: [{
+                    label: 'Doanh thu',
+                    data: @Html.Raw(Json.Serialize(Model.MonthlyRevenueData.Select(m => m.TotalRevenue))),
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Doanh thu (VND)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tháng'
+                        }
+                    }
+                }
+            }
+        });
     </script>
 }
