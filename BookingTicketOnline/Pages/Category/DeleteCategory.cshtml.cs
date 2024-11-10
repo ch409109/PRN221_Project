@@ -1,4 +1,4 @@
-using BookingTicketOnline.Models;
+﻿using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -60,7 +60,7 @@ namespace BookingTicketOnline.Pages.Category
                     {
                         category = categoryToDelete;
 
-                        TempData["error"] = "Cannot delete category because it contains movies. Please remove or reassign the movies first.";
+                        TempData["error"] = "Không thể xóa danh mục vì nó chứa phim. Vui lòng xóa hoặc gán lại cho phim trước.";
 
                         return Page();
                     }
@@ -68,7 +68,7 @@ namespace BookingTicketOnline.Pages.Category
                     _context.MovieCategories.Remove(categoryToDelete);
                     await _context.SaveChangesAsync();
                 }
-                TempData["success"] = "Category deleted successfully";
+                TempData["success"] = "Xóa thể loại phim thành công";
 
                 return RedirectToPage("./ManageCategories");
             }
@@ -76,7 +76,7 @@ namespace BookingTicketOnline.Pages.Category
             {
                 category = await _context.MovieCategories.FirstOrDefaultAsync(c => c.Id == category.Id);
 
-                TempData["error"] = "An error occurred while deleting the category. Please try again.";
+                TempData["error"] = "Có lỗi xảy ra khi xóa. Vui lòng thử lại.";
                 return Page();
             }
         }

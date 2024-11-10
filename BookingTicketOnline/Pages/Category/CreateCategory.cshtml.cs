@@ -1,4 +1,4 @@
-using BookingTicketOnline.Models;
+﻿using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
@@ -37,7 +37,7 @@ namespace BookingTicketOnline.Pages.Category
 
             _context.MovieCategories.Add(category);
             await _context.SaveChangesAsync();
-            TempData["success"] = "Category created successfully";
+            TempData["success"] = "Thể loại phim đã được thêm thành công.";
 
             return RedirectToPage("./ManageCategories");
         }

@@ -1,4 +1,4 @@
-using BookingTicketOnline.Models;
+﻿using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +50,7 @@ namespace BookingTicketOnline.Pages.Category
 
             _context.Attach(category).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            TempData["success"] = "Category updated successfully";
+            TempData["success"] = "Thể loại được chỉnh sửa thành công.";
             return RedirectToPage("./ManageCategories");
         }
     }
