@@ -14,28 +14,78 @@
 	<meta charset="UTF-8">
 	<title>@ViewData["Title"]</title>
 	<link href="~/css/Showtime.css" rel="stylesheet" />
+	<style>
+		.button-container {
+			display: inline-block;
+			margin: 10px;
+		}
+
+		button {
+			padding: 10px 20px;
+			font-size: 16px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s ease, transform 0.2s ease;
+			background-color: #007bff; 
+			color: white;
+		}
+
+			button:hover {
+				background-color: #0056b3; 
+				transform: scale(1.05);
+			}
+
+			button:focus {
+				outline: none;
+			}
+
+			button:disabled {
+				background-color: #d6d6d6;
+				cursor: not-allowed; 
+			}
+
+			button.previous-week, button.next-week {
+				background-color: #28a745; 
+			}
+
+				button.previous-week:hover, button.next-week:hover {
+					background-color: #218838; 
+				}
+
+			button.back {
+				background-color: #ffc107;
+			}
+
+				button.back:hover {
+					background-color: #e0a800; 
+				}
+
+	</style>
 </head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<partial name="_Notification" />
 <body>
 
 	<div class="scheduler">
 		<div class="header">Weekly Showtime Scheduler</div>
 
-		<!-- Button to go back to Index -->
 		<div class="button-container">
 			<a asp-page="./Index">
-				<button>⬅ Select Room</button>
+				<button class="back">⬅ Select Room</button>
 			</a>
 		</div>
 
 		<div class="button-container">
 			<a asp-page="./Showtimes" asp-route-weekOffset="@(weekOffset - 1)">
-				<button>&#9664; Previous Week</button>
+				<button class="previous-week">&#9664; Previous Week</button>
 			</a>
 			<span>@startOfWeek.ToString("MMM d") - @startOfWeek.AddDays(6).ToString("MMM d, yyyy")</span>
 			<a asp-page="./Showtimes" asp-route-weekOffset="@(weekOffset + 1)">
-				<button>Next Week &#9654;</button>
+				<button class="next-week">Next Week &#9654;</button>
 			</a>
 		</div>
+
 
 		<div class="scheduler-content">
 			<!-- Table container for schedule -->
@@ -76,9 +126,16 @@
 
 			<!-- Add/Edit Showtime Form -->
 			<div class="showtime-form">
-				<h3>Add/Edit Showtime</h3>
+				@if (isEditting)
+				{
+					<h3>Modify Showtime</h3>
+				}
+				else
+				{
+					<h3>Create Showtime</h3>
+				}
 				<form method="post" asp-page-handler="SaveShowtime">
-					<input type="hidden" id="showtimeId" value="@Model.Showtime.Id" />
+					<input type="hidden" name="id" value="@Model.Showtime.Id" />
 					<label for="movie">Movie:</label>
 					<select asp-for="Showtime.MovieId">
 						@foreach (var movie in Model.Movies)
@@ -114,19 +171,15 @@
 						</div>
 					}
 
-					<button type="submit">Save</button>
-					<a class="btn btn-outline-danger" asp-page-handler="Cancel">Cancel</a>
+					<button class="btn btn-success" type="submit">Save</button>
+					@if (isEditting)
+					{
+						<button type="submit" class="btn btn-warning" asp-page-handler="DeleteShowtime" asp-route-id="@Model.Showtime.Id">Delete</button>
+					}
+					<button class="btn btn-outline-danger" asp-page-handler="Cancel">Cancel</button>
 				</form>
 			</div>
 		</div>
 	</div>
-	<!-- JavaScript to clear the form -->
-	<script>
-		function clearForm() {
-			document.querySelector("form").reset();
-			const checkbox = document.querySelector("input[type='checkbox']");
-			checkbox.checked = false;
-		}
-	</script>
 </body>
 </html>
