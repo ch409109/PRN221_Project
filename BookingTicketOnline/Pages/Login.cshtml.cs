@@ -71,19 +71,7 @@ namespace BookingTicketOnline.Pages
 
             var user = _context.Users.FirstOrDefault(u => u.Username == Username);
 
-            if (user == null)
-            {
-                TempData["error"] = "Người dùng không tồn tại.";
-                return Page();
-            }
-
-            if (user.Password == null)
-            {
-                TempData["error"] = "Người dùng chưa có mật khẩu được đặt.";
-                return Page();
-            }
-
-            if (!BCrypt.Net.BCrypt.Verify(Password, user.Password))
+            if (user == null || user.Password == null || !BCrypt.Net.BCrypt.Verify(Password, user.Password))
             {
                 TempData["error"] = "Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.";
                 return Page();
