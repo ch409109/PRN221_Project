@@ -8,7 +8,8 @@ namespace BookingTicketOnline.Pages.ManageNews
     public class ManageNewsModel : PageModel
     {
         private readonly PRN221_FinalProjectContext _context;
-        public List<Models.News> NewsSource { get; set; }
+
+        public List<Models.News> NewsSource { get; set; } = new List<Models.News>();
         public ManageNewsModel(PRN221_FinalProjectContext context)
         {
             _context = context;
@@ -24,7 +25,7 @@ namespace BookingTicketOnline.Pages.ManageNews
         public int CurrentPage { get; set; } = 1;
         public int PageSize { get; set; } = 5;
         public int TotalPages { get; set; }
-        public IList<Models.News> News { get; set; }
+        public List<Models.News> News { get; set; } = new List<Models.News>();
 
         public async Task OnGetAsync()
         {

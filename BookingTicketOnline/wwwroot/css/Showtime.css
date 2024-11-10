@@ -224,3 +224,103 @@ button {
 .auto-render-label {
     margin: 0; /* Đảm bảo không có khoảng cách mặc định ở xung quanh label */
 }
+/* Container chính */
+.scheduler {
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px;
+}
+
+/* Header và nút quay lại (back) */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header {
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Scheduler content */
+.scheduler-content {
+    display: flex;
+    gap: 20px;
+    align-items: stretch; /* Đảm bảo các phần tử có chiều cao bằng nhau */
+    flex-wrap: wrap; /* Đảm bảo form nhảy xuống khi màn hình hẹp */
+    min-height: 700px; /* Thiết lập chiều cao tối thiểu cho container */
+}
+
+.table-container {
+    overflow-x: auto; /* Giúp bảng có thể cuộn ngang trên màn hình nhỏ */
+}
+
+/* Day header và time slots */
+.day-header {
+    font-weight: bold;
+    text-align: center;
+}
+
+.time-slot {
+    text-align: center;
+    padding: 5px;
+}
+
+/* Form thêm/sửa suất chiếu */
+.showtime-form {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    /* Chuyển các phần tử sang hàng dọc khi trên màn hình nhỏ */
+    .header-container {
+        flex-direction: column;
+    }
+
+    .button-container {
+        flex-direction: column;
+    }
+
+    .scheduler-content {
+        grid-template-columns: 30px repeat(7, 1fr);
+    }
+
+    .showtime-form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Điều chỉnh nội dung lịch chiếu cho màn hình rất nhỏ */
+    .scheduler-content {
+        grid-template-columns: 1fr;
+    }
+
+    .day-header,
+    .time-slot {
+        font-size: 0.8em;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
