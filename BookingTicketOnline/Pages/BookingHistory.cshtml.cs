@@ -42,7 +42,7 @@ namespace BookingTicketOnline.Pages
 				.Include(b => b.BookingItems)
 					.ThenInclude(bi => bi.FoodAndDrinks)
 				.Include(b => b.User)
-				.Where(b => b.User.Id == userIdClaim)
+				.Where(b => b.User.Id == userIdClaim).OrderByDescending(b=> b.BookingDate)
 				.ToListAsync();
 
 			TotalPages = (int)Math.Ceiling(Bookings.Count / (double)PageSize);

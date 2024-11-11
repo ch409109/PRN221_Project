@@ -77,15 +77,15 @@ INSERT INTO Feedback (UserID, MovieID, Comments, CreateAt, Rate) VALUES
 
 /*News*/
 INSERT INTO News (Title, Content, Image, CreateAt, UpdateAt, CreateBy) VALUES
-(N'Top phim Lee Seung Gi hay làm nổi bật sự nghiệp', 'Lee Seung Gi không chỉ được biết đến qua giọng hát trầm ấm mà còn là một diễn viên tài năng với nhiều vai diễn ấn tượng trên màn ảnh. Nếu bạn là người yêu mến chàng nghệ sĩ đa tài này, hãy cùng khám phá những bộ phim nổi bật trong sự nghiệp diễn xuất của anh, và cảm nhận thêm chiều sâu trong khả năng diễn xuất mà Lee Seung Gi mang lại qua từng vai diễn.', 'News3.png', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1),
-(N'19 phim chiếu rạp 2025 đáng mong đợi dành cho fan cine', 'Chú gấu Paddington đáng yêu và nổi tiếng (lồng tiếng bởi Ben Whishaw) sẽ trở lại màn ảnh lớn với cuộc phiêu lưu hoàn toàn mới. Đây là phần thứ ba trong loạt phim đình đám, được đạo diễn bởi Dougal Wilson. Lần này, hành trình của Paddington đưa cậu đến sâu thẳm khu rừng nhiệt đới Amazon, sau khi một thế lực bí ẩn bất ngờ kéo cậu vào cuộc phiêu lưu kỳ lạ. Bộ phim dự kiến ra mắt tại Vương quốc Anh vào ngày 8 tháng 11 năm 2024 và sẽ chính thức được công chiếu rộng rãi tại Mỹ vào đầu tháng 1 năm 2025.', 'News1.png', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1),
-(N'Squid Game 2 sẽ có gì và được phát sóng khi nào?', 'Squid Game 2 là phần tiếp theo đầy kịch tính của bộ phim Hàn Quốc đình đám Trò chơi con mực, tác phẩm đã gây bão toàn cầu sau khi ra mắt trên Netflix năm 2021. Câu chuyện xoay quanh những con người cùng quẫn, phải đối mặt với thử thách sinh tử trong một cuộc thi đầy tàn nhẫn, với hy vọng giành giải thưởng khổng lồ lên tới 45,6 tỷ won. 
+(N'Top phim Lee Seung Gi hay làm nổi bật sự nghiệp', N'Lee Seung Gi không chỉ được biết đến qua giọng hát trầm ấm mà còn là một diễn viên tài năng với nhiều vai diễn ấn tượng trên màn ảnh. Nếu bạn là người yêu mến chàng nghệ sĩ đa tài này, hãy cùng khám phá những bộ phim nổi bật trong sự nghiệp diễn xuất của anh, và cảm nhận thêm chiều sâu trong khả năng diễn xuất mà Lee Seung Gi mang lại qua từng vai diễn.', 'News3.png', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1),
+(N'19 phim chiếu rạp 2025 đáng mong đợi dành cho fan cine', N'Chú gấu Paddington đáng yêu và nổi tiếng (lồng tiếng bởi Ben Whishaw) sẽ trở lại màn ảnh lớn với cuộc phiêu lưu hoàn toàn mới. Đây là phần thứ ba trong loạt phim đình đám, được đạo diễn bởi Dougal Wilson. Lần này, hành trình của Paddington đưa cậu đến sâu thẳm khu rừng nhiệt đới Amazon, sau khi một thế lực bí ẩn bất ngờ kéo cậu vào cuộc phiêu lưu kỳ lạ. Bộ phim dự kiến ra mắt tại Vương quốc Anh vào ngày 8 tháng 11 năm 2024 và sẽ chính thức được công chiếu rộng rãi tại Mỹ vào đầu tháng 1 năm 2025.', 'News1.png', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1),
+(N'Squid Game 2 sẽ có gì và được phát sóng khi nào?', N'Squid Game 2 là phần tiếp theo đầy kịch tính của bộ phim Hàn Quốc đình đám Trò chơi con mực, tác phẩm đã gây bão toàn cầu sau khi ra mắt trên Netflix năm 2021. Câu chuyện xoay quanh những con người cùng quẫn, phải đối mặt với thử thách sinh tử trong một cuộc thi đầy tàn nhẫn, với hy vọng giành giải thưởng khổng lồ lên tới 45,6 tỷ won. 
 
 Để chạm đến mục tiêu này, họ phải tham gia những trò chơi dân gian Hàn Quốc, nhưng giờ đây đã biến thành những thử thách đẫm máu. Luật chơi đơn giản nhưng tàn nhẫn: chiến thắng để tiếp tục, thất bại đồng nghĩa với cái chết. Phần đầu của bộ phim kết thúc, để lại nhiều bí ẩn chưa được giải đáp.
 
 Gần đây, đoàn làm phim đã xác nhận sự trở lại của Squid Game với phần 2, dự kiến bấm máy vào tháng 7 năm nay, hứa hẹn một hành trình ly kỳ hơn bao giờ hết.', 'News3.png', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1),
-(N'Giới thiệu về Bộ Huy hiệu Đánh giá Phim: Điểm càng cao, phim càng đỉnh!', 'Câu chuyện lấy bối cảnh thời kỳ mạt thế, nơi nguy hiểm luôn rình rập. Bộ phim xoay quanh Lâm Thất Dạ, một thiếu niên được chọn làm đại diện của thần minh. Thông qua sự nỗ lực và giác ngộ của bản thân, Lâm Thất Dạ dần trở thành người gác đêm cho đô thị, với nhiệm vụ bảo vệ quê hương và đất nước khỏi những hiểm nguy. Phim không chỉ mang đến những trận chiến kịch tính mà còn khắc họa hành trình trưởng thành của một người anh hùng giữa thời đại đầy biến động.', 'News2.png', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1),
-(N'Danh sách phim hay Netflix tháng 8/2024', 'Sau 3 năm, Tiêu Viêm gặp lại Huân Nhi tại học viện Già Nam. Tại đây, hắn kết bạn với nhiều người, bao gồm Nạp Lan Hoa Viên, người sau này trở thành vợ hắn. Sau khi tốt nghiệp, Tiêu Viêm thành lập Bàn Môn và cùng bạn bè tu luyện. Để nâng cao thực lực và báo thù, Tiêu Viêm mạo hiểm vào Thiên Phần luyện Khí Tháp, thôn phệ Vẫn Lạc Tâm Viêm, và đột phá thành cường giả Đấu Khí Siêu Phẩm. Trên hành trình trở thành cao thủ và Luyện Dược Sư đỉnh cao, Tiêu Viêm được một tôn sư bí mật hướng dẫn.', 'News1.png', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1);
+(N'Giới thiệu về Bộ Huy hiệu Đánh giá Phim: Điểm càng cao, phim càng đỉnh!', N'Câu chuyện lấy bối cảnh thời kỳ mạt thế, nơi nguy hiểm luôn rình rập. Bộ phim xoay quanh Lâm Thất Dạ, một thiếu niên được chọn làm đại diện của thần minh. Thông qua sự nỗ lực và giác ngộ của bản thân, Lâm Thất Dạ dần trở thành người gác đêm cho đô thị, với nhiệm vụ bảo vệ quê hương và đất nước khỏi những hiểm nguy. Phim không chỉ mang đến những trận chiến kịch tính mà còn khắc họa hành trình trưởng thành của một người anh hùng giữa thời đại đầy biến động.', 'News2.png', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1),
+(N'Danh sách phim hay Netflix tháng 8/2024', N'Sau 3 năm, Tiêu Viêm gặp lại Huân Nhi tại học viện Già Nam. Tại đây, hắn kết bạn với nhiều người, bao gồm Nạp Lan Hoa Viên, người sau này trở thành vợ hắn. Sau khi tốt nghiệp, Tiêu Viêm thành lập Bàn Môn và cùng bạn bè tu luyện. Để nâng cao thực lực và báo thù, Tiêu Viêm mạo hiểm vào Thiên Phần luyện Khí Tháp, thôn phệ Vẫn Lạc Tâm Viêm, và đột phá thành cường giả Đấu Khí Siêu Phẩm. Trên hành trình trở thành cao thủ và Luyện Dược Sư đỉnh cao, Tiêu Viêm được một tôn sư bí mật hướng dẫn.', 'News1.png', '2024-10-10 12:00:00', '2024-10-11 09:00:00', 1);
 
 /*Discount*/
 INSERT INTO Discount (Code, DiscountValue, StartDate, EndDate) VALUES
@@ -98,292 +98,73 @@ INSERT INTO Cinema (Location, City, Name, Status) VALUES
 (N'Tầng 3, Trung Tâm Thương Mại Vincom Times City, P. Vĩnh Tuy, Q. Hai Bà Trưng', N'Hà Nội', N'CGV Vincom Times City', 'Active'),
 (N'Tầng 6, TTTM Lotte Center, 54 Liễu Giai, Q. Ba Đình', N'Hà Nội', N'CGV Lotte Center Hà Nội', 'Active'),
 (N'Tầng 5, TTTM Mipec Tower, 229 Tây Sơn, Q. Đống Đa', N'Hà Nội', N'CGV Mipec Tower', 'Inactive'),
-(N'Tầng 4, TTTM The Garden, Mễ Trì, Q. Nam Từ Liêm', N'Hà Nội', N'CGV The Garden', 'Active'),
-(N'Tầng 3, TTTM Vincom Nguyễn Chí Thanh, 54A Nguyễn Chí Thanh, Q. Đống Đa', N'Hà Nội', N'CGV Vincom Nguyễn Chí Thanh', 'Active'),
-(N'Tầng 4, TTTM Royal City, 72A Nguyễn Trãi, Q. Thanh Xuân', N'Hà Nội', N'CGV Royal City', 'Inactive'),
-(N'Tầng 2, TTTM Vincom Bắc Từ Liêm, Q. Bắc Từ Liêm', N'Hà Nội', N'CGV Vincom Bắc Từ Liêm', 'Active'),
-(N'Tầng 4, TTTM Vincom Trần Duy Hưng, 119 Trần Duy Hưng, Q. Cầu Giấy', N'Hà Nội', N'CGV Vincom Trần Duy Hưng', 'Active'),
-(N'Tầng 5, TTTM Lotte Mart Đống Đa, P. Trung Liệt, Q. Đống Đa', N'Hà Nội', N'CGV Lotte Mart Đống Đa', 'Inactive'),
-(N'Tầng 3, TTTM Vincom Bà Triệu, Q. Hai Bà Trưng', N'Hà Nội', N'CGV Vincom Bà Triệu', 'Active'),
 (N'Tầng 5, TTTM Vincom Center Đồng Khởi, Q.1', N'Hồ Chí Minh', N'CGV Vincom Center Đồng Khởi', 'Active'),
 (N'Tầng 3, TTTM Aeon Mall Tân Phú Celadon, Q. Tân Phú', N'Hồ Chí Minh', N'CGV Aeon Tân Phú', 'Inactive'),
 (N'Tầng 4, TTTM Crescent Mall, Q.7', N'Hồ Chí Minh', N'CGV Crescent Mall', 'Active'),
 (N'Tầng 6, TTTM Pearl Plaza, Q. Bình Thạnh', N'Hồ Chí Minh', N'CGV Pearl Plaza', 'Active'),
-(N'Tầng 4, TTTM Vincom Landmark 81, Q. Bình Thạnh', N'Hồ Chí Minh', N'CGV Landmark 81', 'Inactive'),
-(N'Tầng 3, TTTM Estella Place, Q.2', N'Hồ Chí Minh', N'CGV Estella Place', 'Active'),
-(N'Tầng 5, TTTM Vincom Thảo Điền, Q.2', N'Hồ Chí Minh', N'CGV Vincom Thảo Điền', 'Active'),
-(N'Tầng 2, TTTM SC VivoCity, Q.7', N'Hồ Chí Minh', N'CGV SC VivoCity', 'Inactive'),
-(N'Tầng 3, TTTM Giga Mall Thủ Đức, Q. Thủ Đức', N'Hồ Chí Minh', N'CGV Giga Mall', 'Active'),
-(N'Tầng 2, TTTM Vincom Mega Mall, Q.2', N'Hồ Chí Minh', N'CGV Vincom Mega Mall', 'Active'),
-(N'Tầng 3, TTTM Vincom Plaza Lê Văn Việt, Q.9', N'Hồ Chí Minh', N'CGV Vincom Plaza Lê Văn Việt', 'Active'),
-(N'Tầng 5, TTTM Nowzone Fashion Mall, Q.1', N'Hồ Chí Minh', N'CGV Nowzone', 'Inactive');
-
+(N'Tầng 4, TTTM Vincom Landmark 81, Q. Bình Thạnh', N'Hồ Chí Minh', N'CGV Landmark 81', 'Inactive');
 /*Room*/
 /* Thêm phòng chiếu cho CinemaID từ 1 đến 22 */
 INSERT INTO [dbo].[Room] ([Name], [CinemaID], [NumberOfRows]) VALUES
     -- CinemaID 1
     ('Starium', 1, 9),         -- Phòng chiếu "Starium" thuộc rạp "CGV Aeon Hà Đông"
     ('Aquarius', 1, 9), 
-    ('Ra', 1, 8),         -- Vị thần Ra của Ai Cập
-    ('Vayne', 1, 8),
-    ('Neith', 1, 7),      -- Vị thần Neith của Ai Cập
-    ('Sylas', 1, 8),
-    ('Teemo', 1, 7),
-    ('Mars', 1, 8),       -- Hành tinh Mars (Sao Hỏa)
-    ('Twitch', 1, 6),
+    ('Pluto', 6, 7),      -- Hành tinh Pluto (Sao Diêm Vương)
     ('Jupiter', 1, 7),    -- Hành tinh Jupiter (Sao Mộc)
     
     -- CinemaID 2
-    ('Orion', 2, 8),           -- Phòng chiếu "Orion" thuộc rạp "CGV Vincom Ocean Park"
-    ('Hercules', 2, 8),
+    ('Osiris', 4, 7),     -- Vị thần Osiris của Ai Cập
+    ('Anubis', 4, 6),     -- Vị thần Anubis của Ai Cập
     ('Amun', 2, 6),       -- Vị thần Amun của Ai Cập
-    ('Vi', 2, 9),
-    ('Viktor', 2, 8),
-    ('Vladimir', 2, 7),
-    ('Volibear', 2, 6),
-    ('Warwick', 2, 9),
-    ('Wukong', 2, 8),
-    ('Saturn', 2, 7),     -- Hành tinh Saturn (Sao Thổ)
+    ('Seth', 6, 6),       -- Vị thần Seth của Ai Cập
 
     -- CinemaID 3
     ('Xerath', 3, 7),
-    ('Xin Zhao', 3, 8),
     ('Yone', 3, 6),
     ('Zac', 3, 9),
-    ('Uranus', 3, 8),     -- Hành tinh Uranus (Sao Thiên Vương)
     ('Ziggs', 3, 7),
-    ('Zilean', 3, 6),
-    ('Zoe', 3, 9),
-    ('Neptune', 3, 7),    -- Hành tinh Neptune (Sao Hải Vương)
-    ('Ceres', 3, 8),      -- Hành tinh Ceres (hành tinh lùn)
 
     -- CinemaID 4
-    ('Kled', 4, 7),
-    ('KogMaw', 4, 8),
-    ('Anubis', 4, 6),     -- Vị thần Anubis của Ai Cập
-    ('Lee Sin', 4, 9),
-    ('Leona', 4, 8),
     ('Lissandra', 4, 7),
     ('Lucian', 4, 6),
     ('Lulu', 4, 8),
     ('Lux', 4, 9),
-    ('Osiris', 4, 7),     -- Vị thần Osiris của Ai Cập
 
     -- CinemaID 5
-    ('Malzahar', 5, 7),
     ('Maokai', 5, 8),
-    ('Mercury', 5, 6),    -- Hành tinh Mercury (Sao Thủy)
-    ('Miss Fortune', 5, 9),
     ('Mordekaiser', 5, 8),
-    ('Morgana', 5, 7),
-    ('Nami', 5, 7),
     ('Nasus', 5, 6),
     ('Nautilus', 5, 8),
-    ('Neeko', 5, 9),
 
     -- CinemaID 6
-    ('Nidalee', 6, 7),
-    ('Nocturne', 6, 8),
-    ('Seth', 6, 6),       -- Vị thần Seth của Ai Cập
-    ('Olaf', 6, 9),
-    ('Orianna', 6, 8),
     ('Ornn', 6, 7),
     ('Pantheon', 6, 6),
     ('Poppy', 6, 8),
     ('Pyke', 6, 9),
-    ('Pluto', 6, 7),      -- Hành tinh Pluto (Sao Diêm Vương)
 
     -- CinemaID 7
-    ('Quinn', 7, 7),
-    ('Rakan', 7, 8),
-    ('Rammus', 7, 6),
-    ('RekSai', 7, 9),
-    ('Rell', 7, 8),
     ('Renekton', 7, 7),
     ('Rengar', 7, 6),
     ('Riven', 7, 8),
     ('Rumble', 7, 9),
-    ('Ra', 7, 7),         -- Vị thần Ra của Ai Cập
 
     -- CinemaID 8
     ('Samira', 8, 8),
     ('Sejuani', 8, 7),
     ('Senna', 8, 6),
     ('Seraphine', 8, 9),
-    ('Saturn', 8, 8),     -- Hành tinh Saturn (Sao Thổ)
-    ('Shaco', 8, 7),
-    ('Shen', 8, 6),
-    ('Shyvana', 8, 8),
-    ('Singed', 8, 9),
-    ('Sion', 8, 7),
 
     -- CinemaID 9
     ('Sivir', 9, 7),
     ('Skarner', 9, 8),
     ('Sona', 9, 6),
     ('Soraka', 9, 9),
-    ('Sylas', 9, 8),
-    ('Syndra', 9, 7),
-    ('Tahm Kench', 9, 6),
-    ('Taliyah', 9, 9),
-    ('Taric', 9, 8),
-    ('Tristana', 9, 7),
 
     -- CinemaID 10
-    ('Trundle', 10, 8),
-    ('Tryndamere', 10, 7),
-    ('Twitch', 10, 6),
-    ('Twisted Fate', 10, 9),
-    ('Udyr', 10, 8),
-    ('Urgot', 10, 7),
     ('Varus', 10, 6),
     ('Veigar', 10, 8),
     ('VelKoz', 10, 9),
-    ('Vi', 10, 7),
-
-    -- CinemaID 11
-    ('Viktor', 11, 8),
-    ('Vladimir', 11, 7),
-    ('Volibear', 11, 6),
-    ('Warwick', 11, 9),
-    ('Wukong', 11, 8),
-    ('Xayah', 11, 7),
-    ('Xerath', 11, 6),
-    ('Xin Zhao', 11, 9),
-    ('Yone', 11, 8),
-    ('Zac', 11, 7),
-
-    -- CinemaID 12
-    ('Ziggs', 12, 8),
-    ('Zilean', 12, 7),
-    ('Zoe', 12, 6),
-    ('Yuumi', 12, 9),
-    ('Aatrox', 12, 7),
-    ('Ahri', 12, 8),
-    ('Akali', 12, 6),
-    ('Alistar', 12, 9),
-    ('Amumu', 12, 8),
-    ('Anivia', 12, 7),
-
-    -- CinemaID 13
-    ('Annie', 13, 7),
-    ('Ashe', 13, 8),
-    ('Azir', 13, 6),
-    ('Bard', 13, 9),
-    ('Blitzcrank', 13, 7),
-    ('Brand', 13, 8),
-    ('Braum', 13, 6),
-    ('Caitlyn', 13, 9),
-    ('Camille', 13, 8),
-    ('Cassiopeia', 13, 7),
-
-    -- CinemaID 14
-    ('Sivir', 14, 7),
-    ('Skarner', 14, 8),
-    ('Sona', 14, 6),
-    ('Soraka', 14, 9),
-    ('Sylas', 14, 8),
-    ('Syndra', 14, 7),
-    ('Tahm Kench', 14, 6),
-    ('Taliyah', 14, 9),
-    ('Taric', 14, 8),
-    ('Tristana', 14, 7),
-    
-    -- CinemaID 15
-    ('Trundle', 15, 8),
-    ('Tryndamere', 15, 7),
-    ('Twitch', 15, 6),
-    ('Twisted Fate', 15, 9),
-    ('Udyr', 15, 8),
-    ('Urgot', 15, 7),
-    ('Varus', 15, 6),
-    ('Veigar', 15, 8),
-    ('VelKoz', 15, 9),
-    ('Vi', 15, 7),
-    
-    -- CinemaID 16
-    ('Viktor', 16, 8),
-    ('Vladimir', 16, 7),
-    ('Volibear', 16, 6),
-    ('Warwick', 16, 9),
-    ('Wukong', 16, 8),
-    ('Xayah', 16, 7),
-    ('Xerath', 16, 6),
-    ('Xin Zhao', 16, 9),
-    ('Yone', 16, 8),
-    ('Zac', 16, 7),
-
-    -- CinemaID 17
-    ('Ziggs', 17, 8),
-    ('Zilean', 17, 7),
-    ('Zoe', 17, 6),
-    ('Yuumi', 17, 9),
-    ('Aatrox', 17, 7),
-    ('Ahri', 17, 8),
-    ('Akali', 17, 6),
-    ('Alistar', 17, 9),
-    ('Amumu', 17, 8),
-    ('Anivia', 17, 7),
-
-    -- CinemaID 18
-    ('Annie', 18, 7),
-    ('Ashe', 18, 8),
-    ('Azir', 18, 6),
-    ('Bard', 18, 9),
-    ('Blitzcrank', 18, 7),
-    ('Brand', 18, 8),
-    ('Braum', 18, 6),
-    ('Caitlyn', 18, 9),
-    ('Camille', 18, 8),
-    ('Cassiopeia', 18, 7),
-
-    -- CinemaID 19
-    ('Cassiopeia', 19, 8),
-    ('Cho"Gath', 19, 7),
-    ('Corki', 19, 6),
-    ('Darius', 19, 9),
-    ('Diana', 19, 8),
-    ('Draven', 19, 7),
-    ('Ekko', 19, 6),
-    ('Elise', 19, 9),
-    ('Evelynn', 19, 8),
-    ('Ezreal', 19, 7),
-
-    -- CinemaID 20
-    ('Fiora', 20, 8),
-    ('Fizz', 20, 7),
-    ('Galio', 20, 6),
-    ('Gangplank', 20, 9),
-    ('Garen', 20, 8),
-    ('Gragas', 20, 7),
-    ('Graves', 20, 6),
-    ('Hecarim', 20, 9),
-    ('Heimerdinger', 20, 8),
-    ('Illaoi', 20, 7),
-
-    -- CinemaID 21
-    ('Irelia', 21, 8),
-    ('Janna', 21, 7),
-    ('Jarvan IV', 21, 6),
-    ('Jhin', 21, 9),
-    ('Jinx', 21, 8),
-    ('Kaisa', 21, 7),
-    ('Karthus', 21, 6),
-    ('Kassadin', 21, 9),
-    ('Katarina', 21, 8),
-    ('Kayle', 21, 7),
-
-    -- CinemaID 22
-    ('Kennen', 22, 8),
-    ('Kha"Zix', 22, 7),
-    ('Kindred', 22, 6),
-    ('Kled', 22, 9),
-    ('Kog"Maw', 22, 8),
-    ('LeBlanc', 22, 7),
-    ('Lee Sin', 22, 6),
-    ('Leona', 22, 9),
-    ('Lissandra', 22, 8),
-    ('Lucian', 22, 7);
+    ('Vi', 10, 7);
 
 	
 INSERT INTO [dbo].[Rows] ([RowName], [RoomID], [NumberOfColumns], [Type]) VALUES
@@ -480,7 +261,95 @@ INSERT INTO [dbo].[Rows] ([RowName], [RoomID], [NumberOfColumns], [Type]) VALUES
 
     ('A', 22, 12, 'Regular'), ('B', 22, 12, 'Regular'), ('C', 22, 12, 'Regular'),
     ('D', 22, 12, 'VIP'), ('E', 22, 12, 'VIP'), ('F', 22, 12, 'VIP'),
-    ('G', 22, 12, 'VIP'), ('H', 22, 12, 'VIP'), ('J', 22, 12, 'VIP');
+    ('G', 22, 12, 'VIP'), ('H', 22, 12, 'VIP'), ('J', 22, 12, 'VIP'),
+
+	('A', 23, 12, 'Regular'), ('B', 23, 12, 'Regular'), ('C', 23, 12, 'Regular'),
+    ('D', 23, 12, 'VIP'), ('E', 23, 12, 'VIP'), ('F', 23, 12, 'VIP'),
+    ('G', 23, 12, 'VIP'), ('H', 23, 12, 'VIP'), ('J', 23, 12, 'VIP'),
+
+	('A', 24, 12, 'Regular'), ('B', 24, 12, 'Regular'), ('C', 24, 12, 'Regular'),
+    ('D', 24, 12, 'VIP'), ('E', 24, 12, 'VIP'), ('F', 24, 12, 'VIP'),
+    ('G', 24, 12, 'VIP'), ('H', 24, 12, 'VIP'), ('J', 24, 12, 'VIP'),
+
+	('A', 25, 12, 'Regular'), ('B', 25, 12, 'Regular'), ('C', 25, 12, 'Regular'),
+    ('D', 25, 12, 'VIP'), ('E', 25, 12, 'VIP'), ('F', 25, 12, 'VIP'),
+    ('G', 25, 12, 'VIP'), ('H', 25, 12, 'VIP'), ('J', 25, 12, 'VIP');
+
+	INSERT INTO [dbo].[Rows] ([RowName], [RoomID], [NumberOfColumns], [Type]) VALUES
+    -- RoomID 26
+    ('A', 26, 10, 'Regular'), ('B', 26, 11, 'Regular'), ('C', 26, 12, 'Regular'),
+    ('D', 26, 11, 'VIP'), ('E', 26, 10, 'VIP'), ('F', 26, 12, 'VIP'),
+    ('G', 26, 11, 'VIP'), ('H', 26, 10, 'VIP'), ('J', 26, 12, 'VIP'),
+
+    -- RoomID 27
+    ('A', 27, 12, 'Regular'), ('B', 27, 10, 'Regular'), ('C', 27, 11, 'Regular'),
+    ('D', 27, 12, 'VIP'), ('E', 27, 11, 'VIP'), ('F', 27, 10, 'VIP'),
+    ('G', 27, 12, 'VIP'), ('H', 27, 10, 'VIP'), ('J', 27, 11, 'VIP'),
+
+    -- RoomID 28
+    ('A', 28, 11, 'Regular'), ('B', 28, 10, 'Regular'), ('C', 28, 12, 'Regular'),
+    ('D', 28, 10, 'VIP'), ('E', 28, 11, 'VIP'), ('F', 28, 12, 'VIP'),
+    ('G', 28, 10, 'VIP'), ('H', 28, 12, 'VIP'), ('J', 28, 11, 'VIP'),
+
+    -- RoomID 29
+    ('A', 29, 10, 'Regular'), ('B', 29, 12, 'Regular'), ('C', 29, 11, 'Regular'),
+    ('D', 29, 11, 'VIP'), ('E', 29, 10, 'VIP'), ('F', 29, 12, 'VIP'),
+    ('G', 29, 12, 'VIP'), ('H', 29, 10, 'VIP'), ('J', 29, 11, 'VIP'),
+
+    -- RoomID 30
+    ('A', 30, 12, 'Regular'), ('B', 30, 11, 'Regular'), ('C', 30, 10, 'Regular'),
+    ('D', 30, 10, 'VIP'), ('E', 30, 12, 'VIP'), ('F', 30, 11, 'VIP'),
+    ('G', 30, 12, 'VIP'), ('H', 30, 10, 'VIP'), ('J', 30, 11, 'VIP'),
+
+    -- RoomID 31
+    ('A', 31, 11, 'Regular'), ('B', 31, 10, 'Regular'), ('C', 31, 12, 'Regular'),
+    ('D', 31, 11, 'VIP'), ('E', 31, 10, 'VIP'), ('F', 31, 12, 'VIP'),
+    ('G', 31, 11, 'VIP'), ('H', 31, 12, 'VIP'), ('J', 31, 10, 'VIP'),
+
+    -- RoomID 32
+    ('A', 32, 10, 'Regular'), ('B', 32, 12, 'Regular'), ('C', 32, 11, 'Regular'),
+    ('D', 32, 12, 'VIP'), ('E', 32, 11, 'VIP'), ('F', 32, 10, 'VIP'),
+    ('G', 32, 10, 'VIP'), ('H', 32, 12, 'VIP'), ('J', 32, 11, 'VIP'),
+
+    -- RoomID 33
+    ('A', 33, 12, 'Regular'), ('B', 33, 11, 'Regular'), ('C', 33, 10, 'Regular'),
+    ('D', 33, 12, 'VIP'), ('E', 33, 10, 'VIP'), ('F', 33, 11, 'VIP'),
+    ('G', 33, 12, 'VIP'), ('H', 33, 10, 'VIP'), ('J', 33, 11, 'VIP'),
+
+    -- RoomID 34
+    ('A', 34, 10, 'Regular'), ('B', 34, 12, 'Regular'), ('C', 34, 11, 'Regular'),
+    ('D', 34, 11, 'VIP'), ('E', 34, 12, 'VIP'), ('F', 34, 10, 'VIP'),
+    ('G', 34, 11, 'VIP'), ('H', 34, 12, 'VIP'), ('J', 34, 10, 'VIP'),
+
+    -- RoomID 35
+    ('A', 35, 11, 'Regular'), ('B', 35, 10, 'Regular'), ('C', 35, 12, 'Regular'),
+    ('D', 35, 11, 'VIP'), ('E', 35, 12, 'VIP'), ('F', 35, 10, 'VIP'),
+    ('G', 35, 11, 'VIP'), ('H', 35, 10, 'VIP'), ('J', 35, 12, 'VIP'),
+
+    -- RoomID 36
+    ('A', 36, 12, 'Regular'), ('B', 36, 10, 'Regular'), ('C', 36, 11, 'Regular'),
+    ('D', 36, 10, 'VIP'), ('E', 36, 11, 'VIP'), ('F', 36, 12, 'VIP'),
+    ('G', 36, 10, 'VIP'), ('H', 36, 12, 'VIP'), ('J', 36, 11, 'VIP'),
+
+    -- RoomID 37
+    ('A', 37, 10, 'Regular'), ('B', 37, 11, 'Regular'), ('C', 37, 12, 'Regular'),
+    ('D', 37, 12, 'VIP'), ('E', 37, 10, 'VIP'), ('F', 37, 11, 'VIP'),
+    ('G', 37, 12, 'VIP'), ('H', 37, 10, 'VIP'), ('J', 37, 11, 'VIP'),
+
+    -- RoomID 38
+    ('A', 38, 11, 'Regular'), ('B', 38, 12, 'Regular'), ('C', 38, 10, 'Regular'),
+    ('D', 38, 11, 'VIP'), ('E', 38, 12, 'VIP'), ('F', 38, 10, 'VIP'),
+    ('G', 38, 11, 'VIP'), ('H', 38, 10, 'VIP'), ('J', 38, 12, 'VIP'),
+
+    -- RoomID 39
+    ('A', 39, 12, 'Regular'), ('B', 39, 10, 'Regular'), ('C', 39, 11, 'Regular'),
+    ('D', 39, 12, 'VIP'), ('E', 39, 11, 'VIP'), ('F', 39, 10, 'VIP'),
+    ('G', 39, 12, 'VIP'), ('H', 39, 11, 'VIP'), ('J', 39, 10, 'VIP'),
+
+    -- RoomID 40
+    ('A', 40, 11, 'Regular'), ('B', 40, 10, 'Regular'), ('C', 40, 12, 'Regular'),
+    ('D', 40, 12, 'VIP'), ('E', 40, 10, 'VIP'), ('F', 40, 11, 'VIP'),
+    ('G', 40, 12, 'VIP'), ('H', 40, 10, 'VIP'), ('J', 40, 11, 'VIP');
 
 /*Insert Seat*/
 DECLARE @RowName VARCHAR(15), @RowID INT, @NumberOfColumns INT;
@@ -528,7 +397,7 @@ INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
 
 
 /*Showtime*/
-DECLARE @RoomCount INT = 215; -- Total number of rooms
+DECLARE @RoomCount INT = 40; -- Total number of rooms
 DECLARE @MovieCount INT = (SELECT COUNT(ID) FROM Movies); -- Total number of movies in the Movies table
 DECLARE @Days INT = 3; -- Number of different dates for showtimes
 DECLARE @DateStart DATE = DATEADD(DAY, 1, GETDATE()); -- Starting date for the showtimes (tomorrow)
