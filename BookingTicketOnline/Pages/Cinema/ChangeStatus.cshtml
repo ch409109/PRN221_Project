@@ -7,10 +7,10 @@
 <div class="container my-5" style="max-width: 600px">
     <div class="card">
         <div class="card-header">
-            <h2 class="text-center mb-0">Confirm Status Change</h2>
+            <h2 class="text-center mb-0">Xác nhận thay đổi trạng thái</h2>
         </div>
         <div class="card-body">
-            <h5 class="card-title">Are you sure you want to change this cinema's status?</h5>
+            <h5 class="card-title">Bạn có chắc là muốn thay đổi trạng thái của rạp phim này?</h5>
             <p class="card-text">
                 <strong>Cinema Name:</strong> @Model.Cinema.Name
             </p>
@@ -28,7 +28,7 @@
             </p>
             <div class="alert alert-warning">
                 <i class="bi bi-exclamation-triangle me-2"></i>
-                Warning: This action will affect the cinema's availability in the system.
+                Cảnh báo: Hành động này sẽ ảnh hưởng đến rạp chiếu phim này trong database!
             </div>
             <form method="post">
                 <input type="hidden" asp-for="Cinema.Id" />

@@ -4,7 +4,7 @@
     Layout = "_AdminLayout";
 }
 <div class="container my-5" style="max-width: 600px">
-    <h2 class="text-center mb-4">Edit Foods</h2>
+    <h2 class="text-center mb-4">Chỉnh sửa đồ ăn</h2>
     <form method="post" enctype="multipart/form-data">
 
         <input hidden asp-for="food.Id" />
@@ -13,24 +13,24 @@
 
         <div class="mb-3">
             <label asp-for="food.Name" class="form-label">Name</label>
-            <input asp-for="food.Name" class="form-control" asp-for="food.Name" placeholder="Enter name" />
+            <input asp-for="food.Name" class="form-control" asp-for="food.Name" placeholder="Nhập tên" />
             <span asp-validation-for="food.Name" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
             <label asp-for="food.Quantity" class="form-label">Quantity</label>
-            <input asp-for="food.Quantity" class="form-control" asp-for="food.Quantity" placeholder="Enter quantity" />
+            <input asp-for="food.Quantity" class="form-control" asp-for="food.Quantity" placeholder="Nhập số lượng" />
             <span asp-validation-for="food.Quantity" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
             <label asp-for="food.Price" class="form-label">Price</label>
-            <input asp-for="food.Price" class="form-control" asp-for="food.Price" placeholder="Enter price" />
+            <input asp-for="food.Price" class="form-control" asp-for="food.Price" placeholder="Nhập giá" />
             <span asp-validation-for="food.Price" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Current Image</label>
+            <label class="form-label">Ảnh hiện tại</label>
             @if (!string.IsNullOrEmpty(Model.food.Image))
             {
                 <div class="mb-2">
@@ -43,14 +43,14 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="food.Image" class="form-label">New Image (Optional)</label>
+            <label asp-for="food.Image" class="form-label">Ảnh mới(tùy chọn)</label>
             <input type="file" class="form-control" asp-for="ImageFile" accept="image/*" />
-            <small class="form-text text-muted">Leave empty to keep current image</small>
+            <small class="form-text text-muted">Để trống nếu muốn giữ ảnh cũ</small>
         </div>
 
         <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a class="btn btn-outline-secondary" asp-page="/Foods/ManageFoods">Cancel</a>
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <a class="btn btn-outline-secondary" asp-page="/Foods/ManageFoods">Hủy</a>
         </div>
     </form>
 </div>

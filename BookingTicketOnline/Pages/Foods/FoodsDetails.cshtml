@@ -10,7 +10,7 @@
         <div class="col-12 col-md-8">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h2 class="text-center mb-0">Food and Drink Details</h2>
+                    <h2 class="text-center mb-0">Thông tin chi tiết về đồ ăn thức uống</h2>
                 </div>
 
                 <div class="card-body">
@@ -35,19 +35,19 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Name:</div>
+                        <div class="col-md-4 fw-bold">Tên:</div>
                         <div class="col-md-8">@Model.Foods.Name</div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Price:</div>
+                        <div class="col-md-4 fw-bold">Giá:</div>
                         <div class="col-md-8">@Model.Foods.Price</div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Quantity:</div>
+                        <div class="col-md-4 fw-bold">Số lượng:</div>
                         <div class="col-md-8">@Model.Foods.Quantity</div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Status:</div>
+                        <div class="col-md-4 fw-bold">Trạng thái:</div>
                         <div class="col-md-8">@Model.Foods.Status</div>
                     </div>
                     <div class="row mb-3">
@@ -61,7 +61,7 @@
 
                     <div class="d-flex justify-content-between mt-4">
                         <a asp-page="./ManageFoods" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-2"></i>Back to List
+                            <i class="bi bi-arrow-left me-2"></i>Quay lại
                         </a>
                         <a asp-page="./ChangeStatus" asp-route-id="@Model.Foods.Id"
                            class="btn @(Model.Foods.Status == "Active" ? "btn-danger" : "btn-success")">
