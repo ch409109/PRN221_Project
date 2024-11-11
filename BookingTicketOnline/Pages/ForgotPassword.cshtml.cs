@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookingTicketOnline.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookingTicketOnline.Pages
 {
     public class ForgotPasswordModel : PageModel
     {
         private readonly EmailService _emailService;
-      
-        public ForgotPasswordModel(EmailService emailService)
+        private readonly PRN221_FinalProjectContext _context;
+
+        public ForgotPasswordModel(EmailService emailService, PRN221_FinalProjectContext context)
         {
             _emailService = emailService;
+            _context = context;
         }
 
         [BindProperty]
@@ -26,6 +30,12 @@ namespace BookingTicketOnline.Pages
             if (string.IsNullOrEmpty(Email))
             {
                 ModelState.AddModelError("", "Email is required.");
+                return Page();
+            }
+            var emaillExists = await _context.Users.AnyAsync(u => u.Email == Email);
+            if (!emaillExists)
+            {
+                TempData["error"] = "Email không tồn tại.";
                 return Page();
             }
 
