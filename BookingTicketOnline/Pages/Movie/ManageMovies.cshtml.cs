@@ -47,7 +47,9 @@ namespace BookingTicketOnline.Pages.Movie
                 CategoryFilter = categoryId;
             }
 
-            IQueryable<Models.Movie> movieQuery = _context.Movies.Include(m => m.Category);
+            IQueryable<Models.Movie> movieQuery = _context.Movies
+        .Include(m => m.Category)
+        .Where(m => m.Status == "Active" || m.Status == "Inactive");
 
             if (!string.IsNullOrEmpty(CurrentFilter))
             {
