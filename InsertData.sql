@@ -109,14 +109,14 @@ INSERT INTO [dbo].[Room] ([Name], [CinemaID], [NumberOfRows]) VALUES
     -- CinemaID 1
     ('Starium', 1, 9),         -- Phòng chiếu "Starium" thuộc rạp "CGV Aeon Hà Đông"
     ('Aquarius', 1, 9), 
-    ('Pluto', 6, 7),      -- Hành tinh Pluto (Sao Diêm Vương)
+    ('Pluto', 1, 7),      -- Hành tinh Pluto (Sao Diêm Vương)
     ('Jupiter', 1, 7),    -- Hành tinh Jupiter (Sao Mộc)
     
     -- CinemaID 2
-    ('Osiris', 4, 7),     -- Vị thần Osiris của Ai Cập
-    ('Anubis', 4, 6),     -- Vị thần Anubis của Ai Cập
+    ('Osiris', 2, 7),     -- Vị thần Osiris của Ai Cập
+    ('Anubis', 2, 6),     -- Vị thần Anubis của Ai Cập
     ('Amun', 2, 6),       -- Vị thần Amun của Ai Cập
-    ('Seth', 6, 6),       -- Vị thần Seth của Ai Cập
+    ('Seth', 2, 6),       -- Vị thần Seth của Ai Cập
 
     -- CinemaID 3
     ('Xerath', 3, 7),
