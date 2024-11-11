@@ -33,7 +33,6 @@ namespace BookingTicketOnline.Pages.Seat
                 return RedirectToPage("/Index");
             }
 
-            // Get showtime and room information
             var showtime = await _context.Showtimes
                 .Include(s => s.Room)
                     .ThenInclude(r => r.Rows)
@@ -47,14 +46,12 @@ namespace BookingTicketOnline.Pages.Seat
 
             Rows = showtime.Room.Rows.OrderBy(r => r.RowName).ToList();
 
-            // Get booked seats for this showtime
             var bookedSeats = await _context.BookingSeatsDetails
                 .Include(bs => bs.Booking)
                 .Where(bs => bs.Booking.ShowtimeId == showtimeId)
                 .Select(bs => bs.SeatId)
                 .ToListAsync();
 
-            // Create dictionary of seat statuses
             SeatStatuses = Rows.SelectMany(r => r.Seats)
                 .ToDictionary(
                     s => s.Id,
@@ -76,15 +73,12 @@ namespace BookingTicketOnline.Pages.Seat
                 .Where(s => SelectedSeatIds.Contains(s.Id))
                 .ToListAsync();
 
-            // Calculate total price
             int totalPrice = seats.Sum(s => s.Row.Type.ToLower() == "vip" ? 150000 : 120000);
 
-            // Store selected seats and total price in session
             HttpContext.Session.SetString("SelectedSeatIds",
                 JsonSerializer.Serialize(SelectedSeatIds));
             HttpContext.Session.SetInt32("SeatTotalAmount", totalPrice);
 
-            // Add seat total to existing food total if any
             var foodTotal = HttpContext.Session.GetInt32("FoodTotalAmount") ?? 0;
             var finalTotal = totalPrice + foodTotal;
             HttpContext.Session.SetInt32("TotalPrice", finalTotal);
@@ -99,7 +93,6 @@ namespace BookingTicketOnline.Pages.Seat
                 if (seatIds == null || !seatIds.Any())
                     return new JsonResult(new { total = 0 });
 
-                // Log ?? debug
                 _logger?.LogInformation($"Received seatIds: {string.Join(", ", seatIds)}");
 
                 var seats = _context.Seats
@@ -107,12 +100,10 @@ namespace BookingTicketOnline.Pages.Seat
                     .Where(s => seatIds.Contains(s.Id))
                     .ToList();
 
-                // Log s? l??ng gh? tìm th?y
                 _logger?.LogInformation($"Found {seats.Count} seats");
 
                 int total = seats.Sum(s => s.Row.Type.ToLower() == "vip" ? 150000 : 120000);
 
-                // Log t?ng ti?n
                 _logger?.LogInformation($"Calculated total: {total}");
 
                 return new JsonResult(new { total });
