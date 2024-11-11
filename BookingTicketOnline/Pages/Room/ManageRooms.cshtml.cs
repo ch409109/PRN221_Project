@@ -1,4 +1,4 @@
-using BookingTicketOnline.Models;
+﻿using BookingTicketOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -14,8 +14,10 @@ namespace BookingTicketOnline.Pages.Room
         }
         [BindProperty]
         public List<Models.Room> Rooms { get; set; }
+
         public async Task OnGetAsync(int id)
         {
+            HttpContext.Session.SetInt32("CinemaID",id);
             IQueryable<Models.Room> query = _context.Rooms.Include(c => c.Cinema);
             Rooms = await query.Where(c => c.Cinema.Id == id).ToListAsync();
         }

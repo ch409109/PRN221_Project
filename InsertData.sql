@@ -92,103 +92,424 @@ INSERT INTO Discount (Code, DiscountValue, StartDate, EndDate) VALUES
 ('DISCOUNT10', 10, '2024-10-01', '2024-10-31'),
 ('HALFOFF', 50, '2024-11-01', '2024-11-30');
 
-/*Cinema*/
 INSERT INTO Cinema (Location, City, Name, Status) VALUES 
 (N'Tầng 3 & 4 – TTTM AEON MALL HÀ ĐÔNG, P. Dương Nội, Q. Hà Đông', N'Hà Nội', N'CGV Aeon Hà Đông', 'Active'),
-(N'Tầng 4, Trung Tâm Thương Mại Vincom Ocean Park, Huyện Gia Lâm', N'Hà Nội', N'CGV Vincom Ocean Park', 'Active'),
-(N'Tầng 3 | Hồ Gươm Plaza, số 110 đường Trần Phú, phường Mỗ Lao, quận Hà Đông', N'Hà Nội',N'CGV Vincom Plaza', 'Active'),
-(N'Tầng 5 | Vincom Center Trần Duy Hưng, số 119 Đường Trần Duy Hưng, phường Trung Hòa', N'Hà Nội', N'CGV Vincom Trần Duy Hưng', 'Active'),
-(N'Tầng 4, TTTM AEON Long Biên, Số 27 Cổ Linh, Quận Long Biên', N'CGV Aeon Long Biên',N'Hà Nội', 'Active'),
-(N'Tầng 4, TTTM AEON Quận 1, Số 27 Cổ Linh, Quận Long Biên', N'CGV Aeon Quận 1',N'TP.Hồ Chí Minh', 'Active'),
-(N'Tầng 4, TTTM AEON Quận 2, Số 27 Cổ Linh, Quận Long Biên', N'CGV Aeon Quận 2',N'TP.Hồ Chí Minh', 'Active'),
-(N'Tầng 2, Tòa nhà D’. Le Roi Soleil, số 59 Xuân Diệu, P. Quảng An, Q. Tây Hồ', N'Hà Nội', N'CGV Xuân Diệu', 'Active');
+(N'Tầng 4, Trung Tâm Thương Mại Vincom Ocean Park, Huyện Gia Lâm', N'Hà Nội', N'CGV Vincom Ocean Park', 'Inactive'),
+(N'Tầng 3, Trung Tâm Thương Mại Vincom Times City, P. Vĩnh Tuy, Q. Hai Bà Trưng', N'Hà Nội', N'CGV Vincom Times City', 'Active'),
+(N'Tầng 6, TTTM Lotte Center, 54 Liễu Giai, Q. Ba Đình', N'Hà Nội', N'CGV Lotte Center Hà Nội', 'Active'),
+(N'Tầng 5, TTTM Mipec Tower, 229 Tây Sơn, Q. Đống Đa', N'Hà Nội', N'CGV Mipec Tower', 'Inactive'),
+(N'Tầng 4, TTTM The Garden, Mễ Trì, Q. Nam Từ Liêm', N'Hà Nội', N'CGV The Garden', 'Active'),
+(N'Tầng 3, TTTM Vincom Nguyễn Chí Thanh, 54A Nguyễn Chí Thanh, Q. Đống Đa', N'Hà Nội', N'CGV Vincom Nguyễn Chí Thanh', 'Active'),
+(N'Tầng 4, TTTM Royal City, 72A Nguyễn Trãi, Q. Thanh Xuân', N'Hà Nội', N'CGV Royal City', 'Inactive'),
+(N'Tầng 2, TTTM Vincom Bắc Từ Liêm, Q. Bắc Từ Liêm', N'Hà Nội', N'CGV Vincom Bắc Từ Liêm', 'Active'),
+(N'Tầng 4, TTTM Vincom Trần Duy Hưng, 119 Trần Duy Hưng, Q. Cầu Giấy', N'Hà Nội', N'CGV Vincom Trần Duy Hưng', 'Active'),
+(N'Tầng 5, TTTM Lotte Mart Đống Đa, P. Trung Liệt, Q. Đống Đa', N'Hà Nội', N'CGV Lotte Mart Đống Đa', 'Inactive'),
+(N'Tầng 3, TTTM Vincom Bà Triệu, Q. Hai Bà Trưng', N'Hà Nội', N'CGV Vincom Bà Triệu', 'Active'),
+(N'Tầng 5, TTTM Vincom Center Đồng Khởi, Q.1', N'Hồ Chí Minh', N'CGV Vincom Center Đồng Khởi', 'Active'),
+(N'Tầng 3, TTTM Aeon Mall Tân Phú Celadon, Q. Tân Phú', N'Hồ Chí Minh', N'CGV Aeon Tân Phú', 'Inactive'),
+(N'Tầng 4, TTTM Crescent Mall, Q.7', N'Hồ Chí Minh', N'CGV Crescent Mall', 'Active'),
+(N'Tầng 6, TTTM Pearl Plaza, Q. Bình Thạnh', N'Hồ Chí Minh', N'CGV Pearl Plaza', 'Active'),
+(N'Tầng 4, TTTM Vincom Landmark 81, Q. Bình Thạnh', N'Hồ Chí Minh', N'CGV Landmark 81', 'Inactive'),
+(N'Tầng 3, TTTM Estella Place, Q.2', N'Hồ Chí Minh', N'CGV Estella Place', 'Active'),
+(N'Tầng 5, TTTM Vincom Thảo Điền, Q.2', N'Hồ Chí Minh', N'CGV Vincom Thảo Điền', 'Active'),
+(N'Tầng 2, TTTM SC VivoCity, Q.7', N'Hồ Chí Minh', N'CGV SC VivoCity', 'Inactive'),
+(N'Tầng 3, TTTM Giga Mall Thủ Đức, Q. Thủ Đức', N'Hồ Chí Minh', N'CGV Giga Mall', 'Active'),
+(N'Tầng 2, TTTM Vincom Mega Mall, Q.2', N'Hồ Chí Minh', N'CGV Vincom Mega Mall', 'Active'),
+(N'Tầng 3, TTTM Vincom Plaza Lê Văn Việt, Q.9', N'Hồ Chí Minh', N'CGV Vincom Plaza Lê Văn Việt', 'Active'),
+(N'Tầng 5, TTTM Nowzone Fashion Mall, Q.1', N'Hồ Chí Minh', N'CGV Nowzone', 'Inactive');
 
 /*Room*/
-INSERT INTO [dbo].[Room] ([Name],[CinemaID],[NumberOfRows]) VALUES
+/* Thêm phòng chiếu cho CinemaID từ 1 đến 22 */
+INSERT INTO [dbo].[Room] ([Name], [CinemaID], [NumberOfRows]) VALUES
+    -- CinemaID 1
     ('Starium', 1, 9),         -- Phòng chiếu "Starium" thuộc rạp "CGV Aeon Hà Đông"
-    ('Aquarius', 1, 9),        -- Phòng chiếu "Aquarius" thuộc rạp "CGV Aeon Hà Đông"
+    ('Aquarius', 1, 9), 
+    ('Ra', 1, 8),         -- Vị thần Ra của Ai Cập
+    ('Vayne', 1, 8),
+    ('Neith', 1, 7),      -- Vị thần Neith của Ai Cập
+    ('Sylas', 1, 8),
+    ('Teemo', 1, 7),
+    ('Mars', 1, 8),       -- Hành tinh Mars (Sao Hỏa)
+    ('Twitch', 1, 6),
+    ('Jupiter', 1, 7),    -- Hành tinh Jupiter (Sao Mộc)
+    
+    -- CinemaID 2
     ('Orion', 2, 8),           -- Phòng chiếu "Orion" thuộc rạp "CGV Vincom Ocean Park"
-    ('Hercules', 2, 8);        -- Phòng chiếu "Hercules" thuộc rạp "CGV Vincom Ocean Park"
+    ('Hercules', 2, 8),
+    ('Amun', 2, 6),       -- Vị thần Amun của Ai Cập
+    ('Vi', 2, 9),
+    ('Viktor', 2, 8),
+    ('Vladimir', 2, 7),
+    ('Volibear', 2, 6),
+    ('Warwick', 2, 9),
+    ('Wukong', 2, 8),
+    ('Saturn', 2, 7),     -- Hành tinh Saturn (Sao Thổ)
 
-/*Rows*/
-INSERT INTO [dbo].[Rows] ([RowName],[RoomID],[NumberOfColumns],[Type])
-     VALUES
-           ('A',1,14,'Regular'),('B',1,15,'Regular'),('C',1,15,'Regular'),
-		   ('D',1,15,'VIP'),('E',1,15,'VIP'),('F',1,15,'VIP'),
-		   ('G',1,15,'VIP'),('H',1,15,'VIP'),('J',1,15,'VIP')
+    -- CinemaID 3
+    ('Xerath', 3, 7),
+    ('Xin Zhao', 3, 8),
+    ('Yone', 3, 6),
+    ('Zac', 3, 9),
+    ('Uranus', 3, 8),     -- Hành tinh Uranus (Sao Thiên Vương)
+    ('Ziggs', 3, 7),
+    ('Zilean', 3, 6),
+    ('Zoe', 3, 9),
+    ('Neptune', 3, 7),    -- Hành tinh Neptune (Sao Hải Vương)
+    ('Ceres', 3, 8),      -- Hành tinh Ceres (hành tinh lùn)
 
-/*Seat*/
--- Insert seats for Row A (ID = 1)
-INSERT INTO Seat (SeatName, RowID, Status)
-VALUES
-('A1', 1, 'Available'), ('A2', 1, 'Available'), ('A3', 1, 'Available'),
-('A4', 1, 'Available'), ('A5', 1, 'Available'), ('A6', 1, 'Available'),
-('A7', 1, 'Available'), ('A8', 1, 'Available'), ('A9', 1, 'Available'),
-('A10', 1, 'Available'), ('A11', 1, 'Available'), ('A12', 1, 'Available'),
-('A13', 1, 'Available'), ('A14', 1, 'Available');
+    -- CinemaID 4
+    ('Kled', 4, 7),
+    ('KogMaw', 4, 8),
+    ('Anubis', 4, 6),     -- Vị thần Anubis của Ai Cập
+    ('Lee Sin', 4, 9),
+    ('Leona', 4, 8),
+    ('Lissandra', 4, 7),
+    ('Lucian', 4, 6),
+    ('Lulu', 4, 8),
+    ('Lux', 4, 9),
+    ('Osiris', 4, 7),     -- Vị thần Osiris của Ai Cập
 
--- Insert seats for Row B (ID = 2)
-INSERT INTO Seat (SeatName, RowID, Status)
-VALUES
-('B1', 2, 'Available'), ('B2', 2, 'Available'), ('B3', 2, 'Available'),
-('B4', 2, 'Available'), ('B5', 2, 'Available'), ('B6', 2, 'Available'),
-('B7', 2, 'Available'), ('B8', 2, 'Available'), ('B9', 2, 'Available'),
-('B10', 2, 'Available'), ('B11', 2, 'Available'), ('B12', 2, 'Available'),
-('B13', 2, 'Available'), ('B14', 2, 'Available'), ('B15', 2, 'Available');
+    -- CinemaID 5
+    ('Malzahar', 5, 7),
+    ('Maokai', 5, 8),
+    ('Mercury', 5, 6),    -- Hành tinh Mercury (Sao Thủy)
+    ('Miss Fortune', 5, 9),
+    ('Mordekaiser', 5, 8),
+    ('Morgana', 5, 7),
+    ('Nami', 5, 7),
+    ('Nasus', 5, 6),
+    ('Nautilus', 5, 8),
+    ('Neeko', 5, 9),
 
--- Insert seats for Row C (ID = 3)
-INSERT INTO Seat (SeatName, RowID, Status)
-VALUES
-('C1', 3, 'Available'), ('C2', 3, 'Available'), ('C3', 3, 'Available'),
-('C4', 3, 'Available'), ('C5', 3, 'Available'), ('C6', 3, 'Available'),
-('C7', 3, 'Available'), ('C8', 3, 'Available'), ('C9', 3, 'Available'),
-('C10', 3, 'Available'), ('C11', 3, 'Available'), ('C12', 3, 'Available'),
-('C13', 3, 'Available'), ('C14', 3, 'Available'), ('C15', 3, 'Available');
+    -- CinemaID 6
+    ('Nidalee', 6, 7),
+    ('Nocturne', 6, 8),
+    ('Seth', 6, 6),       -- Vị thần Seth của Ai Cập
+    ('Olaf', 6, 9),
+    ('Orianna', 6, 8),
+    ('Ornn', 6, 7),
+    ('Pantheon', 6, 6),
+    ('Poppy', 6, 8),
+    ('Pyke', 6, 9),
+    ('Pluto', 6, 7),      -- Hành tinh Pluto (Sao Diêm Vương)
 
--- Insert seats for Row D (ID = 4)
-INSERT INTO Seat (SeatName, RowID, Status)
-VALUES
-('D1', 4, 'Available'), ('D2', 4, 'Available'), ('D3', 4, 'Available'),
-('D4', 4, 'Available'), ('D5', 4, 'Available'), ('D6', 4, 'Available'),
-('D7', 4, 'Available'), ('D8', 4, 'Available'), ('D9', 4, 'Available'),
-('D10', 4, 'Available'), ('D11', 4, 'Available'), ('D12', 4, 'Available'),
-('D13', 4, 'Available'), ('D14', 4, 'Available'), ('D15', 4, 'Available');
+    -- CinemaID 7
+    ('Quinn', 7, 7),
+    ('Rakan', 7, 8),
+    ('Rammus', 7, 6),
+    ('RekSai', 7, 9),
+    ('Rell', 7, 8),
+    ('Renekton', 7, 7),
+    ('Rengar', 7, 6),
+    ('Riven', 7, 8),
+    ('Rumble', 7, 9),
+    ('Ra', 7, 7),         -- Vị thần Ra của Ai Cập
 
--- Insert seats for Row E (ID = 5)
-INSERT INTO Seat (SeatName, RowID, Status)
-VALUES
-('E1', 5, 'Available'), ('E2', 5, 'Available'), ('E3', 5, 'Available'),
-('E4', 5, 'Available'), ('E5', 5, 'Available'), ('E6', 5, 'Available'),
-('E7', 5, 'Available'), ('E8', 5, 'Available'), ('E9', 5, 'Available'),
-('E10', 5, 'Available'), ('E11', 5, 'Available'), ('E12', 5, 'Available'),
-('E13', 5, 'Available'), ('E14', 5, 'Available'), ('E15', 5, 'Available');
+    -- CinemaID 8
+    ('Samira', 8, 8),
+    ('Sejuani', 8, 7),
+    ('Senna', 8, 6),
+    ('Seraphine', 8, 9),
+    ('Saturn', 8, 8),     -- Hành tinh Saturn (Sao Thổ)
+    ('Shaco', 8, 7),
+    ('Shen', 8, 6),
+    ('Shyvana', 8, 8),
+    ('Singed', 8, 9),
+    ('Sion', 8, 7),
 
--- Insert seats for Row F (ID = 6)
-INSERT INTO Seat (SeatName, RowID, Status)
-VALUES
-('F1', 6, 'Available'), ('F2', 6, 'Available'), ('F3', 6, 'Available'),
-('F4', 6, 'Available'), ('F5', 6, 'Available'), ('F6', 6, 'Available'),
-('F7', 6, 'Available'), ('F8', 6, 'Available'), ('F9', 6, 'Available'),
-('F10', 6, 'Available'), ('F11', 6, 'Available'), ('F12', 6, 'Available'),
-('F13', 6, 'Available'), ('F14', 6, 'Available'), ('F15', 6, 'Available');
+    -- CinemaID 9
+    ('Sivir', 9, 7),
+    ('Skarner', 9, 8),
+    ('Sona', 9, 6),
+    ('Soraka', 9, 9),
+    ('Sylas', 9, 8),
+    ('Syndra', 9, 7),
+    ('Tahm Kench', 9, 6),
+    ('Taliyah', 9, 9),
+    ('Taric', 9, 8),
+    ('Tristana', 9, 7),
 
--- Insert seats for Row G (ID = 7)
-INSERT INTO Seat (SeatName, RowID, Status)
-VALUES
-('G1', 7, 'Available'), ('G2', 7, 'Available'), ('G3', 7, 'Available'),
-('G4', 7, 'Available'), ('G5', 7, 'Available'), ('G6', 7, 'Available'),
-('G7', 7, 'Available'), ('G8', 7, 'Available'), ('G9', 7, 'Available'),
-('G10', 7, 'Available'), ('G11', 7, 'Available'), ('G12', 7, 'Available'),
-('G13', 7, 'Available'), ('G14', 7, 'Available'), ('G15', 7, 'Available');
+    -- CinemaID 10
+    ('Trundle', 10, 8),
+    ('Tryndamere', 10, 7),
+    ('Twitch', 10, 6),
+    ('Twisted Fate', 10, 9),
+    ('Udyr', 10, 8),
+    ('Urgot', 10, 7),
+    ('Varus', 10, 6),
+    ('Veigar', 10, 8),
+    ('VelKoz', 10, 9),
+    ('Vi', 10, 7),
 
--- Insert seats for Row H (ID = 8)
-INSERT INTO Seat (SeatName, RowID, Status)
-VALUES
-('H1', 8, 'Available'), ('H2', 8, 'Available'), ('H3', 8, 'Available'),
-('H4', 8, 'Available'), ('H5', 8, 'Available'), ('H6', 8, 'Available'),
-('H7', 8, 'Available'), ('H8', 8, 'Available'), ('H9', 8, 'Available'),
-('H10', 8, 'Available'), ('H11', 8, 'Available'), ('H12', 8, 'Available'),
-('H13', 8, 'Available'), ('H14', 8, 'Available'), ('H15', 8, 'Available');
+    -- CinemaID 11
+    ('Viktor', 11, 8),
+    ('Vladimir', 11, 7),
+    ('Volibear', 11, 6),
+    ('Warwick', 11, 9),
+    ('Wukong', 11, 8),
+    ('Xayah', 11, 7),
+    ('Xerath', 11, 6),
+    ('Xin Zhao', 11, 9),
+    ('Yone', 11, 8),
+    ('Zac', 11, 7),
+
+    -- CinemaID 12
+    ('Ziggs', 12, 8),
+    ('Zilean', 12, 7),
+    ('Zoe', 12, 6),
+    ('Yuumi', 12, 9),
+    ('Aatrox', 12, 7),
+    ('Ahri', 12, 8),
+    ('Akali', 12, 6),
+    ('Alistar', 12, 9),
+    ('Amumu', 12, 8),
+    ('Anivia', 12, 7),
+
+    -- CinemaID 13
+    ('Annie', 13, 7),
+    ('Ashe', 13, 8),
+    ('Azir', 13, 6),
+    ('Bard', 13, 9),
+    ('Blitzcrank', 13, 7),
+    ('Brand', 13, 8),
+    ('Braum', 13, 6),
+    ('Caitlyn', 13, 9),
+    ('Camille', 13, 8),
+    ('Cassiopeia', 13, 7),
+
+    -- CinemaID 14
+    ('Sivir', 14, 7),
+    ('Skarner', 14, 8),
+    ('Sona', 14, 6),
+    ('Soraka', 14, 9),
+    ('Sylas', 14, 8),
+    ('Syndra', 14, 7),
+    ('Tahm Kench', 14, 6),
+    ('Taliyah', 14, 9),
+    ('Taric', 14, 8),
+    ('Tristana', 14, 7),
+    
+    -- CinemaID 15
+    ('Trundle', 15, 8),
+    ('Tryndamere', 15, 7),
+    ('Twitch', 15, 6),
+    ('Twisted Fate', 15, 9),
+    ('Udyr', 15, 8),
+    ('Urgot', 15, 7),
+    ('Varus', 15, 6),
+    ('Veigar', 15, 8),
+    ('VelKoz', 15, 9),
+    ('Vi', 15, 7),
+    
+    -- CinemaID 16
+    ('Viktor', 16, 8),
+    ('Vladimir', 16, 7),
+    ('Volibear', 16, 6),
+    ('Warwick', 16, 9),
+    ('Wukong', 16, 8),
+    ('Xayah', 16, 7),
+    ('Xerath', 16, 6),
+    ('Xin Zhao', 16, 9),
+    ('Yone', 16, 8),
+    ('Zac', 16, 7),
+
+    -- CinemaID 17
+    ('Ziggs', 17, 8),
+    ('Zilean', 17, 7),
+    ('Zoe', 17, 6),
+    ('Yuumi', 17, 9),
+    ('Aatrox', 17, 7),
+    ('Ahri', 17, 8),
+    ('Akali', 17, 6),
+    ('Alistar', 17, 9),
+    ('Amumu', 17, 8),
+    ('Anivia', 17, 7),
+
+    -- CinemaID 18
+    ('Annie', 18, 7),
+    ('Ashe', 18, 8),
+    ('Azir', 18, 6),
+    ('Bard', 18, 9),
+    ('Blitzcrank', 18, 7),
+    ('Brand', 18, 8),
+    ('Braum', 18, 6),
+    ('Caitlyn', 18, 9),
+    ('Camille', 18, 8),
+    ('Cassiopeia', 18, 7),
+
+    -- CinemaID 19
+    ('Cassiopeia', 19, 8),
+    ('Cho"Gath', 19, 7),
+    ('Corki', 19, 6),
+    ('Darius', 19, 9),
+    ('Diana', 19, 8),
+    ('Draven', 19, 7),
+    ('Ekko', 19, 6),
+    ('Elise', 19, 9),
+    ('Evelynn', 19, 8),
+    ('Ezreal', 19, 7),
+
+    -- CinemaID 20
+    ('Fiora', 20, 8),
+    ('Fizz', 20, 7),
+    ('Galio', 20, 6),
+    ('Gangplank', 20, 9),
+    ('Garen', 20, 8),
+    ('Gragas', 20, 7),
+    ('Graves', 20, 6),
+    ('Hecarim', 20, 9),
+    ('Heimerdinger', 20, 8),
+    ('Illaoi', 20, 7),
+
+    -- CinemaID 21
+    ('Irelia', 21, 8),
+    ('Janna', 21, 7),
+    ('Jarvan IV', 21, 6),
+    ('Jhin', 21, 9),
+    ('Jinx', 21, 8),
+    ('Kaisa', 21, 7),
+    ('Karthus', 21, 6),
+    ('Kassadin', 21, 9),
+    ('Katarina', 21, 8),
+    ('Kayle', 21, 7),
+
+    -- CinemaID 22
+    ('Kennen', 22, 8),
+    ('Kha"Zix', 22, 7),
+    ('Kindred', 22, 6),
+    ('Kled', 22, 9),
+    ('Kog"Maw', 22, 8),
+    ('LeBlanc', 22, 7),
+    ('Lee Sin', 22, 6),
+    ('Leona', 22, 9),
+    ('Lissandra', 22, 8),
+    ('Lucian', 22, 7);
+
+	
+INSERT INTO [dbo].[Rows] ([RowName], [RoomID], [NumberOfColumns], [Type]) VALUES
+    -- RoomID 1 (CGV Aeon Hà Đông)
+    ('A', 1, 14, 'Regular'), ('B', 1, 15, 'Regular'), ('C', 1, 15, 'Regular'),
+    ('D', 1, 15, 'VIP'), ('E', 1, 15, 'VIP'), ('F', 1, 15, 'VIP'),
+    ('G', 1, 15, 'VIP'), ('H', 1, 15, 'VIP'), ('J', 1, 15, 'VIP'),
+
+    -- RoomID 2 (CGV Vincom Ocean Park)
+    ('A', 2, 13, 'Regular'), ('B', 2, 14, 'Regular'), ('C', 2, 14, 'Regular'),
+    ('D', 2, 14, 'VIP'), ('E', 2, 14, 'VIP'), ('F', 2, 14, 'VIP'),
+    ('G', 2, 14, 'VIP'), ('H', 2, 14, 'VIP'), ('J', 2, 14, 'VIP'),
+
+    -- RoomID 3 (Starium - CGV Aeon Hà Đông)
+    ('A', 3, 16, 'Regular'), ('B', 3, 16, 'Regular'), ('C', 3, 16, 'Regular'),
+    ('D', 3, 16, 'VIP'), ('E', 3, 16, 'VIP'), ('F', 3, 16, 'VIP'),
+    ('G', 3, 16, 'VIP'), ('H', 3, 16, 'VIP'), ('J', 3, 16, 'VIP'),
+
+    -- RoomID 4 (Aquarius - CGV Aeon Hà Đông)
+    ('A', 4, 14, 'Regular'), ('B', 4, 14, 'Regular'), ('C', 4, 14, 'Regular'),
+    ('D', 4, 14, 'VIP'), ('E', 4, 14, 'VIP'), ('F', 4, 14, 'VIP'),
+    ('G', 4, 14, 'VIP'), ('H', 4, 14, 'VIP'), ('J', 4, 14, 'VIP'),
+
+    -- RoomID 5 (Orion - CGV Vincom Ocean Park)
+    ('A', 5, 12, 'Regular'), ('B', 5, 13, 'Regular'), ('C', 5, 13, 'Regular'),
+    ('D', 5, 13, 'VIP'), ('E', 5, 13, 'VIP'), ('F', 5, 13, 'VIP'),
+    ('G', 5, 13, 'VIP'), ('H', 5, 13, 'VIP'), ('J', 5, 13, 'VIP'),
+
+    -- RoomID 6 (Hercules - CGV Vincom Ocean Park)
+    ('A', 6, 13, 'Regular'), ('B', 6, 13, 'Regular'), ('C', 6, 13, 'Regular'),
+    ('D', 6, 13, 'VIP'), ('E', 6, 13, 'VIP'), ('F', 6, 13, 'VIP'),
+    ('G', 6, 13, 'VIP'), ('H', 6, 13, 'VIP'), ('J', 6, 13, 'VIP'),
+
+    -- RoomID 7 đến RoomID 22 (Các phòng chiếu còn lại)
+    ('A', 7, 12, 'Regular'), ('B', 7, 13, 'Regular'), ('C', 7, 13, 'Regular'),
+    ('D', 7, 13, 'VIP'), ('E', 7, 13, 'VIP'), ('F', 7, 13, 'VIP'),
+    ('G', 7, 13, 'VIP'), ('H', 7, 13, 'VIP'), ('J', 7, 13, 'VIP'),
+
+    ('A', 8, 14, 'Regular'), ('B', 8, 14, 'Regular'), ('C', 8, 14, 'Regular'),
+    ('D', 8, 14, 'VIP'), ('E', 8, 14, 'VIP'), ('F', 8, 14, 'VIP'),
+    ('G', 8, 14, 'VIP'), ('H', 8, 14, 'VIP'), ('J', 8, 14, 'VIP'),
+
+    ('A', 9, 15, 'Regular'), ('B', 9, 15, 'Regular'), ('C', 9, 15, 'Regular'),
+    ('D', 9, 15, 'VIP'), ('E', 9, 15, 'VIP'), ('F', 9, 15, 'VIP'),
+    ('G', 9, 15, 'VIP'), ('H', 9, 15, 'VIP'), ('J', 9, 15, 'VIP'),
+
+    ('A', 10, 13, 'Regular'), ('B', 10, 13, 'Regular'), ('C', 10, 13, 'Regular'),
+    ('D', 10, 13, 'VIP'), ('E', 10, 13, 'VIP'), ('F', 10, 13, 'VIP'),
+    ('G', 10, 13, 'VIP'), ('H', 10, 13, 'VIP'), ('J', 10, 13, 'VIP'),
+
+    ('A', 11, 14, 'Regular'), ('B', 11, 14, 'Regular'), ('C', 11, 14, 'Regular'),
+    ('D', 11, 14, 'VIP'), ('E', 11, 14, 'VIP'), ('F', 11, 14, 'VIP'),
+    ('G', 11, 14, 'VIP'), ('H', 11, 14, 'VIP'), ('J', 11, 14, 'VIP'),
+
+    ('A', 12, 12, 'Regular'), ('B', 12, 12, 'Regular'), ('C', 12, 12, 'Regular'),
+    ('D', 12, 12, 'VIP'), ('E', 12, 12, 'VIP'), ('F', 12, 12, 'VIP'),
+    ('G', 12, 12, 'VIP'), ('H', 12, 12, 'VIP'), ('J', 12, 12, 'VIP'),
+
+    ('A', 13, 14, 'Regular'), ('B', 13, 14, 'Regular'), ('C', 13, 14, 'Regular'),
+    ('D', 13, 14, 'VIP'), ('E', 13, 14, 'VIP'), ('F', 13, 14, 'VIP'),
+    ('G', 13, 14, 'VIP'), ('H', 13, 14, 'VIP'), ('J', 13, 14, 'VIP'),
+
+    ('A', 14, 13, 'Regular'), ('B', 14, 13, 'Regular'), ('C', 14, 13, 'Regular'),
+    ('D', 14, 13, 'VIP'), ('E', 14, 13, 'VIP'), ('F', 14, 13, 'VIP'),
+    ('G', 14, 13, 'VIP'), ('H', 14, 13, 'VIP'), ('J', 14, 13, 'VIP'),
+
+    ('A', 15, 12, 'Regular'), ('B', 15, 12, 'Regular'), ('C', 15, 12, 'Regular'),
+    ('D', 15, 12, 'VIP'), ('E', 15, 12, 'VIP'), ('F', 15, 12, 'VIP'),
+    ('G', 15, 12, 'VIP'), ('H', 15, 12, 'VIP'), ('J', 15, 12, 'VIP'),
+
+    ('A', 16, 14, 'Regular'), ('B', 16, 14, 'Regular'), ('C', 16, 14, 'Regular'),
+    ('D', 16, 14, 'VIP'), ('E', 16, 14, 'VIP'), ('F', 16, 14, 'VIP'),
+    ('G', 16, 14, 'VIP'), ('H', 16, 14, 'VIP'), ('J', 16, 14, 'VIP'),
+
+    ('A', 17, 12, 'Regular'), ('B', 17, 12, 'Regular'), ('C', 17, 12, 'Regular'),
+    ('D', 17, 12, 'VIP'), ('E', 17, 12, 'VIP'), ('F', 17, 12, 'VIP'),
+    ('G', 17, 12, 'VIP'), ('H', 17, 12, 'VIP'), ('J', 17, 12, 'VIP'),
+
+    ('A', 18, 13, 'Regular'), ('B', 18, 13, 'Regular'), ('C', 18, 13, 'Regular'),
+    ('D', 18, 13, 'VIP'), ('E', 18, 13, 'VIP'), ('F', 18, 13, 'VIP'),
+    ('G', 18, 13, 'VIP'), ('H', 18, 13, 'VIP'), ('J', 18, 13, 'VIP'),
+    
+    ('A', 19, 15, 'Regular'), ('B', 19, 15, 'Regular'), ('C', 19, 15, 'Regular'),
+    ('D', 19, 15, 'VIP'), ('E', 19, 15, 'VIP'), ('F', 19, 15, 'VIP'),
+    ('G', 19, 15, 'VIP'), ('H', 19, 15, 'VIP'), ('J', 19, 15, 'VIP'),
+
+    ('A', 20, 13, 'Regular'), ('B', 20, 13, 'Regular'), ('C', 20, 13, 'Regular'),
+    ('D', 20, 13, 'VIP'), ('E', 20, 13, 'VIP'), ('F', 20, 13, 'VIP'),
+    ('G', 20, 13, 'VIP'), ('H', 20, 13, 'VIP'), ('J', 20, 13, 'VIP'),
+
+    ('A', 21, 15, 'Regular'), ('B', 21, 15, 'Regular'), ('C', 21, 15, 'Regular'),
+    ('D', 21, 15, 'VIP'), ('E', 21, 15, 'VIP'), ('F', 21, 15, 'VIP'),
+    ('G', 21, 15, 'VIP'), ('H', 21, 15, 'VIP'), ('J', 21, 15, 'VIP'),
+
+    ('A', 22, 12, 'Regular'), ('B', 22, 12, 'Regular'), ('C', 22, 12, 'Regular'),
+    ('D', 22, 12, 'VIP'), ('E', 22, 12, 'VIP'), ('F', 22, 12, 'VIP'),
+    ('G', 22, 12, 'VIP'), ('H', 22, 12, 'VIP'), ('J', 22, 12, 'VIP');
+
+/*Insert Seat*/
+DECLARE @RowName VARCHAR(15), @RowID INT, @NumberOfColumns INT;
+DECLARE @i INT;
+
+-- Lấy thông tin từ bảng Rows
+DECLARE row_cursor CURSOR FOR
+SELECT RowName, ID, NumberOfColumns FROM [Rows];
+
+OPEN row_cursor;
+FETCH NEXT FROM row_cursor INTO @RowName, @RowID, @NumberOfColumns;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    -- Vòng lặp để tạo ghế cho mỗi hàng
+    SET @i = 1;
+    WHILE @i <= @NumberOfColumns
+    BEGIN
+        INSERT INTO Seat (SeatName, RowID, Status)
+        VALUES (@RowName + CAST(@i AS VARCHAR(5)), @RowID, 'Available');
+        SET @i = @i + 1;
+    END
+
+    FETCH NEXT FROM row_cursor INTO @RowName, @RowID, @NumberOfColumns;
+END;
+
+CLOSE row_cursor;
+DEALLOCATE row_cursor;
+
 
 
 /*Revenue*/
@@ -207,98 +528,73 @@ INSERT INTO FoodAndDrinks (Name, Price, Quantity, [Image], Status) VALUES
 
 
 /*Showtime*/
--- RoomID 1 là "Starium" tại CGV Aeon Hà Đông và RoomID 2 là "Aquarius" cũng tại CGV Aeon Hà Đông
+DECLARE @RoomCount INT = 215; -- Total number of rooms
+DECLARE @MovieCount INT = (SELECT COUNT(ID) FROM Movies); -- Total number of movies in the Movies table
+DECLARE @Days INT = 3; -- Number of different dates for showtimes
+DECLARE @DateStart DATE = DATEADD(DAY, 1, GETDATE()); -- Starting date for the showtimes (tomorrow)
+DECLARE @TimeGap TIME = '00:15:00'; -- 15 minutes gap between end time of one movie and start time of the next
 
--- Showtime cho phim Spider-Man: No Way Home (Duration 2:28)
-INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES
-(1, 1, '10:00:00', '12:28:00', '2024-11-08'),
-(1, 1, '13:00:00', '15:28:00', '2024-11-08'),
-(1, 1, '16:00:00', '18:28:00', '2024-11-08'),
-(1, 1, '19:00:00', '21:28:00', '2024-11-08'),
-(1, 1, '22:00:00', '00:28:00', '2024-11-08');
+DECLARE @MovieID INT;
+DECLARE @RoomID INT;
+DECLARE @ShowDate DATE;
+DECLARE @StartTime TIME;
+DECLARE @EndTime TIME;
+DECLARE @Duration TIME;
 
--- Showtime cho phim Frozen 2 (Duration 1:43)
-INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES
-(2, 2, '10:00:00', '11:43:00', '2024-11-08'),
-(2, 2, '12:00:00', '13:43:00', '2024-11-08'),
-(2, 2, '14:00:00', '15:43:00', '2024-11-08'),
-(2, 2, '16:00:00', '17:43:00', '2024-11-08'),
-(2, 2, '18:00:00', '19:43:00', '2024-11-08');
+DECLARE @RoomCounter INT = 1;
 
--- RoomID 3 là "Orion" tại CGV Vincom Ocean Park và RoomID 4 là "Hercules" tại CGV Vincom Ocean Park
+-- Loop through each movie
+WHILE @RoomCounter <= @RoomCount
+BEGIN
+    SET @MovieID = @RoomCounter % @MovieCount + 1; -- Get a movie ID for each room, cycling through movies
+    SET @RoomID = @RoomCounter;
 
--- Showtime cho phim Inception (Duration 2:28)
-INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES
-(3, 3, '10:00:00', '12:28:00', '2024-11-08'),
-(3, 3, '13:00:00', '15:28:00', '2024-11-08'),
-(3, 3, '16:00:00', '18:28:00', '2024-11-08'),
-(3, 3, '19:00:00', '21:28:00', '2024-11-08'),
-(3, 3, '22:00:00', '00:28:00', '2024-11-08');
+    -- Loop through each day
+    DECLARE @DayCounter INT = 0;
+    WHILE @DayCounter < @Days
+    BEGIN
+        SET @ShowDate = DATEADD(DAY, @DayCounter, @DateStart);
 
--- Showtime cho phim The Conjuring (Duration 1:52)
-INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES
-(4, 4, '10:00:00', '11:52:00', '2024-11-08'),
-(4, 4, '12:15:00', '14:07:00', '2024-11-08'),
-(4, 4, '14:30:00', '16:22:00', '2024-11-08'),
-(4, 4, '16:45:00', '18:37:00', '2024-11-08'),
-(4, 4, '19:00:00', '20:52:00', '2024-11-08');
+        -- Define a start time for each movie on a given day
+        SET @StartTime = '09:00:00';
 
-/* Suất chiếu ngày 2024-11-10 */
-INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES 
-(1, 1, '09:00:00', '11:28:00', '2024-11-10'),
-(2, 1, '12:00:00', '13:43:00', '2024-11-10'),
-(3, 1, '14:30:00', '16:58:00', '2024-11-10'),
-(4, 1, '17:30:00', '19:22:00', '2024-11-10'),
-(5, 1, '20:00:00', '22:08:00', '2024-11-10'),
+        -- Fetch the duration of the current movie
+        SET @Duration = (SELECT Duration FROM Movies WHERE ID = @MovieID);
+        SET @EndTime = DATEADD(MINUTE, DATEPART(HOUR, @Duration) * 60 + DATEPART(MINUTE, @Duration), @StartTime);
 
-(1, 2, '10:00:00', '12:28:00', '2024-11-10'),
-(3, 2, '13:00:00', '15:28:00', '2024-11-10'),
-(5, 2, '16:00:00', '18:08:00', '2024-11-10'),
-(6, 2, '18:30:00', '20:10:00', '2024-11-10'),
-(2, 2, '20:30:00', '22:13:00', '2024-11-10');
+        -- Check that end time is before the end of the day (say 10 PM limit for example)
+        WHILE (CAST(@EndTime AS TIME) < '22:00:00')
+        BEGIN
+            -- Insert showtime entry
+            INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date])
+            VALUES (@MovieID, @RoomID, @StartTime, @EndTime, @ShowDate);
 
-/* Suất chiếu ngày 2024-11-11 */
-INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES 
-(2, 1, '09:00:00', '10:43:00', '2024-11-11'),
-(4, 1, '11:00:00', '12:52:00', '2024-11-11'),
-(5, 1, '13:30:00', '15:38:00', '2024-11-11'),
-(1, 1, '16:00:00', '18:28:00', '2024-11-11'),
-(3, 1, '19:00:00', '21:28:00', '2024-11-11'),
+            -- Set up start time for the next movie in the same room
+            SET @StartTime = DATEADD(MINUTE, DATEPART(HOUR, @Duration) * 60 + DATEPART(MINUTE, @Duration), @EndTime);
+            SET @StartTime = DATEADD(MINUTE, 15, @EndTime); -- Add 15 minutes as a break time
+            SET @EndTime = DATEADD(MINUTE, DATEPART(HOUR, @Duration) * 60 + DATEPART(MINUTE, @Duration), @StartTime);
+        END;
 
-(6, 2, '10:00:00', '11:40:00', '2024-11-11'),
-(1, 2, '12:00:00', '14:28:00', '2024-11-11'),
-(3, 2, '15:00:00', '17:28:00', '2024-11-11'),
-(4, 2, '17:45:00', '19:37:00', '2024-11-11'),
-(2, 2, '20:00:00', '21:43:00', '2024-11-11');
+        SET @DayCounter += 1;
+    END;
 
-/* Suất chiếu ngày 2024-11-12 */
-INSERT INTO Showtime (MovieID, RoomID, StartTime, EndTime, [Date]) VALUES 
-(3, 1, '09:00:00', '11:28:00', '2024-11-12'),
-(5, 1, '12:00:00', '14:08:00', '2024-11-12'),
-(1, 1, '15:00:00', '17:28:00', '2024-11-12'),
-(4, 1, '17:45:00', '19:37:00', '2024-11-12'),
-(2, 1, '20:00:00', '21:43:00', '2024-11-12'),
-
-(5, 2, '09:30:00', '11:38:00', '2024-11-12'),
-(6, 2, '12:00:00', '13:40:00', '2024-11-12'),
-(3, 2, '14:00:00', '16:28:00', '2024-11-12'),
-(2, 2, '17:00:00', '18:43:00', '2024-11-12'),
-(1, 2, '19:00:00', '21:28:00', '2024-11-12');
+    SET @RoomCounter += 1;
+END;
 
 
 /*Booking*/
 -- TungNVHE170677 (UserID = 2)
 INSERT INTO Booking (UserID, ShowtimeID, BookingDate, Status, TotalPrice, TicketCode) VALUES
 (2, 1, '2024-11-05 09:00:00', 'Confirmed', 120000, 'TK001TUNG'), -- Xác nhận và sử dụng
-(2, 2, '2024-11-06 13:00:00', 'Unused', 100000, 'TK002TUNG'),   -- Đặt nhưng chưa sử dụng
+(2, 2, '2024-11-06 13:00:00', 'Pending', 100000, 'TK002TUNG'),   -- Đặt nhưng chưa sử dụng
 (2, 3, '2024-11-07 10:00:00', 'Expired', 150000, 'TK003TUNG'),  -- Vé đã hết hạn
-(2, 4, '2024-11-08 17:30:00', 'Canceled', 200000, 'TK004TUNG'), -- Vé đã bị hủy
+(2, 4, '2024-11-08 17:30:00', 'Pending', 200000, 'TK004TUNG'), -- Vé đã bị hủy
 (2, 5, '2024-11-09 20:30:00', 'Confirmed', 180000, 'TK005TUNG'); -- Xác nhận và sử dụng
 
 -- NhatLVHE176909 (UserID = 5)
 INSERT INTO Booking (UserID, ShowtimeID, BookingDate, Status, TotalPrice, TicketCode) VALUES
 (5, 1, '2024-07-05 09:00:00', 'Confirmed', 120000, 'TK001NHAT'), -- Xác nhận và sử dụng
-(5, 2, '2024-07-06 13:00:00', 'Unused', 100000, 'TK002NHAT'),   -- Đặt nhưng chưa sử dụng
+(5, 2, '2024-07-06 13:00:00', 'Pending', 100000, 'TK002NHAT'),   -- Đặt nhưng chưa sử dụng
 (5, 3, '2024-07-07 10:00:00', 'Expired', 150000, 'TK003NHAT'),  -- Vé đã hết hạn
 (5, 4, '2024-07-08 17:30:00', 'Canceled', 200000, 'TK004NHAT'), -- Vé đã bị hủy
 (5, 5, '2024-07-09 20:30:00', 'Confirmed', 180000, 'TK005NHAT'); -- Xác nhận và sử dụng
@@ -326,10 +622,10 @@ INSERT INTO Booking (UserID, ShowtimeID, BookingDate, Status, TotalPrice, Ticket
 /*Payment*/
 INSERT INTO Payment (BookingID, Amount, DiscountID) VALUES
 (1, 120000, 1),  -- Thanh toán cho BookingID 1 với giảm giá 10%
-(2, 100000, NULL),  -- Thanh toán cho BookingID 2 không có giảm giá
+(2, 100000, 1),  -- Thanh toán cho BookingID 2 không có giảm giá
 (3, 150000, 2),  -- Thanh toán cho BookingID 3 với giảm giá 5%
-(4, 200000, NULL),  -- Thanh toán cho BookingID 4 không có giảm giá
-(5, 180000, 3);  -- Thanh toán cho BookingID 5 với giảm giá 15%
+(4, 200000, 2),  -- Thanh toán cho BookingID 4 không có giảm giá
+(5, 180000, 1);  -- Thanh toán cho BookingID 5 với giảm giá 15%
 
 /*BookingSeatDetails*/
 INSERT INTO BookingSeatsDetail (SeatID, Price, BookingID)
@@ -341,10 +637,7 @@ VALUES
 -- Chèn dữ liệu cho BookingID 2 (ghế B1, B2, E1)
 (17, 120000, 2),  -- B1 (Regular)
 (18, 120000, 2),  -- B2 (Regular)
-(31, 125000, 2);  -- E1 (VIP)
-
-INSERT INTO BookingSeatsDetail (SeatID, Price, BookingID)
-VALUES
+(31, 125000, 2),  -- E1 (VIP)
 (15, 125000, 25),  
 (16, 125000, 24),  
 (20, 125000, 23), 
@@ -354,18 +647,16 @@ VALUES
 (35, 125000, 19),  
 (32, 125000, 18),  
 (33, 125000, 17), 
-(34, 150000, 26);
+(34, 150000, 25);
 
 INSERT INTO BookingItem (FoodAndDrinksID, Quantity, Price, BookingID)
 VALUES
 (5, 2, 150000, 24),  
 (6, 3, 190000, 23),
-(7, 2, 210000, 17),  
-(8, 3, 145000, 27),  
-(9, 2, 100000, 25),  
-(10, 3, 70000, 26); 
-
-
+(1, 2, 210000, 17),  
+(5, 3, 145000, 20),  
+(4, 2, 100000, 25),  
+(4, 3, 70000, 21); 
 
 /*BookingItem*/
 -- Chèn dữ liệu cho BookingID 1 (2 phần Tacos và 3 phần Popcorn)
@@ -387,10 +678,3 @@ INSERT INTO Payment (BookingID, Amount, DiscountID) VALUES
 (21, 321000, 2),  
 (20, 550000, 1), 
 (16, 430000, 2); 
-
-
-
-
-/*Insert Movies*/
-
-

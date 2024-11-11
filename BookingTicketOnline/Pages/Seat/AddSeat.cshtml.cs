@@ -18,6 +18,11 @@ namespace BookingTicketOnline.Pages.Seat
 		public Models.Seat Seat { get; set; } = new Models.Seat();
 		public async Task<IActionResult> OnGetAsync()
 		{
+			if (!User.Identity.IsAuthenticated)
+			{
+				var returnURl = Url.Page("/HomeOwner");
+				return RedirectToPage("/Login", new { returnURl = returnURl });
+			}
 			var roomID = HttpContext.Session.GetInt32("RoomID");
 			Rows = await _context.Rows.Include(r => r.Seats).Where(r => r.RoomId == roomID).ToListAsync();
 			return Page();

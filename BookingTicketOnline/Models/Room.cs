@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookingTicketOnline.Models
 {
@@ -12,8 +13,11 @@ namespace BookingTicketOnline.Models
         }
 
         public int Id { get; set; }
-        public string? Name { get; set; }
+		[Required(ErrorMessage = "Tên phòng không được để trống")]
+		[MinLength(4, ErrorMessage = "Tên phải có tối thiểu 4 ký tự")]
+		public string? Name { get; set; }
         public int? CinemaId { get; set; }
+
         public int? NumberOfRows { get; set; }
 
         public virtual Cinema? Cinema { get; set; }

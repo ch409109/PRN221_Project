@@ -58,3 +58,16 @@ footer {
     outline: none; /* Ẩn outline mặc định */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Hiệu ứng bóng cho nút focus */
 }
+@media (max-width: 768px) {
+    /* Mobile Styles */
+    header .navbar {
+        display: none; /* Hide navbar on smaller screens */
+        flex-direction: column;
+        background-color: #333;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 200px;
+        padding: 1rem 0;
+        border-radius: 5px;
+    }

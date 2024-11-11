@@ -18,11 +18,16 @@ namespace BookingTicketOnline.Pages.Seat
         [BindProperty]
         public List<Models.Row> Rows { get; set; } = new List<Models.Row>();
 
-        public async Task OnGetAsync()
+        public async Task<ActionResult> OnGetAsync()
         {
-            var Id = HttpContext.Session.GetInt32("RoomID");
+			if (!User.Identity.IsAuthenticated)
+			{
+				var returnURl = Url.Page("/HomeOwner");
+				return RedirectToPage("/Login", new { returnURl = returnURl });
+			}
+			var Id = HttpContext.Session.GetInt32("RoomID");
             Rows = await _context.Rows.Include(row => row.Seats).Where(row => row.RoomId == Id).ToListAsync();
-
+            return Page();
         }
     }
 }

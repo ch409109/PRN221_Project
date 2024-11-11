@@ -1,0 +1,61 @@
+﻿@page
+@model BookingTicketOnline.Pages.Room.CreateRoomModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Create Room";
+}
+<head>
+    <style>
+        /* Optional styling for rows */
+        #rowsContainer .row {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<h2>Create room</h2>
+
+<div class="form-group">
+    <label for="RoomName">Room name</label>
+    <input type="text" class="form-control" id="RoomName" name="RoomName" />
+</div>
+
+<div class="form-group">
+    <label>Number of rows</label>
+    <div id="rowsContainer" class="border p-3 mt-2">
+        <!-- Row Template - Will be cloned and added by JavaScript -->
+        <div class="row mb-2 row-template d-none">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="RowName" placeholder="Row name" />
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="Type" placeholder="Type" />
+            </div>
+            <div class="col-md-4">
+                <input type="number" class="form-control" name="NumberOfSeats" placeholder="Number of Seats" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Row Button -->
+    <button type="button" class="btn btn-primary mt-3" id="addRowButton">
+        <i class="bi bi-plus"></i> <!-- Bootstrap icon for plus sign -->
+    </button>
+</div>
+
+<a href="/Rooms/Index" class="btn btn-secondary mt-2">Back to Room List</a>
+@section Scripts {
+    <script>
+        document.getElementById("addRowButton").addEventListener("click", function () {
+            // Clone the row template and make it visible
+            const rowTemplate = document.querySelector(".row-template").cloneNode(true);
+            rowTemplate.classList.remove("d-none", "row-template");
+
+            // Append the cloned row to the container
+            document.getElementById("rowsContainer").appendChild(rowTemplate);
+        });
+    </script>
+}

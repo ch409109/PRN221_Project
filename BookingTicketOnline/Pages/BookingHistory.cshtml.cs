@@ -18,21 +18,37 @@ namespace BookingTicketOnline.Pages
 		public int TotalPages { get; set; }
 		[BindProperty]
 		public List<Models.Booking> bookings { get; set; }
-		public async Task OnGetAsync()
+		public async Task<ActionResult> OnGetAsync()
 		{
-			//var Bookings = await _context.Bookings
-			//			.Include(b => b.Movie)
-			//			.Include(b => b.Cinema)
-			//				.ThenInclude(c => c.Showtimes)
-			//			.Include(b => b.BookingSeatsDetails)
-			//				.ThenInclude(bsd => bsd.Seat)
-			//			.Include(b => b.BookingItems)
-			//				.ThenInclude(bi => bi.FoodAndDrinks)
-			//			.ToListAsync();
-			//TotalPages = (int)Math.Ceiling(Bookings.Count / (double)PageSize);
+            if (!User.Identity.IsAuthenticated)
+            {
+				var returnURl = Url.Page("/BookingHistory");
+				return RedirectToPage("/Login", new { returnURl = returnURl });
+            }
+            await LoadBookingHistory();
+			return Page();
+		}
 
-			//bookings = Bookings.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
+		private async Task LoadBookingHistory()
+		{
+			var userIdClaim = Int32.Parse(User.FindFirst("UserId")?.Value);
+			var Bookings = await _context.Bookings
+				.Include(b => b.Showtime)
+					.ThenInclude(s => s.Room.Cinema)
+				.Include(b => b.Showtime)
+					.ThenInclude(s => s.Movie)
+				.Include(b => b.BookingSeatsDetails)
+					.ThenInclude(bsd => bsd.Seat)
+				.Include(b => b.BookingItems)
+					.ThenInclude(bi => bi.FoodAndDrinks)
+				.Include(b => b.User)
+				.Where(b => b.User.Id == userIdClaim)
+				.ToListAsync();
 
+			TotalPages = (int)Math.Ceiling(Bookings.Count / (double)PageSize);
+
+
+			bookings = Bookings.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
 		}
 	}
 }

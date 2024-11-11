@@ -24,9 +24,8 @@ namespace BookingTicketOnline.Pages.Ticket
 		{
 			booking = await _context.Bookings
 			.Include(b => b.User)
-			//.Include(b => b.Movie)
-			//.Include(b => b.Cinema)
-				//.ThenInclude(c => c.Showtimes)
+			.Include(b => b.Showtime)
+				.ThenInclude(b => b.Movie)
 			.Include(b => b.BookingSeatsDetails)
 				.ThenInclude(bsd => bsd.Seat)
 			.Include(b => b.BookingItems)
@@ -34,11 +33,22 @@ namespace BookingTicketOnline.Pages.Ticket
 			.FirstOrDefaultAsync(b => SearchTerm.Equals(b.TicketCode));
 			if (booking == null)
 			{
-				Msg = $"Ticket code \"{SearchTerm}\" does not exist.";
+				Msg = "Not Found.";
+				TempData["error"] = "This ticket is not existed";
 			}
 			else
 			{
-				return;
+				if (booking.Status.Equals("Expired"))
+				{
+					Msg = "Not Found.";
+					TempData["error"] = "This ticket is EXPIRED";
+				}
+				else if (booking.Status.Equals("Canceled"))
+                {
+					Msg = "Not Found.";
+					TempData["error"] = "This ticket is CANCELED";
+				}
+                return;
 			}
 
 		}
@@ -50,9 +60,10 @@ namespace BookingTicketOnline.Pages.Ticket
 				confirmedBooking.Status = "Confirmed";
                 _context.Bookings.Update(confirmedBooking);
                 await _context.SaveChangesAsync();
-				Msg = $"Ticket code \"{SearchTerm}\" has already confirmed.";
+				Msg = "Not Found.";
 			}
-			
+			TempData["success"] = "This ticket has already confirmed!";
+			return;
 
 		}
 	}

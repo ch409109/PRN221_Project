@@ -37,7 +37,12 @@ namespace BookingTicketOnline.Pages.ManageShowTime
 			var sameDayShowtime = await _context.Showtimes
 								 .Where(s => s.RoomId == roomID && s.Date == Showtime.Date && s.Id != id)
 								 .ToListAsync();
-			if (isEditting)
+            if (Showtime.StartTime + movie?.Duration > new TimeSpan(23, 59, 59))
+            {
+                TempData["error"] = "The selected time is out of range!";
+                return RedirectToPage();
+            }
+            if (isEditting)
 			{
 				var showtime = await _context.Showtimes.FindAsync(id);
 
@@ -50,14 +55,13 @@ namespace BookingTicketOnline.Pages.ManageShowTime
 				showtime.StartTime = Showtime.StartTime;
 				showtime.EndTime = Showtime.StartTime + movie?.Duration;
 				showtime.RoomId = roomID;
-
-				var isLooP = sameDayShowtime.Any(s =>
+				var overlap = sameDayShowtime.Any(s =>
 					(showtime.StartTime <= s.EndTime && showtime.StartTime >= s.StartTime) ||
 					(showtime.EndTime >= s.StartTime && showtime.EndTime <= s.EndTime) ||
 					(showtime.StartTime <= s.StartTime && showtime.EndTime >= s.EndTime)
 				);
 
-				if (isLooP)
+				if (overlap)
 				{
 					TempData["error"] = "The selected time conflicts with another showtime!";
 					return RedirectToPage();
@@ -126,10 +130,16 @@ namespace BookingTicketOnline.Pages.ManageShowTime
 
 			return RedirectToPage();
 		}
-		public async Task OnGetAsync(int? weekOffset)
+		public async Task<ActionResult> OnGetAsync(int? weekOffset)
 		{
-			HttpContext.Session.SetInt32("isEditting", 0);
+            if (!User.Identity.IsAuthenticated)
+            {
+                var returnURl = Url.Page("/HomeOwner");
+                return RedirectToPage("/Login", new { returnURl = returnURl });
+            }
+            HttpContext.Session.SetInt32("isEditting", 0);
 			await LoadWeeklyShowtimes(weekOffset);
+			return Page();
 		}
 		public async Task<IActionResult> OnGetSelectShowtime(int id, int? weekOffset)
 		{
