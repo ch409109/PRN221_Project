@@ -139,6 +139,9 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #f9f9f9;
+            overflow-x: auto; /* Thêm thanh cuộn ngang nếu cần */
+            width: 100%; /* Đảm bảo chiều rộng không vượt quá container */
+            box-sizing: border-box; /* Tính padding vào width */
         }
 
             .showtime p {
@@ -153,17 +156,19 @@
         .time-buttons {
             display: flex;
             margin: 10px 0;
+            flex-wrap: wrap; /* Cho phép các button xuống dòng */
+            gap: 10px; /* Khoảng cách giữa các button */
         }
 
         .time-button {
             padding: 10px 20px;
-            margin: 0 5px;
             border: 1px solid #4CAF50;
             border-radius: 5px;
             background-color: white;
             color: #4CAF50;
             cursor: pointer;
             transition: background-color 0.2s, color 0.2s;
+            /* Bỏ margin vì đã dùng gap ở trên */
         }
 
             .time-button:hover {
@@ -286,7 +291,6 @@
             window.location.href = `?city=@Model.SelectedCity&date=${date}`;
         }
 
-        // Đóng dropdown khi click ra ngoài
         window.onclick = function (event) {
             if (!event.target.matches('.location-button')) {
                 var dropdowns = document.getElementsByClassName("dropdown");
