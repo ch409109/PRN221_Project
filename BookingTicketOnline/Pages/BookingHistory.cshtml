@@ -190,7 +190,7 @@ header .navbar li a.home-active {
 							<p class="card-text">Theater: @booking.Showtime?.Room?.Cinema?.Name</p>
 							<p class="card-text">Booking Date:@booking.BookingDate</p>
 							<p class="card-text">
-								Tickets: @booking.BookingSeatsDetails.Count() | Total Price: @(booking.TotalPrice + booking.BookingItems.Sum(bi => bi.Price * bi.Quantity))
+								Tickets: @booking.BookingSeatsDetails.Count() | Total Price: @booking.TotalPrice
 							</p>
 							<p class="card-text"><strong>Status: @booking.Status</strong></p>
 						</div>
@@ -213,6 +213,7 @@ header .navbar li a.home-active {
 								<div class="row">
 									<!-- Thông tin -->
 									<div class="col-md-6">
+										<p><strong>Ticket Code:</strong> @booking.TicketCode</p>
 										<p><strong>Movie:</strong> @booking.Showtime?.Movie?.Title</p>
 										<p><strong>Theater:</strong> @booking.Showtime?.Room?.Cinema?.Name</p>
 										<p><strong>Date:</strong> @booking.Showtime.Date</p>

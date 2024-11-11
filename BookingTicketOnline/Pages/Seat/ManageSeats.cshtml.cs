@@ -26,6 +26,10 @@ namespace BookingTicketOnline.Pages.Seat
 				return RedirectToPage("/Login", new { returnURl = returnURl });
 			}
 			var Id = HttpContext.Session.GetInt32("RoomID");
+            if (Id == null)
+            {
+                return RedirectToPage("/Cinema/ManageCinemas");
+            }
             Rows = await _context.Rows.Include(row => row.Seats).Where(row => row.RoomId == Id).ToListAsync();
             return Page();
         }
